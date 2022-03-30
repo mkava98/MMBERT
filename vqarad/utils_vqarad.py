@@ -14,6 +14,7 @@ import torch.optim as optim
 import torch.optim.lr_scheduler as lr_scheduler
 import torch.nn.functional as F
 from transformers import BertTokenizer, BertModel
+from transformers import DistilBertModel, DistilBertConfig ,DistilBertTokenizer
 from nltk.translate.bleu_score import sentence_bleu
 from tqdm import tqdm
 from PIL import Image
@@ -128,17 +129,25 @@ class VQAMed(Dataset):
         self.df = df.values
         self.tfm = tfm
         self.args = args
-        self.tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
+        if args.bert_model=="distilbert-base-uncased":
+            self.tokenizer=DistilBertTokenizer.from_pretrained(args.bert_model)
+        else:
+            self.tokenizer = BertTokenizer.from_pretrained(args.bert_model)
         self.mode = mode
 
     def __len__(self):
         return len(self.df)
 
     def __getitem__(self, idx):
-        path = self.df[idx,1]
-        question = self.df[idx, 6]
-        answer = self.df[idx, 3]
+        # print("df:::", self.df)
+        # print("index:::", idx)
+        # print("type of df::::", type(self.df))
+        path = self.df[idx,4]
+        # print("path of df::::", path)
 
+        question = self.df[idx, 7]
+        answer = self.df[idx, 12]
+        # print("answer::::", answer)
         if self.mode == 'eval':
             tok_ques = self.tokenizer.tokenize(question)
 
@@ -328,13 +337,23 @@ class BertLayer(nn.Module):
 class Transformer(nn.Module):
     def __init__(self, args):
         super(Transformer,self).__init__()
-        base_model = BertModel.from_pretrained('bert-base-uncased')
+        if args.bert_model=="distilbert-base-uncased":
+            base_model=DistilBertModel.from_pretrained(args.bert_model)
+        else:
+            base_model = BertModel.from_pretrained(args.bert_model)
+        # base_model = BertModel.from_pretrained('bert-base-multilingual-cased')
+        # print("list::::", list(base_model.children())[0:])
+        # print("list::::", list(base_model.children()))
+
         bert_model = nn.Sequential(*list(base_model.children())[0:])
         self.bert_embedding = bert_model[0]
         # self.embed = Embeddings(args)
         self.trans = Transfer(args)
         self.blocks = BertLayer(args,share='none', norm='pre')
         self.n_layers = args.n_layers
+
+### if you whatch the code as an black        
+
     def forward(self, img, input_ids, token_type_ids, mask):
         v_2, v_3, v_4, v_5, v_7 = self.trans(img)
         # h = self.embed(input_ids, token_type_ids)
@@ -365,8 +384,10 @@ class Model(nn.Module):
         super(Model,self).__init__()
         self.args = args
         self.transformer = Transformer(args)
+        print("m2")
         self.fc1 = nn.Linear(args.hidden_size, args.hidden_size)
         self.activ1 = nn.Tanh()
+        print("m3")
         self.classifier = nn.Sequential(nn.Linear(args.hidden_size, args.hidden_size),
                                         nn.LayerNorm(args.hidden_size, eps=1e-12, elementwise_affine=True),
                                         nn.Linear(args.hidden_size, args.vocab_size))
@@ -386,7 +407,7 @@ def train_one_epoch(loader, model, optimizer, criterion, device, scaler, args, t
     
     PREDS = []
     TARGETS = []
-    
+    # print("555555555555555")
     bar = tqdm(loader, leave = False)
     for (img, question_token,segment_ids,attention_mask,target) in bar:
         

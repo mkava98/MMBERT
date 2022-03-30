@@ -1,32 +1,29 @@
 import argparse
 from utils_vqarad import seed_everything, Model, VQAMed, train_one_epoch, validate, test, load_data, LabelSmoothing
-import wandb
+# import wandb
 import pandas as pd
 import numpy as np
 import torch
 import torch.nn as nn
-from torch.utils.data import DataLoader, Dataset
+from torch.utils.data import DataLoader
 import torch.optim as optim
 import torch.optim.lr_scheduler as lr_scheduler
-from torchvision import transforms, models
+from torchvision import transforms
 from torch.cuda.amp import GradScaler
-from torchtoolbox.transform import Cutout
-import albumentations as albu
-from albumentations.core.composition import OneOf
-from albumentations.pytorch.transforms import ToTensorV2
 import os
 import warnings
 
+# np.random.seed(10)
 warnings.simplefilter("ignore", UserWarning)
 
 if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description = "Finetune on VQARAD")
 
-    parser.add_argument('--run_name', type = str, required = True, help = "run name for wandb")
-    parser.add_argument('--data_dir', type = str, required = False, default = "/home/yash19/med-vqa/data", help = "path for data")
+    # parser.add_argument('--run_name', type = str, required = True, help = "run name for wandb")
+    parser.add_argument('--data_dir', type = str, required = False, default = "../data/vqarad/", help = "path for data")
     parser.add_argument('--model_dir', type = str, required = False, default = "/home/viraj.bagal/viraj/medvqa/Weights/roco_mlm/val_loss_3.pt", help = "path to load weights")
-    parser.add_argument('--save_dir', type = str, required = False, default = "/home/viraj.bagal/viraj/medvqa/Weights/vqa-rad", help = "path to save weights")
+    parser.add_argument('--save_dir', type = str, required = False, default = "../output/", help = "path to save weights")
     parser.add_argument('--question_type', type = str, required = False, default = None,  help = "choose specific category if you want")
     parser.add_argument('--use_pretrained', action = 'store_true', default = False, help = "use pretrained weights or not")
     parser.add_argument('--mixed_precision', action = 'store_true', default = False, help = "use mixed precision or not")
@@ -40,7 +37,7 @@ if __name__ == '__main__':
     parser.add_argument('--test_pct', type = float, required = False, default = 1.0, help = "fraction of test samples to select")
 
     parser.add_argument('--max_position_embeddings', type = int, required = False, default = 28, help = "max length of sequence")
-    parser.add_argument('--batch_size', type = int, required = False, default = 16, help = "batch size")
+    parser.add_argument('--batch_size', type = int, required = False, default = 8, help = "batch size")
     parser.add_argument('--lr', type = float, required = False, default = 1e-4, help = "learning rate'")
     # parser.add_argument('--weight_decay', type = float, required = False, default = 1e-2, help = " weight decay for gradients")
     parser.add_argument('--factor', type = float, required = False, default = 0.1, help = "factor for rlp")
@@ -55,33 +52,34 @@ if __name__ == '__main__':
     parser.add_argument('--type_vocab_size', type = int, required = False, default = 2, help = "type vocab size")
     parser.add_argument('--heads', type = int, required = False, default = 12, help = "heads")
     parser.add_argument('--n_layers', type = int, required = False, default = 4, help = "num of layers")
+    parser.add_argument('--bert_model', type = str, required = False, default = "bert-base-uncased", help = "Name of Bert Model")
 
 
     args = parser.parse_args()
-
-    wandb.init(project='imageclef20vqa', name = args.run_name, config = args)
 
     seed_everything(args.seed)
 
 
     train_df, test_df = load_data(args)
+    print("successful loading data ")
 
     if args.question_type:
             
         train_df = train_df[train_df['question_type']==args.question_type].reset_index(drop=True)
-        val_df = val_df[val_df['question_type']==args.question_type].reset_index(drop=True)
+        #val_df = val_df[val_df['question_type']==args.question_type].reset_index(drop=True)
         test_df = test_df[test_df['question_type']==args.question_type].reset_index(drop=True)
 
 
     df = pd.concat([train_df, test_df]).reset_index(drop=True)
     df['answer'] = df['answer'].str.lower()
     ans2idx = {ans:idx for idx,ans in enumerate(df['answer'].unique())}
+    # print(ans2idx)
     idx2ans = {idx:ans for ans,idx in ans2idx.items()}
     df['answer'] = df['answer'].map(ans2idx).astype(int)
     train_df = df[df['mode']=='train'].reset_index(drop=True)
     test_df = df[df['mode']=='test'].reset_index(drop=True)
-
-    num_classes = len(ans2idx)
+    print("labeling the classes")
+    num_classes = len(ans2idx) ### i think that the model do not generate answer just classify them
 
     args.num_classes = num_classes
 
@@ -89,7 +87,7 @@ if __name__ == '__main__':
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
     model = Model(args)
-    
+    print("3")
     if args.use_pretrained:
         model.load_state_dict(torch.load(args.model_dir))
     
@@ -98,7 +96,7 @@ if __name__ == '__main__':
         
     model.to(device)
 
-    wandb.watch(model, log='all')
+    # wandb.watch(model, log='all')
 
     optimizer = optim.Adam(model.parameters(),lr=args.lr)
     scheduler = lr_scheduler.ReduceLROnPlateau(optimizer, patience = args.patience, factor = args.factor, verbose = True)
@@ -124,15 +122,18 @@ if __name__ == '__main__':
                                 transforms.ToTensor(), 
                                  transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
     
+    val_tfm = transforms.Compose([transforms.Resize((224, 224)),
+                                transforms.ToTensor(), 
+                                 transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
 
 
-
-    traindataset = VQAMed(train_df, imgsize = args.image_size, tfm = train_tfm, args = args)
-    valdataset = VQAMed(val_df, imgsize = args.image_size, tfm = val_tfm, args = args)
-    testdataset = VQAMed(test_df, imgsize = args.image_size, tfm = test_tfm, args = args)
+    # traindataset = VQAMed(train_df, imgsize = args.image_size, tfm = train_tfm, args = args)
+    traindataset = VQAMed(train_df, tfm = train_tfm, args = args)
+    # valdataset = VQAMed(val_df, tfm = val_tfm, args = args)
+    testdataset = VQAMed(test_df, tfm = test_tfm, args = args)
 
     trainloader = DataLoader(traindataset, batch_size = args.batch_size, shuffle=True, num_workers = args.num_workers)
-    valloader = DataLoader(valdataset, batch_size = args.batch_size, shuffle=False, num_workers = args.num_workers)
+    # valloader = DataLoader(valdataset, batch_size = args.batch_size, shuffle=False, num_workers = args.num_workers)
     testloader = DataLoader(testdataset, batch_size = args.batch_size, shuffle=False, num_workers = args.num_workers)
 
     val_best_acc = 0
@@ -146,7 +147,7 @@ if __name__ == '__main__':
 
 
         train_loss, train_acc = train_one_epoch(trainloader, model, optimizer, criterion, device, scaler, args, train_df,idx2ans)
-        val_loss, val_predictions, val_acc, val_bleu = validate(valloader, model, criterion, device, scaler, args, val_df,idx2ans)
+        # val_loss, val_predictions, val_acc, val_bleu = validate(valloader, model, criterion, device, scaler, args, val_df,idx2ans)
         test_loss, test_predictions, test_acc = test(testloader, model, criterion, device, scaler, args, test_df,idx2ans)
 
         scheduler.step(train_loss)
@@ -160,11 +161,11 @@ if __name__ == '__main__':
         log_dict['test_loss'] = test_loss
         log_dict['learning_rate'] = optimizer.param_groups[0]["lr"]
 
-        wandb.log(log_dict)
+        # wandb.log(log_dict)
 
         content = f'Learning rate: {(optimizer.param_groups[0]["lr"]):.7f}, Train loss: {(train_loss):.4f}, Train acc: {train_acc},Test loss: {(test_loss):.4f},  Test acc: {test_acc}'
         print(content)
             
         if test_acc['total_acc'] > test_best_acc:
-            torch.save(model.state_dict(),os.path.join(args.save_dir, f'{args.run_name}_test_acc.pt'))
+            torch.save(model.state_dict(),os.path.join(args.save_dir, f'{args.data_dir.split("/")[-1]}_test_acc.pt'))
             test_best_acc=test_acc['total_acc']
