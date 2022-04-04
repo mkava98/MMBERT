@@ -1,5 +1,6 @@
 import argparse
-from utils_vqarad import seed_everything, Model, VQAMed, train_one_epoch, validate, test, load_data, LabelSmoothing
+from utils_vqarad import seed_everything, Model, VQAMed
+from utils_vqarad import train_one_epoch, validate, test, load_data, LabelSmoothing
 # import wandb
 import pandas as pd
 import numpy as np
@@ -60,31 +61,37 @@ if __name__ == '__main__':
     seed_everything(args.seed)
 
 
-    train_df, test_df = load_data(args)
+    train_df, test_df = load_data(args) ### just use train and test data
     print("successful loading data ")
 
     if args.question_type:
             
-        train_df = train_df[train_df['question_type']==args.question_type].reset_index(drop=True)
+        train_df = train_df[train_df['question_type']==\
+        args.question_type].reset_index(drop=True)
         #val_df = val_df[val_df['question_type']==args.question_type].reset_index(drop=True)
-        test_df = test_df[test_df['question_type']==args.question_type].reset_index(drop=True)
+        test_df = test_df[test_df['question_type']==\
+        args.question_type].reset_index(drop=True)
 
 
-    df = pd.concat([train_df, test_df]).reset_index(drop=True)
+    df = pd.concat([train_df, test_df]).reset_index(drop=True) ## this was like a loop!!
+    ### waht does reset index do
     df['answer'] = df['answer'].str.lower()
     ans2idx = {ans:idx for idx,ans in enumerate(df['answer'].unique())}
-    # print(ans2idx)
-    idx2ans = {idx:ans for ans,idx in ans2idx.items()}
-    df['answer'] = df['answer'].map(ans2idx).astype(int)
+    ### make dictionary with enumerate function
+    idx2ans = {idx:ans for ans,idx in ans2idx.items()}  ##  exchange items 
+    df['answer'] = df['answer'].map(ans2idx).astype(int)##Line by line to the\
+    ##dataframe applies\
+    ##the front function of the map
     train_df = df[df['mode']=='train'].reset_index(drop=True)
     test_df = df[df['mode']=='test'].reset_index(drop=True)
     print("labeling the classes")
-    num_classes = len(ans2idx) ### i think that the model do not generate answer just classify them
+    num_classes = len(ans2idx) ### i think that the model do not generate\
+    ## answer just classify them
 
     args.num_classes = num_classes
 
 
-    device = 'cuda' if torch.cuda.is_available() else 'cpu'
+    device = 'cuda' if torch.cuda.is_available() else 'cpu' ### it is an important line
 
     model = Model(args)
     print("3")
@@ -132,13 +139,15 @@ if __name__ == '__main__':
     # valdataset = VQAMed(val_df, tfm = val_tfm, args = args)
     testdataset = VQAMed(test_df, tfm = test_tfm, args = args)
 
-    trainloader = DataLoader(traindataset, batch_size = args.batch_size, shuffle=True, num_workers = args.num_workers)
+    trainloader = DataLoader(traindataset, batch_size = args.batch_size,\
+    shuffle=True, num_workers = args.num_workers)
     # valloader = DataLoader(valdataset, batch_size = args.batch_size, shuffle=False, num_workers = args.num_workers)
-    testloader = DataLoader(testdataset, batch_size = args.batch_size, shuffle=False, num_workers = args.num_workers)
+    testloader = DataLoader(testdataset, batch_size = args.batch_size, \
+    shuffle=False, num_workers = args.num_workers)
 
     val_best_acc = 0
     test_best_acc = 0
-    best_loss = np.inf
+    best_loss = np.inf  ## (positive) infinity.
     counter = 0
 
     for epoch in range(args.epochs):
@@ -146,9 +155,11 @@ if __name__ == '__main__':
         print(f'Epoch {epoch+1}/{args.epochs}')
 
 
-        train_loss, train_acc = train_one_epoch(trainloader, model, optimizer, criterion, device, scaler, args, train_df,idx2ans)
+        train_loss, train_acc = train_one_epoch(trainloader, model, optimizer, \
+        criterion, device, scaler, args, train_df,idx2ans)
         # val_loss, val_predictions, val_acc, val_bleu = validate(valloader, model, criterion, device, scaler, args, val_df,idx2ans)
-        test_loss, test_predictions, test_acc = test(testloader, model, criterion, device, scaler, args, test_df,idx2ans)
+        test_loss, test_predictions, test_acc = test(testloader, model, criterion, \
+        device, scaler, args, test_df,idx2ans)
 
         scheduler.step(train_loss)
 
@@ -163,9 +174,12 @@ if __name__ == '__main__':
 
         # wandb.log(log_dict)
 
-        content = f'Learning rate: {(optimizer.param_groups[0]["lr"]):.7f}, Train loss: {(train_loss):.4f}, Train acc: {train_acc},Test loss: {(test_loss):.4f},  Test acc: {test_acc}'
+        content = f'Learning rate: {(optimizer.param_groups[0]["lr"]):.7f}, \
+        Train loss: {(train_loss):.4f}, Train acc: {train_acc},\
+        Test loss: {(test_loss):.4f},  Test acc: {test_acc}'
         print(content)
             
         if test_acc['total_acc'] > test_best_acc:
-            torch.save(model.state_dict(),os.path.join(args.save_dir, f'{args.data_dir.split("/")[-1]}_test_acc.pt'))
+            torch.save(model.state_dict(),os.path.join(args.save_dir,\
+            f'{args.data_dir.split("/")[-1]}_test_acc.pt'))
             test_best_acc=test_acc['total_acc']

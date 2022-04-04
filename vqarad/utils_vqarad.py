@@ -126,11 +126,11 @@ class LabelSmoothing(nn.Module):
 
 class VQAMed(Dataset):
     def __init__(self, df, tfm, args, mode = 'train'):
-        self.df = df.values
-        self.tfm = tfm
+        self.df = df.values ### construct object of VQA 
+        self.tfm = tfm ### with special transformation
         self.args = args
         if args.bert_model=="distilbert-base-uncased":
-            self.tokenizer=DistilBertTokenizer.from_pretrained(args.bert_model)
+            self.tokenizer=DistilBertTokenizer.from_pretrained(args.bert_model) ## get specific tokenizer 
         else:
             self.tokenizer = BertTokenizer.from_pretrained(args.bert_model)
         self.mode = mode
@@ -162,11 +162,15 @@ class VQAMed(Dataset):
 
 
         if self.mode != 'eval':
-            return img, torch.tensor(tokens, dtype = torch.long), torch.tensor(segment_ids, dtype = torch.long) ,torch.tensor(input_mask, dtype = torch.long), torch.tensor(answer, dtype = torch.long)
+            return img, torch.tensor(tokens, dtype = torch.long), \
+            torch.tensor(segment_ids, dtype = torch.long)\
+            ,torch.tensor(input_mask, dtype = torch.long), \
+                torch.tensor(answer, dtype = torch.long)
         else:
-            return img, torch.tensor(tokens, dtype = torch.long), torch.tensor(segment_ids, dtype = torch.long) ,torch.tensor(input_mask, dtype = torch.long), torch.tensor(answer, dtype = torch.long), tok_ques
-
-
+            return img, torch.tensor(tokens, dtype = torch.long), \
+                torch.tensor(segment_ids, dtype = torch.long) ,\
+                    torch.tensor(input_mask, dtype = torch.long), \
+                        torch.tensor(answer, dtype = torch.long), tok_ques
 
 
 
@@ -384,6 +388,24 @@ class Model(nn.Module):
         super(Model,self).__init__()
         self.args = args
         self.transformer = Transformer(args)
+
+
+        """Some weights of the model checkpoint at bert-base-uncased were not used when 
+        initializing BertModel: ['cls.predictions.transform.dense.weight', 
+        'cls.predictions.transform.LayerNorm.bias', 'cls.predictions.decoder.weight', 
+        'cls.seq_relationship.weight', 'cls.seq_relationship.bias',
+        'cls.predictions.transform.dense.bias', 'cls.predictions.bias', 
+        'cls.predictions.transform.LayerNorm.weight']
+        """
+        """- This IS expected if you are initializing BertModel from the checkpoint of a model
+        trained on another task or with another architecture (e.g. initializing a
+        BertForSequenceClassification model from a BertForPreTraining model). - 
+        This IS NOT expected if you are initializing BertModel from the checkpoint of a model 
+        that you expect to be exactly identical (initializing a BertForSequenceClassification model
+        from a BertForSequenceClassification model). """
+
+
+
         print("m2")
         self.fc1 = nn.Linear(args.hidden_size, args.hidden_size)
         self.activ1 = nn.Tanh()
