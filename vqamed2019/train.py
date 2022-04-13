@@ -1,6 +1,6 @@
 import argparse
 from utils import seed_everything, Model, VQAMed, train_one_epoch, validate, test, load_data, LabelSmoothing, train_img_only, val_img_only, test_img_only
-import wandb
+# import wandb
 import pandas as pd
 import numpy as np
 import torch
@@ -25,7 +25,7 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description = "Finetune on ImageClef 2019")
 
-    parser.add_argument('--run_name', type = str, required = True, help = "run name for wandb")
+    # parser.add_argument('--run_name', type = str, required = True, help = "run name for wandb")
     parser.add_argument('--data_dir', type = str, required = False, default = "/home/viraj.bagal/viraj/medvqa/Dataset/Imageclef19/input/vqa-med-starter", help = "path for data")
     parser.add_argument('--model_dir', type = str, required = False, default = "/home/viraj.bagal/viraj/medvqa/Weights/roco_mlm/val_loss_3.pt", help = "path to load weights")
     parser.add_argument('--save_dir', type = str, required = False, default = "/home/viraj.bagal/viraj/medvqa/Weights/ic19", help = "path to save weights")
@@ -61,7 +61,7 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    wandb.init(project='medvqa', name = args.run_name, config = args)
+    # wandb.init(project='medvqa', name = args.run_name, config = args)
 
     seed_everything(args.seed)
 
@@ -107,7 +107,7 @@ if __name__ == '__main__':
         
     model.to(device)
 
-    wandb.watch(model, log='all')
+    # wandb.watch(model, log='all')
 
 
     optimizer = optim.Adam(model.parameters(),lr=args.lr)
@@ -180,18 +180,18 @@ if __name__ == '__main__':
             log_dict['test_loss'] = test_loss
             log_dict['learning_rate'] = optimizer.param_groups[0]["lr"]
 
-            wandb.log(log_dict)
+            # wandb.log(log_dict)
 
-        else:
+        # else:
 
-            wandb.log({'train_loss': train_loss,
-                        'val_loss': val_loss,
-                        'test_loss': test_loss,
-                        'learning_rate': optimizer.param_groups[0]["lr"],
-                        f'val_{args.category}_acc': val_acc,
-                        f'val_{args.category}_bleu': val_bleu,
-                        f'{args.category}_acc': acc,
-                        f'{args.category}_bleu': bleu}) 
+        #     wandb.log({'train_loss': train_loss,
+        #                 'val_loss': val_loss,
+        #                 'test_loss': test_loss,
+        #                 'learning_rate': optimizer.param_groups[0]["lr"],
+        #                 f'val_{args.category}_acc': val_acc,
+        #                 f'val_{args.category}_bleu': val_bleu,
+        #                 f'{args.category}_acc': acc,
+        #                 f'{args.category}_bleu': bleu}) 
 
 
 

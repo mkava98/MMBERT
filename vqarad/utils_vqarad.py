@@ -83,7 +83,8 @@ def encode_text(caption,tokenizer, args):
     #get token ids and remove [CLS] and [SEP] token id
     part2 = tokenizer.encode(caption)[1:-1]
 
-    tokens = [tokenizer.cls_token_id] + part1 + [tokenizer.sep_token_id] + part2[:args.max_position_embeddings-8] + [tokenizer.sep_token_id]
+    tokens = [tokenizer.cls_token_id] + part1 + [tokenizer.sep_token_id] \
+    + part2[:args.max_position_embeddings-8] + [tokenizer.sep_token_id]
     segment_ids = [0]*(len(part1)+2) + [1]*(len(part2[:args.max_position_embeddings-8])+1)
     input_mask = [1]*len(tokens)
     n_pad = args.max_position_embeddings - len(tokens)
@@ -177,7 +178,7 @@ class VQAMed(Dataset):
 def calculate_bleu_score(preds,targets, idx2ans):
        
     bleu_per_answer = np.asarray([sentence_bleu([idx2ans[target].split()],idx2ans[pred].split(),weights=[1]) for pred,target in zip(preds,targets)])
-        
+
     return np.mean(bleu_per_answer)
 
 
@@ -482,10 +483,11 @@ def train_one_epoch(loader, model, optimizer, criterion, device, scaler, args, t
     closed_acc = (PREDS[train_df['answer_type']=='CLOSED'] == TARGETS[train_df['answer_type']=='CLOSED']).mean() * 100.
     open_acc = (PREDS[train_df['answer_type']=='OPEN'] == TARGETS[train_df['answer_type']=='OPEN']).mean() * 100.
 
-    acc = {'total_acc': np.round(total_acc, 4), 'closed_acc': np.round(closed_acc, 4), 'open_acc': np.round(open_acc, 4)}
+    acc = {'total_acc': np.round(total_acc, 4), 'closed_acc': np.round(closed_acc, 4),\
+    'open_acc': np.round(open_acc, 4)}
 
 
-    return np.mean(train_loss), acc
+    return np.mean(train_loss), acc  ### it is important what is returning 
 
 def validate(loader, model, criterion, device, scaler, args, val_df, idx2ans):
     model.eval()
@@ -498,7 +500,9 @@ def validate(loader, model, criterion, device, scaler, args, val_df, idx2ans):
     with torch.no_grad():
         for (img, question_token,segment_ids,attention_mask,target) in bar:
 
-            img, question_token,segment_ids,attention_mask,target = img.to(device), question_token.to(device), segment_ids.to(device), attention_mask.to(device), target.to(device)
+            img, question_token,segment_ids,attention_mask,target = img.to(device),\
+            question_token.to(device), segment_ids.to(device), attention_mask.to(device),\
+            target.to(device)
             question_token = question_token.squeeze(1)
             attention_mask = attention_mask.squeeze(1)
 

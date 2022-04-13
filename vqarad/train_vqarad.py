@@ -1,6 +1,8 @@
 import argparse
-from utils_vqarad import seed_everything, Model, VQAMed
-from utils_vqarad import train_one_epoch, validate, test, load_data, LabelSmoothing
+from turtle import color
+
+from cv2 import dft
+from utils_vqarad import seed_everything, Model, VQAMed, train_one_epoch, validate, test, load_data, LabelSmoothing
 # import wandb
 import pandas as pd
 import numpy as np
@@ -13,9 +15,26 @@ from torchvision import transforms
 from torch.cuda.amp import GradScaler
 import os
 import warnings
+import matplotlib.pyplot as plt
+import datetime
 
 # np.random.seed(10)
 warnings.simplefilter("ignore", UserWarning)
+
+
+### we should alt this 
+
+
+def my_plot(epochs, loss, acc):
+            print(epochs)
+            print()
+            plt.plot(epochs, loss, color="blue")
+            plt.plot(epochs, acc, color="red")
+            plt.show()
+            plt.savefig('train.png')
+
+   
+    
 
 if __name__ == '__main__':
 
@@ -32,13 +51,13 @@ if __name__ == '__main__':
 
     parser.add_argument('--seed', type = int, required = False, default = 42, help = "set seed for reproducibility")
     parser.add_argument('--num_workers', type = int, required = False, default = 4, help = "number of workers")
-    parser.add_argument('--epochs', type = int, required = False, default = 100, help = "num epochs to train")
+    parser.add_argument('--epochs', type = int, required = False, default = 4, help = "num epochs to train")
     parser.add_argument('--train_pct', type = float, required = False, default = 1.0, help = "fraction of train samples to select")
     parser.add_argument('--valid_pct', type = float, required = False, default = 1.0, help = "fraction of validation samples to select")
     parser.add_argument('--test_pct', type = float, required = False, default = 1.0, help = "fraction of test samples to select")
 
     parser.add_argument('--max_position_embeddings', type = int, required = False, default = 28, help = "max length of sequence")
-    parser.add_argument('--batch_size', type = int, required = False, default = 8, help = "batch size")
+    parser.add_argument('--batch_size', type = int, required = False, default = 1, help = "batch size")
     parser.add_argument('--lr', type = float, required = False, default = 1e-4, help = "learning rate'")
     # parser.add_argument('--weight_decay', type = float, required = False, default = 1e-2, help = " weight decay for gradients")
     parser.add_argument('--factor', type = float, required = False, default = 0.1, help = "factor for rlp")
@@ -61,37 +80,31 @@ if __name__ == '__main__':
     seed_everything(args.seed)
 
 
-    train_df, test_df = load_data(args) ### just use train and test data
+    train_df,val_df, test_df = load_data(args)
     print("successful loading data ")
 
     if args.question_type:
             
-        train_df = train_df[train_df['question_type']==\
-        args.question_type].reset_index(drop=True)
-        #val_df = val_df[val_df['question_type']==args.question_type].reset_index(drop=True)
-        test_df = test_df[test_df['question_type']==\
-        args.question_type].reset_index(drop=True)
+        train_df = train_df[train_df['question_type']==args.question_type].reset_index(drop=True)
+        val_df = val_df[val_df['question_type']==args.question_type].reset_index(drop=True)
+        test_df = test_df[test_df['question_type']==args.question_type].reset_index(drop=True)
 
 
-    df = pd.concat([train_df, test_df]).reset_index(drop=True) ## this was like a loop!!
-    ### waht does reset index do
+    df = pd.concat([train_df, test_df]).reset_index(drop=True)
     df['answer'] = df['answer'].str.lower()
     ans2idx = {ans:idx for idx,ans in enumerate(df['answer'].unique())}
-    ### make dictionary with enumerate function
-    idx2ans = {idx:ans for ans,idx in ans2idx.items()}  ##  exchange items 
-    df['answer'] = df['answer'].map(ans2idx).astype(int)##Line by line to the\
-    ##dataframe applies\
-    ##the front function of the map
+    # print(ans2idx)
+    idx2ans = {idx:ans for ans,idx in ans2idx.items()}
+    df['answer'] = df['answer'].map(ans2idx).astype(int)
     train_df = df[df['mode']=='train'].reset_index(drop=True)
     test_df = df[df['mode']=='test'].reset_index(drop=True)
     print("labeling the classes")
-    num_classes = len(ans2idx) ### i think that the model do not generate\
-    ## answer just classify them
+    num_classes = len(ans2idx) ### i think that the model do not generate answer just classify them
 
     args.num_classes = num_classes
 
 
-    device = 'cuda' if torch.cuda.is_available() else 'cpu' ### it is an important line
+    device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
     model = Model(args)
     print("3")
@@ -139,27 +152,24 @@ if __name__ == '__main__':
     # valdataset = VQAMed(val_df, tfm = val_tfm, args = args)
     testdataset = VQAMed(test_df, tfm = test_tfm, args = args)
 
-    trainloader = DataLoader(traindataset, batch_size = args.batch_size,\
-    shuffle=True, num_workers = args.num_workers)
+    trainloader = DataLoader(traindataset, batch_size = args.batch_size, shuffle=True, num_workers = args.num_workers)
     # valloader = DataLoader(valdataset, batch_size = args.batch_size, shuffle=False, num_workers = args.num_workers)
-    testloader = DataLoader(testdataset, batch_size = args.batch_size, \
-    shuffle=False, num_workers = args.num_workers)
+    testloader = DataLoader(testdataset, batch_size = args.batch_size, shuffle=False, num_workers = args.num_workers)
 
     val_best_acc = 0
     test_best_acc = 0
-    best_loss = np.inf  ## (positive) infinity.
+    best_loss = np.inf
     counter = 0
-
+    all_loss_val = []
+    all_train_acc=[]
     for epoch in range(args.epochs):
 
         print(f'Epoch {epoch+1}/{args.epochs}')
 
 
-        train_loss, train_acc = train_one_epoch(trainloader, model, optimizer, \
-        criterion, device, scaler, args, train_df,idx2ans)
+        train_loss, train_acc = train_one_epoch(trainloader, model, optimizer, criterion, device, scaler, args, train_df,idx2ans)
         # val_loss, val_predictions, val_acc, val_bleu = validate(valloader, model, criterion, device, scaler, args, val_df,idx2ans)
-        test_loss, test_predictions, test_acc = test(testloader, model, criterion, \
-        device, scaler, args, test_df,idx2ans)
+        test_loss, test_predictions, test_acc = test(testloader, model, criterion, device, scaler, args, test_df,idx2ans)
 
         scheduler.step(train_loss)
 
@@ -167,6 +177,9 @@ if __name__ == '__main__':
 
         for k,v in test_acc.items():
             log_dict[k] = v
+        all_loss_val.append(train_loss)
+        all_train_acc.append(train_acc["total_acc"])
+        
 
         log_dict['train_loss'] = train_loss
         log_dict['test_loss'] = test_loss
@@ -174,12 +187,37 @@ if __name__ == '__main__':
 
         # wandb.log(log_dict)
 
-        content = f'Learning rate: {(optimizer.param_groups[0]["lr"]):.7f}, \
-        Train loss: {(train_loss):.4f}, Train acc: {train_acc},\
-        Test loss: {(test_loss):.4f},  Test acc: {test_acc}'
+        content = f'Learning rate: {(optimizer.param_groups[0]["lr"]):.7f}, Train loss: {(train_loss):.4f}, Train acc: {train_acc},Test loss: {(test_loss):.4f},  Test acc: {test_acc}'
         print(content)
             
         if test_acc['total_acc'] > test_best_acc:
-            torch.save(model.state_dict(),os.path.join(args.save_dir,\
-            f'{args.data_dir.split("/")[-1]}_test_acc.pt'))
+            torch.save(model.state_dict(),os.path.join(args.save_dir, f'{args.data_dir.split("/")[-1]}_test_acc.pt'))
             test_best_acc=test_acc['total_acc']
+    # epoo=[]
+    # for epoch in range(args.epochs):
+    #     epoo.append[epoch]    
+
+    epoo = [epoch+1 for epoch in range(args.epochs)]  
+    df = pd.read_excel('output_train.xlsx')
+    df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
+
+
+
+    df = df.append({'model_name' : 'model2', 'bert_model' : args.bert_model, \
+        'epoch' : args.epochs, "lr" : args.lr, "loss" : \
+        all_loss_val, "overalla_ccuracy" : all_train_acc},\
+        ignore_index = True)
+    # ["model2",args.bert_model ,args.epochs, args.lr, train_loss,train_acc["total_acc"]]
+    df.to_excel("output_train.xlsx") 
+    
+
+
+    # my_plot(epoo,train_loss,train_acc)
+
+
+
+
+
+
+    # my_plot( epoo, all_loss_val)
+ 
