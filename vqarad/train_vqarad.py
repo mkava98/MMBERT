@@ -1,5 +1,5 @@
 import argparse
-from turtle import color
+# from turtle import color
 
 from cv2 import dft
 from utils_vqarad import seed_everything, Model, VQAMed, train_one_epoch, validate, test, load_data, LabelSmoothing
@@ -17,6 +17,7 @@ import os
 import warnings
 import matplotlib.pyplot as plt
 import datetime
+import utils_vqarad
 
 # np.random.seed(10)
 warnings.simplefilter("ignore", UserWarning)
@@ -43,7 +44,7 @@ if __name__ == '__main__':
     # parser.add_argument('--run_name', type = str, required = True, help = "run name for wandb")
     parser.add_argument('--data_dir', type = str, required = False, default = "../data/vqarad/", help = "path for data")
     parser.add_argument('--model_dir', type = str, required = False, default = "/home/viraj.bagal/viraj/medvqa/Weights/roco_mlm/val_loss_3.pt", help = "path to load weights")
-    parser.add_argument('--save_dir', type = str, required = False, default = "../output/", help = "path to save weights")
+    parser.add_argument('--save_dir', type = str, required = False, default = "output/", help = "path to save weights")
     parser.add_argument('--question_type', type = str, required = False, default = None,  help = "choose specific category if you want")
     parser.add_argument('--use_pretrained', action = 'store_true', default = False, help = "use pretrained weights or not")
     parser.add_argument('--mixed_precision', action = 'store_true', default = False, help = "use mixed precision or not")
@@ -51,7 +52,7 @@ if __name__ == '__main__':
 
     parser.add_argument('--seed', type = int, required = False, default = 42, help = "set seed for reproducibility")
     parser.add_argument('--num_workers', type = int, required = False, default = 4, help = "number of workers")
-    parser.add_argument('--epochs', type = int, required = False, default = 4, help = "num epochs to train")
+    parser.add_argument('--epochs', type = int, required = False, default = 2, help = "num epochs to train")
     parser.add_argument('--train_pct', type = float, required = False, default = 1.0, help = "fraction of train samples to select")
     parser.add_argument('--valid_pct', type = float, required = False, default = 1.0, help = "fraction of validation samples to select")
     parser.add_argument('--test_pct', type = float, required = False, default = 1.0, help = "fraction of test samples to select")
@@ -80,7 +81,8 @@ if __name__ == '__main__':
     seed_everything(args.seed)
 
 
-    train_df,val_df, test_df = load_data(args)
+    # train_df,val_df, test_df = load_data(args)
+    train_df, test_df = load_data(args)
     print("successful loading data ")
 
     if args.question_type:
@@ -148,9 +150,12 @@ if __name__ == '__main__':
 
 
     # traindataset = VQAMed(train_df, imgsize = args.image_size, tfm = train_tfm, args = args)
-    traindataset = VQAMed(train_df, tfm = train_tfm, args = args)
+    from transformers import BertTokenizer
+    tokenizer = BertTokenizer.from_pretrained(args.bert_model)
+    print('tokenizer!')
+    traindataset = VQAMed(train_df, tfm = train_tfm, args = args, tokenizer=tokenizer)
     # valdataset = VQAMed(val_df, tfm = val_tfm, args = args)
-    testdataset = VQAMed(test_df, tfm = test_tfm, args = args)
+    testdataset = VQAMed(test_df, tfm = test_tfm, args = args, tokenizer=tokenizer)
 
     trainloader = DataLoader(traindataset, batch_size = args.batch_size, shuffle=True, num_workers = args.num_workers)
     # valloader = DataLoader(valdataset, batch_size = args.batch_size, shuffle=False, num_workers = args.num_workers)
@@ -197,7 +202,13 @@ if __name__ == '__main__':
     # for epoch in range(args.epochs):
     #     epoo.append[epoch]    
 
-    epoo = [epoch+1 for epoch in range(args.epochs)]  
+    epoo = [epoch+1 for epoch in range(args.epochs)]
+    a = {'model_name': 'model2', 'bert_model': args.bert_model,
+         'epoch': args.epochs, "lr": args.lr, "loss":
+             all_loss_val, "overalla_ccuracy": all_train_acc}
+    df = pd.DataFrame(a)
+    df.to_csv('output_train.csv')
+
     df = pd.read_excel('output_train.xlsx')
     df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
 

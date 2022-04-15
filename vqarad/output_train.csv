@@ -1,0 +1,3 @@
+,model_name,bert_model,epoch,lr,loss,overalla_ccuracy
+0,model2,bert-base-uncased,2,0.0001,4.1582336,26.637
+1,model2,bert-base-uncased,2,0.0001,3.4872146,27.8449

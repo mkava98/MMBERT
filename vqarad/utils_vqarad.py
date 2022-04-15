@@ -126,14 +126,14 @@ class LabelSmoothing(nn.Module):
 
 
 class VQAMed(Dataset):
-    def __init__(self, df, tfm, args, mode = 'train'):
+    def __init__(self, df, tfm, args, mode = 'train', tokenizer=None):
         self.df = df.values ### construct object of VQA 
         self.tfm = tfm ### with special transformation
         self.args = args
         if args.bert_model=="distilbert-base-uncased":
             self.tokenizer=DistilBertTokenizer.from_pretrained(args.bert_model) ## get specific tokenizer 
         else:
-            self.tokenizer = BertTokenizer.from_pretrained(args.bert_model)
+            self.tokenizer = tokenizer #BertTokenizer.from_pretrained(args.bert_model)
         self.mode = mode
 
     def __len__(self):
