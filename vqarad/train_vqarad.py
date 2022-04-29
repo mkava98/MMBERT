@@ -1,18 +1,26 @@
 
-print("just a test ")
-print("I love you programmer ")
+# print("just a test ")
+# print("I love you programmer ")
 
-import argparse
+import argparse     ### passing argument to program
 # from turtle import color
 
-from cv2 import dft
-from utils_vqarad import seed_everything, Model, VQAMed, train_one_epoch, validate, test, load_data, LabelSmoothing
-# import wandb
+from cv2 import dft  ##Changing the contrast and brightness of an image! ??
+"""Fourier Transform is used to analyze the frequency characteristics of various 
+filters. For images, 2D Discrete Fourier Transform (DFT) is used to find the 
+frequency domain."""
+from utils_vqarad import seed_everything, Model, VQAMed, train_one_epoch, validate,\
+test, load_data, LabelSmoothing
+# import wandb  aya niaz hast estefadeh shavad???
 import pandas as pd
 import numpy as np
-import torch
-import torch.nn as nn
+import torch ###  orch is an open-source machine learning library, a scientific computing framework, and a script language based on the Lua programming language. It provides a wide range of algorithms for deep learning, \
+###and uses the scripting language LuaJIT, and an underlying C implementation.
+import torch.nn as nn  ##  how it works to make the code either more concise, or more flexible.
+###modules and classes torch.nn , torch.optim , Dataset , and DataLoader to help you create and train neural networks. In order to fully utilize their power and customize them for your problem
 from torch.utils.data import DataLoader
+###Sampler classes are used to specify the sequence of indices/keys used in data loading
+###They represent iterable objects over the indices to datasets
 import torch.optim as optim
 import torch.optim.lr_scheduler as lr_scheduler
 from torchvision import transforms
