@@ -288,12 +288,29 @@ class PositionWiseFeedForward(nn.Module):
     def forward(self, x):
         return self.fc2(gelu(self.fc1(x)))
 
+"""torch.nn.module 
+Base class for all neural network modules.
+Your models should also subclass this class.
+Modules can also contain other Modules, allowing to nest them in a tree structure.
+You can assign the submodules as regular attributes:
+
+ Edpresso Team. Class attributes are variables of a class that are shared between all 
+ of its instances. They differ from instance attributes in that instance attributes 
+ are owned by one specific instance of the class only, and ​are not shared between instances.
+"""
+##training (bool) – Boolean represents whether this module is in training or evaluation mode.
+
 class BertLayer(nn.Module):
-    def __init__(self,args, share='all', norm='pre'):
+    def __init__(self,args, share='all', norm='pre'): ### mitunim tarif konim custom shodeh dige??
         super(BertLayer, self).__init__()
         self.share = share
         self.norm_pos = norm
         self.norm1 = nn.LayerNorm(args.hidden_size, eps=1e-12)
+        """انتظار داریم که با تکرار نمونه‌گیری‌ها، متوسط مقدار برآوردگرهای حاصل، با پارامتر واقعی جامعه تقریبا برابر شود
+         
+         ممکن است عضوی از کلاس یا خانواده برآوردگرهای نااریب نسبت به یک برآوردگر خارج از این کلاس، دارای واریانس (Variance) بیشتری یا در حقیقت دقت کمتری باشد.
+         برای مثال کلاس برآوردگرهای نااریب، برای پارامترهایشان دارای اریبی صفر هستند.
+        """
         self.norm2 = nn.LayerNorm(args.hidden_size, eps=1e-12)
         self.drop1 = nn.Dropout(args.hidden_dropout_prob)
         self.drop2 = nn.Dropout(args.hidden_dropout_prob)

@@ -22,14 +22,45 @@ from torch.utils.data import DataLoader
 ###Sampler classes are used to specify the sequence of indices/keys used in data loading
 ###They represent iterable objects over the indices to datasets
 import torch.optim as optim
+### different optimization object !!
+"""
+torch.optim is a package implementing various optimization algorithms. 
+Most commonly used methods are already supported, and the interface is general enough,
+so that more sophisticated ones can be also easily integrated in the future.
+To use torch.optim you have to construct an optimizer object, that will 
+hold the current state and will update the parameters based on the computed gradients.
+"""
+
 import torch.optim.lr_scheduler as lr_scheduler
+### custom scheduler !!
 from torchvision import transforms
+""" 
+This library is part of the PyTorch project. PyTorch is an open source machine learning framework.
+The torchvision package consists of popular datasets, model architectures, 
+and common image transformations for computer vision."""
+
 from torch.cuda.amp import GradScaler
+
+"""
+To prevent underflow, “gradient scaling” multiplies the network’s loss(es) by a scale factor and 
+invokes a backward pass on the scaled loss(es). Gradients flowing backward through the network
+ are then scaled by the same factor. In other words, gradient values have a larger magnitude,
+so they don’t flush to zero.
+idea!!
+ with autocast():
+        output = model(input)
+        loss = loss_fn(output, target)"""
+
 import os
+
 import warnings
+
 import matplotlib.pyplot as plt
+
 import datetime
+
 import utils_vqarad
+
 
 # np.random.seed(10)
 warnings.simplefilter("ignore", UserWarning)
@@ -112,7 +143,7 @@ if __name__ == '__main__':
     df['answer'] = df['answer'].map(ans2idx).astype(int)
     train_df = df[df['mode']=='train'].reset_index(drop=True)
     test_df = df[df['mode']=='test'].reset_index(drop=True)
-    print("labeling the classes")
+    # print("labeling the classes")
     num_classes = len(ans2idx) ### i think that the model do not generate answer just classify them
 
     args.num_classes = num_classes
@@ -121,14 +152,16 @@ if __name__ == '__main__':
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
     model = Model(args)
-    print("3")
+    # print("3")
     if args.use_pretrained:
         model.load_state_dict(torch.load(args.model_dir))
     
     
     model.classifier[2] = nn.Linear(args.hidden_size, num_classes)
         
-    model.to(device)
+    model.to(device) ### If you need to move a model to GPU via .cuda(),
+    ##please do so before constructing optimizers for it. 
+    ##Parameters of a model after .cuda() will be different objects with those before the call.
 
     # wandb.watch(model, log='all')
 
