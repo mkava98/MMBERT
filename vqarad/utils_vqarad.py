@@ -14,6 +14,11 @@ import torch.optim as optim
 import torch.optim.lr_scheduler as lr_scheduler
 import torch.nn.functional as F
 from transformers import BertTokenizer, BertModel
+"""
+BERT is a model with absolute position embeddings so it’s 
+usually advised to pad the inputs on the right rather than the left.????
+
+"""
 from transformers import DistilBertModel, DistilBertConfig ,DistilBertTokenizer
 from nltk.translate.bleu_score import sentence_bleu
 from tqdm import tqdm
@@ -273,9 +278,10 @@ class MultiHeadedSelfAttention(nn.Module): ## we should know about thi function 
         return h, scores
     def split_last(self, x, shape):
         shape = list(shape)
-        assert shape.count(-1) <= 1  
+        assert shape.count(-1) <= 1  ### this condition should be TRUE if it is False raise an error
         if -1 in shape:
-            shape[shape.index(-1)] = int(x.size(-1) / -np.prod(shape))
+            shape[shape.index(-1)] = int(x.size(-1) / -np.prod(shape)) 
+            ### Return the product of array elements over a given axis
         return x.view(*x.size()[:-1], *shape)
 
     def merge_last(self, x, n_dims):
