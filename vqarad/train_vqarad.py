@@ -108,6 +108,13 @@ if __name__ == '__main__':
     parser.add_argument('--patience', type = int, required = False, default = 10, help = "patience for rlp")
     # parser.add_argument('--lr_min', type = float, required = False, default = 1e-6, help = "minimum lr for Cosine Annealing")
     parser.add_argument('--hidden_dropout_prob', type = float, required = False, default = 0.3, help = "hidden dropout probability")
+    """
+    This conceptualization suggests that perhaps dropout breaks-up situations where network layers 
+    -adapt to correct mistakes from prior layers, in turn making the model more robust.
+    sparse representations in autoencoder models
+    The term “dropout” refers to dropping out units (hidden and visible) in a neural network.
+    p – probability of an element to be zeroed. Default: 0.5
+    """
     parser.add_argument('--smoothing', type = float, required = False, default = None, help = "label smoothing")
 
     parser.add_argument('--image_size', type = int, required = False, default = 224, help = "image size")

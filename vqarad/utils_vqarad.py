@@ -248,15 +248,17 @@ class Transfer(nn.Module):
         v_7 = self.gap7(self.relu(self.conv7(fix7(img)))).view(-1,self.args.hidden_size)
         return v_2, v_3, v_4, v_5, v_7
 
-class MultiHeadedSelfAttention(nn.Module):
+class MultiHeadedSelfAttention(nn.Module): ## we should know about thi function at first 
     def __init__(self,args):
         super(MultiHeadedSelfAttention,self).__init__()
         self.proj_q = nn.Linear(args.hidden_size, args.hidden_size)
         self.proj_k = nn.Linear(args.hidden_size, args.hidden_size)
         self.proj_v = nn.Linear(args.hidden_size, args.hidden_size)
         self.drop = nn.Dropout(args.hidden_dropout_prob)
-        self.scores = None
+        self.scores = None ## what does score mean hear?
         self.n_heads = args.heads
+
+
     def forward(self, x, mask):
         q, k, v = self.proj_q(x), self.proj_k(x), self.proj_v(x)
         q, k, v = (self.split_last(x, (self.n_heads, -1)).transpose(1, 2) for x in [q, k, v])
@@ -275,6 +277,7 @@ class MultiHeadedSelfAttention(nn.Module):
         if -1 in shape:
             shape[shape.index(-1)] = int(x.size(-1) / -np.prod(shape))
         return x.view(*x.size()[:-1], *shape)
+
     def merge_last(self, x, n_dims):
         s = x.size()
         assert n_dims > 1 and n_dims < len(s)
@@ -303,7 +306,7 @@ You can assign the submodules as regular attributes:
 class BertLayer(nn.Module):
     def __init__(self,args, share='all', norm='pre'): ### mitunim tarif konim custom shodeh dige??
         super(BertLayer, self).__init__()
-        self.share = share
+        self.share = share  ## what does it mean??
         self.norm_pos = norm
         self.norm1 = nn.LayerNorm(args.hidden_size, eps=1e-12)
         """انتظار داریم که با تکرار نمونه‌گیری‌ها، متوسط مقدار برآوردگرهای حاصل، با پارامتر واقعی جامعه تقریبا برابر شود
@@ -312,12 +315,16 @@ class BertLayer(nn.Module):
          برای مثال کلاس برآوردگرهای نااریب، برای پارامترهایشان دارای اریبی صفر هستند.
         """
         self.norm2 = nn.LayerNorm(args.hidden_size, eps=1e-12)
+        ##Applies Layer Normalization over a mini-batch of inputs as described in the paper
+        ##eps – a value added to the denominator for numerical stability. Default: 1e-5
         self.drop1 = nn.Dropout(args.hidden_dropout_prob)
         self.drop2 = nn.Dropout(args.hidden_dropout_prob)
+
         if self.share == 'ffn':
             self.attention = nn.ModuleList([MultiHeadedSelfAttention(args) for _ in range(args.n_layers)])
             self.proj = nn.ModuleList([nn.Linear(args.hidden_size, args.hidden_size) for _ in range(args.n_layers)])
             self.feedforward = PositionWiseFeedForward(args)
+            
         elif self.share == 'att':
             self.attention = MultiHeadedSelfAttention(args)
             self.proj = nn.Linear(args.hidden_size, args.hidden_size)
