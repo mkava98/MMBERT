@@ -87,7 +87,7 @@ if __name__ == '__main__':
     # parser.add_argument('--run_name', type = str, required = True, help = "run name for wandb")
     parser.add_argument('--data_dir', type = str, required = False, default = "../data/vqarad/", help = "path for data")
     parser.add_argument('--model_dir', type = str, required = False, default = "/home/viraj.bagal/viraj/medvqa/Weights/roco_mlm/val_loss_3.pt", help = "path to load weights")
-    parser.add_argument('--save_dir', type = str, required = False, default = "output/", help = "path to save weights")
+    parser.add_argument('--save_dir', type = str, required = False, default = "../output/", help = "path to save weights")
     parser.add_argument('--question_type', type = str, required = False, default = None,  help = "choose specific category if you want")
     parser.add_argument('--use_pretrained', action = 'store_true', default = False, help = "use pretrained weights or not")
     parser.add_argument('--mixed_precision', action = 'store_true', default = False, help = "use mixed precision or not")
