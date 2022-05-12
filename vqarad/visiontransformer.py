@@ -3,6 +3,8 @@ import torch
 import torch.nn as nn
 import timm
 import requests
+from torchvision import transforms, models
+
 import torchvision.transforms as transforms
 from timm.data.constants import IMAGENET_DEFAULT_MEAN, IMAGENET_DEFAULT_STD
 
@@ -11,6 +13,7 @@ from timm.data.constants import IMAGENET_DEFAULT_MEAN, IMAGENET_DEFAULT_STD
 
 
 model = torch.hub.load('facebookresearch/deit:main', 'deit_base_patch16_224', pretrained=True)
+model2=models.resnet152(pretrained=True)
 # model.eval()
 
 
@@ -27,7 +30,7 @@ relu = nn.ReLU()
 # gap7 = nn.AdaptiveAvgPool2d((1,1))
 
 
-conv2 = nn.Conv2d(768, 768, kernel_size=(1, 1), stride=(1, 1), bias=False)
+conv2 = nn.Conv2d(196, 768, kernel_size=(1, 1), stride=(1, 1), bias=False)
 gap2 = nn.AdaptiveAvgPool2d((1,1))
 conv3 = nn.Conv2d(1024, 768, kernel_size=(1, 1), stride=(1, 1), bias=False)
 gap3 = nn.AdaptiveAvgPool2d((1,1))
@@ -47,16 +50,17 @@ transform = transforms.Compose([
 
 img = Image.open(requests.get("https://raw.githubusercontent.com/pytorch/ios-demo-app/master/HelloWorld/HelloWorld/HelloWorld/image.png", stream=True).raw)
 img = transform(img)[None,]
+print("image size:", img.size())
 # out = model(img)
 
 
 
 modules2 = list(model.children())[:-2]
-print("children -2222",list(model.children())[:-2])
+# print("children -2222",list(model.children())[:-2])
 fix2 = nn.Sequential(*modules2)
 z=fix2(img)
 print(z.size())
-# z=conv2(fix2(img))
+z=conv2(fix2(img))
 # v_2 = gap2(relu(conv2(fix2(img)))).view(-1,768)
 # modules3 = list(model.children())[:-3]
 # fix3 = nn.Sequential(*modules3)
