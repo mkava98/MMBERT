@@ -4,6 +4,12 @@ import pandas as pd
 import random
 import math
 import json
+from PIL import Image
+import torch
+import timm
+import requests
+import torchvision.transforms as transforms
+from timm.data.constants import IMAGENET_DEFAULT_MEAN, IMAGENET_DEFAULT_STD
 
 import torch
 from torchvision import transforms, models
@@ -219,39 +225,46 @@ class Embeddings(nn.Module):
 class Transfer(nn.Module):
     def __init__(self,args):
         super(Transfer, self).__init__()
-
-        self.args = args
-        self.model = models.resnet152(pretrained=True)
-        # for p in self.parameters():
-        #     p.requires_grad=False
-        self.relu = nn.ReLU()
-        self.conv2 = nn.Conv2d(2048, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
-        self.gap2 = nn.AdaptiveAvgPool2d((1,1))
-        self.conv3 = nn.Conv2d(1024, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
-        self.gap3 = nn.AdaptiveAvgPool2d((1,1))
-        self.conv4 = nn.Conv2d(512, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
-        self.gap4 = nn.AdaptiveAvgPool2d((1,1))
-        self.conv5 = nn.Conv2d(256, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
-        self.gap5 = nn.AdaptiveAvgPool2d((1,1))
-        self.conv7 = nn.Conv2d(64, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
-        self.gap7 = nn.AdaptiveAvgPool2d((1,1))
+        if args.image_embedding =="resnet":
+            self.args = args
+            self.model = models.resnet152(pretrained=True)
+            # for p in self.parameters():
+            #     p.requires_grad=False
+            self.relu = nn.ReLU()
+            self.conv2 = nn.Conv2d(2048, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            self.gap2 = nn.AdaptiveAvgPool2d((1,1))
+            self.conv3 = nn.Conv2d(1024, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            self.gap3 = nn.AdaptiveAvgPool2d((1,1))
+            self.conv4 = nn.Conv2d(512, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            self.gap4 = nn.AdaptiveAvgPool2d((1,1))
+            self.conv5 = nn.Conv2d(256, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            self.gap5 = nn.AdaptiveAvgPool2d((1,1))
+            self.conv7 = nn.Conv2d(64, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            self.gap7 = nn.AdaptiveAvgPool2d((1,1))
+        elif args.image_embedding == "vision":
+            self.args = args
+            self.model = \
+            torch.hub.load('facebookresearch/deit:main', 'deit_base_patch16_224', pretrained=True)
     def forward(self, img):
-        modules2 = list(self.model.children())[:-2]
-        fix2 = nn.Sequential(*modules2)
-        v_2 = self.gap2(self.relu(self.conv2(fix2(img)))).view(-1,self.args.hidden_size)
-        modules3 = list(self.model.children())[:-3]
-        fix3 = nn.Sequential(*modules3)
-        v_3 = self.gap3(self.relu(self.conv3(fix3(img)))).view(-1,self.args.hidden_size)
-        modules4 = list(self.model.children())[:-4]
-        fix4 = nn.Sequential(*modules4)
-        v_4 = self.gap4(self.relu(self.conv4(fix4(img)))).view(-1,self.args.hidden_size)
-        modules5 = list(self.model.children())[:-5]
-        fix5 = nn.Sequential(*modules5)
-        v_5 = self.gap5(self.relu(self.conv5(fix5(img)))).view(-1,self.args.hidden_size)
-        modules7 = list(self.model.children())[:-7]
-        fix7 = nn.Sequential(*modules7)
-        v_7 = self.gap7(self.relu(self.conv7(fix7(img)))).view(-1,self.args.hidden_size)
-        return v_2, v_3, v_4, v_5, v_7
+        if self.args.image_embedding =="resnet":
+            modules2 = list(self.model.children())[:-2]
+            fix2 = nn.Sequential(*modules2)
+            v_2 = self.gap2(self.relu(self.conv2(fix2(img)))).view(-1,self.args.hidden_size)
+            modules3 = list(self.model.children())[:-3]
+            fix3 = nn.Sequential(*modules3)
+            v_3 = self.gap3(self.relu(self.conv3(fix3(img)))).view(-1,self.args.hidden_size)
+            modules4 = list(self.model.children())[:-4]
+            fix4 = nn.Sequential(*modules4)
+            v_4 = self.gap4(self.relu(self.conv4(fix4(img)))).view(-1,self.args.hidden_size)
+            modules5 = list(self.model.children())[:-5]
+            fix5 = nn.Sequential(*modules5)
+            v_5 = self.gap5(self.relu(self.conv5(fix5(img)))).view(-1,self.args.hidden_size)
+            modules7 = list(self.model.children())[:-7]
+            fix7 = nn.Sequential(*modules7)
+            v_7 = self.gap7(self.relu(self.conv7(fix7(img)))).view(-1,self.args.hidden_size)
+            return v_2, v_3, v_4, v_5, v_7
+        elif self.args.image_embedding == "vision":
+            pass
 
 class MultiHeadedSelfAttention(nn.Module): ## we should know about thi function at first 
     def __init__(self,args):
