@@ -1,6 +1,13 @@
 
 # print("just a test ")
 # print("I love you programmer ")
+from PIL import Image
+import torch
+import timm
+import requests
+import torchvision.transforms as transforms
+from timm.data.constants import IMAGENET_DEFAULT_MEAN, IMAGENET_DEFAULT_STD
+
 
 import argparse     ### passing argument to program
 # from turtle import color
@@ -124,6 +131,7 @@ if __name__ == '__main__':
     parser.add_argument('--heads', type = int, required = False, default = 12, help = "heads")
     parser.add_argument('--n_layers', type = int, required = False, default = 4, help = "num of layers")
     parser.add_argument('--bert_model', type = str, required = False, default = "bert-base-uncased", help = "Name of Bert Model")
+    parser.add_argument('--image_embedding', type = str, required = False, default = "resnet", help = "Name of image extractor")
 
 
     args = parser.parse_args()
@@ -182,23 +190,42 @@ if __name__ == '__main__':
 
     scaler = GradScaler()
 
+
+    if args.image_embedding == "resnet":
+
     
-    train_tfm = transforms.Compose([transforms.Resize((224, 224)),
-                                    transforms.RandomResizedCrop(224,scale=(0.5,1.0),ratio=(0.75,1.333)),
-                                    transforms.RandomRotation(10),
-                                    # Cutout(),
-                                    transforms.ColorJitter(brightness=0.4,contrast=0.4,saturation=0.4,hue=0.4),
+        train_tfm = transforms.Compose([transforms.Resize((224, 224)),
+                                        transforms.RandomResizedCrop(224,scale=(0.5,1.0),ratio=(0.75,1.333)),
+                                        transforms.RandomRotation(10),
+                                        # Cutout(),
+                                        transforms.ColorJitter(brightness=0.4,contrast=0.4,saturation=0.4,hue=0.4),
+                                        transforms.ToTensor(), 
+                                        transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
+
+
+        test_tfm = transforms.Compose([transforms.Resize((224, 224)),
+                                    transforms.ToTensor(), 
+                                    transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
+        
+        val_tfm = transforms.Compose([transforms.Resize((224, 224)),
                                     transforms.ToTensor(), 
                                     transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
 
+    elif args.image_embedding == "vision" :
+        train_tfm = transforms.Compose([
+            transforms.Resize(256, interpolation=3),
+            transforms.CenterCrop(224),
+            transforms.ToTensor(),
+            transforms.Normalize(IMAGENET_DEFAULT_MEAN, IMAGENET_DEFAULT_STD),
+        ])
+        test_tfm = transforms.Compose([
+            transforms.Resize(256, interpolation=3),
+            transforms.CenterCrop(224),
+            transforms.ToTensor(),
+            transforms.Normalize(IMAGENET_DEFAULT_MEAN, IMAGENET_DEFAULT_STD),
+        ])
 
-    test_tfm = transforms.Compose([transforms.Resize((224, 224)),
-                                transforms.ToTensor(), 
-                                 transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
-    
-    val_tfm = transforms.Compose([transforms.Resize((224, 224)),
-                                transforms.ToTensor(), 
-                                 transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
+
 
 
     # traindataset = VQAMed(train_df, imgsize = args.image_size, tfm = train_tfm, args = args)
