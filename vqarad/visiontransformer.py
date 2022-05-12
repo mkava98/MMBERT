@@ -55,12 +55,13 @@ print("image size:", img.size())
 
 
 
-modules2 = list(model.children())[:-2]
+modules2 = list(model.children())[:-4]
 # print("children -2222",list(model.children())[:-2])
 fix2 = nn.Sequential(*modules2)
 z=fix2(img)
+# z=z.view(1,196,40,-1)
+# z=gap2(relu(conv2(z))).view(-1,768)
 print(z.size())
-z=conv2(fix2(img))
 # v_2 = gap2(relu(conv2(fix2(img)))).view(-1,768)
 # modules3 = list(model.children())[:-3]
 # fix3 = nn.Sequential(*modules3)

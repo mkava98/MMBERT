@@ -244,15 +244,20 @@ class Transfer(nn.Module):
         elif args.image_embedding == "vision":
             self.args = args
             self.model = \
-            torch.hub.load('facebookresearch/deit:main', 'deit_base_patch16_224', pretrained=True)
+            torch.hub.load('facebookresearch/deit:main', 'deit_base_patch16_224', \
+            pretrained=True)
+
     def forward(self, img):
         if self.args.image_embedding =="resnet":
             modules2 = list(self.model.children())[:-2]
             fix2 = nn.Sequential(*modules2)
             v_2 = self.gap2(self.relu(self.conv2(fix2(img)))).view(-1,self.args.hidden_size)
+            print("v2size:", v_2.size())
             modules3 = list(self.model.children())[:-3]
             fix3 = nn.Sequential(*modules3)
             v_3 = self.gap3(self.relu(self.conv3(fix3(img)))).view(-1,self.args.hidden_size)
+            print("v3size:", v_3.size())
+
             modules4 = list(self.model.children())[:-4]
             fix4 = nn.Sequential(*modules4)
             v_4 = self.gap4(self.relu(self.conv4(fix4(img)))).view(-1,self.args.hidden_size)
