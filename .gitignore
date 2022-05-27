@@ -2,3 +2,4 @@ output/
 .vscode/
 env_rad/
 __pycache__
+data/

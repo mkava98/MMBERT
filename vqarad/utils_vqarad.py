@@ -62,8 +62,11 @@ def make_df(file_path):
 
 def load_data(args):
     
-    train_file = open(os.path.join(args.data_dir,'trainset.json'),)
-    test_file = open(os.path.join(args.data_dir,'testset.json'),)
+    # train_file = open(os.path.join(args.data_dir,'trainset.json'),)
+    # test_file = open(os.path.join(args.data_dir,'testset.json'),)
+        
+    train_file = open(os.path.join(args.data_dir,'trainlittle.json'),)
+    test_file = open(os.path.join(args.data_dir,'testlittle.json'),)
     
     train_data = json.load(train_file)
     test_data = json.load(test_file)
