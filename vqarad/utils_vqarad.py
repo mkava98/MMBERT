@@ -443,7 +443,7 @@ class BertLayer(nn.Module):
             out = self.norm2(out + self.drop2(h))
         return out, attn_scores  ###  finalllllyyyy operation for atention
 
-class Transfromer(nn.Module):
+class Transformer(nn.Module):
     def __init__(self, args):
         super(Transformer,self).__init__()
         if args.bert_model=="distilbert-base-uncased": ### specify distile bert 
