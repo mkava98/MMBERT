@@ -45,20 +45,20 @@ def seed_everything(seed):
     torch.backends.cudnn.deterministic = True
     torch.backends.cudnn.benchmark = True
 
+### it is unnecessary
 
-
-def make_df(file_path):
-    paths = os.listdir(file_path)
+# def make_df(file_path):
+#     paths = os.listdir(file_path)
     
-    df_list = []
+#     df_list = []
     
-    for p in paths:
-        df = pd.read_csv(os.path.join(file_path, p), sep='|', names = ['img_id', 'question', 'answer'])
-        df['category'] = p.split('_')[1]
-        df['mode'] = p.split('_')[2][:-4]
-        df_list.append(df)
+#     for p in paths:
+#         df = pd.read_csv(os.path.join(file_path, p), sep='|', names = ['img_id', 'question', 'answer'])
+#         df['category'] = p.split('_')[1]
+#         df['mode'] = p.split('_')[2][:-4]
+#         df_list.append(df)
     
-    return pd.concat(df_list)
+#     return pd.concat(df_list)
 
 def load_data(args):
     
@@ -102,12 +102,15 @@ def encode_text(caption,tokenizer, args):
     segment_ids = [0]*(len(part1)+2) + [1]*(len(part2[:args.max_position_embeddings-8])+1)
     input_mask = [1]*len(tokens)
     n_pad = args.max_position_embeddings - len(tokens)
-    tokens.extend([0]*n_pad)
+    tokens.extend([0]*n_pad) ### expand inputs in a fix size 
     segment_ids.extend([0]*n_pad)
     input_mask.extend([0]*n_pad)
 
     
     return tokens, segment_ids, input_mask
+
+
+###  end of encode text 
 
 def onehot(size, target):
     vec = torch.zeros(size, dtype=torch.float32)
@@ -139,9 +142,9 @@ class LabelSmoothing(nn.Module):
             return torch.nn.functional.cross_entropy(x, target)
 
 
-class VQAMed(Dataset):
-    def __init__(self, df, tfm, args, mode = 'train', tokenizer=None):
-        self.df = df.values ### construct object of VQA 
+class VQAMed(Dataset): ### inheritance does not accure????
+    def __init__(self, df, tfm, args, mode = 'train', tokenizer=None):### construct object of VQA 
+        self.df = df.values 
         self.tfm = tfm ### with special transformation
         self.args = args
         if args.bert_model=="distilbert-base-uncased":
@@ -173,21 +176,22 @@ class VQAMed(Dataset):
             img = self.tfm(img)
 
             
-        tokens, segment_ids, input_mask= encode_text(question, self.tokenizer, self.args)
+        tokens, segment_ids, input_mask= encode_text(question, self.tokenizer, self.args) ## porsesh va token token mikonim 
 
 
-        if self.mode != 'eval':
+        if self.mode != 'eval': ### trian 
             return img, torch.tensor(tokens, dtype = torch.long), \
             torch.tensor(segment_ids, dtype = torch.long)\
             ,torch.tensor(input_mask, dtype = torch.long), \
                 torch.tensor(answer, dtype = torch.long)
-        else:
+        else: ### eval or test 
             return img, torch.tensor(tokens, dtype = torch.long), \
                 torch.tensor(segment_ids, dtype = torch.long) ,\
                     torch.tensor(input_mask, dtype = torch.long), \
-                        torch.tensor(answer, dtype = torch.long), tok_ques
+                        torch.tensor(answer, dtype = torch.long), tok_ques  ### what is applicaton of this?
 
-
+ 
+### the end of VQAMed class
 
 def calculate_bleu_score(preds,targets, idx2ans):
        
@@ -196,39 +200,66 @@ def calculate_bleu_score(preds,targets, idx2ans):
     return np.mean(bleu_per_answer)
 
 
-
+## input ??
 class Embeddings(nn.Module):
     def __init__(self, args):
         super(Embeddings, self).__init__()
+
         self.word_embeddings = nn.Embedding(args.vocab_size, 128, padding_idx=0)
+
+        """num_embeddings (int) size of the dictionary of embeddings
+            embedding_dim (int) the size of each embedding vector
+        """
+
+        """
+          If specified, the entries at padding_idx do not contribute to the gradient; therefore, 
+          the embedding vector at padding_idx is not updated during training, i.e. it remains as a 
+          fixed “pad”. For a newly constructed Embedding, the embedding vector at padding_idx will 
+          default to all zeros, but can be updated to another value to be used as the padding vector.
+        
+        """
         self.word_embeddings_2 = nn.Linear(128, args.hidden_size, bias=False)
+         ### a linear layer we define
         self.position_embeddings = nn.Embedding(args.max_position_embeddings, args.hidden_size)
+         ##for embede the position
         self.type_embeddings = nn.Embedding(3, args.hidden_size)
-        self.LayerNorm = nn.LayerNorm(args.hidden_size, eps=1e-12)
+        ## we have three type 
+        self.LayerNorm = nn.LayerNorm(args.hidden_size, eps=1e-12)  ###eps – a value added to the 
+        ##denominator for numerical 
+        ##stability. Default: 1e-5
         self.dropout = nn.Dropout(args.hidden_dropout_prob)
+
         self.len = args.max_position_embeddings
+
+        ### define structure embedding class
+
     def forward(self, input_ids, segment_ids, position_ids=None):
         if position_ids is None:
             if torch.cuda.is_available():
                 position_ids = torch.arange(self.len, dtype=torch.long).cuda()
             else:
                 position_ids = torch.arange(self.len, dtype=torch.long)
-            position_ids = position_ids.unsqueeze(0).expand_as(input_ids)
+            position_ids = position_ids.unsqueeze(0).expand_as(input_ids) ### unsqueeze means feshordan
+            ##  i think expand to length of number of token or inputs
         words_embeddings = self.word_embeddings(input_ids)
-        words_embeddings = self.word_embeddings_2(words_embeddings)
+        words_embeddings = self.word_embeddings_2(words_embeddings) ## a linear operation 
         position_embeddings = self.position_embeddings(position_ids)
         token_type_embeddings = self.type_embeddings(segment_ids)
-        embeddings = words_embeddings + position_embeddings + token_type_embeddings
+
+        ### construct final word embedding 
+        embeddings = words_embeddings + position_embeddings + token_type_embeddings ### construct the embedding
         embeddings = self.LayerNorm(embeddings)
         embeddings = self.dropout(embeddings)
 
         return embeddings
 
+###  end of embedding class 
+
 
 class Transfer(nn.Module):
     def __init__(self,args):
         super(Transfer, self).__init__()
-        if args.image_embedding =="resnet":
+        if args.image_embedding =="resnet":  ### it is a condition 
             self.args = args
             self.model = models.resnet152(pretrained=True)
             # for p in self.parameters():
@@ -245,22 +276,28 @@ class Transfer(nn.Module):
             self.conv7 = nn.Conv2d(64, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
             self.gap7 = nn.AdaptiveAvgPool2d((1,1))
         elif args.image_embedding == "vision":
+
             self.args = args
             self.model = \
             torch.hub.load('facebookresearch/deit:main', 'deit_base_patch16_224', \
             pretrained=True)
 
-    def forward(self, img):
+
+            ### layer specification 
+
+
+    def forward(self, img):  ## is a singleimg or a batch of images???!!!
+
         if self.args.image_embedding =="resnet":
-            modules2 = list(self.model.children())[:-2]
-            fix2 = nn.Sequential(*modules2)
+
+            modules2 = list(self.model.children())[:-2] ## do ta mandeh be akhari !!
+            fix2 = nn.Sequential(*modules2)  ## sequential
             v_2 = self.gap2(self.relu(self.conv2(fix2(img)))).view(-1,self.args.hidden_size)
-            print("v2size:", v_2.size())
-            modules3 = list(self.model.children())[:-3]
+            print("v2size:", v_2.size())  ### (1, 768)
+            modules3 = list(self.model.children())[:-3] ### 3 ta laye be akhari 
             fix3 = nn.Sequential(*modules3)
             v_3 = self.gap3(self.relu(self.conv3(fix3(img)))).view(-1,self.args.hidden_size)
-            print("v3size:", v_3.size())
-
+            print("v3size:", v_3.size())  ###
             modules4 = list(self.model.children())[:-4]
             fix4 = nn.Sequential(*modules4)
             v_4 = self.gap4(self.relu(self.conv4(fix4(img)))).view(-1,self.args.hidden_size)
@@ -270,12 +307,18 @@ class Transfer(nn.Module):
             modules7 = list(self.model.children())[:-7]
             fix7 = nn.Sequential(*modules7)
             v_7 = self.gap7(self.relu(self.conv7(fix7(img)))).view(-1,self.args.hidden_size)
-            return v_2, v_3, v_4, v_5, v_7
+            return v_2, v_3, v_4, v_5, v_7  ## 5 feature vector extracted 
+
         elif self.args.image_embedding == "vision":
+
+            ### ta in ghesmat kamel shavad 
             pass
+## end of Transfer class
+
+
 
 class MultiHeadedSelfAttention(nn.Module): ## we should know about thi function at first 
-    def __init__(self,args):
+    def __init__(self, args):
         super(MultiHeadedSelfAttention,self).__init__()
         self.proj_q = nn.Linear(args.hidden_size, args.hidden_size)
         self.proj_k = nn.Linear(args.hidden_size, args.hidden_size)
@@ -286,7 +329,10 @@ class MultiHeadedSelfAttention(nn.Module): ## we should know about thi function 
 
 
     def forward(self, x, mask):
-        q, k, v = self.proj_q(x), self.proj_k(x), self.proj_v(x)
+        q, k, v = self.proj_q(x), self.proj_k(x), self.proj_v(x) ### chon vorudi har se x ast pas be in 
+        ### mana hast ke ba self atttentin kar mikonim tebgh estedlal "khodam" q va k bayad ham faza va entebaghpazir 
+        ### bashand va v mitavanad motafavet bashad dar attention 
+
         q, k, v = (self.split_last(x, (self.n_heads, -1)).transpose(1, 2) for x in [q, k, v])
         scores = q @ k.transpose(-2, -1) / np.sqrt(k.size(-1))
         if mask is not None:
@@ -297,6 +343,11 @@ class MultiHeadedSelfAttention(nn.Module): ## we should know about thi function 
         h = self.merge_last(h, 2)
         self.scores = scores
         return h, scores
+
+        ### self attention abstract 
+
+
+
     def split_last(self, x, shape):
         shape = list(shape)
         assert shape.count(-1) <= 1  ### this condition should be TRUE if it is False raise an error
@@ -350,7 +401,8 @@ class BertLayer(nn.Module):
         if self.share == 'ffn':
             self.attention = nn.ModuleList([MultiHeadedSelfAttention(args) for _ in range(args.n_layers)])
             self.proj = nn.ModuleList([nn.Linear(args.hidden_size, args.hidden_size) for _ in range(args.n_layers)])
-            self.feedforward = PositionWiseFeedForward(args)
+            self.feedforward = PositionWiseFeedForward(args)  ## sakhtar sabeti darad dar vaghe baznevisi
+            ###modular 
             
         elif self.share == 'att':
             self.attention = MultiHeadedSelfAttention(args)
@@ -364,11 +416,12 @@ class BertLayer(nn.Module):
             self.attention = nn.ModuleList([MultiHeadedSelfAttention(args) for _ in range(args.n_layers)])
             self.proj = nn.ModuleList([nn.Linear(args.hidden_size, args.hidden_size) for _ in range(args.n_layers)])
             self.feedforward = nn.ModuleList([PositionWiseFeedForward(args) for _ in range(args.n_layers)])
+    
     def forward(self, hidden_states, attention_mask, layer_num):
         if self.norm_pos == 'pre':
             if isinstance(self.attention, nn.ModuleList):
                 attn_output, attn_scores = self.attention[layer_num](self.norm1(hidden_states), attention_mask)
-                h = self.proj[layer_num](attn_output)
+                h = self.proj[layer_num](attn_output) ### output kodum layeh ast?
             else:
                 h = self.proj(self.attention(self.norm1(hidden_states), attention_mask))
             out = hidden_states + self.drop1(h)
@@ -388,20 +441,21 @@ class BertLayer(nn.Module):
             else:
                 h = self.feedforward(out)
             out = self.norm2(out + self.drop2(h))
-        return out, attn_scores
+        return out, attn_scores  ###  finalllllyyyy operation for atention
 
-class Transformer(nn.Module):
+class Transfromer(nn.Module):
     def __init__(self, args):
         super(Transformer,self).__init__()
-        if args.bert_model=="distilbert-base-uncased":
+        if args.bert_model=="distilbert-base-uncased": ### specify distile bert 
             base_model=DistilBertModel.from_pretrained(args.bert_model)
         else:
-            base_model = BertModel.from_pretrained(args.bert_model)
+            base_model = BertModel.from_pretrained(args.bert_model) ## other model 
+
         # base_model = BertModel.from_pretrained('bert-base-multilingual-cased')
         # print("list::::", list(base_model.children())[0:])
         # print("list::::", list(base_model.children()))
 
-        bert_model = nn.Sequential(*list(base_model.children())[0:])
+        bert_model = nn.Sequential(*list(base_model.children())[0:]) ### Structure Of Model
         self.bert_embedding = bert_model[0]
         # self.embed = Embeddings(args)
         self.trans = Transfer(args)
@@ -434,6 +488,7 @@ class Transformer(nn.Module):
 
         return torch.stack(hidden_states, 0), torch.stack(all_attn_scores, 0)
 
+### end of Transformer 
 
 class Model(nn.Module):
     def __init__(self,args):
@@ -469,11 +524,11 @@ class Model(nn.Module):
         h, attn_scores = self.transformer(img, input_ids, segment_ids, input_mask)
         pooled_h = self.activ1(self.fc1(h.mean(0).mean(1)))
         logits = self.classifier(pooled_h)
-        return logits, attn_scores
+        return logits, attn_scores 
     
     
 
-
+### train one epoch 
 def train_one_epoch(loader, model, optimizer, criterion, device, scaler, args, train_df, idx2ans):
 
     model.train()
@@ -540,6 +595,7 @@ def train_one_epoch(loader, model, optimizer, criterion, device, scaler, args, t
 
     return np.mean(train_loss), acc  ### it is important what is returning 
 
+### validate the validation data set 
 def validate(loader, model, criterion, device, scaler, args, val_df, idx2ans):
     model.eval()
     val_loss = []
@@ -601,7 +657,7 @@ def validate(loader, model, criterion, device, scaler, args, val_df, idx2ans):
     bleu = {'total_bleu': np.round(total_bleu, 4),  'closed_bleu': np.round(closed_bleu, 4), 'open_bleu': np.round(open_bleu, 4)}
 
     return val_loss, PREDS, acc, bleu
-    
+### final test for testdataset eval()  
 def test(loader, model, criterion, device, scaler, args, val_df,idx2ans):
 
     model.eval()
@@ -656,6 +712,7 @@ def test(loader, model, criterion, device, scaler, args, val_df,idx2ans):
 
     return test_loss, PREDS, acc
 
+### final prediction 
 def final_test(loader, all_models, device, args, val_df, idx2ans):
 
     PREDS = []

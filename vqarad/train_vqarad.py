@@ -75,15 +75,6 @@ warnings.simplefilter("ignore", UserWarning)
 
 ### we should alt this 
 
-
-def my_plot(epochs, loss, acc):
-            print(epochs)
-            print()
-            plt.plot(epochs, loss, color="blue")
-            plt.plot(epochs, acc, color="red")
-            plt.show()
-            plt.savefig('train.png')
-
    
     
 
@@ -282,11 +273,7 @@ if __name__ == '__main__':
     #     epoo.append[epoch]    
 
     epoo = [epoch+1 for epoch in range(args.epochs)]
-    # a = {'model_name': 'model2', 'bert_model': args.bert_model,'image_embedding':args.image_embedding,\
-    #      'epoch': args.epochs, "lr": args.lr, "loss":
-    #          all_loss_val, "overalla_ccuracy": all_train_acc}
-    # df = pd.DataFrame(a)
-    # df.to_csv('output_train.xlsx')
+   
 
     df = pd.read_excel('output_train.xlsx')
     df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
@@ -301,14 +288,3 @@ if __name__ == '__main__':
     # ["model2",args.bert_model ,args.epochs, args.lr, train_loss,train_acc["total_acc"]]
     df.to_excel("output_train.xlsx") 
     
-
-
-    # my_plot(epoo,train_loss,train_acc)
-
-
-
-
-
-
-    # my_plot( epoo, all_loss_val)
- 
