@@ -13,11 +13,11 @@ from timm.data.constants import IMAGENET_DEFAULT_MEAN, IMAGENET_DEFAULT_STD
 
 
 model = torch.hub.load('facebookresearch/deit:main', 'deit_base_patch16_224', pretrained=True)
-model2=models.resnet152(pretrained=True)
+# model2=models.resnet152(pretrained=True)
 # model.eval()
 
 
-relu = nn.ReLU()
+# relu = nn.ReLU()
 # conv2 = nn.Conv2d(2048, 768, kernel_size=(1, 1), stride=(1, 1), bias=False)
 # gap2 = nn.AdaptiveAvgPool2d((1,1))
 # conv3 = nn.Conv2d(1024, 768, kernel_size=(1, 1), stride=(1, 1), bias=False)
@@ -29,6 +29,7 @@ relu = nn.ReLU()
 # conv7 = nn.Conv2d(64, 768, kernel_size=(1, 1), stride=(1, 1), bias=False)
 # gap7 = nn.AdaptiveAvgPool2d((1,1))
 
+relu = nn.ReLU()
 
 conv2 = nn.Conv2d(196, 768, kernel_size=(1, 1), stride=(1, 1), bias=False)
 gap2 = nn.AdaptiveAvgPool2d((1,1))
@@ -50,22 +51,27 @@ transform = transforms.Compose([
 
 img = Image.open(requests.get("https://raw.githubusercontent.com/pytorch/ios-demo-app/master/HelloWorld/HelloWorld/HelloWorld/image.png", stream=True).raw)
 img = transform(img)[None,]
-print("image size:", img.size())
-# out = model(img)
+out = model(img)
 
 
 
-modules2 = list(model.children())[:-4]
+modules2 = list(model.children())[:]
 # print("children -2222",list(model.children())[:-2])
 fix2 = nn.Sequential(*modules2)
 z=fix2(img)
-# z=z.view(1,196,40,-1)
-# z=gap2(relu(conv2(z))).view(-1,768)
 print(z.size())
-# v_2 = gap2(relu(conv2(fix2(img)))).view(-1,768)
-# modules3 = list(model.children())[:-3]
-# fix3 = nn.Sequential(*modules3)
-# v_3 = gap3(relu(conv3(fix3(img)))).view(-1,768)
+z=z.view(1,196,10,100)
+# v_2 =gap2(relu(conv2(z))).view(-1,768)
+# print(z.size())
+v_2 = gap2(relu(conv2(fix2(img).view(1,196,10,100)))).view(-1,768)
+modules3 = list(model.children())[:]
+fix3 = nn.Sequential(*modules3)
+dim=fix3(img).size()
+print(dim)
+# v_3 = gap3(relu(conv3(fix3(img).view(768, -1, -1, -1)))).view(-1,768)
+### .view(1,196,10,100)
+# z=z.view(1,196,10,100)
+
 # modules4 = list(model.children())[:-4]
 # fix4 = nn.Sequential(*modules4)
 # v_4 = gap4(relu(conv4(fix4(img)))).view(-1,768)

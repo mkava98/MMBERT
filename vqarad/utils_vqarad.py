@@ -281,6 +281,22 @@ class Transfer(nn.Module):
             self.model = \
             torch.hub.load('facebookresearch/deit:main', 'deit_base_patch16_224', \
             pretrained=True)
+            # relu = nn.ReLU()
+            # conv2 = nn.Conv2d(196, 768, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            # gap2 = nn.AdaptiveAvgPool2d((1,1))
+            # conv3 = nn.Conv2d(1024, 768, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            # gap3 = nn.AdaptiveAvgPool2d((1,1))
+            # conv4 = nn.Conv2d(512, 768, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            # gap4 = nn.AdaptiveAvgPool2d((1,1))
+            # conv5 = nn.Conv2d(256, 768, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            # gap5 = nn.AdaptiveAvgPool2d((1,1))
+            # conv7 = nn.Conv2d(64, 768, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            # gap7 = nn.AdaptiveAvgPool2d((1,1))
+            self.relu = nn.ReLU()
+            self.conv2 = nn.Conv2d(196, 768, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            self.gap2 = nn.AdaptiveAvgPool2d((1,1))
+
+
 
 
             ### layer specification 
@@ -293,11 +309,11 @@ class Transfer(nn.Module):
             modules2 = list(self.model.children())[:-2] ## do ta mandeh be akhari !!
             fix2 = nn.Sequential(*modules2)  ## sequential
             v_2 = self.gap2(self.relu(self.conv2(fix2(img)))).view(-1,self.args.hidden_size)
-            print("v2size:", v_2.size())  ### (1, 768)
+            # print("v2size:", v_2.size())  ### (1, 768)
             modules3 = list(self.model.children())[:-3] ### 3 ta laye be akhari 
             fix3 = nn.Sequential(*modules3)
             v_3 = self.gap3(self.relu(self.conv3(fix3(img)))).view(-1,self.args.hidden_size)
-            print("v3size:", v_3.size())  ###
+            # print("v3size:", v_3.size())  ###
             modules4 = list(self.model.children())[:-4]
             fix4 = nn.Sequential(*modules4)
             v_4 = self.gap4(self.relu(self.conv4(fix4(img)))).view(-1,self.args.hidden_size)
@@ -311,8 +327,26 @@ class Transfer(nn.Module):
 
         elif self.args.image_embedding == "vision":
 
+            modules2 = list(self.model.children())[:] ## do ta mandeh be akhari !!
+            fix2 = nn.Sequential(*modules2)  ## sequential
+            v_2 = self.gap2(self.relu(self.conv2(fix2(img).view(1,196,10,100)))).view(-1,self.args.hidden_size)
+            # # print("v2size:", v_2.size())  ### (1, 768)
+            # modules3 = list(self.model.children())[:-3] ### 3 ta laye be akhari 
+            # fix3 = nn.Sequential(*modules3)
+            # v_3 = self.gap3(self.relu(self.conv3(fix3(img)))).view(-1,self.args.hidden_size)
+            # # print("v3size:", v_3.size())  ###
+            # modules4 = list(self.model.children())[:-4]
+            # fix4 = nn.Sequential(*modules4)
+            # v_4 = self.gap4(self.relu(self.conv4(fix4(img)))).view(-1,self.args.hidden_size)
+            # modules5 = list(self.model.children())[:-5]
+            # fix5 = nn.Sequential(*modules5)
+            # v_5 = self.gap5(self.relu(self.conv5(fix5(img)))).view(-1,self.args.hidden_size)
+            # modules7 = list(self.model.children())[:-7]
+            # fix7 = nn.Sequential(*modules7)
+            # v_7 = self.gap7(self.relu(self.conv7(fix7(img)))).view(-1,self.args.hidden_size)
+            return v_2, v_2, v_2, v_2, v_2  ## 5 feature vector extracted 
+
             ### ta in ghesmat kamel shavad 
-            pass
 ## end of Transfer class
 
 
