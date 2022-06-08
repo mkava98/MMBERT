@@ -22,7 +22,6 @@ import matplotlib.pyplot as plt
 
 import pretrainedmodels
 
-
 def seed_everything(seed):
     random.seed(seed)
     os.environ['PYTHONHASHSEED'] = str(seed)

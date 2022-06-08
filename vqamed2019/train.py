@@ -26,7 +26,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description = "Finetune on ImageClef 2019")
 
     # parser.add_argument('--run_name', type = str, required = True, help = "run name for wandb")
-    parser.add_argument('--data_dir', type = str, required = False, default = "/home/viraj.bagal/viraj/medvqa/Dataset/Imageclef19/input/vqa-med-starter", help = "path for data")
+    parser.add_argument('--data_dir', type = str, required = False, default = "../data/vqamed/", help = "path for data")
     parser.add_argument('--model_dir', type = str, required = False, default = "/home/viraj.bagal/viraj/medvqa/Weights/roco_mlm/val_loss_3.pt", help = "path to load weights")
     parser.add_argument('--save_dir', type = str, required = False, default = "/home/viraj.bagal/viraj/medvqa/Weights/ic19", help = "path to save weights")
     parser.add_argument('--category', type = str, required = False, default = None,  help = "choose specific category if you want")
