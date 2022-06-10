@@ -1,0 +1,2001 @@
+,img_id,question,answer,category,mode
+0,synpic54733,what organ system is shown in the image?,"face, sinuses, and neck",Organ,val
+1,synpic25647,what organ system is being imaged?,"lung, mediastinum, pleura",Organ,val
+2,synpic35681,what part of the body is being imaged?,breast,Organ,val
+3,synpic39641,what organ system is pictured here?,musculoskeletal,Organ,val
+4,synpic35693,what is the organ principally shown in this mri?,heart and great vessels,Organ,val
+5,synpic17419,what organ systems can be evaluated with this ct scan?,gastrointestinal,Organ,val
+6,synpic32909,the ct scan shows what organ system?,gastrointestinal,Organ,val
+7,synpic48040,what organ system is primarily present in this image?,skull and contents,Organ,val
+8,synpic48351,what organ system is being imaged?,"lung, mediastinum, pleura",Organ,val
+9,synpic49503,what part of the body is being imaged?,skull and contents,Organ,val
+10,synpic18176,the ct scan shows what organ system?,gastrointestinal,Organ,val
+11,synpic36498,what part of the body does this x-ray show?,"lung, mediastinum, pleura",Organ,val
+12,synpic26850,what organ system is imaged?,heart and great vessels,Organ,val
+13,synpic19508,what is the organ system in this image?,genitourinary,Organ,val
+14,synpic23496,what organ system is visualized?,skull and contents,Organ,val
+15,synpic25435,which organ is captured by this mri?,skull and contents,Organ,val
+16,synpic38894,what organ system is evaluated primarily?,gastrointestinal,Organ,val
+17,synpic25620,what organ systems can be evaluated with this x-ray?,musculoskeletal,Organ,val
+18,synpic25634,the x-ray shows what organ system?,musculoskeletal,Organ,val
+19,synpic36490,what is the organ principally shown in this x-ray?,skull and contents,Organ,val
+20,synpic40658,which organ system is imaged?,skull and contents,Organ,val
+21,synpic27614,what organ system is primarily present in this image?,musculoskeletal,Organ,val
+22,synpic26245,what part of the body is being imaged here?,skull and contents,Organ,val
+23,synpic25628,what organ systems can be evaluated with this x-ray?,musculoskeletal,Organ,val
+24,synpic34446,what organ system is shown in this mri?,"face, sinuses, and neck",Organ,val
+25,synpic28899,what organ is this image of?,musculoskeletal,Organ,val
+26,synpic28331,what organ system is visualized?,genitourinary,Organ,val
+27,synpic55791,what organ system is imaged?,skull and contents,Organ,val
+28,synpic32867,what organ system is shown in the image?,skull and contents,Organ,val
+29,synpic21201,which organ system is shown in the x-ray?,musculoskeletal,Organ,val
+30,synpic20686,what organ is this image of?,breast,Organ,val
+31,synpic17412,what part of the body is being imaged?,gastrointestinal,Organ,val
+32,synpic53907,what organ system is displayed in this ct scan?,"face, sinuses, and neck",Organ,val
+33,synpic24024,what organ system is displayed in this ultrasound?,genitourinary,Organ,val
+34,synpic59540,what part of the body is being imaged?,skull and contents,Organ,val
+35,synpic19169,what organ is this image of?,musculoskeletal,Organ,val
+36,synpic52424,what is one organ system seen in this image?,spine and contents,Organ,val
+37,synpic52430,what is the organ principally shown in this mri?,musculoskeletal,Organ,val
+38,synpic51878,what organ is this mri showing?,gastrointestinal,Organ,val
+39,synpic25109,what organ is this image of?,skull and contents,Organ,val
+40,synpic21186,what part of the body is being imaged here?,musculoskeletal,Organ,val
+41,synpic52140,what part of the body is being imaged here?,"face, sinuses, and neck",Organ,val
+42,synpic32893,what part of the body is being imaged?,gastrointestinal,Organ,val
+43,synpic25451,what organ system is evaluated primarily?,"lung, mediastinum, pleura",Organ,val
+44,synpic18101,the x-ray shows what organ system?,spine and contents,Organ,val
+45,synpic18115,what organ system is pictured here?,musculoskeletal,Organ,val
+46,synpic17583,what organ system is visualized?,musculoskeletal,Organ,val
+47,synpic100295,what is one organ system seen in this image?,genitourinary,Organ,val
+48,synpic46243,what organ system is shown in this mri?,spine and contents,Organ,val
+49,synpic38951,what organ system is visualized?,musculoskeletal,Organ,val
+50,synpic60290,the ct scan shows what organ system?,genitourinary,Organ,val
+51,synpic17970,what organ system is shown in the image?,musculoskeletal,Organ,val
+52,synpic17780,what part of the body does this gastrointestinal image show?,gastrointestinal,Organ,val
+53,synpic28216,what is the organ principally shown in this gastrointestinal image?,gastrointestinal,Organ,val
+54,synpic31753,what organ is this ct scan showing?,vascular and lymphatic,Organ,val
+55,synpic16475,what organ system is pictured here?,gastrointestinal,Organ,val
+56,synpic38575,what organ system is displayed in this mri?,skull and contents,Organ,val
+57,synpic41707,what organ system is primarily present in this image?,spine and contents,Organ,val
+58,synpic26950,what organ system is shown in the image?,gastrointestinal,Organ,val
+59,synpic18921,what organ system is primarily present in this image?,genitourinary,Organ,val
+60,synpic29054,what organ is this x-ray showing?,musculoskeletal,Organ,val
+61,synpic56870,what is one organ system seen in this image?,spine and contents,Organ,val
+62,synpic21385,the mri shows what organ system?,skull and contents,Organ,val
+63,synpic57577,what organ system is imaged?,skull and contents,Organ,val
+64,synpic40779,what organ system is visualized?,gastrointestinal,Organ,val
+65,synpic49985,what organ system is shown in the image?,spine and contents,Organ,val
+66,synpic50556,what organ system is visualized?,skull and contents,Organ,val
+67,synpic57239,which organ system is shown in the mri?,skull and contents,Organ,val
+68,synpic54730,what organ system is being imaged?,gastrointestinal,Organ,val
+69,synpic52631,which organ system is shown in the mri?,skull and contents,Organ,val
+70,synpic28837,which organ system is imaged?,skull and contents,Organ,val
+71,synpic39709,what organ system is evaluated primarily?,skull and contents,Organ,val
+72,synpic61204,what part of the body is being imaged here?,musculoskeletal,Organ,val
+73,synpic27523,what organ is this ct scan showing?,"lung, mediastinum, pleura",Organ,val
+74,synpic61238,what organ system is evaluated primarily?,skull and contents,Organ,val
+75,synpic58532,what is the organ principally shown in this mri?,skull and contents,Organ,val
+76,synpic45577,what part of the body is being imaged here?,skull and contents,Organ,val
+77,synpic39696,what is the organ system in this image?,skull and contents,Organ,val
+78,synpic23157,what organ system is primarily present in this image?,skull and contents,Organ,val
+79,synpic23631,what organ system is visualized?,skull and contents,Organ,val
+80,synpic27319,which organ is captured by this x-ray?,musculoskeletal,Organ,val
+81,synpic51072,which organ system is imaged?,skull and contents,Organ,val
+82,synpic53659,what organ system is pictured here?,"lung, mediastinum, pleura",Organ,val
+83,synpic58095,what organ is this ct scan showing?,gastrointestinal,Organ,val
+84,synpic60250,what organ is this image of?,skull and contents,Organ,val
+85,synpic40194,what part of the body does this ct scan show?,musculoskeletal,Organ,val
+86,synpic29645,what organ system is primarily present in this image?,musculoskeletal,Organ,val
+87,synpic31036,what organ system is primarily present in this image?,"lung, mediastinum, pleura",Organ,val
+88,synpic33806,what part of the body is being imaged here?,skull and contents,Organ,val
+89,synpic27873,what organ is this image showing?,breast,Organ,val
+90,synpic38953,what is the organ principally shown in this x-ray?,musculoskeletal,Organ,val
+91,synpic49172,what organ system is primarily present in this image?,musculoskeletal,Organ,val
+92,synpic59407,what is one organ system seen in this image?,"face, sinuses, and neck",Organ,val
+93,synpic43477,what organ system is imaged?,musculoskeletal,Organ,val
+94,synpic53314,what is the organ system in this image?,skull and contents,Organ,val
+95,synpic46876,what part of the body does this x-ray show?,"lung, mediastinum, pleura",Organ,val
+96,synpic28188,what organ system is visualized?,musculoskeletal,Organ,val
+97,synpic47573,what organ is this image of?,skull and contents,Organ,val
+98,synpic30260,what organ system is being imaged?,vascular and lymphatic,Organ,val
+99,synpic45827,which organ system is imaged?,skull and contents,Organ,val
+100,synpic27046,what organ system is visualized?,musculoskeletal,Organ,val
+101,synpic20729,the ct scan shows what organ system?,spine and contents,Organ,val
+102,synpic30248,which organ system is shown in the ct scan?,heart and great vessels,Organ,val
+103,synpic53738,what organ system is shown in the image?,spine and contents,Organ,val
+104,synpic17620,what organ is this ct scan showing?,gastrointestinal,Organ,val
+105,synpic47017,what organ system is displayed in this mri?,skull and contents,Organ,val
+106,synpic41314,what organ system is shown in the image?,skull and contents,Organ,val
+107,synpic55403,what is the organ principally shown in this ct scan?,skull and contents,Organ,val
+108,synpic27730,what part of the body is being imaged?,gastrointestinal,Organ,val
+109,synpic58682,which organ system is imaged?,spine and contents,Organ,val
+110,synpic50023,what organ system is imaged?,"lung, mediastinum, pleura",Organ,val
+111,synpic57758,the mri shows what organ system?,skull and contents,Organ,val
+112,synpic19225,what organ systems can be evaluated with this mri?,skull and contents,Organ,val
+113,synpic16880,which organ system is imaged?,musculoskeletal,Organ,val
+114,synpic48730,what organ system is imaged?,genitourinary,Organ,val
+115,synpic21786,what organ system is evaluated primarily?,"face, sinuses, and neck",Organ,val
+116,synpic25090,which organ system is shown in the ct scan?,gastrointestinal,Organ,val
+117,synpic58912,what organ systems can be evaluated with this mri?,skull and contents,Organ,val
+118,synpic35240,what organ is this image of?,skull and contents,Organ,val
+119,synpic33143,which organ system is shown in the mri?,musculoskeletal,Organ,val
+120,synpic28204,what organ system is shown in the image?,gastrointestinal,Organ,val
+121,synpic26201,what is the organ principally shown in this x-ray?,skull and contents,Organ,val
+122,synpic41271,which organ is captured by this x-ray?,musculoskeletal,Organ,val
+123,synpic8182,what is the organ system in this image?,gastrointestinal,Organ,val
+124,synpic57188,what organ system is displayed in this mri?,skull and contents,Organ,val
+125,synpic43843,what organ system is visualized?,skull and contents,Organ,val
+126,synpic36210,what organ system is pictured here?,"face, sinuses, and neck",Organ,val
+127,synpic58495,what organ system is pictured here?,skull and contents,Organ,val
+128,synpic40231,what part of the body does this mri show?,skull and contents,Organ,val
+129,synpic40782,what organ systems can be evaluated with this ct scan?,spine and contents,Organ,val
+130,synpic53098,what is the organ principally shown in this mri?,skull and contents,Organ,val
+131,synpic31184,the ct scan shows what organ system?,genitourinary,Organ,val
+132,synpic56123,what organ system is primarily present in this image?,musculoskeletal,Organ,val
+133,synpic59548,the ct scan shows what organ system?,skull and contents,Organ,val
+134,synpic21418,what organ system is shown in the image?,"lung, mediastinum, pleura",Organ,val
+135,synpic17814,what part of the body is being imaged?,gastrointestinal,Organ,val
+136,synpic22893,which organ system is imaged?,"face, sinuses, and neck",Organ,val
+137,synpic33236,what organ system is shown in this angiogram?,vascular and lymphatic,Organ,val
+138,synpic59945,which organ is captured by this ct scan?,skull and contents,Organ,val
+139,synpic27492,what organ system is shown in the image?,skull and contents,Organ,val
+140,synpic45565,what organ is this ct scan showing?,"lung, mediastinum, pleura",Organ,val
+141,synpic16883,what part of the body does this mri show?,musculoskeletal,Organ,val
+142,synpic43699,what organ is this mri showing?,skull and contents,Organ,val
+143,synpic23151,what organ system is shown in the image?,"lung, mediastinum, pleura",Organ,val
+144,synpic21020,what organ system is pictured here?,skull and contents,Organ,val
+145,synpic52596,what organ system is pictured here?,spine and contents,Organ,val
+146,synpic56901,what organ system is displayed in this mri?,spine and contents,Organ,val
+147,synpic38404,what organ system is shown in the image?,spine and contents,Organ,val
+148,synpic40597,which organ is captured by this ct scan?,genitourinary,Organ,val
+149,synpic26612,what organ system is being imaged?,skull and contents,Organ,val
+150,synpic100332,what part of the body is being imaged?,spine and contents,Organ,val
+151,synpic26809,what organ is this ct scan showing?,genitourinary,Organ,val
+152,synpic59005,what organ system is shown in the image?,skull and contents,Organ,val
+153,synpic43576,which organ system is shown in the x-ray?,musculoskeletal,Organ,val
+154,synpic33913,what is one organ system seen in this image?,genitourinary,Organ,val
+155,synpic23255,what organ systems can be evaluated with this ct scan?,skull and contents,Organ,val
+156,synpic21442,what organ system is shown in the image?,genitourinary,Organ,val
+157,synpic38885,which organ system is shown in the ct scan?,gastrointestinal,Organ,val
+158,synpic17866,which organ is captured by this ct scan?,genitourinary,Organ,val
+159,synpic24512,what organ system is primarily present in this image?,skull and contents,Organ,val
+160,synpic24506,what organ system is displayed in this mri?,skull and contents,Organ,val
+161,synpic39557,what part of the body does this x-ray show?,"lung, mediastinum, pleura",Organ,val
+162,synpic33293,what part of the body is being imaged here?,gastrointestinal,Organ,val
+163,synpic13143,which organ is captured by this mri?,"face, sinuses, and neck",Organ,val
+164,synpic17319,what is one organ system seen in this image?,gastrointestinal,Organ,val
+165,synpic33481,what organ is this image of?,"lung, mediastinum, pleura",Organ,val
+166,synpic24857,what organ system is shown in this ct scan?,skull and contents,Organ,val
+167,synpic37195,what is the organ principally shown in this ct scan?,genitourinary,Organ,val
+168,synpic48796,what organ system is primarily present in this image?,"lung, mediastinum, pleura",Organ,val
+169,synpic47664,what organ system is evaluated primarily?,skull and contents,Organ,val
+170,synpic56027,what organ system is evaluated primarily?,skull and contents,Organ,val
+171,synpic42084,what organ is this image of?,skull and contents,Organ,val
+172,synpic37433,what organ system is imaged?,"face, sinuses, and neck",Organ,val
+173,synpic34853,which organ system is imaged?,skull and contents,Organ,val
+174,synpic32749,what organ system is visualized?,spine and contents,Organ,val
+175,synpic60966,what organ system is evaluated primarily?,"lung, mediastinum, pleura",Organ,val
+176,synpic25382,what organ system is shown in the image?,vascular and lymphatic,Organ,val
+177,synpic39967,what organ system is pictured here?,skull and contents,Organ,val
+178,synpic27768,what organ system is shown in this angiogram?,vascular and lymphatic,Organ,val
+179,synpic30200,what organ system is visualized?,"face, sinuses, and neck",Organ,val
+180,synpic31678,what organ system is pictured here?,musculoskeletal,Organ,val
+181,synpic53994,what organ system is being imaged?,skull and contents,Organ,val
+182,synpic49072,what is the organ principally shown in this mri?,skull and contents,Organ,val
+183,synpic19651,what organ system is being imaged?,spine and contents,Organ,val
+184,synpic53980,what organ systems can be evaluated with this mri?,skull and contents,Organ,val
+185,synpic33084,what is the organ system in this image?,genitourinary,Organ,val
+186,synpic56608,what organ systems can be evaluated with this ct scan?,spine and contents,Organ,val
+187,synpic48422,what is the organ principally shown in this mri?,skull and contents,Organ,val
+188,synpic46419,what organ system is imaged?,skull and contents,Organ,val
+189,synpic17124,which organ is captured by this x-ray?,musculoskeletal,Organ,val
+190,synpic47049,which organ is captured by this ct scan?,gastrointestinal,Organ,val
+191,synpic40915,what organ is this image of?,skull and contents,Organ,val
+192,synpic51818,what organ is this image of?,skull and contents,Organ,val
+193,synpic32401,the x-ray shows what organ system?,"face, sinuses, and neck",Organ,val
+194,synpic34070,what organ system is evaluated primarily?,gastrointestinal,Organ,val
+195,synpic55854,what organ system is visualized?,skull and contents,Organ,val
+196,synpic29237,what organ system is displayed in this x-ray?,musculoskeletal,Organ,val
+197,synpic39193,what organ system is visualized?,musculoskeletal,Organ,val
+198,synpic33455,what organ system is imaged?,genitourinary,Organ,val
+199,synpic41564,what is one organ system seen in this image?,skull and contents,Organ,val
+200,synpic54169,what organ system is evaluated primarily?,skull and contents,Organ,val
+201,synpic57312,what organ system is shown in this ct scan?,spine and contents,Organ,val
+202,synpic54627,what organ systems can be evaluated with this mri?,skull and contents,Organ,val
+203,synpic58790,what is the organ principally shown in this ct scan?,skull and contents,Organ,val
+204,synpic58974,what organ system is shown in the image?,skull and contents,Organ,val
+205,synpic35568,what organ is this ct scan showing?,skull and contents,Organ,val
+206,synpic53835,what organ system is being imaged?,heart and great vessels,Organ,val
+207,synpic47855,the mri shows what organ system?,spine and contents,Organ,val
+208,synpic58008,what part of the body does this ct scan show?,spine and contents,Organ,val
+209,synpic15120,what organ system is imaged?,spine and contents,Organ,val
+210,synpic33695,which organ system is imaged?,musculoskeletal,Organ,val
+211,synpic100545,what organ system is being imaged?,spine and contents,Organ,val
+212,synpic58544,what organ system is primarily present in this image?,skull and contents,Organ,val
+213,synpic32825,what part of the body is being imaged?,gastrointestinal,Organ,val
+214,synpic41613,what organ system is shown in the image?,gastrointestinal,Organ,val
+215,synpic39569,what organ is this x-ray showing?,musculoskeletal,Organ,val
+216,synpic24538,what part of the body is being imaged?,heart and great vessels,Organ,val
+217,synpic17121,what organ systems can be evaluated with this x-ray?,breast,Organ,val
+218,synpic34061,what organ is this image of?,gastrointestinal,Organ,val
+219,synpic36110,what organ system is pictured here?,musculoskeletal,Organ,val
+220,synpic56814,what organ is this image of?,musculoskeletal,Organ,val
+221,synpic43955,which organ system is imaged?,musculoskeletal,Organ,val
+222,synpic54434,what organ system is evaluated primarily?,skull and contents,Organ,val
+223,synpic24879,what organ system is being imaged?,gastrointestinal,Organ,val
+224,synpic39828,what organ systems can be evaluated with this mri?,skull and contents,Organ,val
+225,synpic48021,what organ system is imaged?,skull and contents,Organ,val
+226,synpic49129,what organ is this ct scan showing?,genitourinary,Organ,val
+227,synpic58742,what is one organ system seen in this image?,skull and contents,Organ,val
+228,synpic15871,which organ is captured by this ct scan?,musculoskeletal,Organ,val
+229,synpic58965,what organ systems can be evaluated with this mri?,skull and contents,Organ,val
+230,synpic39357,what organ system is visualized?,heart and great vessels,Organ,val
+231,synpic60223,what organ system is being imaged?,skull and contents,Organ,val
+232,synpic34841,what is the organ principally shown in this mri?,musculoskeletal,Organ,val
+233,synpic21041,what organ system is displayed in this ct scan?,heart and great vessels,Organ,val
+234,synpic55071,what is one organ system seen in this image?,skull and contents,Organ,val
+235,synpic41825,which organ is captured by this mri?,musculoskeletal,Organ,val
+236,synpic55850,what part of the body is being imaged here?,skull and contents,Organ,val
+237,synpic34276,which organ system is shown in the mri?,spine and contents,Organ,val
+238,synpic25384,what organ system is shown in this mri?,skull and contents,Organ,val
+239,synpic43767,what organ system is imaged?,skull and contents,Organ,val
+240,synpic23252,which organ is captured by this ultrasound?,genitourinary,Organ,val
+241,synpic53789,what is one organ system seen in this image?,skull and contents,Organ,val
+242,synpic52468,the mri shows what organ system?,skull and contents,Organ,val
+243,synpic42135,what organ system is visualized?,musculoskeletal,Organ,val
+244,synpic58184,what part of the body does this mri show?,skull and contents,Organ,val
+245,synpic48397,what organ system is primarily present in this image?,skull and contents,Organ,val
+246,synpic45466,what part of the body is being imaged here?,"face, sinuses, and neck",Organ,val
+247,synpic46966,what is the organ system in this image?,musculoskeletal,Organ,val
+248,synpic39618,which organ system is shown in the x-ray?,musculoskeletal,Organ,val
+249,synpic18359,what organ system is shown in the image?,musculoskeletal,Organ,val
+250,synpic56036,what organ system is shown in the image?,skull and contents,Organ,val
+251,synpic49116,what organ system is evaluated primarily?,spine and contents,Organ,val
+252,synpic53199,the ct scan shows what organ system?,skull and contents,Organ,val
+253,synpic38739,what organ system is imaged?,genitourinary,Organ,val
+254,synpic17902,what organ system is visualized?,skull and contents,Organ,val
+255,synpic22952,what organ system is shown in the image?,genitourinary,Organ,val
+256,synpic16361,what is the organ principally shown in this mri?,musculoskeletal,Organ,val
+257,synpic19052,what organ system is primarily present in this image?,gastrointestinal,Organ,val
+258,synpic27433,what organ system is shown in this ultrasound?,genitourinary,Organ,val
+259,synpic54393,what part of the body does this mri show?,skull and contents,Organ,val
+260,synpic42268,which organ system is imaged?,musculoskeletal,Organ,val
+261,synpic17527,what part of the body is being imaged?,"lung, mediastinum, pleura",Organ,val
+262,synpic43604,what is the organ principally shown in this ultrasound?,genitourinary,Organ,val
+263,synpic50917,what organ is this image of?,skull and contents,Organ,val
+264,synpic39751,what organ system is shown in the image?,musculoskeletal,Organ,val
+265,synpic21687,what organ system is shown in the image?,vascular and lymphatic,Organ,val
+266,synpic35180,what organ system is primarily present in this image?,genitourinary,Organ,val
+267,synpic18012,what part of the body is being imaged here?,skull and contents,Organ,val
+268,synpic16765,what organ system is pictured here?,musculoskeletal,Organ,val
+269,synpic19640,what part of the body is being imaged?,vascular and lymphatic,Organ,val
+270,synpic54017,what organ is this image of?,"face, sinuses, and neck",Organ,val
+271,synpic33926,what organ systems can be evaluated with this ct scan?,genitourinary,Organ,val
+272,synpic59241,what part of the body does this mri show?,skull and contents,Organ,val
+273,synpic44990,what is the organ system in this image?,spine and contents,Organ,val
+274,synpic28094,what organ systems can be evaluated with this x-ray?,musculoskeletal,Organ,val
+275,synpic35947,what organ system is imaged?,spine and contents,Organ,val
+276,synpic41793,what organ is this mri showing?,spine and contents,Organ,val
+277,synpic43423,what is one organ system seen in this image?,musculoskeletal,Organ,val
+278,synpic16378,what organ system is shown in the image?,musculoskeletal,Organ,val
+279,synpic33107,what is the organ principally shown in this mri?,skull and contents,Organ,val
+280,synpic47877,what organ system is primarily present in this image?,skull and contents,Organ,val
+281,synpic22547,what part of the body does this ct scan show?,genitourinary,Organ,val
+282,synpic33489,what part of the body is being imaged here?,gastrointestinal,Organ,val
+283,synpic20393,which organ is captured by this x-ray?,musculoskeletal,Organ,val
+284,synpic50674,what is the organ principally shown in this mri?,spine and contents,Organ,val
+285,synpic46002,what organ system is shown in this ct scan?,heart and great vessels,Organ,val
+286,synpic41751,what is the organ system in this image?,spine and contents,Organ,val
+287,synpic21890,what part of the body does this mri show?,gastrointestinal,Organ,val
+288,synpic9384,what organ system is shown in this x-ray?,vascular and lymphatic,Organ,val
+289,synpic31315,what organ system is imaged?,breast,Organ,val
+290,synpic38331,what organ system is imaged?,musculoskeletal,Organ,val
+291,synpic25374,what is the organ principally shown in this ultrasound?,vascular and lymphatic,Organ,val
+292,synpic54214,what organ system is displayed in this ct scan?,spine and contents,Organ,val
+293,synpic56615,which organ is captured by this ct scan?,spine and contents,Organ,val
+294,synpic37599,which organ is captured by this mri?,vascular and lymphatic,Organ,val
+295,synpic55308,what part of the body is being imaged?,gastrointestinal,Organ,val
+296,synpic45133,the ct scan shows what organ system?,gastrointestinal,Organ,val
+297,synpic54994,what is the organ principally shown in this ct scan?,skull and contents,Organ,val
+298,synpic41341,what organ is this image of?,"face, sinuses, and neck",Organ,val
+299,synpic54766,what is the organ principally shown in this mri?,"face, sinuses, and neck",Organ,val
+300,synpic22196,what is the organ system in this image?,genitourinary,Organ,val
+301,synpic29772,what part of the body is being imaged here?,musculoskeletal,Organ,val
+302,synpic18008,what organ system is shown in the image?,musculoskeletal,Organ,val
+303,synpic30800,what organ system is imaged?,heart and great vessels,Organ,val
+304,synpic41960,what is the organ principally shown in this gastrointestinal image?,gastrointestinal,Organ,val
+305,synpic28295,what organ system is shown in the image?,"face, sinuses, and neck",Organ,val
+306,synpic24487,what organ system is displayed in this angiogram?,skull and contents,Organ,val
+307,synpic20187,what organ system is pictured here?,vascular and lymphatic,Organ,val
+308,synpic26246,the mri shows what organ system?,skull and contents,Organ,val
+309,synpic16352,what part of the body does this ct scan show?,vascular and lymphatic,Organ,val
+310,synpic59337,what part of the body is being imaged here?,"lung, mediastinum, pleura",Organ,val
+311,synpic48212,what organ system is shown in this x-ray?,"lung, mediastinum, pleura",Organ,val
+312,synpic57871,what part of the body does this angiogram show?,skull and contents,Organ,val
+313,synpic34454,what organ system is shown in the image?,gastrointestinal,Organ,val
+314,synpic17299,what part of the body does this angiogram show?,vascular and lymphatic,Organ,val
+315,synpic28733,what organ system is being imaged?,"lung, mediastinum, pleura",Organ,val
+316,synpic55727,the mri shows what organ system?,breast,Organ,val
+317,synpic45246,what part of the body is being imaged here?,"lung, mediastinum, pleura",Organ,val
+318,synpic57642,what organ system is visualized?,skull and contents,Organ,val
+319,synpic60171,what is the organ system in this image?,"face, sinuses, and neck",Organ,val
+320,synpic29565,what part of the body does this x-ray show?,"lung, mediastinum, pleura",Organ,val
+321,synpic19303,what organ systems can be evaluated with this image?,breast,Organ,val
+322,synpic51353,which organ is captured by this mri?,skull and contents,Organ,val
+323,synpic26332,what is the organ principally shown in this ct scan?,"lung, mediastinum, pleura",Organ,val
+324,synpic53785,what part of the body is being imaged?,skull and contents,Organ,val
+325,synpic53024,what organ system is displayed in this ct scan?,skull and contents,Organ,val
+326,synpic45861,what organ system is shown in the image?,gastrointestinal,Organ,val
+327,synpic31104,what is one organ system seen in this image?,"lung, mediastinum, pleura",Organ,val
+328,synpic49242,what organ system is pictured here?,spine and contents,Organ,val
+329,synpic41636,what organ is this ct scan showing?,"face, sinuses, and neck",Organ,val
+330,synpic58401,what part of the body is being imaged?,heart and great vessels,Organ,val
+331,synpic51357,what organ system is displayed in this mri?,"face, sinuses, and neck",Organ,val
+332,synpic44955,what organ is this image of?,"face, sinuses, and neck",Organ,val
+333,synpic23070,what organ system is pictured here?,gastrointestinal,Organ,val
+334,synpic47469,what organ system is visualized?,skull and contents,Organ,val
+335,synpic19529,what organ system is pictured here?,"lung, mediastinum, pleura",Organ,val
+336,synpic46993,which organ system is shown in the mri?,spine and contents,Organ,val
+337,synpic28051,the ct scan shows what organ system?,skull and contents,Organ,val
+338,synpic58993,what organ system is pictured here?,skull and contents,Organ,val
+339,synpic43431,what part of the body is being imaged here?,gastrointestinal,Organ,val
+340,synpic20814,what organ system is visualized?,breast,Organ,val
+341,synpic46549,what organ systems can be evaluated with this gastrointestinal image?,gastrointestinal,Organ,val
+342,synpic54830,what organ system is evaluated primarily?,musculoskeletal,Organ,val
+343,synpic40845,what organ system is displayed in this mri?,skull and contents,Organ,val
+344,synpic35203,what organ systems can be evaluated with this mri?,skull and contents,Organ,val
+345,synpic58951,which organ system is imaged?,"face, sinuses, and neck",Organ,val
+346,synpic51752,what organ is this ultrasound showing?,skull and contents,Organ,val
+347,synpic19716,what organ system is shown in the image?,skull and contents,Organ,val
+348,synpic56001,the angiogram shows what organ system?,skull and contents,Organ,val
+349,synpic55508,what organ system is primarily present in this image?,"face, sinuses, and neck",Organ,val
+350,synpic32746,what organ system is shown in the image?,musculoskeletal,Organ,val
+351,synpic52918,what organ is this image of?,skull and contents,Organ,val
+352,synpic21672,what is one organ system seen in this image?,gastrointestinal,Organ,val
+353,synpic51395,what organ systems can be evaluated with this mri?,skull and contents,Organ,val
+354,synpic27571,what organ system is visualized?,musculoskeletal,Organ,val
+355,synpic50921,which organ system is imaged?,skull and contents,Organ,val
+356,synpic53596,what organ system is shown in this mri?,heart and great vessels,Organ,val
+357,synpic32632,what is the organ principally shown in this x-ray?,musculoskeletal,Organ,val
+358,synpic59939,what is the organ principally shown in this mri?,skull and contents,Organ,val
+359,synpic22390,what organ is this ct scan showing?,musculoskeletal,Organ,val
+360,synpic28454,what organ system is evaluated primarily?,gastrointestinal,Organ,val
+361,synpic40703,what part of the body is being imaged?,skull and contents,Organ,val
+362,synpic38876,which organ system is imaged?,skull and contents,Organ,val
+363,synpic15700,what is the organ principally shown in this mri?,vascular and lymphatic,Organ,val
+364,synpic21328,what organ system is pictured here?,spine and contents,Organ,val
+365,synpic44995,what organ system is primarily present in this image?,skull and contents,Organ,val
+366,synpic48836,the ultrasound shows what organ system?,heart and great vessels,Organ,val
+367,synpic26651,what organ system is pictured here?,heart and great vessels,Organ,val
+368,synpic57862,what is one organ system seen in this image?,skull and contents,Organ,val
+369,synpic43817,what part of the body is being imaged here?,musculoskeletal,Organ,val
+370,synpic24495,what organ system is shown in this x-ray?,vascular and lymphatic,Organ,val
+371,synpic22755,what organ system is pictured here?,skull and contents,Organ,val
+372,synpic34123,what organ system is displayed in this ct scan?,genitourinary,Organ,val
+373,synpic22741,what organ is this mri showing?,spine and contents,Organ,val
+374,synpic33102,what organ systems can be evaluated with this x-ray?,"lung, mediastinum, pleura",Organ,val
+375,synpic47683,what organ system is shown in the image?,"face, sinuses, and neck",Organ,val
+376,synpic19933,what is one organ system seen in this image?,"lung, mediastinum, pleura",Organ,val
+377,synpic53152,what is the organ principally shown in this mri?,skull and contents,Organ,val
+378,synpic40660,what organ system is shown in the image?,skull and contents,Organ,val
+379,synpic31933,what part of the body is being imaged here?,skull and contents,Organ,val
+380,synpic24899,what part of the body is being imaged here?,musculoskeletal,Organ,val
+381,synpic55682,what organ is this image of?,skull and contents,Organ,val
+382,synpic53581,which organ system is shown in the x-ray?,skull and contents,Organ,val
+383,synpic11771,what organ system is primarily present in this image?,skull and contents,Organ,val
+384,synpic31884,what is the organ system in this image?,gastrointestinal,Organ,val
+385,synpic17664,what organ system is visualized?,heart and great vessels,Organ,val
+386,synpic36696,what part of the body does this ct scan show?,genitourinary,Organ,val
+387,synpic53727,what part of the body is being imaged?,heart and great vessels,Organ,val
+388,synpic42170,what organ system is pictured here?,"lung, mediastinum, pleura",Organ,val
+389,synpic34794,what is the organ principally shown in this mri?,skull and contents,Organ,val
+390,synpic49970,what organ system is shown in the image?,gastrointestinal,Organ,val
+391,synpic47975,what is the organ principally shown in this gastrointestinal image?,gastrointestinal,Organ,val
+392,synpic40559,what organ system is imaged?,spine and contents,Organ,val
+393,synpic57757,what organ system is imaged?,skull and contents,Organ,val
+394,synpic21602,which organ system is shown in the x-ray?,musculoskeletal,Organ,val
+395,synpic47342,what organ system is shown in the image?,skull and contents,Organ,val
+396,synpic16119,what organ system is displayed in this mri?,"face, sinuses, and neck",Organ,val
+397,synpic48065,what organ system is being imaged?,skull and contents,Organ,val
+398,synpic51285,what organ system is evaluated primarily?,skull and contents,Organ,val
+399,synpic36236,what part of the body is being imaged?,"lung, mediastinum, pleura",Organ,val
+400,synpic28587,what organ system is pictured here?,"face, sinuses, and neck",Organ,val
+401,synpic50366,what is one organ system seen in this image?,skull and contents,Organ,val
+402,synpic28544,what part of the body does this gastrointestinal image show?,gastrointestinal,Organ,val
+403,synpic37470,what part of the body is being imaged here?,vascular and lymphatic,Organ,val
+404,synpic38742,what part of the body is being imaged?,gastrointestinal,Organ,val
+405,synpic42788,the mri shows what organ system?,skull and contents,Organ,val
+406,synpic43455,what organ system is evaluated primarily?,"lung, mediastinum, pleura",Organ,val
+407,synpic55545,which organ system is imaged?,skull and contents,Organ,val
+408,synpic38795,what organ system is being imaged?,skull and contents,Organ,val
+409,synpic60065,which organ is captured by this mri?,musculoskeletal,Organ,val
+410,synpic18848,which organ system is imaged?,gastrointestinal,Organ,val
+411,synpic49352,what organ system is primarily present in this image?,gastrointestinal,Organ,val
+412,synpic23766,what part of the body does this mri show?,skull and contents,Organ,val
+413,synpic50039,what organ system is primarily present in this image?,spine and contents,Organ,val
+414,synpic40000,what organ system is being imaged?,skull and contents,Organ,val
+415,synpic54713,which organ is captured by this ultrasound?,"face, sinuses, and neck",Organ,val
+416,synpic45150,what part of the body does this mri show?,skull and contents,Organ,val
+417,synpic47023,what organ system is shown in this mri?,skull and contents,Organ,val
+418,synpic53042,the mri shows what organ system?,skull and contents,Organ,val
+419,synpic47751,what part of the body is being imaged here?,skull and contents,Organ,val
+420,synpic57218,what part of the body is being imaged?,musculoskeletal,Organ,val
+421,synpic30532,which organ system is imaged?,spine and contents,Organ,val
+422,synpic22136,what organ system is being imaged?,breast,Organ,val
+423,synpic24235,which organ system is imaged?,genitourinary,Organ,val
+424,synpic48112,what organ system is primarily present in this image?,genitourinary,Organ,val
+425,synpic14645,what is one organ system seen in this image?,musculoskeletal,Organ,val
+426,synpic58329,the mri shows what organ system?,skull and contents,Organ,val
+427,synpic50775,what organ system is evaluated primarily?,spine and contents,Organ,val
+428,synpic18902,what is one organ system seen in this image?,musculoskeletal,Organ,val
+429,synpic35648,what organ system is primarily present in this image?,vascular and lymphatic,Organ,val
+430,synpic26620,what is the organ system in this image?,gastrointestinal,Organ,val
+431,synpic48066,what organ system is pictured here?,skull and contents,Organ,val
+432,synpic39853,what part of the body is being imaged here?,gastrointestinal,Organ,val
+433,synpic27338,what organ system is imaged?,musculoskeletal,Organ,val
+434,synpic37881,what part of the body does this mri show?,spine and contents,Organ,val
+435,synpic33629,which organ is captured by this mri?,skull and contents,Organ,val
+436,synpic53877,which organ is captured by this mri?,skull and contents,Organ,val
+437,synpic39463,what organ system is visualized?,skull and contents,Organ,val
+438,synpic43481,what organ system is primarily present in this image?,"face, sinuses, and neck",Organ,val
+439,synpic32126,what organ system is being imaged?,vascular and lymphatic,Organ,val
+440,synpic44926,what organ is this mri showing?,musculoskeletal,Organ,val
+441,synpic58300,what organ system is shown in this mri?,spine and contents,Organ,val
+442,synpic25880,what organ system is pictured here?,gastrointestinal,Organ,val
+443,synpic16292,what organ system is shown in the image?,skull and contents,Organ,val
+444,synpic51136,what organ system is pictured here?,"lung, mediastinum, pleura",Organ,val
+445,synpic49209,what organ system is pictured here?,musculoskeletal,Organ,val
+446,synpic55813,what organ system is shown in the image?,skull and contents,Organ,val
+447,synpic46847,what organ system is shown in the image?,skull and contents,Organ,val
+448,synpic45382,what organ system is being imaged?,spine and contents,Organ,val
+449,synpic55026,which organ is captured by this mri?,skull and contents,Organ,val
+450,synpic21980,what is one organ system seen in this image?,"lung, mediastinum, pleura",Organ,val
+451,synpic48249,the mri shows what organ system?,skull and contents,Organ,val
+452,synpic54648,what organ system is evaluated primarily?,vascular and lymphatic,Organ,val
+453,synpic16484,what organ is this image of?,breast,Organ,val
+454,synpic43447,what organ system is evaluated primarily?,gastrointestinal,Organ,val
+455,synpic54675,which organ system is shown in the mri?,skull and contents,Organ,val
+456,synpic29463,what organ system is imaged?,vascular and lymphatic,Organ,val
+457,synpic47351,what organ system is evaluated primarily?,skull and contents,Organ,val
+458,synpic17228,what part of the body is being imaged here?,musculoskeletal,Organ,val
+459,synpic51490,what organ system is visualized?,gastrointestinal,Organ,val
+460,synpic35880,what organ system is primarily present in this image?,skull and contents,Organ,val
+461,synpic34552,which organ is captured by this mri?,skull and contents,Organ,val
+462,synpic52166,which organ is captured by this ct scan?,musculoskeletal,Organ,val
+463,synpic21188,what organ system is being imaged?,spine and contents,Organ,val
+464,synpic57585,what part of the body does this x-ray show?,spine and contents,Organ,val
+465,synpic40947,what is the organ system in this image?,skull and contents,Organ,val
+466,synpic29098,what part of the body is being imaged?,breast,Organ,val
+467,synpic44506,which organ system is shown in the mri?,skull and contents,Organ,val
+468,synpic52364,what organ system is shown in the image?,skull and contents,Organ,val
+469,synpic57208,which organ system is shown in the ct scan?,skull and contents,Organ,val
+470,synpic57578,what part of the body is being imaged?,skull and contents,Organ,val
+471,synpic58887,what part of the body is being imaged?,skull and contents,Organ,val
+472,synpic50565,what part of the body is being imaged?,gastrointestinal,Organ,val
+473,synpic56114,the mri shows what organ system?,skull and contents,Organ,val
+474,synpic23560,what organ system is shown in the image?,gastrointestinal,Organ,val
+475,synpic34008,what organ system is evaluated primarily?,"lung, mediastinum, pleura",Organ,val
+476,synpic16083,what part of the body is being imaged here?,heart and great vessels,Organ,val
+477,synpic52004,what organ system is visualized?,skull and contents,Organ,val
+478,synpic15401,what organ is this image of?,heart and great vessels,Organ,val
+479,synpic57801,which organ system is imaged?,skull and contents,Organ,val
+480,synpic25267,what organ system is pictured here?,gastrointestinal,Organ,val
+481,synpic34632,what organ system is shown in this ct scan?,spine and contents,Organ,val
+482,synpic45021,what part of the body does this ct scan show?,vascular and lymphatic,Organ,val
+483,synpic50410,what organ system is being imaged?,skull and contents,Organ,val
+484,synpic47178,what organ system is visualized?,musculoskeletal,Organ,val
+485,synpic40398,what organ system is imaged?,skull and contents,Organ,val
+486,synpic18681,what organ systems can be evaluated with this mri?,skull and contents,Organ,val
+487,synpic38551,what is the organ system in this image?,skull and contents,Organ,val
+488,synpic36540,what is one organ system seen in this image?,skull and contents,Organ,val
+489,synpic17203,what part of the body is being imaged?,gastrointestinal,Organ,val
+490,synpic57633,what organ system is imaged?,spine and contents,Organ,val
+491,synpic56511,what organ system is shown in this mri?,skull and contents,Organ,val
+492,synpic29500,the x-ray shows what organ system?,gastrointestinal,Organ,val
+493,synpic48897,what organ system is evaluated primarily?,skull and contents,Organ,val
+494,synpic45196,what organ system is shown in this mri?,"face, sinuses, and neck",Organ,val
+495,synpic45828,what organ system is pictured here?,skull and contents,Organ,val
+496,synpic60458,what part of the body is being imaged here?,musculoskeletal,Organ,val
+497,synpic43524,what organ system is being imaged?,skull and contents,Organ,val
+498,synpic59568,what organ system is shown in the image?,skull and contents,Organ,val
+499,synpic48459,which organ system is shown in the mri?,spine and contents,Organ,val
+0,synpic54733,what is the primary abnormality in this image?,paraganglioma,Abnormality,val
+1,synpic25647,is there an abnormality in the x-ray?,no,Abnormality,val
+2,synpic35681,is there an abnormality in the mri?,no,Abnormality,val
+3,synpic39641,what is the primary abnormality in this image?,ganglion cyst,Abnormality,val
+4,synpic35693,is this a normal mri?,yes,Abnormality,val
+5,synpic17419,is this a normal ct scan?,yes,Abnormality,val
+6,synpic32909,what abnormality is seen in the image?,cholelithiasis,Abnormality,val
+7,synpic48040,is there an abnormality in the ct scan?,no,Abnormality,val
+8,synpic48351,what abnormality is seen in the image?,congenital cystic adenomatoid malformation,Abnormality,val
+9,synpic49503,is there evidence of any abnormalities?,no,Abnormality,val
+10,synpic18176,what is abnormal in the ct scan?,pancreatic ductal adenocarcinoma,Abnormality,val
+11,synpic36498,is there an abnormality in the x-ray?,no,Abnormality,val
+12,synpic26850,is there an abnormality in the mri?,no,Abnormality,val
+13,synpic19508,what is the primary abnormality in this image?,omental cake,Abnormality,val
+14,synpic23496,what is most alarming about this mri?,imaging in traumatic brain injury,Abnormality,val
+15,synpic25435,what is abnormal in the mri?,dnet (dysembryoplastic neuroepithelial tumor),Abnormality,val
+16,synpic38894,what is abnormal in the ct scan?,"liposarcoma, myxoid liposarcoma",Abnormality,val
+17,synpic25620,is this image normal?,yes,Abnormality,val
+18,synpic25634,is there evidence of any abnormalities?,no,Abnormality,val
+19,synpic36490,does this image look normal?,yes,Abnormality,val
+20,synpic40658,what is the primary abnormality in this image?,"astrocytoma, low-grade (who 2), supratentorial",Abnormality,val
+21,synpic27614,is this a normal x-ray?,yes,Abnormality,val
+22,synpic26245,what is the primary abnormality in this image?,adult medulloblastoma,Abnormality,val
+23,synpic25628,are there abnormalities in this x-ray?,no,Abnormality,val
+24,synpic34446,what is abnormal in the mri?,pleomorphic adenoma,Abnormality,val
+25,synpic28899,does this image look normal?,yes,Abnormality,val
+26,synpic28331,does this image look normal?,yes,Abnormality,val
+27,synpic55791,what is abnormal in the mri?,giant tumefactive perivascular spaces,Abnormality,val
+28,synpic32867,what is the primary abnormality in this image?,fibrous dysplasia,Abnormality,val
+29,synpic21201,is there an abnormality in the x-ray?,no,Abnormality,val
+30,synpic20686,what is most alarming about this mammograph?,invasive lobular breast carcinoma,Abnormality,val
+31,synpic17412,is this a normal ct scan?,yes,Abnormality,val
+32,synpic53907,what is abnormal in the ct scan?,paranasal sinus osteoma,Abnormality,val
+33,synpic24024,is this image normal?,yes,Abnormality,val
+34,synpic59540,is there an abnormality in the image,yes,Abnormality,val
+35,synpic19169,what is most alarming about this mri?,nonossifying fibroma,Abnormality,val
+36,synpic52424,what is abnormal in the ct scan?,burst fracture of l1,Abnormality,val
+37,synpic52430,what is most alarming about this mri?,acute knee injury with effusion,Abnormality,val
+38,synpic51878,what is abnormal in the mri?,crohn disease,Abnormality,val
+39,synpic25109,what is abnormal in the mri?,schizencephaly (open-lip and closed-lip),Abnormality,val
+40,synpic21186,what is most alarming about this x-ray?,osteoarthritis,Abnormality,val
+41,synpic52140,what is most alarming about this ct scan?,sialolithiasis,Abnormality,val
+42,synpic32893,what is most alarming about this x-ray?,small bowel obstruction,Abnormality,val
+43,synpic25451,what is abnormal in the x-ray?,pulmonary septic emboli,Abnormality,val
+44,synpic18101,what is most alarming about this x-ray?,sacral agenesis,Abnormality,val
+45,synpic18115,what is abnormal in the mri?,multifocal bone infarcts (osteonecrosis) in a patient with systemic lupus erythematosus,Abnormality,val
+46,synpic17583,what is the primary abnormality in this image?,heterotopic ossification,Abnormality,val
+47,synpic100295,what abnormality is seen in the image?,renal disease in systemic lupus erythematosus (sle) versus c3 glomerulonephritis,Abnormality,val
+48,synpic46243,what is the primary abnormality in this image?,adenocarcinoma of the lung,Abnormality,val
+49,synpic38951,what is abnormal in the x-ray?,scaphoid fracture,Abnormality,val
+50,synpic60290,what is the primary abnormality in this image?,nephroblastomatosis with bilateral wilms tumors,Abnormality,val
+51,synpic17970,what is the primary abnormality in this image?,"ankle fracture, weber class c",Abnormality,val
+52,synpic17780,what abnormality is seen in the image?,intussusception,Abnormality,val
+53,synpic28216,what is most alarming about this gastrointestinal image?,juvenile polyposis syndrome,Abnormality,val
+54,synpic31753,what abnormality is seen in the image?,aortic pseudoaneurysm,Abnormality,val
+55,synpic16475,what abnormality is seen in the image?,bronchogenic carcinoma of the lung with metastasis to the liver,Abnormality,val
+56,synpic38575,what abnormality is seen in the image?,"unilateral megaloencephaly, hemimegalencephaly",Abnormality,val
+57,synpic41707,what is the primary abnormality in this image?,diffuse large cell lymphoma,Abnormality,val
+58,synpic26950,what is abnormal in the gastrointestinal image?,traction esophageal diverticulum,Abnormality,val
+59,synpic18921,what is most alarming about this ultrasound?,evaluation of ovarian mass,Abnormality,val
+60,synpic29054,what abnormality is seen in the image?,kohler's disease,Abnormality,val
+61,synpic56870,what is the primary abnormality in this image?,diastematomyelia,Abnormality,val
+62,synpic21385,what abnormality is seen in the image?,open lip schizencephaly,Abnormality,val
+63,synpic57577,what is abnormal in the angiogram?,persistent trigeminal artery,Abnormality,val
+64,synpic40779,what is most alarming about this ct scan?,pseudomembranous colitis,Abnormality,val
+65,synpic49985,what is abnormal in the ct scan?,fracture dislocation at c6-c7,Abnormality,val
+66,synpic50556,what is abnormal in the ct scan?,"dva, developmental venous anomaly, venous angioma",Abnormality,val
+67,synpic57239,what is most alarming about this mri?,intracranial epidermoid cyst,Abnormality,val
+68,synpic54730,what is most alarming about this ct scan?,splenic artery aneurysm,Abnormality,val
+69,synpic52631,what is most alarming about this mri?,toxoplasmosis,Abnormality,val
+70,synpic28837,what is abnormal in the ct scan?,"brain, parenchymal hemorrhage, contusion",Abnormality,val
+71,synpic39709,what is the primary abnormality in this image?,hypothalamic glioma,Abnormality,val
+72,synpic61204,what is most alarming about this x-ray?,"osteochondritis dissecans, trauma, and ischemia",Abnormality,val
+73,synpic27523,what is most alarming about this ct scan?,mucus plug,Abnormality,val
+74,synpic61238,what abnormality is seen in the image?,langerhan cell histiocytosis,Abnormality,val
+75,synpic58532,what abnormality is seen in the image?,"vestibular schwannoma (""acoustic""schwannoma)",Abnormality,val
+76,synpic45577,what is most alarming about this ct scan?,"astrocytoma, grading and subtypes",Abnormality,val
+77,synpic39696,what is abnormal in the mri?,hypothalamic glioma,Abnormality,val
+78,synpic23157,what is the primary abnormality in this image?,cavernous malformation (cavernous angioma),Abnormality,val
+79,synpic23631,what abnormality is seen in the image?,posterior cerebellar artery infarct,Abnormality,val
+80,synpic27319,what abnormality is seen in the image?,enchondroma,Abnormality,val
+81,synpic51072,what is abnormal in the mri?,adult medulloblastoma,Abnormality,val
+82,synpic53659,what is the primary abnormality in this image?,metastatic malignant melanoma,Abnormality,val
+83,synpic58095,what is abnormal in the ct scan?,contained gallbladder perforation,Abnormality,val
+84,synpic60250,what is most alarming about this mri?,intracranial epidermoid cyst (retroclival),Abnormality,val
+85,synpic40194,what abnormality is seen in the image?,unicameral bone cyst,Abnormality,val
+86,synpic29645,what abnormality is seen in the image?,osteoid osteoma,Abnormality,val
+87,synpic31036,what is abnormal in the ct scan?,pe,Abnormality,val
+88,synpic33806,is there evidence of any abnormalities?,yes,Abnormality,val
+89,synpic27873,what is abnormal in the mammograph?,secretory calcifications of the breast,Abnormality,val
+90,synpic38953,what is most alarming about this x-ray?,scaphoid fracture,Abnormality,val
+91,synpic49172,what is most alarming about this mri?,bucket handle tear,Abnormality,val
+92,synpic59407,what abnormality is seen in the image?,osteosarcoma,Abnormality,val
+93,synpic43477,what is the primary abnormality in this image?,achilles tendon tear,Abnormality,val
+94,synpic53314,what is most alarming about this mri?,meningioma,Abnormality,val
+95,synpic46876,what is the primary abnormality in this image?,empyema,Abnormality,val
+96,synpic28188,what is most alarming about this x-ray?,heterotopic ossification,Abnormality,val
+97,synpic47573,what is the primary abnormality in this image?,pachygyria with schizencephaly,Abnormality,val
+98,synpic30260,what abnormality is seen in the image?,median arcuate ligament syndrome,Abnormality,val
+99,synpic45827,what abnormality is seen in the image?,marked hydrocephalus due to aqueductal stenosis,Abnormality,val
+100,synpic27046,what is the primary abnormality in this image?,unicameral bone cyst with pathologic fracture,Abnormality,val
+101,synpic20729,what is abnormal in the ct scan?,brain tumor and cancer protocols,Abnormality,val
+102,synpic30248,what is the primary abnormality in this image?,aberrant right subclavian artery (arsa),Abnormality,val
+103,synpic53738,what is the primary abnormality in this image?,lumbar spinal stenosis,Abnormality,val
+104,synpic17620,what is most alarming about this ct scan?,cholangiocarcinoma,Abnormality,val
+105,synpic47017,what is the primary abnormality in this image?,non-hodgkin's lymphoma - b-cell lymphoma,Abnormality,val
+106,synpic41314,what is abnormal in the mri?,"vestibular (""acoustic"") schwannoma",Abnormality,val
+107,synpic55403,what is the primary abnormality in this image?,cerebral arteriovenous malformation (avm),Abnormality,val
+108,synpic27730,what is abnormal in the ultrasound?,gastroschisis,Abnormality,val
+109,synpic58682,what abnormality is seen in the image?,pyogenic discitis,Abnormality,val
+110,synpic50023,what is most alarming about this x-ray?,swimming-induced pulmonary edema (sipe),Abnormality,val
+111,synpic57758,what abnormality is seen in the image?,fibro osseous lesions of the face and sinuses,Abnormality,val
+112,synpic19225,what is the primary abnormality in this image?,obstructive hydrocephalus (at level of sylvian aqueduct),Abnormality,val
+113,synpic16880,what abnormality is seen in the image?,enchondroma,Abnormality,val
+114,synpic48730,what abnormality is seen in the image?,ureterolithiasis,Abnormality,val
+115,synpic21786,what is abnormal in the ct scan?,ossification of stylohyoid ligament,Abnormality,val
+116,synpic25090,what is abnormal in the ct scan?,colonic inguinal hernia,Abnormality,val
+117,synpic58912,what abnormality is seen in the image?,cerebral infarction,Abnormality,val
+118,synpic35240,what is the primary abnormality in this image?,tuberous sclerosis,Abnormality,val
+119,synpic33143,what is the primary abnormality in this image?,segond fracture with asssociated anterior cruciate ligament tear,Abnormality,val
+120,synpic28204,what is the primary abnormality in this image?,pancreatic divisum,Abnormality,val
+121,synpic26201,what is abnormal in the x-ray?,ied - improvised explosive device,Abnormality,val
+122,synpic41271,what is most alarming about this x-ray?,"medial epicondyle avulsion, entrapment between trochlea and olecranon",Abnormality,val
+123,synpic8182,what abnormality is seen in the image?,diverticulitis,Abnormality,val
+124,synpic57188,what abnormality is seen in the image?,glioblastoma multiforme (gbm),Abnormality,val
+125,synpic43843,what is most alarming about this angiogram?,arteriovenous malformation (avm),Abnormality,val
+126,synpic36210,what abnormality is seen in the image?,odontogenic keratocyst of the mandible,Abnormality,val
+127,synpic58495,what is abnormal in the mri?,glioblastoma multiforme,Abnormality,val
+128,synpic40231,what is abnormal in the mri?,"holoprosencephaly, alobar",Abnormality,val
+129,synpic40782,what is most alarming about this ct scan?,malignant melanoma,Abnormality,val
+130,synpic53098,what is the primary abnormality in this image?,rosette forming glioneuronal tumor of the pineal gland,Abnormality,val
+131,synpic31184,what is the primary abnormality in this image?,mature cystic teratoma,Abnormality,val
+132,synpic56123,what is most alarming about this x-ray?,spinal osteochondroma,Abnormality,val
+133,synpic59548,what is the primary abnormality in this image?,arteriovenous malformation,Abnormality,val
+134,synpic21418,what abnormality is seen in the image?,invasive aspergillosis,Abnormality,val
+135,synpic17814,what abnormality is seen in the image?,biliary leak,Abnormality,val
+136,synpic22893,what abnormality is seen in the image?,solitary thyroid nodule,Abnormality,val
+137,synpic33236,what is most alarming about this angiogram?,raynaud's disease,Abnormality,val
+138,synpic59945,what is the primary abnormality in this image?,posterior inferior cerebellar artery infarct,Abnormality,val
+139,synpic27492,what abnormality is seen in the image?,meningiomas,Abnormality,val
+140,synpic45565,what abnormality is seen in the image?,sand aspiration,Abnormality,val
+141,synpic16883,what is most alarming about this mri?,enchondroma,Abnormality,val
+142,synpic43699,what is abnormal in the mri?,intracranial lipoma,Abnormality,val
+143,synpic23151,what is abnormal in the x-ray?,malignant mesothelioma,Abnormality,val
+144,synpic21020,what is the primary abnormality in this image?,glioblastoma multiforme,Abnormality,val
+145,synpic52596,what is abnormal in the x-ray?,ankylosing spondylitis,Abnormality,val
+146,synpic56901,what is the primary abnormality in this image?,"spine, epidural abscess",Abnormality,val
+147,synpic38404,what abnormality is seen in the image?,lipomyelomeningocele with spinal cord syrinx,Abnormality,val
+148,synpic40597,what abnormality is seen in the image?,immature teratoma,Abnormality,val
+149,synpic26612,what is abnormal in the angiogram?,meningioma,Abnormality,val
+150,synpic100332,what is most alarming about this x-ray?,lumbosacral disc herniation vs lumbar spondylosis,Abnormality,val
+151,synpic26809,what is the primary abnormality in this image?,contrast-induced nephropathy,Abnormality,val
+152,synpic59005,what is the primary abnormality in this image?,pilocytic astrocytoma,Abnormality,val
+153,synpic43576,what is most alarming about this x-ray?,hallux rigidus,Abnormality,val
+154,synpic33913,what abnormality is seen in the image?,adenomyosis,Abnormality,val
+155,synpic23255,what is abnormal in the ct scan?,dermoid tumor (inclusion cyst) of cns,Abnormality,val
+156,synpic21442,what is the primary abnormality in this image?,urinoma,Abnormality,val
+157,synpic38885,what is most alarming about this ct scan?,neuroendocrine carcinoma of duodenum,Abnormality,val
+158,synpic17866,what is most alarming about this ct scan?,peritoneal metastasis,Abnormality,val
+159,synpic24512,what is the primary abnormality in this image?,metastatic carcinoma unknown primary,Abnormality,val
+160,synpic24506,what abnormality is seen in the image?,developmental venous anomaly (venous angioma),Abnormality,val
+161,synpic39557,what is abnormal in the x-ray?,pulmonary hamartoma,Abnormality,val
+162,synpic33293,what is abnormal in the gastrointestinal image?,"malrotation, intestine",Abnormality,val
+163,synpic13143,what is abnormal in the mri?,extraskeletal sarcoma,Abnormality,val
+164,synpic17319,what is most alarming about this ct scan?,gastropexy anchor appendiceal foreign body,Abnormality,val
+165,synpic33481,what is most alarming about this x-ray?,multiple pulmonary nodules,Abnormality,val
+166,synpic24857,what is the primary abnormality in this image?,silent sinus syndrome,Abnormality,val
+167,synpic37195,what is the primary abnormality in this image?,"transitional cell carcinoma, bladder",Abnormality,val
+168,synpic48796,what is most alarming about this ct scan?,pneumocystis jiroveci pneumonia,Abnormality,val
+169,synpic47664,what is most alarming about this mri?,meningioma,Abnormality,val
+170,synpic56027,what is most alarming about this ct scan?,cleidocranial dysostosis/dysplasia,Abnormality,val
+171,synpic42084,what is abnormal in the mri?,intracranial epidermoid tumor,Abnormality,val
+172,synpic37433,what is abnormal in the mri?,oropharyngeal cancer,Abnormality,val
+173,synpic34853,what is the primary abnormality in this image?,"paradoxic embolization, patent foramen ovale, cerebral infarction",Abnormality,val
+174,synpic32749,what is abnormal in the ct scan?,limbus vertebra,Abnormality,val
+175,synpic60966,what is most alarming about this x-ray?,solitary pulmonary nodule - calcified granuloma,Abnormality,val
+176,synpic25382,what is abnormal in the pet scan?,"non-hodgkin’s lymphoma, staging  stage i nhl",Abnormality,val
+177,synpic39967,what is abnormal in the mri?,"large cell lymphoma, of the b-cell phenotype (cd20 positive)",Abnormality,val
+178,synpic27768,what is abnormal in the angiogram?,cryoplasty of femoropopliteal atherosclerotic disease,Abnormality,val
+179,synpic30200,what is the primary abnormality in this image?,epiglottitis,Abnormality,val
+180,synpic31678,what is abnormal in the ct scan?,clay shoveler's fracture,Abnormality,val
+181,synpic53994,what is abnormal in the ct scan?,brain death,Abnormality,val
+182,synpic49072,what is most alarming about this mri?,metastatic disease from colonic carcinoma,Abnormality,val
+183,synpic19651,what is the primary abnormality in this image?,tethered spinal cord with terminal spinal lipoma,Abnormality,val
+184,synpic53980,what abnormality is seen in the image?,left pica infarct,Abnormality,val
+185,synpic33084,what is abnormal in the ct scan?,bilateral wilms tumor,Abnormality,val
+186,synpic56608,what abnormality is seen in the image?,c-spine fracture,Abnormality,val
+187,synpic48422,what is most alarming about this mri?,hypoxic/ischemic encephalopathy,Abnormality,val
+188,synpic46419,what abnormality is seen in the image?,chloroma,Abnormality,val
+189,synpic17124,what abnormality is seen in the image?,femoral neck insufficiency fracture,Abnormality,val
+190,synpic47049,what is most alarming about this ct scan?,hemangiomas of the liver,Abnormality,val
+191,synpic40915,what is abnormal in the mri?,intraventricular meningioma,Abnormality,val
+192,synpic51818,what is most alarming about this ct scan?,squamous cell carcinoma,Abnormality,val
+193,synpic32401,what is most alarming about this x-ray?,pseudofracture of the cervical vertebral body,Abnormality,val
+194,synpic34070,what abnormality is seen in the image?,adenocarcinoma of the gastroesophageal junction,Abnormality,val
+195,synpic55854,what is the primary abnormality in this image?,intracranial hypotension,Abnormality,val
+196,synpic29237,what is abnormal in the x-ray?,anterior dislocation right shoulder,Abnormality,val
+197,synpic39193,what is most alarming about this mri?,femoral neck stress fractures,Abnormality,val
+198,synpic33455,what abnormality is seen in the image?,hemorrhagic cyst,Abnormality,val
+199,synpic41564,what is the primary abnormality in this image?,cephalocele,Abnormality,val
+200,synpic54169,what is abnormal in the mri?,dnet (dysembryoplastic neuroepithelial tumor),Abnormality,val
+201,synpic57312,what is abnormal in the ct scan?,osteogenesis imperfecta,Abnormality,val
+202,synpic54627,what is the primary abnormality in this image?,juvenile pilocytic astrocytoma,Abnormality,val
+203,synpic58790,what abnormality is seen in the image?,neuroblastoma,Abnormality,val
+204,synpic58974,what is most alarming about this mri?,intravascular lymphomatosis,Abnormality,val
+205,synpic35568,what abnormality is seen in the image?,bilateral subacute (isodense) subdural hematomas,Abnormality,val
+206,synpic53835,what is abnormal in the mri?,coarctation of the aorta,Abnormality,val
+207,synpic47855,what abnormality is seen in the image?,"spine fracture, t4",Abnormality,val
+208,synpic58008,what abnormality is seen in the image?,bilateral perched facets c5 c6 with spinal cord injury,Abnormality,val
+209,synpic15120,what is the primary abnormality in this image?,"spine, angiolipoma",Abnormality,val
+210,synpic33695,what is abnormal in the x-ray?,femoral neck stress fractures,Abnormality,val
+211,synpic100545,what abnormality is seen in the image?,atlanto-axial instability imaging and clinical affect,Abnormality,val
+212,synpic58544,what abnormality is seen in the image?,motor vehicle accident and multiple sclerosis exacerbation,Abnormality,val
+213,synpic32825,what is the primary abnormality in this image?,hirschsprung's disease,Abnormality,val
+214,synpic41613,what abnormality is seen in the image?,esophageal lipomatosis,Abnormality,val
+215,synpic39569,what abnormality is seen in the image?,spiral salter-harris ii fracture,Abnormality,val
+216,synpic24538,what is the primary abnormality in this image?,left ventricular aneurysm,Abnormality,val
+217,synpic17121,what is abnormal in the x-ray?,"ductal carcinoma in situ (dcis), breast calcification on mammogram",Abnormality,val
+218,synpic34061,what abnormality is seen in the image?,acute appendicitis,Abnormality,val
+219,synpic36110,what abnormality is seen in the image?,freiberg's infraction,Abnormality,val
+220,synpic56814,what is most alarming about this mri?,medial meniscal tear and comminuted fibula fracture,Abnormality,val
+221,synpic43955,what abnormality is seen in the image?,lipoma arborescens,Abnormality,val
+222,synpic54434,what is most alarming about this mri?,glioblastoma multiforme,Abnormality,val
+223,synpic24879,what abnormality is seen in the image?,diverticulosis  and  diverticulitis,Abnormality,val
+224,synpic39828,what is abnormal in the mri?,chondrosarcoma,Abnormality,val
+225,synpic48021,what abnormality is seen in the image?,glioblastoma multiforme,Abnormality,val
+226,synpic49129,what is most alarming about this ct scan?,renal cell carcinoma,Abnormality,val
+227,synpic58742,what is abnormal in the ct scan?,brain meningioma,Abnormality,val
+228,synpic15871,what abnormality is seen in the image?,juvenile dermatomyositis,Abnormality,val
+229,synpic58965,what is most alarming about this mri?,cpa mass - meningioma,Abnormality,val
+230,synpic39357,what is the primary abnormality in this image?,myocardial infarction with ventricular aneurysm,Abnormality,val
+231,synpic60223,what is the primary abnormality in this image?,anaplastic ganglioglioma (who grade iii),Abnormality,val
+232,synpic34841,what abnormality is seen in the image?,"primary bone neoplasm, chondro-osseous variants",Abnormality,val
+233,synpic21041,what is abnormal in the ct scan?,pericardial cyst,Abnormality,val
+234,synpic55071,what abnormality is seen in the image?,pituitary apoplexy,Abnormality,val
+235,synpic41825,what is the primary abnormality in this image?,medial collateral ligament injuries,Abnormality,val
+236,synpic55850,what is most alarming about this mri?,intracranial hypotension,Abnormality,val
+237,synpic34276,what is most alarming about this mri?,os odontoideum,Abnormality,val
+238,synpic25384,what is the primary abnormality in this image?,schizencephaly,Abnormality,val
+239,synpic43767,what is most alarming about this ct scan?,"brain, cerebral abscess",Abnormality,val
+240,synpic23252,what is most alarming about this ultrasound?,subchorionic hemorrhage,Abnormality,val
+241,synpic53789,what is the primary abnormality in this image?,glioblastoma multiforme,Abnormality,val
+242,synpic52468,what is most alarming about this mri?,sturge weber syndrome,Abnormality,val
+243,synpic42135,what is most alarming about this ct scan?,hereditary multiple exostoses,Abnormality,val
+244,synpic58184,what is abnormal in the mri?,intracranial venous thrombosis,Abnormality,val
+245,synpic48397,what is the primary abnormality in this image?,hemangioblastoma of cerebellum,Abnormality,val
+246,synpic45466,what is most alarming about this mri?,tricholemmoma,Abnormality,val
+247,synpic46966,what is abnormal in the x-ray?,intrinsic sclerotic bone dysplasia (likely osteopetrosis) with fracture,Abnormality,val
+248,synpic39618,what is most alarming about this x-ray?,osteochondroma,Abnormality,val
+249,synpic18359,what is abnormal in the mri?,plantar plate disruption,Abnormality,val
+250,synpic56036,what is abnormal in the mri?,meningioma,Abnormality,val
+251,synpic49116,what abnormality is seen in the image?,neuroblastoma,Abnormality,val
+252,synpic53199,what is abnormal in the ct scan?,hypoxic/ischemic encephalopathy,Abnormality,val
+253,synpic38739,what is most alarming about this ultrasound?,medullary nephrocalcinosis,Abnormality,val
+254,synpic17902,what abnormality is seen in the image?,metastatic melanoma,Abnormality,val
+255,synpic22952,what is most alarming about this ct scan?,ovarian torsion,Abnormality,val
+256,synpic16361,what abnormality is seen in the image?,slap lesion of the glenoid labrum,Abnormality,val
+257,synpic19052,what abnormality is seen in the image?,transmesenteric internal hernia,Abnormality,val
+258,synpic27433,what is the primary abnormality in this image?,vesicoureteral reflux,Abnormality,val
+259,synpic54393,what abnormality is seen in the image?,diffuse axonal injury,Abnormality,val
+260,synpic42268,what is the primary abnormality in this image?,ewing sarcoma,Abnormality,val
+261,synpic17527,what is abnormal in the x-ray?,sarcoidosis,Abnormality,val
+262,synpic43604,what is most alarming about this ultrasound?,hemorrhagic cysts,Abnormality,val
+263,synpic50917,what is most alarming about this mri?,"arachnoid cyst, sella",Abnormality,val
+264,synpic39751,what abnormality is seen in the image?,proximal focal femoral deficiency,Abnormality,val
+265,synpic21687,what abnormality is seen in the image?,subclavian central venous catheter fracture and embolization,Abnormality,val
+266,synpic35180,what is most alarming about this ct scan?,wilms tumor,Abnormality,val
+267,synpic18012,what is the primary abnormality in this image?,hypothalamic hamartoma,Abnormality,val
+268,synpic16765,what is abnormal in the x-ray?,cppd (pseudogout),Abnormality,val
+269,synpic19640,what abnormality is seen in the image?,superior vena cava obstruction,Abnormality,val
+270,synpic54017,what abnormality is seen in the image?,frontal sinus mucocele,Abnormality,val
+271,synpic33926,what abnormality is seen in the image?,horseshoe kidney,Abnormality,val
+272,synpic59241,what is the primary abnormality in this image?,potts puffy tumor,Abnormality,val
+273,synpic44990,what abnormality is seen in the image?,solitary fibrous tumor in the cervical spine,Abnormality,val
+274,synpic28094,is there an abnormality in the x-ray?,yes,Abnormality,val
+275,synpic35947,what is abnormal in the mri?,schwannoma,Abnormality,val
+276,synpic41793,what is abnormal in the mri?,"right vertebral artery dissection, lateral medullary syndrome (wallenberg syndrome)",Abnormality,val
+277,synpic43423,what is abnormal in the mri?,partial avulsion of the patella tendon,Abnormality,val
+278,synpic16378,what is abnormal in the ct scan?,osseous hemangioma,Abnormality,val
+279,synpic33107,what is the primary abnormality in this image?,epidermoid cyst,Abnormality,val
+280,synpic47877,what is the primary abnormality in this image?,cavernous  hemangioma and convexity meningioma,Abnormality,val
+281,synpic22547,what abnormality is seen in the image?,shattered kidney,Abnormality,val
+282,synpic33489,what is most alarming about this ct scan?,diverticulitis,Abnormality,val
+283,synpic20393,what abnormality is seen in the image?,melorheostosis,Abnormality,val
+284,synpic50674,what is the primary abnormality in this image?,epidural spinal hematoma,Abnormality,val
+285,synpic46002,what abnormality is seen in the image?,pulmonary artery pseudaneurysm,Abnormality,val
+286,synpic41751,what is the primary abnormality in this image?,spinal dural arteriovenous fistula,Abnormality,val
+287,synpic21890,what is the primary abnormality in this image?,primary sclerosing cholangitis,Abnormality,val
+288,synpic9384,what is the primary abnormality in this image?,aortic dissection,Abnormality,val
+289,synpic31315,what abnormality is seen in the image?,bilateral axillary lymphadenopathy,Abnormality,val
+290,synpic38331,what abnormality is seen in the image?,"spinal ""phytes""",Abnormality,val
+291,synpic25374,what is the primary abnormality in this image?,"hemochromatosis, hepatocellular carcinoma, hcc",Abnormality,val
+292,synpic54214,what abnormality is seen in the image?,"spondylolisthesis, bilateral pars fracture",Abnormality,val
+293,synpic56615,is there an abnormality in the ct scan?,yes,Abnormality,val
+294,synpic37599,what is abnormal in the mri?,venous malformation,Abnormality,val
+295,synpic55308,what is most alarming about this ct scan?,cirrhosis,Abnormality,val
+296,synpic45133,what is abnormal in the ct scan?,ruptured appendicitis,Abnormality,val
+297,synpic54994,what abnormality is seen in the image?,nonketotic hyperglycemic hemichorea hemiballismus,Abnormality,val
+298,synpic41341,what abnormality is seen in the image?,choanal atresia and congenital nasal airway obstruction,Abnormality,val
+299,synpic54766,what is abnormal in the mri?,olfactory neuroblastoma (esthesioneuroblastoma),Abnormality,val
+300,synpic22196,what abnormality is seen in the image?,"renal tubular acidosis, medullary nephrocalcinosis",Abnormality,val
+301,synpic29772,what is abnormal in the x-ray?,osteomyelitis,Abnormality,val
+302,synpic18008,what is most alarming about this x-ray?,slipped capital femoral epiphysis,Abnormality,val
+303,synpic30800,what is most alarming about this mri?,bicuspid aortic valve with aortic stenosis and aortic dilatation,Abnormality,val
+304,synpic41960,what is the primary abnormality in this image?,superior mesenteric artery syndrome,Abnormality,val
+305,synpic28295,what abnormality is seen in the image?,mucocele,Abnormality,val
+306,synpic24487,what is abnormal in the angiogram?,dural av fistulae,Abnormality,val
+307,synpic20187,what is most alarming about this angiogram?,gunther tulip retrievable vena cava filter,Abnormality,val
+308,synpic26246,what is abnormal in the mri?,adult medulloblastoma,Abnormality,val
+309,synpic16352,what abnormality is seen in the image?,"superior mesenteric artery dissection, isolated",Abnormality,val
+310,synpic59337,what abnormality is seen in the image?,"sequestration, intralobar bronchopulmonary",Abnormality,val
+311,synpic48212,what is abnormal in the x-ray?,pcp pneumonia (pneumocystis jiroveci pneumonia),Abnormality,val
+312,synpic57871,what is most alarming about this angiogram?,"dural  fistula, avf",Abnormality,val
+313,synpic34454,what abnormality is seen in the image?,cricopharyngeal bar,Abnormality,val
+314,synpic17299,what is most alarming about this angiogram?,arteriovenous fistula,Abnormality,val
+315,synpic28733,what is the primary abnormality in this image?,non-small cell carcinoma,Abnormality,val
+316,synpic55727,what abnormality is seen in the image?,vestibular schwannoma,Abnormality,val
+317,synpic45246,what is most alarming about this ct scan?,fine needle aspiration of lung lesions,Abnormality,val
+318,synpic57642,what is most alarming about this ct scan?,meningioma,Abnormality,val
+319,synpic60171,what abnormality is seen in the image?,subdural empyema secondary to sinusitis in an adolescent,Abnormality,val
+320,synpic29565,what is most alarming about this x-ray?,adenocarcinoma of the lung,Abnormality,val
+321,synpic19303,what is most alarming about this mammograph?,circumscribed masses in the breast,Abnormality,val
+322,synpic51353,what is most alarming about this mri?,"oligodendroglioma, profile and who grade",Abnormality,val
+323,synpic26332,what is abnormal in the ct scan?,"liver metastases from breast cancer.  (path) malignant cells derived from adenocarcinoma, favoring metastatic breast carcinoma",Abnormality,val
+324,synpic53785,what is the primary abnormality in this image?,glioblastoma multiforme,Abnormality,val
+325,synpic53024,what is abnormal in the ct scan?,acute epidural hematoma,Abnormality,val
+326,synpic45861,what abnormality is seen in the image?,gallstone pancreatitis,Abnormality,val
+327,synpic31104,what abnormality is seen in the image?,aspergillosis and the air-crescent sign,Abnormality,val
+328,synpic49242,what is abnormal in the mri?,"pleomorphic  xanthoastrocytoma, pxa",Abnormality,val
+329,synpic41636,what is the primary abnormality in this image?,oral antral fistula,Abnormality,val
+330,synpic58401,what is most alarming about this angiogram?,traumatic carotid-cavernous fistula,Abnormality,val
+331,synpic51357,what is abnormal in the mri?,glioblastoma multiforme (who grade 4 astrocytoma),Abnormality,val
+332,synpic44955,what is the primary abnormality in this image?,atypical teratoid/rhabdoid tumor,Abnormality,val
+333,synpic23070,what is the primary abnormality in this image?,insulinoma,Abnormality,val
+334,synpic47469,what is abnormal in the ct scan?,chiari malformation,Abnormality,val
+335,synpic19529,what is the primary abnormality in this image?,histoplasmosis,Abnormality,val
+336,synpic46993,what is most alarming about this mri?,chronic lymphocytic leukemia (cll),Abnormality,val
+337,synpic28051,what abnormality is seen in the image?,mondini syndrome,Abnormality,val
+338,synpic58993,what is the primary abnormality in this image?,arachnoid cyst,Abnormality,val
+339,synpic43431,is there an abnormality in the x-ray?,yes,Abnormality,val
+340,synpic20814,what is most alarming about this mammograph?,breast oil cyst,Abnormality,val
+341,synpic46549,what is abnormal in the gastrointestinal image?,jejunal atresia (proximal),Abnormality,val
+342,synpic54830,what abnormality is seen in the image?,femoroacetabular impingement (fai),Abnormality,val
+343,synpic40845,what is most alarming about this mri?,meningioma,Abnormality,val
+344,synpic35203,what abnormality is seen in the image?,"neurocytoma, central neurocytoma",Abnormality,val
+345,synpic58951,what is the primary abnormality in this image?,carotid cavernous fistula,Abnormality,val
+346,synpic51752,what is abnormal in the ultrasound?,hydrocephalus secondary to intraventricular hemorrhage.  periventricular leukomalacia,Abnormality,val
+347,synpic19716,what is abnormal in the mri?,neurocysticercosis,Abnormality,val
+348,synpic56001,what abnormality is seen in the image?,giant aneurysm,Abnormality,val
+349,synpic55508,what is abnormal in the ct scan?,laryngeal lipoma,Abnormality,val
+350,synpic32746,what is abnormal in the x-ray?,unicameral bone cyst with associated pathological fracture,Abnormality,val
+351,synpic52918,what abnormality is seen in the image?,"pseudotumor  cerebri (""benign"" idiopathic intracranial hypertension)",Abnormality,val
+352,synpic21672,what is most alarming about this ultrasound?,cholangiocarcinoma,Abnormality,val
+353,synpic51395,what abnormality is seen in the image?,cerebellar infarction in sca distribution,Abnormality,val
+354,synpic27571,what is most alarming about this ct scan?,osteochondritis dissecans,Abnormality,val
+355,synpic50921,what is most alarming about this mri?,"arachnoid cyst, sella",Abnormality,val
+356,synpic53596,what is the primary abnormality in this image?,marfan syndrome,Abnormality,val
+357,synpic32632,what is abnormal in the x-ray?,avascular necrosis,Abnormality,val
+358,synpic59939,what is abnormal in the mri?,posterior inferior cerebellar artery infarct,Abnormality,val
+359,synpic22390,what abnormality is seen in the image?,primary lymphoma of bone,Abnormality,val
+360,synpic28454,what is the primary abnormality in this image?,cavernous hemangioma,Abnormality,val
+361,synpic40703,what is most alarming about this mri?,dermoid tumor (inclusion cyst) of cns,Abnormality,val
+362,synpic38876,what abnormality is seen in the image?,multiple sclerosis,Abnormality,val
+363,synpic15700,what abnormality is seen in the image?,takayasu arteritis,Abnormality,val
+364,synpic21328,what is the primary abnormality in this image?,"spine, epidural abscess",Abnormality,val
+365,synpic44995,what is most alarming about this mri?,posterior reversible encephalopathy syndrome (pres),Abnormality,val
+366,synpic48836,what abnormality is seen in the image?,situs ambiguous (heterotaxy),Abnormality,val
+367,synpic26651,what is the primary abnormality in this image?,artificial cardiac valves,Abnormality,val
+368,synpic57862,what abnormality is seen in the image?,"dural  fistula, avf",Abnormality,val
+369,synpic43817,what is most alarming about this mri?,anterior cruciate ligament tear,Abnormality,val
+370,synpic24495,what is abnormal in the x-ray?,hodgkin's lymphoma,Abnormality,val
+371,synpic22755,what is the primary abnormality in this image?,arachnoid cyst,Abnormality,val
+372,synpic34123,what is most alarming about this ct scan?,transitional cell carcinoma,Abnormality,val
+373,synpic22741,what is abnormal in the mri?,l5-s1 extruded disk fragment,Abnormality,val
+374,synpic33102,what is most alarming about this x-ray?,hydropneumothorax,Abnormality,val
+375,synpic47683,what is the primary abnormality in this image?,lingual thyroid,Abnormality,val
+376,synpic19933,what is most alarming about this ct scan?,pulmonary arteriovenous malformation,Abnormality,val
+377,synpic53152,what is the primary abnormality in this image?,rathke's cleft cyst,Abnormality,val
+378,synpic40660,what is the primary abnormality in this image?,"astrocytoma, low-grade (who 2), supratentorial",Abnormality,val
+379,synpic31933,what is most alarming about this ct scan?,shaken baby syndrome,Abnormality,val
+380,synpic24899,what is abnormal in the x-ray?,high velocity rifle injury,Abnormality,val
+381,synpic55682,what abnormality is seen in the image?,depressed  skull  fractures,Abnormality,val
+382,synpic53581,what is the primary abnormality in this image?,fat embolism with cerebral infarction,Abnormality,val
+383,synpic11771,what is most alarming about this ct scan?,"subependymoma, lateral ventricle",Abnormality,val
+384,synpic31884,what is the primary abnormality in this image?,appendicitis,Abnormality,val
+385,synpic17664,what is most alarming about this x-ray?,"constrictive pericarditis, calcified pericardium",Abnormality,val
+386,synpic36696,what is the primary abnormality in this image?,inguinal hernia involving bladder,Abnormality,val
+387,synpic53727,what is most alarming about this ct scan?,rheumatic valve disease,Abnormality,val
+388,synpic42170,what abnormality is seen in the image?,epiploic appendigitis,Abnormality,val
+389,synpic34794,what is most alarming about this mri?,"dural metastases, prostate cancer",Abnormality,val
+390,synpic49970,what is the primary abnormality in this image?,necrotizing pancreatitis,Abnormality,val
+391,synpic47975,what abnormality is seen in the image?,colon cancer,Abnormality,val
+392,synpic40559,what is the primary abnormality in this image?,ganglioneuroma,Abnormality,val
+393,synpic57757,what abnormality is seen in the image?,fibro osseous lesions of the face and sinuses,Abnormality,val
+394,synpic21602,what is abnormal in the x-ray?,salter harris fracture type 1,Abnormality,val
+395,synpic47342,what is abnormal in the mri?,arachnoid cyst,Abnormality,val
+396,synpic16119,what abnormality is seen in the image?,infected thyroglossal duct cyst,Abnormality,val
+397,synpic48065,what is the primary abnormality in this image?,"avm, arterio-venous malformation, vascular malformation",Abnormality,val
+398,synpic51285,what is most alarming about this mri?,"brain, cerebral abscess",Abnormality,val
+399,synpic36236,what is most alarming about this x-ray?,double aortic arch,Abnormality,val
+400,synpic28587,what is the primary abnormality in this image?,graves disease,Abnormality,val
+401,synpic50366,what is the primary abnormality in this image?,amyloidosis,Abnormality,val
+402,synpic28544,what is abnormal in the gastrointestinal image?,hiatal hernia,Abnormality,val
+403,synpic37470,what is the primary abnormality in this image?,dieulafoy's lesion:  an angiographic finding of a gastric avm,Abnormality,val
+404,synpic38742,what is the primary abnormality in this image?,medullary nephrocalcinosis,Abnormality,val
+405,synpic42788,what abnormality is seen in the image?,"cystic meningioma, atypical",Abnormality,val
+406,synpic43455,what is abnormal in the x-ray?,poorly differentiated non-small cell lung carcinoma,Abnormality,val
+407,synpic55545,what is the primary abnormality in this image?,carbon monoxide poisoning,Abnormality,val
+408,synpic38795,what is abnormal in the mri?,dysembryoplastic neuroepithelial tumor,Abnormality,val
+409,synpic60065,what is the primary abnormality in this image?,osteoid osteoma,Abnormality,val
+410,synpic18848,what abnormality is seen in the image?,ileal atresia,Abnormality,val
+411,synpic49352,what is most alarming about this ct scan?,"gastrointestinal bleed, lower gi tract",Abnormality,val
+412,synpic23766,what is most alarming about this mri?,moyamoya,Abnormality,val
+413,synpic50039,what abnormality is seen in the image?,epidural spinal hematoma,Abnormality,val
+414,synpic40000,what is abnormal in the mri?,rathke cleft cyst,Abnormality,val
+415,synpic54713,what is most alarming about this ultrasound?,papillary carcinoma of the thyroid,Abnormality,val
+416,synpic45150,what abnormality is seen in the image?,meningioma,Abnormality,val
+417,synpic47023,what is abnormal in the mri?,non-hodgkin's lymphoma - b-cell lymphoma,Abnormality,val
+418,synpic53042,what abnormality is seen in the image?,pituitary apoplexy,Abnormality,val
+419,synpic47751,what is the primary abnormality in this image?,arteriovenous malformation,Abnormality,val
+420,synpic57218,what is the primary abnormality in this image?,chondromalacia patella in the presence of meniscal tear,Abnormality,val
+421,synpic30532,what is abnormal in the x-ray?,complete paraplegia secondary to cord transection and l1 vertebral body puncture from gun shot wound,Abnormality,val
+422,synpic22136,what abnormality is seen in the image?,“secondary” finding of breast carcinoma,Abnormality,val
+423,synpic24235,what is abnormal in the ultrasound?,ectopic pregnancy,Abnormality,val
+424,synpic48112,what is most alarming about this mri?,serous cystadenoma,Abnormality,val
+425,synpic14645,what is most alarming about this mri?,clear cell chondrosarcoma,Abnormality,val
+426,synpic58329,what abnormality is seen in the image?,"avm, arterio-venous malformation, vascular malformation",Abnormality,val
+427,synpic50775,what is most alarming about this mri?,"spine, epidural abscess",Abnormality,val
+428,synpic18902,what abnormality is seen in the image?,paget disease of bone,Abnormality,val
+429,synpic35648,what is the primary abnormality in this image?,peripheral vascular disease s/p atherectomy,Abnormality,val
+430,synpic26620,what is most alarming about this angiogram?,microcoil embolization of a lower gastrointestinal bleed,Abnormality,val
+431,synpic48066,what is the primary abnormality in this image?,"avm, arterio-venous malformation, vascular malformation",Abnormality,val
+432,synpic39853,what is abnormal in the ct scan?,acute appendicitis,Abnormality,val
+433,synpic27338,what is most alarming about this mri?,ewing's sarcoma,Abnormality,val
+434,synpic37881,what is abnormal in the mri?,spinal cord astrocytoma,Abnormality,val
+435,synpic33629,what is abnormal in the mri?,"fat embolism, brain",Abnormality,val
+436,synpic53877,what abnormality is seen in the image?,giant tumefactive perivascular spaces,Abnormality,val
+437,synpic39463,what is most alarming about this mri?,hsv encephalitis,Abnormality,val
+438,synpic43481,what abnormality is seen in the image?,cleft lip,Abnormality,val
+439,synpic32126,what abnormality is seen in the image?,endograft leak,Abnormality,val
+440,synpic44926,what abnormality is seen in the image?,calcific tendinitis,Abnormality,val
+441,synpic58300,what is the primary abnormality in this image?,synovial cyst,Abnormality,val
+442,synpic25880,what abnormality is seen in the image?,hiatal hernia,Abnormality,val
+443,synpic16292,what is most alarming about this mri?,"subependymoma, fourth ventricle",Abnormality,val
+444,synpic51136,what is abnormal in the ct scan?,penetrating diaphragm injury after trauma,Abnormality,val
+445,synpic49209,what is abnormal in the x-ray?,lipohemarthrosis,Abnormality,val
+446,synpic55813,what abnormality is seen in the image?,meningioma,Abnormality,val
+447,synpic46847,what abnormality is seen in the image?,meningioma,Abnormality,val
+448,synpic45382,what abnormality is seen in the image?,sarcoidosis,Abnormality,val
+449,synpic55026,what is most alarming about this mri?,fibrous dysplasia,Abnormality,val
+450,synpic21980,what is most alarming about this x-ray?,hydropneumothorax,Abnormality,val
+451,synpic48249,what is the primary abnormality in this image?,leptomeningeal carcinomatosis,Abnormality,val
+452,synpic54648,what is the primary abnormality in this image?,"common carotid occlusion, collateral reconstitution of ipsilateral ica from vertebral artery muscular branches",Abnormality,val
+453,synpic16484,what is most alarming about this mammograph?,intramammary lymph node,Abnormality,val
+454,synpic43447,what is most alarming about this ct scan?,rectovaginal fistula,Abnormality,val
+455,synpic54675,what abnormality is seen in the image?,radiation necrosis,Abnormality,val
+456,synpic29463,what is most alarming about this mri?,developmental venous anomaly,Abnormality,val
+457,synpic47351,what is abnormal in the ct scan?,renal cell carcinoma,Abnormality,val
+458,synpic17228,what abnormality is seen in the image?,tennis leg,Abnormality,val
+459,synpic51490,what is most alarming about this ct scan?,foregut cyst,Abnormality,val
+460,synpic35880,what is abnormal in the mri?,juvenile pilocytic astrocytoma,Abnormality,val
+461,synpic34552,what abnormality is seen in the image?,arteriovenous malformation (avm),Abnormality,val
+462,synpic52166,what is the primary abnormality in this image?,musculoskeletal differential diagnosis,Abnormality,val
+463,synpic21188,what is abnormal in the x-ray?,jefferson fracture c1,Abnormality,val
+464,synpic57585,what abnormality is seen in the image?,opll - ossification of the posterior longitudinal ligament,Abnormality,val
+465,synpic40947,what is the primary abnormality in this image?,cns prenchymal metastasis,Abnormality,val
+466,synpic29098,what is the primary abnormality in this image?,infiltrating ductal carcinoma,Abnormality,val
+467,synpic44506,what is abnormal in the mri?,dandy-walker malformation,Abnormality,val
+468,synpic52364,what is abnormal in the ct scan?,cerebral aneurysm,Abnormality,val
+469,synpic57208,what is most alarming about this ct scan?,glioblastoma multiforme (who grade 4 astrocytoma),Abnormality,val
+470,synpic57578,what is most alarming about this ct scan?,persistent trigeminal artery,Abnormality,val
+471,synpic58887,what abnormality is seen in the image?,bone metastasis,Abnormality,val
+472,synpic50565,what abnormality is seen in the image?,serous cystadenoma (macrocystic variant),Abnormality,val
+473,synpic56114,what abnormality is seen in the image?,"anoxic brain injury, anoxia",Abnormality,val
+474,synpic23560,what abnormality is seen in the image?,small bowel obstruction secondary to adhesions,Abnormality,val
+475,synpic34008,what is most alarming about this ct scan?,pulmonary thromboembolism,Abnormality,val
+476,synpic16083,what is the primary abnormality in this image?,cardiogenic pulmonary edema – chf exacerbation secondary to new onset atrial fibrillation,Abnormality,val
+477,synpic52004,what is the primary abnormality in this image?,congenital hypoplasia of the internal carotid artery,Abnormality,val
+478,synpic15401,what abnormality is seen in the image?,right aortic arch with aberrant left subclavian artery,Abnormality,val
+479,synpic57801,what is the primary abnormality in this image?,osteoma skull,Abnormality,val
+480,synpic25267,what is abnormal in the gastrointestinal image?,plyoric stenosis,Abnormality,val
+481,synpic34632,what abnormality is seen in the image?,cervical nerve root avulsion,Abnormality,val
+482,synpic45021,what abnormality is seen in the image?,carotid dissection,Abnormality,val
+483,synpic50410,what is the primary abnormality in this image?,"brain, cerebral abscess",Abnormality,val
+484,synpic47178,what is abnormal in the x-ray?,chondroblastoma,Abnormality,val
+485,synpic40398,what is the primary abnormality in this image?,posterior reversible encephalopathy syndrome (pres),Abnormality,val
+486,synpic18681,what abnormality is seen in the image?,pituitary macroadenoma,Abnormality,val
+487,synpic38551,what abnormality is seen in the image?,"neurocytoma, central neurocytoma",Abnormality,val
+488,synpic36540,what abnormality is seen in the image?,hypothalamic hamartoma,Abnormality,val
+489,synpic17203,what is abnormal in the ct scan?,hepatic hemangioma,Abnormality,val
+490,synpic57633,what is most alarming about this mri?,schwannoma,Abnormality,val
+491,synpic56511,what abnormality is seen in the image?,craniopharyngioma,Abnormality,val
+492,synpic29500,what is most alarming about this x-ray?,achalasia,Abnormality,val
+493,synpic48897,what is abnormal in the mri?,epidermoid cyst,Abnormality,val
+494,synpic45196,what abnormality is seen in the image?,ossified posterior longitudinal ligament (opll),Abnormality,val
+495,synpic45828,what is abnormal in the mri?,marked hydrocephalus due to aqueductal stenosis,Abnormality,val
+496,synpic60458,what is abnormal in the x-ray?,discoid meniscus,Abnormality,val
+497,synpic43524,what is most alarming about this mri?,"choroid plexus neoplasm, papilloma, carcinoma",Abnormality,val
+498,synpic59568,what is abnormal in the mri?,multiple sclerosis,Abnormality,val
+499,synpic48459,what is most alarming about this mri?,"spine,  tethered  cord",Abnormality,val
+0,synpic54733,in what plane is this image oriented?,axial,Plane,val
+1,synpic25647,what plane is this x-ray in?,ap,Plane,val
+2,synpic35681,what plane is demonstrated?,coronal,Plane,val
+3,synpic39641,in what plane was this image taken?,axial,Plane,val
+4,synpic35693,in what plane is this mri taken?,sagittal,Plane,val
+5,synpic17419,in which plane is the ct scan displayed?,axial,Plane,val
+6,synpic32909,what is the plane of the ct scan?,axial,Plane,val
+7,synpic48040,what plane was used in this ct scan?,axial,Plane,val
+8,synpic48351,what imaging plane is depicted here?,frontal,Plane,val
+9,synpic49503,what plane is this?,coronal,Plane,val
+10,synpic18176,what plane is this ct scan in?,axial,Plane,val
+11,synpic36498,which plane is the image shown in?,pa,Plane,val
+12,synpic26850,what image plane is this?,sagittal,Plane,val
+13,synpic19508,what plane was used?,axial,Plane,val
+14,synpic23496,what is the plane of the image?,coronal,Plane,val
+15,synpic25435,what plane is demonstrated?,axial,Plane,val
+16,synpic38894,in what plane is this image oriented?,axial,Plane,val
+17,synpic25620,what plane is the image acquired in?,frontal,Plane,val
+18,synpic25634,in what plane is this x-ray captured?,lateral,Plane,val
+19,synpic36490,what imaging plane is depicted here?,lateral,Plane,val
+20,synpic40658,in what plane is this image taken?,sagittal,Plane,val
+21,synpic27614,what plane is this x-ray in?,lateral,Plane,val
+22,synpic26245,what is the plane of the image?,axial,Plane,val
+23,synpic25628,what image plane is this?,ap,Plane,val
+24,synpic34446,what image plane is this?,coronal,Plane,val
+25,synpic28899,which plane is this image taken?,lateral,Plane,val
+26,synpic28331,what plane is this?,sagittal,Plane,val
+27,synpic55791,which plane is this image taken?,axial,Plane,val
+28,synpic32867,what is the plane of the ct scan?,axial,Plane,val
+29,synpic21201,what plane is demonstrated?,pa,Plane,val
+30,synpic20686,what plane is seen?,mammo - mlo,Plane,val
+31,synpic17412,what plane is this?,axial,Plane,val
+32,synpic53907,what is the plane of the ct scan?,coronal,Plane,val
+33,synpic24024,what plane is the image acquired in?,sagittal,Plane,val
+34,synpic59540,in which plane is the mri displayed?,axial,Plane,val
+35,synpic19169,in what plane is this image taken?,axial,Plane,val
+36,synpic52424,what plane is demonstrated?,axial,Plane,val
+37,synpic52430,which plane is this image in?,coronal,Plane,val
+38,synpic51878,what imaging plane is depicted here?,coronal,Plane,val
+39,synpic25109,which plane is the image shown in?,coronal,Plane,val
+40,synpic21186,what plane is seen?,lateral,Plane,val
+41,synpic52140,which plane is this image in?,axial,Plane,val
+42,synpic32893,what is the plane of this x-ray?,ap,Plane,val
+43,synpic25451,in what plane is this x-ray?,lateral,Plane,val
+44,synpic18101,which plane is the image shown in?,frontal,Plane,val
+45,synpic18115,what plane is seen?,sagittal,Plane,val
+46,synpic17583,what is the plane of the x-ray?,frontal,Plane,val
+47,synpic100295,in which plane is the ultrasound displayed?,sagittal,Plane,val
+48,synpic46243,what is the plane of the image?,axial,Plane,val
+49,synpic38951,what plane is seen?,pa,Plane,val
+50,synpic60290,what is the plane of this ct scan?,coronal,Plane,val
+51,synpic17970,what is the plane of the image?,ap,Plane,val
+52,synpic17780,in what plane is this gastrointestinal image taken?,frontal,Plane,val
+53,synpic28216,what plane was used?,pa,Plane,val
+54,synpic31753,what is the plane of the ct scan?,axial,Plane,val
+55,synpic16475,in what plane is this image oriented?,axial,Plane,val
+56,synpic38575,in what plane was this image taken?,sagittal,Plane,val
+57,synpic41707,what plane is the image acquired in?,sagittal,Plane,val
+58,synpic26950,which plane is the image shown in?,oblique,Plane,val
+59,synpic18921,what plane is this ultrasound in?,transverse,Plane,val
+60,synpic29054,in what plane is this image oriented?,ap,Plane,val
+61,synpic56870,what imaging plane is depicted here?,axial,Plane,val
+62,synpic21385,in what plane is this mri?,axial,Plane,val
+63,synpic57577,what plane is demonstrated?,oblique,Plane,val
+64,synpic40779,in what plane is this image taken?,axial,Plane,val
+65,synpic49985,what plane is this ct scan in?,sagittal,Plane,val
+66,synpic50556,what plane was used?,axial,Plane,val
+67,synpic57239,which plane is the image shown in?,sagittal,Plane,val
+68,synpic54730,in what plane is this ct scan?,coronal,Plane,val
+69,synpic52631,what is the plane of this mri?,axial,Plane,val
+70,synpic28837,in what plane is this image taken?,axial,Plane,val
+71,synpic39709,what is the plane of the mri?,coronal,Plane,val
+72,synpic61204,in what plane is this image oriented?,oblique,Plane,val
+73,synpic27523,what is the plane of the image?,axial,Plane,val
+74,synpic61238,what plane is this ct scan in?,axial,Plane,val
+75,synpic58532,what plane was used in this mri?,coronal,Plane,val
+76,synpic45577,what plane is this?,axial,Plane,val
+77,synpic39696,what is the plane of the image?,sagittal,Plane,val
+78,synpic23157,in what plane was this image taken?,axial,Plane,val
+79,synpic23631,what plane is the image acquired in?,axial,Plane,val
+80,synpic27319,which plane is this image taken?,ap,Plane,val
+81,synpic51072,what image plane is this?,sagittal,Plane,val
+82,synpic53659,in what plane is this image taken?,sagittal,Plane,val
+83,synpic58095,what plane was used?,axial,Plane,val
+84,synpic60250,in what plane is this mri?,axial,Plane,val
+85,synpic40194,in what plane is this image taken?,coronal,Plane,val
+86,synpic29645,in what plane is this image oriented?,axial,Plane,val
+87,synpic31036,what is the plane?,axial,Plane,val
+88,synpic33806,which plane is the image shown in?,axial,Plane,val
+89,synpic27873,which plane is this image taken?,mammo - mlo,Plane,val
+90,synpic38953,what is the plane?,lateral,Plane,val
+91,synpic49172,what plane is this?,sagittal,Plane,val
+92,synpic59407,in what plane is this mri?,coronal,Plane,val
+93,synpic43477,what plane is seen?,ap,Plane,val
+94,synpic53314,in what plane was this image taken?,axial,Plane,val
+95,synpic46876,what is the plane?,lateral,Plane,val
+96,synpic28188,what plane is seen?,ap,Plane,val
+97,synpic47573,in what plane is this image taken?,sagittal,Plane,val
+98,synpic30260,in what plane is this angiogram?,lateral,Plane,val
+99,synpic45827,what plane was used in this mri?,axial,Plane,val
+100,synpic27046,which plane is this image in?,sagittal,Plane,val
+101,synpic20729,in which plane is the ct scan displayed?,axial,Plane,val
+102,synpic30248,in what plane is this ct scan?,axial,Plane,val
+103,synpic53738,in what plane is this image taken?,sagittal,Plane,val
+104,synpic17620,what imaging plane is depicted here?,axial,Plane,val
+105,synpic47017,what is the plane?,axial,Plane,val
+106,synpic41314,in what plane is this mri?,axial,Plane,val
+107,synpic55403,which plane is this image taken?,axial,Plane,val
+108,synpic27730,what plane is this film,transverse,Plane,val
+109,synpic58682,which plane is the image taken?,sagittal,Plane,val
+110,synpic50023,in what plane is this image taken?,pa,Plane,val
+111,synpic57758,what is the plane of the image?,coronal,Plane,val
+112,synpic19225,which plane is the image taken?,coronal,Plane,val
+113,synpic16880,what imaging plane is depicted here?,ap,Plane,val
+114,synpic48730,in what plane is this image taken?,coronal,Plane,val
+115,synpic21786,in what plane is this image oriented?,axial,Plane,val
+116,synpic25090,in what plane is this image oriented?,axial,Plane,val
+117,synpic58912,what is the plane of this mri?,axial,Plane,val
+118,synpic35240,what plane was used?,axial,Plane,val
+119,synpic33143,what plane is seen?,sagittal,Plane,val
+120,synpic28204,what plane is this ct scan in?,axial,Plane,val
+121,synpic26201,what plane is the image acquired in?,lateral,Plane,val
+122,synpic41271,which plane is this image taken?,lateral,Plane,val
+123,synpic8182,what image plane is this?,frontal,Plane,val
+124,synpic57188,what plane is seen?,coronal,Plane,val
+125,synpic43843,what plane was used in this angiogram?,lateral,Plane,val
+126,synpic36210,what is the plane of the image?,coronal,Plane,val
+127,synpic58495,in which plane is the mri displayed?,axial,Plane,val
+128,synpic40231,in what plane is this mri?,coronal,Plane,val
+129,synpic40782,in what plane is this ct scan captured?,sagittal,Plane,val
+130,synpic53098,in what plane is this mri captured?,axial,Plane,val
+131,synpic31184,in what plane is this image taken?,axial,Plane,val
+132,synpic56123,in what plane is this image taken?,ap,Plane,val
+133,synpic59548,what is the plane of the image?,axial,Plane,val
+134,synpic21418,what plane is this?,axial,Plane,val
+135,synpic17814,what plane is the image acquired in?,axial,Plane,val
+136,synpic22893,in what plane is this ct scan captured?,axial,Plane,val
+137,synpic33236,which plane is this image in?,ap,Plane,val
+138,synpic59945,what is the plane?,coronal,Plane,val
+139,synpic27492,what is the plane?,coronal,Plane,val
+140,synpic45565,which plane is this ct scan taken in?,axial,Plane,val
+141,synpic16883,what imaging plane is depicted here?,ap,Plane,val
+142,synpic43699,in what plane is this mri?,sagittal,Plane,val
+143,synpic23151,which plane is the image taken?,frontal,Plane,val
+144,synpic21020,in what plane is this image taken?,axial,Plane,val
+145,synpic52596,what is the plane of the x-ray?,ap,Plane,val
+146,synpic56901,what is the plane of the mri?,sagittal,Plane,val
+147,synpic38404,what imaging plane is depicted here?,axial,Plane,val
+148,synpic40597,what plane was used?,axial,Plane,val
+149,synpic26612,what plane is the image acquired in?,ap,Plane,val
+150,synpic100332,what is the plane of this x-ray?,ap,Plane,val
+151,synpic26809,which plane is this ct scan taken in?,axial,Plane,val
+152,synpic59005,in what plane is this image oriented?,axial,Plane,val
+153,synpic43576,what is the plane?,pa,Plane,val
+154,synpic33913,what plane was used?,sagittal,Plane,val
+155,synpic23255,in which plane is the ct scan displayed?,axial,Plane,val
+156,synpic21442,which plane is this ct scan taken in?,axial,Plane,val
+157,synpic38885,what plane is the image acquired in?,axial,Plane,val
+158,synpic17866,what imaging plane is depicted here?,axial,Plane,val
+159,synpic24512,which plane is the image shown in?,coronal,Plane,val
+160,synpic24506,which plane is the image shown in?,axial,Plane,val
+161,synpic39557,in what plane is this x-ray?,pa,Plane,val
+162,synpic33293,in what plane is this image taken?,coronal,Plane,val
+163,synpic13143,what is the plane?,axial,Plane,val
+164,synpic17319,what is the plane of the image?,axial,Plane,val
+165,synpic33481,what is the plane of this x-ray?,pa,Plane,val
+166,synpic24857,which plane is the image shown in?,axial,Plane,val
+167,synpic37195,in what plane is this ct scan?,axial,Plane,val
+168,synpic48796,what plane is demonstrated?,axial,Plane,val
+169,synpic47664,what is the plane?,axial,Plane,val
+170,synpic56027,in what plane is this image oriented?,3d reconstruction,Plane,val
+171,synpic42084,what image plane is this?,axial,Plane,val
+172,synpic37433,what plane is this?,axial,Plane,val
+173,synpic34853,what plane is this mri in?,axial,Plane,val
+174,synpic32749,what is the plane of the ct scan?,sagittal,Plane,val
+175,synpic60966,in what plane is this image oriented?,lateral,Plane,val
+176,synpic25382,in what plane was this image taken?,axial,Plane,val
+177,synpic39967,in what plane is this mri taken?,axial,Plane,val
+178,synpic27768,in what plane was this image taken?,ap,Plane,val
+179,synpic30200,what is the plane of the x-ray?,lateral,Plane,val
+180,synpic31678,what plane was used in this ct scan?,axial,Plane,val
+181,synpic53994,what plane was used in this ct scan?,axial,Plane,val
+182,synpic49072,what plane is this film,axial,Plane,val
+183,synpic19651,which plane is this mri taken in?,axial,Plane,val
+184,synpic53980,what plane is the image acquired in?,axial,Plane,val
+185,synpic33084,in what plane is this image taken?,coronal,Plane,val
+186,synpic56608,in which plane is the ct scan displayed?,sagittal,Plane,val
+187,synpic48422,in which plane is the mri displayed?,sagittal,Plane,val
+188,synpic46419,what plane was used in this mri?,coronal,Plane,val
+189,synpic17124,what is the plane of the image?,ap,Plane,val
+190,synpic47049,in which plane is the ct scan displayed?,axial,Plane,val
+191,synpic40915,in what plane is this image taken?,sagittal,Plane,val
+192,synpic51818,what is the plane of this ct scan?,axial,Plane,val
+193,synpic32401,in what plane is this x-ray taken?,lateral,Plane,val
+194,synpic34070,what plane was used in this ct scan?,axial,Plane,val
+195,synpic55854,what plane is demonstrated?,axial,Plane,val
+196,synpic29237,in what plane is this image taken?,frontal,Plane,val
+197,synpic39193,what plane was used in this mri?,coronal,Plane,val
+198,synpic33455,in what plane is this ultrasound?,transverse,Plane,val
+199,synpic41564,what is the plane of this mri?,axial,Plane,val
+200,synpic54169,in what plane is this image oriented?,coronal,Plane,val
+201,synpic57312,which plane is this image taken?,axial,Plane,val
+202,synpic54627,what plane was used in this mri?,coronal,Plane,val
+203,synpic58790,which plane is this image in?,axial,Plane,val
+204,synpic58974,what plane is the image acquired in?,axial,Plane,val
+205,synpic35568,in what plane is this ct scan?,axial,Plane,val
+206,synpic53835,in what plane is this mri taken?,sagittal,Plane,val
+207,synpic47855,what is the plane of the image?,axial,Plane,val
+208,synpic58008,what is the plane of this ct scan?,axial,Plane,val
+209,synpic15120,what plane is demonstrated?,axial,Plane,val
+210,synpic33695,which plane is this image taken?,frontal,Plane,val
+211,synpic100545,what image plane is this?,oblique,Plane,val
+212,synpic58544,what plane is seen?,sagittal,Plane,val
+213,synpic32825,what plane is demonstrated?,lateral,Plane,val
+214,synpic41613,what plane is this?,axial,Plane,val
+215,synpic39569,in what plane is this image taken?,oblique,Plane,val
+216,synpic24538,in what plane is this x-ray captured?,pa,Plane,val
+217,synpic17121,what is the plane?,mammo - mag cc,Plane,val
+218,synpic34061,which plane is the image shown in?,sagittal,Plane,val
+219,synpic36110,what plane was used in this x-ray?,oblique,Plane,val
+220,synpic56814,in which plane is the mri displayed?,sagittal,Plane,val
+221,synpic43955,what plane is this?,axial,Plane,val
+222,synpic54434,which plane is the image taken?,axial,Plane,val
+223,synpic24879,in what plane is this image taken?,axial,Plane,val
+224,synpic39828,which plane is this image in?,axial,Plane,val
+225,synpic48021,in what plane is this image taken?,axial,Plane,val
+226,synpic49129,what plane is seen?,axial,Plane,val
+227,synpic58742,what imaging plane is depicted here?,axial,Plane,val
+228,synpic15871,what is the plane?,axial,Plane,val
+229,synpic58965,what plane was used?,axial,Plane,val
+230,synpic39357,what plane is the image acquired in?,pa,Plane,val
+231,synpic60223,what plane is this mri in?,axial,Plane,val
+232,synpic34841,what plane is seen?,axial,Plane,val
+233,synpic21041,which plane is this image taken?,axial,Plane,val
+234,synpic55071,what is the plane of the image?,coronal,Plane,val
+235,synpic41825,in which plane is the mri displayed?,sagittal,Plane,val
+236,synpic55850,in what plane is this image taken?,sagittal,Plane,val
+237,synpic34276,what is the plane of this mri?,sagittal,Plane,val
+238,synpic25384,what plane is demonstrated?,axial,Plane,val
+239,synpic43767,in what plane is this ct scan?,axial,Plane,val
+240,synpic23252,which plane is this ultrasound taken in?,sagittal,Plane,val
+241,synpic53789,in what plane is this image taken?,coronal,Plane,val
+242,synpic52468,what plane is this?,coronal,Plane,val
+243,synpic42135,in what plane is this ct scan?,coronal,Plane,val
+244,synpic58184,what plane is demonstrated?,coronal,Plane,val
+245,synpic48397,what plane is this mri in?,coronal,Plane,val
+246,synpic45466,what is the plane?,axial,Plane,val
+247,synpic46966,what plane is seen?,ap,Plane,val
+248,synpic39618,what imaging plane is depicted here?,ap,Plane,val
+249,synpic18359,which plane is the image shown in?,sagittal,Plane,val
+250,synpic56036,in which plane is the mri displayed?,coronal,Plane,val
+251,synpic49116,in what plane is this image oriented?,sagittal,Plane,val
+252,synpic53199,what plane was used in this ct scan?,axial,Plane,val
+253,synpic38739,what plane is demonstrated?,transverse,Plane,val
+254,synpic17902,which plane is the image shown in?,axial,Plane,val
+255,synpic22952,in what plane is this ct scan?,axial,Plane,val
+256,synpic16361,in what plane is this image taken?,coronal,Plane,val
+257,synpic19052,which plane is this image in?,axial,Plane,val
+258,synpic27433,which plane is the image shown in?,longitudinal,Plane,val
+259,synpic54393,what is the plane of this mri?,axial,Plane,val
+260,synpic42268,in what plane was this image taken?,axial,Plane,val
+261,synpic17527,what imaging plane is depicted here?,frontal,Plane,val
+262,synpic43604,which plane is this image taken?,transverse,Plane,val
+263,synpic50917,what plane is demonstrated?,axial,Plane,val
+264,synpic39751,which plane is the image shown in?,ap,Plane,val
+265,synpic21687,which plane is the image taken?,frontal,Plane,val
+266,synpic35180,what imaging plane is depicted here?,axial,Plane,val
+267,synpic18012,in what plane was this image taken?,coronal,Plane,val
+268,synpic16765,in what plane is this image taken?,frontal,Plane,val
+269,synpic19640,in what plane is this image taken?,frontal,Plane,val
+270,synpic54017,what is the plane of the image?,axial,Plane,val
+271,synpic33926,what is the plane of the image?,axial,Plane,val
+272,synpic59241,which plane is the image shown in?,coronal,Plane,val
+273,synpic44990,in which plane is the mri displayed?,axial,Plane,val
+274,synpic28094,what is the plane of the image?,ap,Plane,val
+275,synpic35947,what is the plane of this mri?,sagittal,Plane,val
+276,synpic41793,what plane is this?,sagittal,Plane,val
+277,synpic43423,what plane is this?,sagittal,Plane,val
+278,synpic16378,in what plane is this ct scan?,axial,Plane,val
+279,synpic33107,what is the plane of the image?,axial,Plane,val
+280,synpic47877,what plane is this mri in?,axial,Plane,val
+281,synpic22547,what is the plane of the ct scan?,axial,Plane,val
+282,synpic33489,in what plane is this ct scan captured?,axial,Plane,val
+283,synpic20393,which plane is the image taken?,oblique,Plane,val
+284,synpic50674,in what plane is this mri captured?,sagittal,Plane,val
+285,synpic46002,which plane is the image shown in?,axial,Plane,val
+286,synpic41751,which plane is this image in?,oblique,Plane,val
+287,synpic21890,what plane is this mri in?,frontal,Plane,val
+288,synpic9384,what imaging plane is depicted here?,lateral,Plane,val
+289,synpic31315,what plane is the image acquired in?,mammo - mlo,Plane,val
+290,synpic38331,what imaging plane is depicted here?,lateral,Plane,val
+291,synpic25374,in what plane is this ultrasound captured?,transverse,Plane,val
+292,synpic54214,in what plane is this image taken?,sagittal,Plane,val
+293,synpic56615,what plane is the image acquired in?,axial,Plane,val
+294,synpic37599,which plane is the image taken?,axial,Plane,val
+295,synpic55308,what plane is this ct scan in?,axial,Plane,val
+296,synpic45133,in which plane is the ct scan displayed?,axial,Plane,val
+297,synpic54994,what plane was used?,axial,Plane,val
+298,synpic41341,in what plane is this image oriented?,coronal,Plane,val
+299,synpic54766,what is the plane of the image?,sagittal,Plane,val
+300,synpic22196,which plane is this ct scan taken in?,axial,Plane,val
+301,synpic29772,what plane is seen?,ap,Plane,val
+302,synpic18008,what is the plane of this x-ray?,ap,Plane,val
+303,synpic30800,in what plane is this image taken?,sagittal,Plane,val
+304,synpic41960,in what plane is this image taken?,ap,Plane,val
+305,synpic28295,what plane is the image acquired in?,coronal,Plane,val
+306,synpic24487,what is the plane of this angiogram?,lateral,Plane,val
+307,synpic20187,in what plane is this angiogram?,pa,Plane,val
+308,synpic26246,in what plane is this mri?,sagittal,Plane,val
+309,synpic16352,which plane is this ct scan taken in?,axial,Plane,val
+310,synpic59337,in what plane is this image taken?,axial,Plane,val
+311,synpic48212,what plane is demonstrated?,frontal,Plane,val
+312,synpic57871,what is the plane?,ap,Plane,val
+313,synpic34454,what plane is this film,pa,Plane,val
+314,synpic17299,in what plane is this image oriented?,pa,Plane,val
+315,synpic28733,which plane is this image in?,axial,Plane,val
+316,synpic55727,what plane is this mri in?,sagittal,Plane,val
+317,synpic45246,in which plane is the ct scan displayed?,axial,Plane,val
+318,synpic57642,what plane is this film,axial,Plane,val
+319,synpic60171,in what plane was this image taken?,coronal,Plane,val
+320,synpic29565,what plane was used?,pa,Plane,val
+321,synpic19303,which plane is this mammograph taken in?,mammo - xcc,Plane,val
+322,synpic51353,what is the plane of the mri?,coronal,Plane,val
+323,synpic26332,what image plane is this?,axial,Plane,val
+324,synpic53785,what is the plane of the mri?,axial,Plane,val
+325,synpic53024,what is the plane?,axial,Plane,val
+326,synpic45861,which plane is this ct scan taken in?,axial,Plane,val
+327,synpic31104,what imaging plane is depicted here?,axial,Plane,val
+328,synpic49242,what plane was used in this mri?,sagittal,Plane,val
+329,synpic41636,what plane is this film,coronal,Plane,val
+330,synpic58401,which plane is this image taken?,ap,Plane,val
+331,synpic51357,what plane is seen?,axial,Plane,val
+332,synpic44955,in what plane is this mri captured?,sagittal,Plane,val
+333,synpic23070,what plane is seen?,axial,Plane,val
+334,synpic47469,in what plane is this ct scan taken?,axial,Plane,val
+335,synpic19529,what plane is this?,axial,Plane,val
+336,synpic46993,what is the plane?,sagittal,Plane,val
+337,synpic28051,in what plane is this image taken?,axial,Plane,val
+338,synpic58993,what plane is this?,coronal,Plane,val
+339,synpic43431,what is the plane?,ap,Plane,val
+340,synpic20814,what is the plane?,mammo - mlo,Plane,val
+341,synpic46549,in what plane is this image taken?,ap,Plane,val
+342,synpic54830,in what plane was this image taken?,lateral,Plane,val
+343,synpic40845,what is the plane of the image?,coronal,Plane,val
+344,synpic35203,in what plane is this mri?,sagittal,Plane,val
+345,synpic58951,what plane is this angiogram in?,lateral,Plane,val
+346,synpic51752,in what plane is this image oriented?,coronal,Plane,val
+347,synpic19716,in what plane is this image oriented?,sagittal,Plane,val
+348,synpic56001,what is the plane?,oblique,Plane,val
+349,synpic55508,what is the plane of this ct scan?,sagittal,Plane,val
+350,synpic32746,in what plane was this image taken?,frontal,Plane,val
+351,synpic52918,what plane was used?,sagittal,Plane,val
+352,synpic21672,what plane was used in this ultrasound?,sagittal,Plane,val
+353,synpic51395,what is the plane of the mri?,sagittal,Plane,val
+354,synpic27571,what is the plane of this ct scan?,coronal,Plane,val
+355,synpic50921,what plane is the image acquired in?,axial,Plane,val
+356,synpic53596,in what plane is this mri?,oblique,Plane,val
+357,synpic32632,what plane is this?,lateral,Plane,val
+358,synpic59939,what plane is seen?,axial,Plane,val
+359,synpic22390,what plane is seen?,axial,Plane,val
+360,synpic28454,what plane is this?,axial,Plane,val
+361,synpic40703,in what plane was this image taken?,axial,Plane,val
+362,synpic38876,in what plane was this image taken?,axial,Plane,val
+363,synpic15700,what plane is demonstrated?,coronal,Plane,val
+364,synpic21328,what plane is this film,axial,Plane,val
+365,synpic44995,which plane is the image taken?,axial,Plane,val
+366,synpic48836,what plane is demonstrated?,axial,Plane,val
+367,synpic26651,in what plane is this image taken?,pa,Plane,val
+368,synpic57862,what is the plane of the image?,3d reconstruction,Plane,val
+369,synpic43817,which plane is the image taken?,sagittal,Plane,val
+370,synpic24495,in what plane is this x-ray taken?,ap,Plane,val
+371,synpic22755,what is the plane?,axial,Plane,val
+372,synpic34123,in what plane is this ct scan?,axial,Plane,val
+373,synpic22741,in what plane is this image oriented?,sagittal,Plane,val
+374,synpic33102,in what plane was this image taken?,pa,Plane,val
+375,synpic47683,what is the plane of this ct scan?,axial,Plane,val
+376,synpic19933,in what plane is this image taken?,axial,Plane,val
+377,synpic53152,which plane is this image in?,coronal,Plane,val
+378,synpic40660,in what plane is this image taken?,axial,Plane,val
+379,synpic31933,in what plane is this ct scan?,axial,Plane,val
+380,synpic24899,in what plane is this image taken?,frontal,Plane,val
+381,synpic55682,in what plane is this ct scan captured?,axial,Plane,val
+382,synpic53581,what plane was used in this x-ray?,ap,Plane,val
+383,synpic11771,which plane is this ct scan taken in?,axial,Plane,val
+384,synpic31884,what is the plane of the ct scan?,axial,Plane,val
+385,synpic17664,which plane is this x-ray taken in?,pa,Plane,val
+386,synpic36696,in what plane is this ct scan taken?,coronal,Plane,val
+387,synpic53727,in what plane is this ct scan taken?,3d reconstruction,Plane,val
+388,synpic42170,which plane is this x-ray taken in?,pa,Plane,val
+389,synpic34794,what imaging plane is depicted here?,axial,Plane,val
+390,synpic49970,which plane is this image taken?,axial,Plane,val
+391,synpic47975,what is the plane of this gastrointestinal image?,frontal,Plane,val
+392,synpic40559,what is the plane?,sagittal,Plane,val
+393,synpic57757,in what plane is this image taken?,axial,Plane,val
+394,synpic21602,what plane is this film,lateral,Plane,val
+395,synpic47342,what is the plane of the image?,axial,Plane,val
+396,synpic16119,what plane is seen?,axial,Plane,val
+397,synpic48065,in what plane was this image taken?,axial,Plane,val
+398,synpic51285,what plane is this film,axial,Plane,val
+399,synpic36236,what is the plane of this x-ray?,frontal,Plane,val
+400,synpic28587,what plane was used?,transverse,Plane,val
+401,synpic50366,what plane is seen?,sagittal,Plane,val
+402,synpic28544,what is the plane?,frontal,Plane,val
+403,synpic37470,which plane is this image in?,coronal,Plane,val
+404,synpic38742,what image plane is this?,axial,Plane,val
+405,synpic42788,which plane is this mri taken in?,coronal,Plane,val
+406,synpic43455,what plane is demonstrated?,lateral,Plane,val
+407,synpic55545,what image plane is this?,axial,Plane,val
+408,synpic38795,which plane is the image shown in?,axial,Plane,val
+409,synpic60065,in what plane is this image taken?,axial,Plane,val
+410,synpic18848,what is the plane of this gastrointestinal image?,ap,Plane,val
+411,synpic49352,what is the plane?,axial,Plane,val
+412,synpic23766,what is the plane of the image?,axial,Plane,val
+413,synpic50039,in what plane is this mri?,sagittal,Plane,val
+414,synpic40000,what is the plane of this mri?,sagittal,Plane,val
+415,synpic54713,what is the plane of the ultrasound?,axial,Plane,val
+416,synpic45150,in what plane is this image taken?,axial,Plane,val
+417,synpic47023,what plane is demonstrated?,sagittal,Plane,val
+418,synpic53042,what plane is this film,sagittal,Plane,val
+419,synpic47751,in what plane is this image oriented?,sagittal,Plane,val
+420,synpic57218,in what plane is this mri?,axial,Plane,val
+421,synpic30532,what plane is this?,ap,Plane,val
+422,synpic22136,in what plane is this image taken?,mammo - mlo,Plane,val
+423,synpic24235,which plane is this image in?,coronal,Plane,val
+424,synpic48112,what plane is the image acquired in?,coronal,Plane,val
+425,synpic14645,what plane is demonstrated?,axial,Plane,val
+426,synpic58329,in what plane was this image taken?,axial,Plane,val
+427,synpic50775,what plane was used in this mri?,sagittal,Plane,val
+428,synpic18902,what plane is this x-ray in?,lateral,Plane,val
+429,synpic35648,what plane was used in this angiogram?,frontal,Plane,val
+430,synpic26620,in what plane is this image taken?,frontal,Plane,val
+431,synpic48066,in what plane was this image taken?,coronal,Plane,val
+432,synpic39853,what image plane is this?,axial,Plane,val
+433,synpic27338,in what plane is this mri taken?,frontal,Plane,val
+434,synpic37881,in which plane is the mri displayed?,axial,Plane,val
+435,synpic33629,in what plane is this mri captured?,axial,Plane,val
+436,synpic53877,in what plane is this image taken?,axial,Plane,val
+437,synpic39463,in what plane is this mri taken?,axial,Plane,val
+438,synpic43481,in what plane is this ultrasound?,axial,Plane,val
+439,synpic32126,what is the plane of this ct scan?,axial,Plane,val
+440,synpic44926,which plane is the image shown in?,sagittal,Plane,val
+441,synpic58300,what is the plane of the image?,sagittal,Plane,val
+442,synpic25880,what plane is seen?,oblique,Plane,val
+443,synpic16292,what plane is the image acquired in?,sagittal,Plane,val
+444,synpic51136,which plane is the image taken?,3d reconstruction,Plane,val
+445,synpic49209,in what plane is this image taken?,lateral,Plane,val
+446,synpic55813,in what plane is this mri?,axial,Plane,val
+447,synpic46847,in what plane is this mri taken?,sagittal,Plane,val
+448,synpic45382,in which plane is the mri displayed?,sagittal,Plane,val
+449,synpic55026,what plane is this mri in?,coronal,Plane,val
+450,synpic21980,what plane is this film,pa,Plane,val
+451,synpic48249,what plane is the image acquired in?,axial,Plane,val
+452,synpic54648,in what plane is this image taken?,ap,Plane,val
+453,synpic16484,what plane is this mammograph in?,mammo - mlo,Plane,val
+454,synpic43447,in what plane was this image taken?,axial,Plane,val
+455,synpic54675,in what plane is this mri captured?,axial,Plane,val
+456,synpic29463,what is the plane?,axial,Plane,val
+457,synpic47351,what plane is this ct scan in?,axial,Plane,val
+458,synpic17228,in which plane is the mri displayed?,coronal,Plane,val
+459,synpic51490,which plane is this ct scan taken in?,axial,Plane,val
+460,synpic35880,what plane is seen?,sagittal,Plane,val
+461,synpic34552,what plane is this?,axial,Plane,val
+462,synpic52166,in what plane is this ct scan taken?,sagittal,Plane,val
+463,synpic21188,which plane is the image shown in?,lateral,Plane,val
+464,synpic57585,in what plane is this image oriented?,lateral,Plane,val
+465,synpic40947,what plane was used?,axial,Plane,val
+466,synpic29098,what plane is this film,mammo - cc,Plane,val
+467,synpic44506,what plane was used in this mri?,coronal,Plane,val
+468,synpic52364,what plane is the image acquired in?,axial,Plane,val
+469,synpic57208,what plane is the image acquired in?,axial,Plane,val
+470,synpic57578,which plane is this ct scan taken in?,coronal,Plane,val
+471,synpic58887,what image plane is this?,coronal,Plane,val
+472,synpic50565,what plane is this ct scan in?,axial,Plane,val
+473,synpic56114,in what plane is this mri?,axial,Plane,val
+474,synpic23560,in what plane is this ct scan?,axial,Plane,val
+475,synpic34008,in what plane is this ct scan?,coronal,Plane,val
+476,synpic16083,what plane is this film,axial,Plane,val
+477,synpic52004,what is the plane of the image?,longitudinal,Plane,val
+478,synpic15401,in what plane is this image oriented?,lateral,Plane,val
+479,synpic57801,what is the plane of the ct scan?,axial,Plane,val
+480,synpic25267,which plane is the image shown in?,longitudinal,Plane,val
+481,synpic34632,what plane was used in this ct scan?,sagittal,Plane,val
+482,synpic45021,in what plane is this ct scan?,coronal,Plane,val
+483,synpic50410,what plane is seen?,sagittal,Plane,val
+484,synpic47178,what plane is this film,lateral,Plane,val
+485,synpic40398,what plane is this mri in?,axial,Plane,val
+486,synpic18681,what plane is this mri in?,sagittal,Plane,val
+487,synpic38551,which plane is this image taken?,axial,Plane,val
+488,synpic36540,which plane is this mri taken in?,sagittal,Plane,val
+489,synpic17203,what plane was used?,axial,Plane,val
+490,synpic57633,in what plane is this mri?,sagittal,Plane,val
+491,synpic56511,in what plane is this mri?,sagittal,Plane,val
+492,synpic29500,in what plane is this x-ray?,pa,Plane,val
+493,synpic48897,in what plane is this image taken?,axial,Plane,val
+494,synpic45196,what plane is this?,axial,Plane,val
+495,synpic45828,in what plane is this mri?,coronal,Plane,val
+496,synpic60458,which plane is this image taken?,ap,Plane,val
+497,synpic43524,what is the plane?,coronal,Plane,val
+498,synpic59568,what imaging plane is depicted here?,sagittal,Plane,val
+499,synpic48459,what plane is the image acquired in?,sagittal,Plane,val
+0,synpic54733,what imaging modality was used to take this image?,ct with iv contrast,Modality,val
+1,synpic25647,what kind of scan is this?,xr - plain film,Modality,val
+2,synpic35681,was the mri taken with contrast?,no,Modality,val
+3,synpic39641,"is this a t1 weighted, t2 weighted, or flair image?",t2,Modality,val
+4,synpic35693,is this a noncontrast mri?,yes,Modality,val
+5,synpic17419,was iv contrast given to the patient?,yes,Modality,val
+6,synpic32909,what type of contrast did this patient have?,iv,Modality,val
+7,synpic48040,was the ct scan taken with contrast?,no,Modality,val
+8,synpic48351,what was this image taken with?,xr - plain film,Modality,val
+9,synpic49503,was the ct scan taken with contrast?,no,Modality,val
+10,synpic18176,what imaging modality was used to take this image?,ct with iv contrast,Modality,val
+11,synpic36498,what type of imaging modality is shown?,xr - plain film,Modality,val
+12,synpic26850,is this a ct scan?,no,Modality,val
+13,synpic19508,is this a contrast or noncontrast ct?,contrast,Modality,val
+14,synpic23496,what imaging modality was used to take this image?,mr - t1w - noncontrast,Modality,val
+15,synpic25435,"is this a t1 weighted, t2 weighted, or flair image?",t2,Modality,val
+16,synpic38894,is this a noncontrast ct?,no,Modality,val
+17,synpic25620,what is the modality?,xr - plain film,Modality,val
+18,synpic25634,what imaging method was used?,xr - plain film,Modality,val
+19,synpic36490,what type of imaging is this?,xr - plain film,Modality,val
+20,synpic40658,is this a t2 weighted image?,no,Modality,val
+21,synpic27614,what kind of image is this?,xr - plain film,Modality,val
+22,synpic26245,is this a ct scan?,no,Modality,val
+23,synpic25628,what imaging method was used?,xr - plain film,Modality,val
+24,synpic34446,is this a ct scan?,no,Modality,val
+25,synpic28899,what kind of scan is this?,xr - plain film,Modality,val
+26,synpic28331,what type of imaging does this represent?,us - ultrasound,Modality,val
+27,synpic55791,what imaging modality was used to take this image?,mr - t2 weighted,Modality,val
+28,synpic32867,was the ct scan taken with contrast?,no,Modality,val
+29,synpic21201,what was this image taken with?,xr - plain film,Modality,val
+30,synpic20686,what kind of image is this?,mammograph,Modality,val
+31,synpic17412,is this a noncontrast ct?,no,Modality,val
+32,synpic53907,is this a contrast or noncontrast ct?,noncontrast,Modality,val
+33,synpic24024,in what modality is this image taken?,us - ultrasound,Modality,val
+34,synpic59540,what type of imaging modality is shown?,mr - adc map (app diff coeff),Modality,val
+35,synpic19169,"is this image modality t1, t2, or flair?",t2,Modality,val
+36,synpic52424,was the ct scan taken with contrast?,no,Modality,val
+37,synpic52430,"is this image modality t1, t2, or flair?",t2,Modality,val
+38,synpic51878,what type of imaging modality is shown?,mr - other pulse seq.,Modality,val
+39,synpic25109,"is this a t1 weighted, t2 weighted, or flair image?",t2,Modality,val
+40,synpic21186,what kind of image is this?,xr - plain film,Modality,val
+41,synpic52140,is this a contrast or noncontrast ct?,contrast,Modality,val
+42,synpic32893,what type of imaging modality is shown?,xr - plain film,Modality,val
+43,synpic25451,with what modality is this image taken?,xr - plain film,Modality,val
+44,synpic18101,what imaging modality was used to take this image?,xr - plain film,Modality,val
+45,synpic18115,what is the mr weighting in this image?,t2,Modality,val
+46,synpic17583,what kind of scan is this?,xr - plain film,Modality,val
+47,synpic100295,what type of image modality is this?,us - ultrasound,Modality,val
+48,synpic46243,was the mri taken with contrast?,yes,Modality,val
+49,synpic38951,what imaging modality is used?,xr - plain film,Modality,val
+50,synpic60290,is this a ct scan?,yes,Modality,val
+51,synpic17970,what type of image modality is seen?,xr - plain film,Modality,val
+52,synpic17780,how was the image taken?,be - barium enema,Modality,val
+53,synpic28216,what imaging method was used?,ugi - upper gi,Modality,val
+54,synpic31753,is this a noncontrast ct?,no,Modality,val
+55,synpic16475,what imaging modality was used to take this image?,ct with iv contrast,Modality,val
+56,synpic38575,"is this a t1 weighted, t2 weighted, or flair image?",t1,Modality,val
+57,synpic41707,was the mri taken with contrast?,yes,Modality,val
+58,synpic26950,what imaging modality is seen here?,bas - barium swallow,Modality,val
+59,synpic18921,what type of image modality is seen?,us - ultrasound,Modality,val
+60,synpic29054,what imaging modality was used to take this image?,xr - plain film,Modality,val
+61,synpic56870,is this a ct scan?,no,Modality,val
+62,synpic21385,what imaging modality was used to take this image?,mr - other pulse seq.,Modality,val
+63,synpic57577,how was this image taken?,an - angiogram,Modality,val
+64,synpic40779,was the ct scan taken with contrast?,yes,Modality,val
+65,synpic49985,is this a ct scan?,yes,Modality,val
+66,synpic50556,is this a ct scan?,yes,Modality,val
+67,synpic57239,what imaging modality was used to take this image?,mr - flair,Modality,val
+68,synpic54730,what imaging modality was used to take this image?,ct with iv contrast,Modality,val
+69,synpic52631,what imaging modality was used to take this image?,mr - t2 weighted,Modality,val
+70,synpic28837,is this a contrast or noncontrast ct?,noncontrast,Modality,val
+71,synpic39709,was the mri taken with contrast?,yes,Modality,val
+72,synpic61204,what imaging modality is seen here?,xr - plain film,Modality,val
+73,synpic27523,what type of imaging modality is shown?,ct w/contrast (iv),Modality,val
+74,synpic61238,is this a ct scan?,yes,Modality,val
+75,synpic58532,what imaging modality was used to take this image?,mr - t1w w/gadolinium,Modality,val
+76,synpic45577,is this an mri image?,no,Modality,val
+77,synpic39696,what is the mr weighting in this image?,t1,Modality,val
+78,synpic23157,what imaging modality was used to take this image?,"mr t2* gradient,gre,mpgr,swan,swi",Modality,val
+79,synpic23631,is this a contrast or noncontrast ct?,noncontrast,Modality,val
+80,synpic27319,how was this image taken?,xr - plain film,Modality,val
+81,synpic51072,what imaging modality was used to take this image?,mr - t1w - noncontrast,Modality,val
+82,synpic53659,is this an mri image?,yes,Modality,val
+83,synpic58095,is this an mri image?,no,Modality,val
+84,synpic60250,"is this a t1 weighted, t2 weighted, or flair image?",t2,Modality,val
+85,synpic40194,is this a contrast or noncontrast ct?,noncontrast,Modality,val
+86,synpic29645,what imaging modality was used to take this image?,mr - t2 weighted,Modality,val
+87,synpic31036,was gi contrast given to the patient?,no,Modality,val
+88,synpic33806,what imaging modality was used to take this image?,mr - t2 weighted,Modality,val
+89,synpic27873,with what modality is this image taken?,mammograph,Modality,val
+90,synpic38953,how was this image taken?,xr - plain film,Modality,val
+91,synpic49172,what imaging modality is used to acquire this picture?,mr - pdw proton density,Modality,val
+92,synpic59407,is this a t1 weighted image?,no,Modality,val
+93,synpic43477,what type of imaging does this represent?,xr - plain film,Modality,val
+94,synpic53314,is this an mri image?,yes,Modality,val
+95,synpic46876,how is the image taken?,xr - plain film,Modality,val
+96,synpic28188,what type of imaging modality is seen in this image?,xr - plain film,Modality,val
+97,synpic47573,was the mri taken with contrast?,no,Modality,val
+98,synpic30260,what type of imaging is this?,an - angiogram,Modality,val
+99,synpic45827,"is this a t1 weighted, t2 weighted, or flair image?",t2,Modality,val
+100,synpic27046,"is this a t1 weighted, t2 weighted, or flair image?",t2,Modality,val
+101,synpic20729,is this a contrast or noncontrast ct?,noncontrast,Modality,val
+102,synpic30248,is this a noncontrast ct?,no,Modality,val
+103,synpic53738,"is this image modality t1, t2, or flair?",t2,Modality,val
+104,synpic17620,was gi contrast given to the patient?,no,Modality,val
+105,synpic47017,is this a t2 weighted image?,no,Modality,val
+106,synpic41314,"is this a t1 weighted, t2 weighted, or flair image?",t2,Modality,val
+107,synpic55403,is this a contrast or noncontrast ct?,noncontrast,Modality,val
+108,synpic27730,with what modality is this image taken?,us - ultrasound,Modality,val
+109,synpic58682,what imaging modality was used to take this image?,mr - t1w w/gadolinium,Modality,val
+110,synpic50023,what type of imaging does this represent?,xr - plain film,Modality,val
+111,synpic57758,is this an mri image?,yes,Modality,val
+112,synpic19225,how was the image taken?,mr - flair,Modality,val
+113,synpic16880,what type of image modality is seen?,xr - plain film,Modality,val
+114,synpic48730,is this an mri image?,no,Modality,val
+115,synpic21786,was the ct scan taken with contrast?,no,Modality,val
+116,synpic25090,was the ct scan taken with contrast?,yes,Modality,val
+117,synpic58912,is this a ct scan?,no,Modality,val
+118,synpic35240,what imaging modality was used to take this image?,mr - t2 weighted,Modality,val
+119,synpic33143,what was this image taken with?,mr - pdw proton density,Modality,val
+120,synpic28204,what imaging modality was used to take this image?,ct with gi and iv contrast,Modality,val
+121,synpic26201,what was this image taken with?,xr - plain film,Modality,val
+122,synpic41271,what kind of scan is this?,xr - plain film,Modality,val
+123,synpic8182,what is the modality?,be - barium enema,Modality,val
+124,synpic57188,was the mri taken with contrast?,yes,Modality,val
+125,synpic43843,what type of imaging modality is used to acquire the image?,an - angiogram,Modality,val
+126,synpic36210,was gi contrast given to the patient?,no,Modality,val
+127,synpic58495,is this a t2 weighted image?,no,Modality,val
+128,synpic40231,"is this a t1 weighted, t2 weighted, or flair image?",t2,Modality,val
+129,synpic40782,what imaging modality was used to take this image?,ct noncontrast,Modality,val
+130,synpic53098,is this a ct scan?,no,Modality,val
+131,synpic31184,was gi contrast given to the patient?,no,Modality,val
+132,synpic56123,what imaging method was used?,xr - plain film,Modality,val
+133,synpic59548,is this a ct scan?,yes,Modality,val
+134,synpic21418,is this a contrast or noncontrast ct?,contrast,Modality,val
+135,synpic17814,is this a noncontrast ct?,no,Modality,val
+136,synpic22893,is this a contrast or noncontrast ct?,contrast,Modality,val
+137,synpic33236,what type of image modality is this?,an - angiogram,Modality,val
+138,synpic59945,what type of image modality is this?,cta - ct angiography,Modality,val
+139,synpic27492,what is the mr weighting in this image?,t2,Modality,val
+140,synpic45565,was the ct scan taken with contrast?,no,Modality,val
+141,synpic16883,is this a t1 weighted image?,no,Modality,val
+142,synpic43699,is this a noncontrast mri?,yes,Modality,val
+143,synpic23151,what imaging modality was used to take this image?,xr - plain film,Modality,val
+144,synpic21020,is this a noncontrast ct?,yes,Modality,val
+145,synpic52596,what imaging modality is used?,xr - plain film,Modality,val
+146,synpic56901,is this a ct scan?,no,Modality,val
+147,synpic38404,"is this a t1 weighted, t2 weighted, or flair image?",t2,Modality,val
+148,synpic40597,was the ct scan taken with contrast?,yes,Modality,val
+149,synpic26612,what type of imaging was used?,an - angiogram,Modality,val
+150,synpic100332,what type of image modality is this?,xr - plain film,Modality,val
+151,synpic26809,was the ct scan taken with contrast?,no,Modality,val
+152,synpic59005,how was the image taken?,mr - flair,Modality,val
+153,synpic43576,what modality is used to take this image?,xr - plain film,Modality,val
+154,synpic33913,"is this image modality t1, t2, or flair?",t2,Modality,val
+155,synpic23255,is this a contrast or noncontrast ct?,noncontrast,Modality,val
+156,synpic21442,is this a ct scan?,yes,Modality,val
+157,synpic38885,was gi contrast given to the patient?,no,Modality,val
+158,synpic17866,what type of imaging modality is shown?,ct w/contrast (iv),Modality,val
+159,synpic24512,is 	this a t1 weighted image?,yes,Modality,val
+160,synpic24506,is 	this a t1 weighted image?,yes,Modality,val
+161,synpic39557,what type of imaging modality is used to acquire the image?,xr - plain film,Modality,val
+162,synpic33293,what is the modality of this image?,ugi - upper gi,Modality,val
+163,synpic13143,is this a t2 weighted image?,no,Modality,val
+164,synpic17319,what imaging modality was used to take this image?,ct noncontrast,Modality,val
+165,synpic33481,what imaging modality was used to take this image?,xr - plain film,Modality,val
+166,synpic24857,is this an mri image?,no,Modality,val
+167,synpic37195,is this a noncontrast ct?,no,Modality,val
+168,synpic48796,is this an mri image?,no,Modality,val
+169,synpic47664,what imaging modality was used to take this image?,mr - t1w w/gd (fat suppressed),Modality,val
+170,synpic56027,is this a noncontrast ct?,yes,Modality,val
+171,synpic42084,is this a contrast or noncontrast mri?,noncontrast,Modality,val
+172,synpic37433,is this a t1 weighted image?,no,Modality,val
+173,synpic34853,which image modality is this?,mr - flair,Modality,val
+174,synpic32749,is this a ct scan?,yes,Modality,val
+175,synpic60966,what type of imaging modality is seen in this image?,xr - plain film,Modality,val
+176,synpic25382,what is the modality?,pet-ct fusion,Modality,val
+177,synpic39967,is this a t2 weighted image?,no,Modality,val
+178,synpic27768,how is the image taken?,an - angiogram,Modality,val
+179,synpic30200,what modality is shown?,xr - plain film,Modality,val
+180,synpic31678,is this an mri image?,no,Modality,val
+181,synpic53994,is this a contrast or noncontrast ct?,noncontrast,Modality,val
+182,synpic49072,what imaging modality was used to take this image?,mr - t1w - noncontrast,Modality,val
+183,synpic19651,was the mri taken with contrast?,no,Modality,val
+184,synpic53980,"is this a t1 weighted, t2 weighted, or flair image?",flair,Modality,val
+185,synpic33084,what type of imaging modality is shown?,ct - gi & iv contrast,Modality,val
+186,synpic56608,what imaging modality was used to take this image?,ct noncontrast,Modality,val
+187,synpic48422,what is the mr weighting in this image?,t1,Modality,val
+188,synpic46419,is this a ct scan?,no,Modality,val
+189,synpic17124,what type of imaging modality is shown?,xr - plain film,Modality,val
+190,synpic47049,what imaging modality was used to take this image?,ct with iv contrast,Modality,val
+191,synpic40915,is this a noncontrast mri?,no,Modality,val
+192,synpic51818,is this a noncontrast ct?,yes,Modality,val
+193,synpic32401,what type of imaging modality is shown?,xr - plain film,Modality,val
+194,synpic34070,what type of imaging modality is shown?,ct - gi & iv contrast,Modality,val
+195,synpic55854,what imaging modality is used?,mra - mr angiography/venography,Modality,val
+196,synpic29237,what modality was used to take this image?,xr - plain film,Modality,val
+197,synpic39193,was the mri taken with contrast?,no,Modality,val
+198,synpic33455,what type of imaging modality is shown?,us - ultrasound,Modality,val
+199,synpic41564,is this a noncontrast mri?,yes,Modality,val
+200,synpic54169,is this a noncontrast mri?,yes,Modality,val
+201,synpic57312,was the ct scan taken with contrast?,no,Modality,val
+202,synpic54627,what imaging modality was used to take this image?,mr - t2 weighted,Modality,val
+203,synpic58790,what imaging modality was used to take this image?,ct noncontrast,Modality,val
+204,synpic58974,"is this a t1 weighted, t2 weighted, or flair image?",t2,Modality,val
+205,synpic35568,is this a noncontrast ct?,yes,Modality,val
+206,synpic53835,what is the modality of this image?,mr - other pulse seq.,Modality,val
+207,synpic47855,was the mri taken with contrast?,no,Modality,val
+208,synpic58008,what imaging modality was used to take this image?,ct noncontrast,Modality,val
+209,synpic15120,is this a t1 weighted image?,no,Modality,val
+210,synpic33695,how was this image taken?,xr - plain film,Modality,val
+211,synpic100545,what type of imaging modality is shown?,xr - plain film,Modality,val
+212,synpic58544,what imaging modality was used to take this image?,mr - flair,Modality,val
+213,synpic32825,what is the modality?,xr - plain film,Modality,val
+214,synpic41613,is this an mri image?,no,Modality,val
+215,synpic39569,what type of imaging is this?,xr - plain film,Modality,val
+216,synpic24538,what type of imaging was used?,xr - plain film,Modality,val
+217,synpic17121,what type of imaging modality is seen in this image?,xr - plain film,Modality,val
+218,synpic34061,how was this image taken?,us - ultrasound,Modality,val
+219,synpic36110,with what modality is this image taken?,xr - plain film,Modality,val
+220,synpic56814,what is the modality?,mr - pdw proton density,Modality,val
+221,synpic43955,is this a t1 weighted image?,no,Modality,val
+222,synpic54434,is this a t1 weighted image?,no,Modality,val
+223,synpic24879,what type of contrast did this patient have?,gi and iv,Modality,val
+224,synpic39828,what imaging modality was used to take this image?,mr - t1w w/gadolinium,Modality,val
+225,synpic48021,what imaging modality was used to take this image?,mr - t1w w/gadolinium,Modality,val
+226,synpic49129,what type of contrast did this patient have?,iv,Modality,val
+227,synpic58742,is this a contrast or noncontrast ct?,noncontrast,Modality,val
+228,synpic15871,was gi contrast given to the patient?,no,Modality,val
+229,synpic58965,is this a ct scan?,no,Modality,val
+230,synpic39357,what modality is shown?,xr - plain film,Modality,val
+231,synpic60223,"is this image modality t1, t2, or flair?",t2,Modality,val
+232,synpic34841,is this a ct scan?,no,Modality,val
+233,synpic21041,what type of contrast did this patient have?,iv,Modality,val
+234,synpic55071,is this a contrast or noncontrast mri?,contrast,Modality,val
+235,synpic41825,"is this a t1 weighted, t2 weighted, or flair image?",t1,Modality,val
+236,synpic55850,was the mri taken with contrast?,no,Modality,val
+237,synpic34276,is this a t1 weighted image?,no,Modality,val
+238,synpic25384,"is this image modality t1, t2, or flair?",t2,Modality,val
+239,synpic43767,what type of imaging modality is shown?,ct w/contrast (iv),Modality,val
+240,synpic23252,what imaging modality is used?,us - ultrasound,Modality,val
+241,synpic53789,is this a noncontrast mri?,no,Modality,val
+242,synpic52468,is this a noncontrast mri?,no,Modality,val
+243,synpic42135,is this a ct scan?,yes,Modality,val
+244,synpic58184,"is this a t1 weighted, t2 weighted, or flair image?",t2,Modality,val
+245,synpic48397,"is this a t1 weighted, t2 weighted, or flair image?",t1,Modality,val
+246,synpic45466,what type of imaging is this?,mr - stir,Modality,val
+247,synpic46966,what modality is used to take this image?,xr - plain film,Modality,val
+248,synpic39618,what type of imaging was used?,xr - plain film,Modality,val
+249,synpic18359,is this a t1 weighted image?,no,Modality,val
+250,synpic56036,is this a t2 weighted image?,no,Modality,val
+251,synpic49116,"is this a t1 weighted, t2 weighted, or flair image?",t1,Modality,val
+252,synpic53199,is this a ct scan?,yes,Modality,val
+253,synpic38739,how was the image taken?,us - ultrasound,Modality,val
+254,synpic17902,what is the mr weighting in this image?,t2,Modality,val
+255,synpic22952,is this a noncontrast ct?,no,Modality,val
+256,synpic16361,is this a t2 weighted image?,no,Modality,val
+257,synpic19052,what imaging modality was used to take this image?,ct noncontrast,Modality,val
+258,synpic27433,what type of imaging was used?,us - ultrasound,Modality,val
+259,synpic54393,"is this image modality t1, t2, or flair?",t2,Modality,val
+260,synpic42268,is this a noncontrast ct?,no,Modality,val
+261,synpic17527,what modality is shown?,xr - plain film,Modality,val
+262,synpic43604,what is the modality?,us - ultrasound,Modality,val
+263,synpic50917,"is this image modality t1, t2, or flair?",t2,Modality,val
+264,synpic39751,with what modality is this image taken?,xr - plain film,Modality,val
+265,synpic21687,what is the modality?,xr - plain film,Modality,val
+266,synpic35180,was gi contrast given to the patient?,no,Modality,val
+267,synpic18012,"is this image modality t1, t2, or flair?",flair,Modality,val
+268,synpic16765,what kind of image is this?,xr - plain film,Modality,val
+269,synpic19640,what modality is used to take this image?,xr - plain film,Modality,val
+270,synpic54017,is this a noncontrast mri?,no,Modality,val
+271,synpic33926,is this a ct scan?,yes,Modality,val
+272,synpic59241,is this a t2 weighted image?,no,Modality,val
+273,synpic44990,is this a t1 weighted image?,no,Modality,val
+274,synpic28094,what type of imaging modality is shown?,xr - plain film,Modality,val
+275,synpic35947,what imaging modality was used to take this image?,mr - t2 weighted,Modality,val
+276,synpic41793,"is this image modality t1, t2, or flair?",t2,Modality,val
+277,synpic43423,is this a t2 weighted image?,no,Modality,val
+278,synpic16378,is this a noncontrast ct?,no,Modality,val
+279,synpic33107,is this an mri image?,yes,Modality,val
+280,synpic47877,is this a contrast or noncontrast mri?,contrast,Modality,val
+281,synpic22547,is this a ct scan?,yes,Modality,val
+282,synpic33489,is this a noncontrast ct?,no,Modality,val
+283,synpic20393,how was this image taken?,xr - plain film,Modality,val
+284,synpic50674,what is the mr weighting in this image?,t2,Modality,val
+285,synpic46002,is this a ct scan?,yes,Modality,val
+286,synpic41751,with what modality is this image taken?,an - angiogram,Modality,val
+287,synpic21890,what imaging modality was used?,mr - other pulse seq.,Modality,val
+288,synpic9384,what imaging modality is used to acquire this picture?,xr - plain film,Modality,val
+289,synpic31315,what imaging method was used?,mammograph,Modality,val
+290,synpic38331,what imaging modality is seen here?,xr - plain film,Modality,val
+291,synpic25374,what imaging modality was used?,us - ultrasound,Modality,val
+292,synpic54214,is this an mri image?,no,Modality,val
+293,synpic56615,what modality was used to take this image?,cta - ct angiography,Modality,val
+294,synpic37599,what imaging modality was used to take this image?,mr - t1w w/gadolinium,Modality,val
+295,synpic55308,was gi contrast given to the patient?,no,Modality,val
+296,synpic45133,is this a ct scan?,yes,Modality,val
+297,synpic54994,is this an mri image?,no,Modality,val
+298,synpic41341,is this a noncontrast ct?,yes,Modality,val
+299,synpic54766,what imaging modality was used to take this image?,mr - t1w w/gd (fat suppressed),Modality,val
+300,synpic22196,is this a noncontrast ct?,yes,Modality,val
+301,synpic29772,how was this image taken?,xr - plain film,Modality,val
+302,synpic18008,what imaging modality is used?,xr - plain film,Modality,val
+303,synpic30800,what type of image modality is seen?,mra - mr angiography/venography,Modality,val
+304,synpic41960,what type of imaging modality is seen in this image?,ugi - upper gi,Modality,val
+305,synpic28295,is this a contrast or noncontrast ct?,noncontrast,Modality,val
+306,synpic24487,which image modality is this?,an - angiogram,Modality,val
+307,synpic20187,in what modality is this image taken?,an - angiogram,Modality,val
+308,synpic26246,is this a ct scan?,no,Modality,val
+309,synpic16352,was gi contrast given to the patient?,no,Modality,val
+310,synpic59337,what type of contrast did this patient have?,iv,Modality,val
+311,synpic48212,how was the image taken?,xr - plain film,Modality,val
+312,synpic57871,how was the image taken?,an - angiogram,Modality,val
+313,synpic34454,what kind of image is this?,bas - barium swallow,Modality,val
+314,synpic17299,what kind of image is this?,an - angiogram,Modality,val
+315,synpic28733,was the ct scan taken with contrast?,yes,Modality,val
+316,synpic55727,is 	this a t1 weighted image?,yes,Modality,val
+317,synpic45246,what imaging modality was used to take this image?,ct noncontrast,Modality,val
+318,synpic57642,is this an mri image?,no,Modality,val
+319,synpic60171,was the ct scan taken with contrast?,no,Modality,val
+320,synpic29565,what kind of scan is this?,xr - plain film,Modality,val
+321,synpic19303,what type of imaging does this represent?,mammograph,Modality,val
+322,synpic51353,what is the mr weighting in this image?,t1,Modality,val
+323,synpic26332,was iv contrast given to the patient?,yes,Modality,val
+324,synpic53785,what is the mr weighting in this image?,t2,Modality,val
+325,synpic53024,is this a contrast or noncontrast ct?,noncontrast,Modality,val
+326,synpic45861,was gi contrast given to the patient?,no,Modality,val
+327,synpic31104,was the ct scan taken with contrast?,no,Modality,val
+328,synpic49242,is this a t2 weighted image?,no,Modality,val
+329,synpic41636,was the ct scan taken with contrast?,no,Modality,val
+330,synpic58401,what type of imaging modality is seen in this image?,an - angiogram,Modality,val
+331,synpic51357,"is this image modality t1, t2, or flair?",flair,Modality,val
+332,synpic44955,is this an mri image?,yes,Modality,val
+333,synpic23070,was the ct scan taken with contrast?,yes,Modality,val
+334,synpic47469,what imaging modality was used to take this image?,ct with iv contrast,Modality,val
+335,synpic19529,was the ct scan taken with contrast?,yes,Modality,val
+336,synpic46993,is this a ct scan?,no,Modality,val
+337,synpic28051,is this a noncontrast ct?,yes,Modality,val
+338,synpic58993,is this a t1 weighted image?,no,Modality,val
+339,synpic43431,what is the modality?,xr - plain film,Modality,val
+340,synpic20814,what is the modality?,mammograph,Modality,val
+341,synpic46549,how is the image taken?,be - barium enema,Modality,val
+342,synpic54830,is this an mri image?,no,Modality,val
+343,synpic40845,is this a contrast or noncontrast mri?,contrast,Modality,val
+344,synpic35203,what imaging modality was used to take this image?,mr - t1w - noncontrast,Modality,val
+345,synpic58951,what imaging modality is seen here?,an - angiogram,Modality,val
+346,synpic51752,what was this image taken with?,us - ultrasound,Modality,val
+347,synpic19716,what is the mr weighting in this image?,t1,Modality,val
+348,synpic56001,what imaging modality is used?,an - angiogram,Modality,val
+349,synpic55508,is this an mri image?,no,Modality,val
+350,synpic32746,what imaging modality was used to take this image?,xr - plain film,Modality,val
+351,synpic52918,is this a t2 weighted image?,no,Modality,val
+352,synpic21672,what is the modality?,us - ultrasound,Modality,val
+353,synpic51395,is this a contrast or noncontrast mri?,noncontrast,Modality,val
+354,synpic27571,is this a ct scan?,yes,Modality,val
+355,synpic50921,"is this a t1 weighted, t2 weighted, or flair image?",t1,Modality,val
+356,synpic53596,what type of image modality is seen?,mr - other pulse seq.,Modality,val
+357,synpic32632,in what modality is this image taken?,xr - plain film,Modality,val
+358,synpic59939,is this a ct scan?,no,Modality,val
+359,synpic22390,is this an mri image?,no,Modality,val
+360,synpic28454,is this a noncontrast ct?,no,Modality,val
+361,synpic40703,"is this a t1 weighted, t2 weighted, or flair image?",t1,Modality,val
+362,synpic38876,is this a t1 weighted image?,no,Modality,val
+363,synpic15700,what type of image modality is seen?,mra - mr angiography/venography,Modality,val
+364,synpic21328,is this a t2 weighted image?,no,Modality,val
+365,synpic44995,which image modality is this?,mr - flair,Modality,val
+366,synpic48836,what type of imaging does this represent?,us - ultrasound,Modality,val
+367,synpic26651,which image modality is this?,xr - plain film,Modality,val
+368,synpic57862,what is the modality?,cta - ct angiography,Modality,val
+369,synpic43817,is this a t1 weighted image?,no,Modality,val
+370,synpic24495,how was this image taken?,xr - plain film,Modality,val
+371,synpic22755,was the ct scan taken with contrast?,no,Modality,val
+372,synpic34123,is this a contrast or noncontrast ct?,contrast,Modality,val
+373,synpic22741,what imaging modality was used to take this image?,mr - t1w - noncontrast,Modality,val
+374,synpic33102,what kind of image is this?,xr - plain film,Modality,val
+375,synpic47683,is this a contrast or noncontrast ct?,contrast,Modality,val
+376,synpic19933,was the ct scan taken with contrast?,yes,Modality,val
+377,synpic53152,is this a t2 weighted image?,no,Modality,val
+378,synpic40660,"is this image modality t1, t2, or flair?",t2,Modality,val
+379,synpic31933,is this a ct scan?,yes,Modality,val
+380,synpic24899,what type of imaging does this represent?,xr - plain film,Modality,val
+381,synpic55682,was the ct scan taken with contrast?,no,Modality,val
+382,synpic53581,which image modality is this?,xr - plain film,Modality,val
+383,synpic11771,is this an mri image?,no,Modality,val
+384,synpic31884,what type of imaging modality is shown?,ct - gi & iv contrast,Modality,val
+385,synpic17664,what modality is used to take this image?,xr - plain film,Modality,val
+386,synpic36696,was iv contrast given to the patient?,yes,Modality,val
+387,synpic53727,is this a noncontrast ct?,no,Modality,val
+388,synpic42170,what type of imaging was used?,xr - plain film,Modality,val
+389,synpic34794,"is this image modality t1, t2, or flair?",flair,Modality,val
+390,synpic49970,is this a contrast or noncontrast ct?,contrast,Modality,val
+391,synpic47975,what modality was used to take this image?,be - barium enema,Modality,val
+392,synpic40559,"is this image modality t1, t2, or flair?",t2,Modality,val
+393,synpic57757,is this a noncontrast mri?,no,Modality,val
+394,synpic21602,what imaging modality is seen here?,xr - plain film,Modality,val
+395,synpic47342,what imaging modality was used to take this image?,mr - flair,Modality,val
+396,synpic16119,is this a t2 weighted image?,no,Modality,val
+397,synpic48065,how was the image taken?,mr - flair,Modality,val
+398,synpic51285,is this a contrast or noncontrast mri?,contrast,Modality,val
+399,synpic36236,what is the modality?,xr - plain film,Modality,val
+400,synpic28587,what type of imaging modality is shown?,us - ultrasound,Modality,val
+401,synpic50366,is this a contrast or noncontrast mri?,noncontrast,Modality,val
+402,synpic28544,what type of imaging is this?,ugi - upper gi,Modality,val
+403,synpic37470,what modality was used to take this image?,an - angiogram,Modality,val
+404,synpic38742,is this a noncontrast ct?,no,Modality,val
+405,synpic42788,is this a contrast or noncontrast mri?,contrast,Modality,val
+406,synpic43455,what type of imaging does this represent?,xr - plain film,Modality,val
+407,synpic55545,how was the image taken?,mr - flair,Modality,val
+408,synpic38795,what imaging modality was used to take this image?,mr - t2 weighted,Modality,val
+409,synpic60065,is this an mri image?,yes,Modality,val
+410,synpic18848,with what modality is this image taken?,bas - barium swallow,Modality,val
+411,synpic49352,what type of imaging modality is shown?,ct w/contrast (iv),Modality,val
+412,synpic23766,is this an mri image?,yes,Modality,val
+413,synpic50039,"is this image modality t1, t2, or flair?",t2,Modality,val
+414,synpic40000,is this a contrast or noncontrast mri?,contrast,Modality,val
+415,synpic54713,what type of image modality is this?,us - ultrasound,Modality,val
+416,synpic45150,is 	this a t1 weighted image?,yes,Modality,val
+417,synpic47023,"is this a t1 weighted, t2 weighted, or flair image?",t1,Modality,val
+418,synpic53042,is this a t2 weighted image?,no,Modality,val
+419,synpic47751,what type of imaging is this?,mra - mr angiography/venography,Modality,val
+420,synpic57218,what type of imaging does this represent?,mr - other pulse seq.,Modality,val
+421,synpic30532,how is the image taken?,xr - plain film,Modality,val
+422,synpic22136,in what modality is this image taken?,mammograph,Modality,val
+423,synpic24235,in what modality is this image taken?,us - ultrasound,Modality,val
+424,synpic48112,what imaging modality was used to take this image?,mr - t2 weighted,Modality,val
+425,synpic14645,is this a contrast or noncontrast mri?,noncontrast,Modality,val
+426,synpic58329,what imaging modality is seen here?,mra - mr angiography/venography,Modality,val
+427,synpic50775,is this an mri image?,yes,Modality,val
+428,synpic18902,with what modality is this image taken?,xr - plain film,Modality,val
+429,synpic35648,what kind of scan is this?,an - angiogram,Modality,val
+430,synpic26620,what kind of image is this?,an - angiogram,Modality,val
+431,synpic48066,"is this a t1 weighted, t2 weighted, or flair image?",t1,Modality,val
+432,synpic39853,was iv contrast given to the patient?,yes,Modality,val
+433,synpic27338,is this a noncontrast mri?,yes,Modality,val
+434,synpic37881,"is this a t1 weighted, t2 weighted, or flair image?",t1,Modality,val
+435,synpic33629,"is this a t1 weighted, t2 weighted, or flair image?",flair,Modality,val
+436,synpic53877,is this a t1 weighted image?,no,Modality,val
+437,synpic39463,is this an mri image?,yes,Modality,val
+438,synpic43481,what type of imaging modality is used to acquire the image?,us - ultrasound,Modality,val
+439,synpic32126,what type of imaging modality is shown?,ct w/contrast (iv),Modality,val
+440,synpic44926,what imaging modality was used to take this image?,mr - t2 weighted,Modality,val
+441,synpic58300,what is the mr weighting in this image?,t2,Modality,val
+442,synpic25880,what type of image modality is seen?,bas - barium swallow,Modality,val
+443,synpic16292,what is the mr weighting in this image?,t1,Modality,val
+444,synpic51136,was gi contrast given to the patient?,no,Modality,val
+445,synpic49209,what kind of scan is this?,xr - plain film,Modality,val
+446,synpic55813,how was the image taken?,mr - flair,Modality,val
+447,synpic46847,was the mri taken with contrast?,yes,Modality,val
+448,synpic45382,is this a t1 weighted image?,no,Modality,val
+449,synpic55026,is this a t1 weighted image?,no,Modality,val
+450,synpic21980,what modality is used to take this image?,xr - plain film,Modality,val
+451,synpic48249,what imaging modality was used to take this image?,mr - t1w w/gadolinium,Modality,val
+452,synpic54648,how was the image taken?,an - angiogram,Modality,val
+453,synpic16484,what was this image taken with?,mammograph,Modality,val
+454,synpic43447,what type of contrast did this patient have?,gi and iv,Modality,val
+455,synpic54675,what imaging modality was used to take this image?,mr - t1w w/gadolinium,Modality,val
+456,synpic29463,is this an mri image?,yes,Modality,val
+457,synpic47351,is this a contrast or noncontrast ct?,contrast,Modality,val
+458,synpic17228,is this a t2 weighted image?,no,Modality,val
+459,synpic51490,was iv contrast given to the patient?,yes,Modality,val
+460,synpic35880,is this a noncontrast mri?,yes,Modality,val
+461,synpic34552,is this an mri image?,yes,Modality,val
+462,synpic52166,is this a ct scan?,yes,Modality,val
+463,synpic21188,what modality was used to take this image?,xr - plain film,Modality,val
+464,synpic57585,how is the image taken?,xr - plain film,Modality,val
+465,synpic40947,what is the mr weighting in this image?,t1,Modality,val
+466,synpic29098,what type of image modality is seen?,mammograph,Modality,val
+467,synpic44506,is this a t2 weighted image?,no,Modality,val
+468,synpic52364,is this a contrast or noncontrast ct?,contrast,Modality,val
+469,synpic57208,was the ct scan taken with contrast?,no,Modality,val
+470,synpic57578,with what modality is this image taken?,cta - ct angiography,Modality,val
+471,synpic58887,what imaging modality was used to take this image?,ct with iv contrast,Modality,val
+472,synpic50565,was gi contrast given to the patient?,no,Modality,val
+473,synpic56114,which image modality is this?,mr - flair,Modality,val
+474,synpic23560,is this a ct scan?,yes,Modality,val
+475,synpic34008,was gi contrast given to the patient?,no,Modality,val
+476,synpic16083,is this a contrast or noncontrast ct?,noncontrast,Modality,val
+477,synpic52004,what type of imaging modality is seen in this image?,us - ultrasound,Modality,val
+478,synpic15401,which image modality is this?,xr - plain film,Modality,val
+479,synpic57801,what imaging modality was used to take this image?,ct noncontrast,Modality,val
+480,synpic25267,what was this image taken with?,ugi - upper gi,Modality,val
+481,synpic34632,what imaging modality was used to take this image?,ct noncontrast,Modality,val
+482,synpic45021,what type of imaging modality is used to acquire the image?,cta - ct angiography,Modality,val
+483,synpic50410,what is the mr weighting in this image?,t1,Modality,val
+484,synpic47178,what is the modality of this image?,xr - plain film,Modality,val
+485,synpic40398,"is this a t1 weighted, t2 weighted, or flair image?",t2,Modality,val
+486,synpic18681,is this a noncontrast mri?,yes,Modality,val
+487,synpic38551,was the ct scan taken with contrast?,no,Modality,val
+488,synpic36540,is this a t2 weighted image?,no,Modality,val
+489,synpic17203,what type of imaging modality is shown?,ct w/contrast (iv),Modality,val
+490,synpic57633,is this a t2 weighted image?,no,Modality,val
+491,synpic56511,"is this a t1 weighted, t2 weighted, or flair image?",t1,Modality,val
+492,synpic29500,what modality was used to take this image?,xr - plain film,Modality,val
+493,synpic48897,"is this image modality t1, t2, or flair?",t2,Modality,val
+494,synpic45196,is this an mri image?,yes,Modality,val
+495,synpic45828,is this a noncontrast mri?,yes,Modality,val
+496,synpic60458,what type of imaging is this?,xr - plain film,Modality,val
+497,synpic43524,is 	this a t1 weighted image?,yes,Modality,val
+498,synpic59568,"is this a t1 weighted, t2 weighted, or flair image?",flair,Modality,val
+499,synpic48459,is this a contrast or noncontrast mri?,contrast,Modality,val
