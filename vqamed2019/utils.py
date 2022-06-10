@@ -48,17 +48,23 @@ def make_df(file_path):
     return pd.concat(df_list)
 
 def load_data(args, remove = None):
-
-    traindf = pd.read_csv(os.path.join(args.data_dir, 'traindf.csv'))
-    valdf = pd.read_csv(os.path.join(args.data_dir, 'valdf.csv'))
-    testdf = pd.read_csv(os.path.join(args.data_dir, 'testdf.csv'))
+    print(os.getcwd())
+    traindf = pd.read_csv(os.path.join(args.data_dir, 'traindf.csv'),nrows=100)
+    valdf = pd.read_csv(os.path.join(args.data_dir, 'valdf.csv'),nrows=100)
+    testdf = pd.read_csv(os.path.join(args.data_dir, 'testdf.csv'),nrows=100)
 
     if remove is not None:
         traindf = traindf[~traindf['img_id'].isin(remove)].reset_index(drop=True)
 
-    traindf['img_id'] = traindf['img_id'].apply(lambda x: os.path.join(args.data_dir, 'train_images', x + '.jpg'))
-    valdf['img_id'] = valdf['img_id'].apply(lambda x: os.path.join(args.data_dir, 'val_images', x + '.jpg'))
-    testdf['img_id'] = testdf['img_id'].apply(lambda x: os.path.join(args.data_dir, 'test_images', x + '.jpg'))
+    traindf['img_id'] = traindf['img_id'].apply(lambda x: os.path.join(args.data_dir, 'ImageClef-2019-VQA-Med-Training/Train_images', x + '.jpg'))
+    # traindf['img_id'] = traindf['img_id'].apply(lambda x: os.path.join(args.data_dir, 'ImageClef-2019-VQA-Med-Training/Train_images', x ))
+
+    valdf['img_id'] = valdf['img_id'].apply(lambda x: os.path.join(args.data_dir, 'ImageClef-2019-VQA-Med-Validation/Val_images', x + '.jpg'))
+    # valdf['img_id'] = valdf['img_id'].apply(lambda x: os.path.join(args.data_dir, 'ImageClef-2019-VQA-Med-Validation/Val_images', x ))
+
+    testdf['img_id'] = testdf['img_id'].apply(lambda x: os.path.join(args.data_dir, 'ImageClef-2019-VQA-Med-Test/VQAMed2019_Test_Images', x + '.jpg'))
+    # testdf['img_id'] = testdf['img_id'].apply(lambda x: os.path.join(args.data_dir, 'ImageClef-2019-VQA-Med-Test/VQAMed2019_Test_Images', x ))
+
     # testdf['img_id'] = testdf['img_id'].apply(lambda x: os.path.join(args.data_dir, x + '.jpg'))
 
     traindf['category'] = traindf['category'].str.lower()
@@ -77,7 +83,7 @@ def load_data(args, remove = None):
 
     return traindf, valdf, testdf
 
-def load_2020_data(args):
+# def load_2020_data(args):
 
     remove_train2020 = ['synpic52595', 'synpic61281', 'synpic43628', 'synpic15348', 'synpic35145', 'synpic20101', 'synpic20412', 'synpic45126', 'synpic26398', 'synpic15349', \
                        'synpic37214', 'synpic52598', 'synpic46660', 'synpic36320', 'synpic34054', 'synpic58686', 'synpic15888', 'synpic19909', 'synpic24243', 'synpic39311', \

@@ -1,4 +1,6 @@
 import argparse
+import pwd
+from xmlrpc.client import boolean
 from utils import seed_everything, Model, VQAMed, train_one_epoch, validate, test, load_data, LabelSmoothing, train_img_only, val_img_only, test_img_only
 # import wandb
 import pandas as pd
@@ -22,27 +24,27 @@ warnings.simplefilter("ignore", UserWarning)
 
 
 if __name__ == '__main__':
-
+    # print("addres)
     parser = argparse.ArgumentParser(description = "Finetune on ImageClef 2019")
 
     # parser.add_argument('--run_name', type = str, required = True, help = "run name for wandb")
-    parser.add_argument('--data_dir', type = str, required = False, default = "../data/vqamed/", help = "path for data")
+    parser.add_argument('--data_dir', type = str, required = False, default = "../data/vqamed", help = "path for data")
     parser.add_argument('--model_dir', type = str, required = False, default = "/home/viraj.bagal/viraj/medvqa/Weights/roco_mlm/val_loss_3.pt", help = "path to load weights")
     parser.add_argument('--save_dir', type = str, required = False, default = "/home/viraj.bagal/viraj/medvqa/Weights/ic19", help = "path to save weights")
     parser.add_argument('--category', type = str, required = False, default = None,  help = "choose specific category if you want")
     parser.add_argument('--use_pretrained', action = 'store_true', default = False, help = "use pretrained weights or not")
-    parser.add_argument('--mixed_precision', action = 'store_true', default = False, help = "use mixed precision or not")
+    parser.add_argument('--mixed_precision', action = 'store_true', default = True, help = "use mixed precision or not")
     parser.add_argument('--clip', action = 'store_true', default = False, help = "clip the gradients or not")
 
     parser.add_argument('--seed', type = int, required = False, default = 42, help = "set seed for reproducibility")
-    parser.add_argument('--num_workers', type = int, required = False, default = 4, help = "number of workers")
-    parser.add_argument('--epochs', type = int, required = False, default = 100, help = "num epochs to train")
+    parser.add_argument('--num_workers', type = int, required = False, default = 0, help = "number of workers")
+    parser.add_argument('--epochs', type = int, required = False, default = 2, help = "num epochs to train")
     parser.add_argument('--train_pct', type = float, required = False, default = 1.0, help = "fraction of train samples to select")
     parser.add_argument('--valid_pct', type = float, required = False, default = 1.0, help = "fraction of validation samples to select")
     parser.add_argument('--test_pct', type = float, required = False, default = 1.0, help = "fraction of test samples to select")
 
     parser.add_argument('--max_position_embeddings', type = int, required = False, default = 28, help = "max length of sequence")
-    parser.add_argument('--batch_size', type = int, required = False, default = 16, help = "batch size")
+    parser.add_argument('--batch_size', type = int, required = False, default = 1, help = "batch size")
     parser.add_argument('--lr', type = float, required = False, default = 1e-4, help = "learning rate'")
     # parser.add_argument('--weight_decay', type = float, required = False, default = 1e-2, help = " weight decay for gradients")
     parser.add_argument('--factor', type = float, required = False, default = 0.1, help = "factor for rlp")
@@ -52,12 +54,13 @@ if __name__ == '__main__':
     parser.add_argument('--smoothing', type = float, required = False, default = None, help = "label smoothing")
 
     parser.add_argument('--image_size', type = int, required = False, default = 224, help = "image size")
-    parser.add_argument('--hidden_size', type = int, required = False, default = 312, help = "hidden size")
+    parser.add_argument('--hidden_size', type = int, required = False, default = 768, help = "hidden size")
     parser.add_argument('--vocab_size', type = int, required = False, default = 30522, help = "vocab size")
     parser.add_argument('--type_vocab_size', type = int, required = False, default = 2, help = "type vocab size")
     parser.add_argument('--heads', type = int, required = False, default = 12, help = "heads")
-    parser.add_argument('--n_layers', type = int, required = False, default = 4, help = "num of layers")
-    parser.add_argument('--num_vis', type = int, required = True, help = "num of visual embeddings")
+    parser.add_argument('--n_layers', type = int, required = False, default= 4, help = "num of layers")
+    parser.add_argument('--num_vis', type = int, required = False,default=5, help = "num of visual embeddings")
+    # parser.add_argument('--all_category', type =boolean, required= False, help = "yes or no category")
 
     args = parser.parse_args()
 
@@ -85,7 +88,7 @@ if __name__ == '__main__':
     df['answer'] = df['answer'].map(ans2idx).astype(int)
     train_df = df[df['mode']=='train'].reset_index(drop=True)
     val_df = df[df['mode']=='val'].reset_index(drop=True)
-    test_df = df[df['mode']=='test'].reset_index(drop=True)
+    test_df = df[df['mode']=='test'].reset_index(drop=True) ## with lower 
 
     num_classes = len(ans2idx)
 
