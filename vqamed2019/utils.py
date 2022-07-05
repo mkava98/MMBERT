@@ -222,7 +222,8 @@ class VQAMed(Dataset):
         self.tfm = tfm
         self.size = imgsize
         self.args = args
-        self.tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
+        self.tokenizer = BertTokenizer.from_pretrained('bert-base-uncased') ## it takes time??? 
+        ##for two model
         self.mode = mode
 
     def __len__(self):

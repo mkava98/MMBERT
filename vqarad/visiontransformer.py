@@ -42,6 +42,8 @@ gap5 = nn.AdaptiveAvgPool2d((1,1))
 conv7 = nn.Conv2d(64, 768, kernel_size=(1, 1), stride=(1, 1), bias=False)
 gap7 = nn.AdaptiveAvgPool2d((1,1))
 
+### 28 * 28 = 784
+
 transform = transforms.Compose([
     transforms.Resize(256, interpolation=3),
     transforms.CenterCrop(224),
@@ -56,18 +58,19 @@ out = model(img)
 
 
 modules2 = list(model.children())[:]
-# print("children -2222",list(model.children())[:-2])
-fix2 = nn.Sequential(*modules2)
-z=fix2(img)
-print(z.size())
-z=z.view(1,196,10,100)
+print("children -2222",list(model.children())[:])
+print (len(list(model.children())[0:]))
+# fix2 = nn.Sequential(*modules2)
+# z=fix2(img)
+# print(z.size())
+# z=z.view(1,196,10,100)
 # v_2 =gap2(relu(conv2(z))).view(-1,768)
 # print(z.size())
-v_2 = gap2(relu(conv2(fix2(img).view(1,196,10,100)))).view(-1,768)
-modules3 = list(model.children())[:]
-fix3 = nn.Sequential(*modules3)
-dim=fix3(img).size()
-print(dim)
+# v_2 = gap2(relu(conv2(fix2(img).view(1,196,10,100)))).view(-1,768)
+# modules3 = list(model.children())[:]
+# fix3 = nn.Sequential(*modules3)
+# dim=fix3(img).size()
+# print(dim)
 # v_3 = gap3(relu(conv3(fix3(img).view(768, -1, -1, -1)))).view(-1,768)
 ### .view(1,196,10,100)
 # z=z.view(1,196,10,100)

@@ -171,7 +171,7 @@ if __name__ == '__main__':
 
         scheduler.step(val_loss)
      
-
+        print(val_acc)
         if not args.category:
 
             log_dict = acc
@@ -182,7 +182,7 @@ if __name__ == '__main__':
             log_dict['train_loss'] = train_loss
             log_dict['test_loss'] = test_loss
             log_dict['learning_rate'] = optimizer.param_groups[0]["lr"]
-
+            print(log_dict)
             # wandb.log(log_dict)
 
         # else:
@@ -200,9 +200,9 @@ if __name__ == '__main__':
 
         if not args.category:
 
-            if val_acc['total_acc'] > best_acc1:
+            if val_acc['val_total_acc'] > best_acc1:
                 torch.save(model.state_dict(),os.path.join(args.save_dir, f'{args.run_name}_acc.pt'))
-                best_acc1=val_acc['total_acc']
+                best_acc1=val_acc['val_total_acc']
 
         else:
 
@@ -213,9 +213,9 @@ if __name__ == '__main__':
 
 
 
-        if val_acc > best_acc2:
+        if val_acc['val_total_acc']  > best_acc2:
             counter = 0
-            best_acc2 = val_acc
+            best_acc2 = val_acc['val_total_acc'] 
         else:
             counter+=1
             if counter > 20:
