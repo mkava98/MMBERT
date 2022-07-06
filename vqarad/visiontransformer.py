@@ -57,9 +57,35 @@ out = model(img)
 
 
 
-modules2 = list(model.children())[:]
-print("children -2222",list(model.children())[:])
-print (len(list(model.children())[0:]))
+# modules2 = list(model.children())[:]
+# print("children -2222",list(model.children())[:])
+print (len(list(model.children())[0:]))   #### length 6 i can 
+print (len(list(model.children())[1:]))   #### length 6 i can
+print (len(list(model.children())[2:]))   #### length 6 i can 
+print (len(list(model.children())[3:]))   #### length 6 i can 
+print (len(list(model.children())[4:]))   #### length 6 i can 
+print (len(list(model.children())[5:]))   #### length 6 i can 
+# print (len(list(model.children())[6:]))   #### length 6 i can
+
+print ("list(model.children())[0:]",len(list(model.children())[0:])) #### length 6 
+print ("list(model.children())[0:]",list(list(model.children())[0:])) #### length 6 
+print ("list(model.children())[0:]",list(model.children())[0:]) #### length 6 
+
+
+print ("list(model.children())[0:]",type(list(model.children())[0:])) #### length 6 
+print ("list(model.children())[0:]",model.children()) #### length 6 
+
+
+# print ("list(model.children())[1:]" , list(model.children())[1:])   #### length 5
+# print ("list(model.children())[2:]",list(model.children())[2:])   #### length 4 
+# print ("list(model.children())[3:]",list(model.children())[3:])   #### length 3 
+# print ("list(model.children())[4:]",list(model.children())[4:])   #### length 2 
+# print ("list(model.children())[5:]",list(model.children())[5:])   #### length 1 
+# print (len(list(model.children())[6:]))   #### length 6 i can 
+
+
+
+
 # fix2 = nn.Sequential(*modules2)
 # z=fix2(img)
 # print(z.size())
