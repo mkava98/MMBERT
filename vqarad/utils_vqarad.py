@@ -1,3 +1,4 @@
+from ast import Not
 import os
 import numpy as np
 import pandas as pd
@@ -10,7 +11,6 @@ import timm
 import requests
 import torchvision.transforms as transforms
 from timm.data.constants import IMAGENET_DEFAULT_MEAN, IMAGENET_DEFAULT_STD
-
 import torch
 from torchvision import transforms, models
 from torch.cuda.amp import GradScaler
@@ -64,27 +64,35 @@ def load_data(args):
     
     # train_file = open(os.path.join(args.data_dir,'trainset.json'),)
     # test_file = open(os.path.join(args.data_dir,'testset.json'),)
+    # validation_file = open(os.path.join(args.data_dir,'validationset.json'),)
         
-    train_file = open(os.path.join(args.data_dir,'trainlittle.json'),)
-    test_file = open(os.path.join(args.data_dir,'testlittle.json'),)
-    
+    train_file = open(os.path.join(args.data_dir,'littrainset.json'),)
+    test_file = open(os.path.join(args.data_dir,'littestset.json'),)
+    validation_file = open(os.path.join(args.data_dir,'litvalidationset.json'),)
+
     train_data = json.load(train_file)
     test_data = json.load(test_file)
+    validation_data = json.load(validation_file)
 
     traindf = pd.DataFrame(train_data) 
     traindf['mode'] = 'train'
     testdf = pd.DataFrame(test_data)
     testdf['mode'] = 'test' 
+    validdf = pd.DataFrame(validation_data) 
+    validdf['mode'] = 'eval'
 
     traindf['image_name'] = traindf['image_name'].apply(lambda x: os.path.join(args.data_dir, 'images', x))
     testdf['image_name'] = testdf['image_name'].apply(lambda x: os.path.join(args.data_dir, 'images', x))
+    validdf['image_name'] = validdf['image_name'].apply(lambda x: os.path.join(args.data_dir, 'images', x))
 
     traindf['question_type'] = traindf['question_type'].str.lower()
     testdf['question_type'] = testdf['question_type'].str.lower()
+    validdf['question_type'] = validdf['question_type'].str.lower()
 
 
 
-    return traindf, testdf
+
+    return traindf, validdf, testdf
 
 
 #Utils
@@ -93,18 +101,23 @@ def gelu(x):
 
 
 def encode_text(caption,tokenizer, args):
-    part1 = [0 for _ in range(5)]
-    #get token ids and remove [CLS] and [SEP] token id
-    part2 = tokenizer.encode(caption)[1:-1]
+    # print("cccccccccccccccccaptionnnnnsss", caption)
+    if type(caption) is not  torch.NoneType :
+        part1 = [0 for _ in range(5)]
+        #get token ids and remove [CLS] and [SEP] token id
+        part2 = tokenizer.encode(caption)[1:-1]
 
-    tokens = [tokenizer.cls_token_id] + part1 + [tokenizer.sep_token_id] \
-    + part2[:args.max_position_embeddings-8] + [tokenizer.sep_token_id]
-    segment_ids = [0]*(len(part1)+2) + [1]*(len(part2[:args.max_position_embeddings-8])+1)
-    input_mask = [1]*len(tokens)
-    n_pad = args.max_position_embeddings - len(tokens)
-    tokens.extend([0]*n_pad) ### expand inputs in a fix size 
-    segment_ids.extend([0]*n_pad)
-    input_mask.extend([0]*n_pad)
+        tokens = [tokenizer.cls_token_id] + part1 + [tokenizer.sep_token_id] \
+        + part2[:args.max_position_embeddings-8] + [tokenizer.sep_token_id]
+        segment_ids = [0]*(len(part1)+2) + [1]*(len(part2[:args.max_position_embeddings-8])+1)
+        input_mask = [1]*len(tokens)
+        n_pad = args.max_position_embeddings - len(tokens)
+        tokens.extend([0]*n_pad) ### expand inputs in a fix size 
+        segment_ids.extend([0]*n_pad)
+        input_mask.extend([0]*n_pad)
+    else :
+        print("NNNNNNNNone")
+        return
 
     
     return tokens, segment_ids, input_mask
@@ -150,7 +163,7 @@ class VQAMed(Dataset): ### inheritance does not accure????
         if args.bert_model=="distilbert-base-uncased":
             self.tokenizer=DistilBertTokenizer.from_pretrained(args.bert_model) ## get specific tokenizer 
         else:
-            self.tokenizer = tokenizer #BertTokenizer.from_pretrained(args.bert_model)
+            self.tokenizer =BertTokenizer.from_pretrained(args.bert_model)
         self.mode = mode
 
     def __len__(self):

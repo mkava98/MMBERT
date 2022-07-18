@@ -12,14 +12,18 @@ data = json.load(f)
 for i in data:
     print(i)
     break
-_, test = train_test_split(data, test_size=0.2)
-train, test = train_test_split(test, test_size=0.3)
-
-with open('testlittle.json', 'w') as outfile:
+_, alltrainvalid = train_test_split(data, test_size=0.3)
+alltrain, test = train_test_split(alltrainvalid, test_size=0.3)
+train, validation = train_test_split(alltrain, test_size=0.2)
+with open('littestset.json', 'w') as outfile:
     json.dump(test, outfile)
   
 # Using a JSON string
-with open('trainlittle.json', 'w') as outfile:
+with open('littrainset.json', 'w') as outfile:
     json.dump(train,outfile)
+    
+
+with open('litvalidationset.json', 'w') as outfile:
+    json.dump(validation, outfile)
 # Closing file
 f.close()

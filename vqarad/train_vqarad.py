@@ -92,8 +92,8 @@ if __name__ == '__main__':
     parser.add_argument('--clip', action = 'store_true', default = False, help = "clip the gradients or not")
 
     parser.add_argument('--seed', type = int, required = False, default = 42, help = "set seed for reproducibility")
-    parser.add_argument('--num_workers', type = int, required = False, default = 4, help = "number of workers")
-    parser.add_argument('--epochs', type = int, required = False, default =3, help = "num epochs to train")
+    parser.add_argument('--num_workers', type = int, required = False, default = 0, help = "number of workers")
+    parser.add_argument('--epochs', type = int, required = False, default =10, help = "num epochs to train")
     parser.add_argument('--train_pct', type = float, required = False, default = 1.0, help = "fraction of train samples to select")
     parser.add_argument('--valid_pct', type = float, required = False, default = 1.0, help = "fraction of validation samples to select")
     parser.add_argument('--test_pct', type = float, required = False, default = 1.0, help = "fraction of test samples to select")
@@ -130,8 +130,8 @@ if __name__ == '__main__':
     seed_everything(args.seed)
 
 
-    # train_df,val_df, test_df = load_data(args)
-    train_df, test_df = load_data(args)
+    train_df,val_df, test_df = load_data(args)
+    # train_df, test_df = load_data(args)
     print("successful loading data ")
 
     if args.question_type:
@@ -141,14 +141,16 @@ if __name__ == '__main__':
         test_df = test_df[test_df['question_type']==args.question_type].reset_index(drop=True)
 
 
-    df = pd.concat([train_df, test_df]).reset_index(drop=True)
+    df = pd.concat([train_df,val_df, test_df]).reset_index(drop=True)
     df['answer'] = df['answer'].str.lower()
     ans2idx = {ans:idx for idx,ans in enumerate(df['answer'].unique())}
     # print(ans2idx)
     idx2ans = {idx:ans for ans,idx in ans2idx.items()}
     df['answer'] = df['answer'].map(ans2idx).astype(int)
     train_df = df[df['mode']=='train'].reset_index(drop=True)
+    val_df = df[df['mode']=='eval'].reset_index(drop=True)
     test_df = df[df['mode']=='test'].reset_index(drop=True)
+    
     # print("labeling the classes")
     num_classes = len(ans2idx) ### i think that the model do not generate answer just classify them
 
@@ -215,39 +217,71 @@ if __name__ == '__main__':
             transforms.ToTensor(),
             transforms.Normalize(IMAGENET_DEFAULT_MEAN, IMAGENET_DEFAULT_STD),
         ])
+        val_tfm = transforms.Compose([
+            transforms.Resize(256, interpolation=3),
+            transforms.CenterCrop(224),
+            transforms.ToTensor(),
+            transforms.Normalize(IMAGENET_DEFAULT_MEAN, IMAGENET_DEFAULT_STD),
+        ])
 
 
 
 
     # traindataset = VQAMed(train_df, imgsize = args.image_size, tfm = train_tfm, args = args)
     from transformers import BertTokenizer
+
     tokenizer = BertTokenizer.from_pretrained(args.bert_model)
     print('tokenizer!')
     traindataset = VQAMed(train_df, tfm = train_tfm, args = args, tokenizer=tokenizer)
-    # valdataset = VQAMed(val_df, tfm = val_tfm, args = args)
+    valdataset = VQAMed(val_df, tfm = val_tfm, args = args)
     testdataset = VQAMed(test_df, tfm = test_tfm, args = args, tokenizer=tokenizer)
 
     trainloader = DataLoader(traindataset, batch_size = args.batch_size, shuffle=True, num_workers = args.num_workers)
-    # valloader = DataLoader(valdataset, batch_size = args.batch_size, shuffle=False, num_workers = args.num_workers)
+    valloader = DataLoader(valdataset, batch_size = args.batch_size, shuffle=False, num_workers = args.num_workers)
     testloader = DataLoader(testdataset, batch_size = args.batch_size, shuffle=False, num_workers = args.num_workers)
 
     val_best_acc = 0
     test_best_acc = 0
     best_loss = np.inf
     counter = 0
+
+     # Early stopping
+    last_loss = 100
+    patience = 5
+    triggertimes = 0
+
+
     all_train_loss= []
     all_train_acc=[]
     all_test_acc = []
     all_test_loss= []
+
+    last_epoch= args.epochs
     for epoch in range(args.epochs):
 
         print(f'Epoch {epoch+1}/{args.epochs}')
 
 
         train_loss, train_acc = train_one_epoch(trainloader, model, optimizer, criterion, device, scaler, args, train_df,idx2ans)
-        # val_loss, val_predictions, val_acc, val_bleu = validate(valloader, model, criterion, device, scaler, args, val_df,idx2ans)
+        val_loss, val_predictions, val_acc, val_bleu = validate(valloader, model, criterion, device, scaler, args, val_df,idx2ans)
         test_loss, test_predictions, test_acc = test(testloader, model, criterion, device, scaler, args, test_df,idx2ans)
+        current_loss = val_loss
+        print('The Current Loss:', current_loss)
 
+        if current_loss > last_loss:
+            trigger_times += 1
+            print('Trigger Times:', trigger_times)
+
+            if trigger_times >= patience:
+                print('Early stopping!\nStart to test process.')
+                last_epoch = epoch
+                break
+
+        else:
+            print('trigger times: 0')
+            trigger_times = 0
+
+        last_loss = current_loss
         scheduler.step(train_loss)
 
         log_dict = test_acc
@@ -269,7 +303,7 @@ if __name__ == '__main__':
         print(content)
             
         if test_acc['total_acc'] > test_best_acc:
-            torch.save(model.state_dict(),os.path.join(args.save_dir, f'{args.data_dir.split("/")[-1]}_test_acc.pt'))
+            # torch.save(model.state_dict(),os.path.join(args.save_dir, f'{args.data_dir.split("/")[-1]}_test_acc.pt'))
             test_best_acc=test_acc['total_acc']
     # epoo=[]
     # for epoch in range(args.epochs):
@@ -285,7 +319,7 @@ if __name__ == '__main__':
 
     df = df.append({'model_name' : 'model3', 'bert_model' : args.bert_model, \
         'image_embedding':args.image_embedding,\
-        'epoch' : args.epochs, "lr" : args.lr, "loss_train" : \
+        'epoch' : last_epoch, "lr" : args.lr, "loss_train" : \
         all_train_loss, "overall_accuracy_train" : all_train_acc,"loss_test":all_test_loss, "overall_accuracy_test": all_test_acc},\
         ignore_index = True)
     # ["model2",args.bert_model ,args.epochs, args.lr, train_loss,train_acc["total_acc"]]
