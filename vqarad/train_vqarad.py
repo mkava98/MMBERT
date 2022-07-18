@@ -93,7 +93,7 @@ if __name__ == '__main__':
 
     parser.add_argument('--seed', type = int, required = False, default = 42, help = "set seed for reproducibility")
     parser.add_argument('--num_workers', type = int, required = False, default = 4, help = "number of workers")
-    parser.add_argument('--epochs', type = int, required = False, default =1, help = "num epochs to train")
+    parser.add_argument('--epochs', type = int, required = False, default =3, help = "num epochs to train")
     parser.add_argument('--train_pct', type = float, required = False, default = 1.0, help = "fraction of train samples to select")
     parser.add_argument('--valid_pct', type = float, required = False, default = 1.0, help = "fraction of validation samples to select")
     parser.add_argument('--test_pct', type = float, required = False, default = 1.0, help = "fraction of test samples to select")
@@ -235,7 +235,7 @@ if __name__ == '__main__':
     test_best_acc = 0
     best_loss = np.inf
     counter = 0
-    all_loss_val = []
+    all_train_loss= []
     all_train_acc=[]
     all_test_acc = []
     all_test_loss= []
@@ -254,7 +254,7 @@ if __name__ == '__main__':
 
         for k,v in test_acc.items():
             log_dict[k] = v
-        all_loss_val.append(train_loss)
+        all_train_loss.append(train_loss)
         all_train_acc.append(train_acc["total_acc"])
         all_test_loss.append(test_loss)
         all_test_acc.append(test_acc['total_acc'])
@@ -286,7 +286,7 @@ if __name__ == '__main__':
     df = df.append({'model_name' : 'model3', 'bert_model' : args.bert_model, \
         'image_embedding':args.image_embedding,\
         'epoch' : args.epochs, "lr" : args.lr, "loss_train" : \
-        all_loss_val, "overall_accuracy_train" : all_train_acc,"loss_test":all_test_loss, "overall_accuracy_test": all_test_acc},\
+        all_train_loss, "overall_accuracy_train" : all_train_acc,"loss_test":all_test_loss, "overall_accuracy_test": all_test_acc},\
         ignore_index = True)
     # ["model2",args.bert_model ,args.epochs, args.lr, train_loss,train_acc["total_acc"]]
     df.to_excel("output_train.xlsx") 
