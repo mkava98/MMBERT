@@ -279,8 +279,7 @@ class Transfer(nn.Module):
 
             self.args = args
             self.model = \
-            torch.hub.load('facebookresearch/deit:main', 'deit_base_patch16_224', \
-            pretrained=True)
+            torch.hub.load('facebookresearch/deit:main', 'deit_base_patch16_224', pretrained=True)
             # relu = nn.ReLU()
             # conv2 = nn.Conv2d(196, 768, kernel_size=(1, 1), stride=(1, 1), bias=False)
             # gap2 = nn.AdaptiveAvgPool2d((1,1))
@@ -303,13 +302,18 @@ class Transfer(nn.Module):
 
 
     def forward(self, img):  ## is a singleimg or a batch of images???!!!
-
+        # print("imaaaaaaaaaaaaaaaaaaaaaaggggeeeeeee:",img.size())
         if self.args.image_embedding =="resnet":
 
             modules2 = list(self.model.children())[:-2] ## do ta mandeh be akhari !!
             fix2 = nn.Sequential(*modules2)  ## sequential
+            # print("fix2 structure alone:",fix2[-1:])
+
+            # print("fix2 structure:", fix2(img).size())
             v_2 = self.gap2(self.relu(self.conv2(fix2(img)))).view(-1,self.args.hidden_size)
-            # print("v2size:", v_2.size())  ### (1, 768)
+            # print("self.conv2(fix2)",self.conv2(fix2(img)).size())
+            # print("")
+            # print("v2size:", v_2.size())  ### (12, 768)
             modules3 = list(self.model.children())[:-3] ### 3 ta laye be akhari 
             fix3 = nn.Sequential(*modules3)
             v_3 = self.gap3(self.relu(self.conv3(fix3(img)))).view(-1,self.args.hidden_size)
@@ -327,9 +331,22 @@ class Transfer(nn.Module):
 
         elif self.args.image_embedding == "vision":
 
-            modules2 = list(self.model.children())[:] ## do ta mandeh be akhari !!
-            fix2 = nn.Sequential(*modules2)  ## sequential
-            v_2 = self.gap2(self.relu(self.conv2(fix2(img).view(1,196,10,100)))).view(-1,self.args.hidden_size)
+            modules2 = list(self.model.children())[:]
+            fix2 = nn.Sequential(*modules2)
+    
+            # print(len(fix2))
+            z=fix2(img)
+            # print("z.size()in vision ", z.size())
+            z=z.view(img.size()[0],196,10,100)
+            z=self.conv2(z)
+            # print("z_size() after conv2",z.size())
+            z_relu=self.relu(z)
+            # print(z_relu)
+            z_gap = self.gap2(z_relu)
+            # print("z_gap.size()", z_gap.size())
+            z_gap = z_gap.view(img.size()[0],-1)
+            # v_2 =self.gap2(self.relu(self.conv2(z))).view(-1,768)
+            v_2=z_gap
             # # print("v2size:", v_2.size())  ### (1, 768)
             # modules3 = list(self.model.children())[:-3] ### 3 ta laye be akhari 
             # fix3 = nn.Sequential(*modules3)
@@ -502,14 +519,21 @@ class Transformer(nn.Module):
         v_2, v_3, v_4, v_5, v_7 = self.trans(img)
         # h = self.embed(input_ids, token_type_ids)
         h = self.bert_embedding(input_ids=input_ids, token_type_ids=token_type_ids, position_ids=None)
+        # print("hhhhhhh size", h.size())
+        # print("v_2.size()",v_2.size())
         for i in range(len(h)):
             h[i][1] = v_2[i]
+        # print("v_3.size()",v_3.size())
         for i in range(len(h)):
             h[i][2] = v_3[i]
+        # print("v_4.size()",v_4.size())
+
         for i in range(len(h)):
             h[i][3] = v_4[i]
+        # print("v_5.size()",v_5.size())
         for i in range(len(h)):
             h[i][4] = v_5[i]
+        # print("v_7.size()",v_7.size())
         for i in range(len(h)):
             h[i][5] = v_7[i]
 

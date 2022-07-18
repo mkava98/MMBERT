@@ -57,7 +57,6 @@ out = model(img)
 
 
 
-# modules2 = list(model.children())[:]
 # print("children -2222",list(model.children())[:])
 print (len(list(model.children())[0:]))   #### length 6 i can 
 print (len(list(model.children())[1:]))   #### length 6 i can
@@ -85,12 +84,14 @@ print ("list(model.children())[0:]",model.children()) #### length 6
 
 
 
+modules2 = list(model.children())[:]
+fix2 = nn.Sequential(*modules2)
+z=fix2(img)
+print(z.size())
+z=z.view(1,196,10,100)
+v_2 =gap2(relu(conv2(z))).view(-1,768)
 
-# fix2 = nn.Sequential(*modules2)
-# z=fix2(img)
-# print(z.size())
-# z=z.view(1,196,10,100)
-# v_2 =gap2(relu(conv2(z))).view(-1,768)
+
 # print(z.size())
 # v_2 = gap2(relu(conv2(fix2(img).view(1,196,10,100)))).view(-1,768)
 # modules3 = list(model.children())[:]

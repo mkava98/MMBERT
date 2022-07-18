@@ -6,7 +6,7 @@ def make_df():
     # ["rownum", "model_name","bert_model",\
     # "epoch","lr", "loss", "overalla_ccuracy"])
     df_empty = pd.DataFrame(columns = ["model_name","bert_model","image_embedding","epoch"\
-    ,"lr", "loss", "overall_accuracy"])
+    ,"lr", "loss_train", "overall_accuracy_train","loss_test","overall_accuracy_test"])
     
 
     
