@@ -19,9 +19,9 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Pretrain on ROCO with MLM")
 
     # parser.add_argument('-r', '--run_name', type=str, help="name for wandb run", required=True)
-    parser.add_argument('--data_dir', type=str, default = '../data/', help='path to dataset', required = False)
+    parser.add_argument('--data_dir', type=str, default = '../data/roco/', help='path to dataset', required = False)
     parser.add_argument('--save_dir', type=str, default = '../roco_mlm', help='save model weights in this dir', required = False)
-    parser.add_argument('--mlm_prob', type=float, required = True, help='probability of token being masked')
+    parser.add_argument('--mlm_prob', type=float, required = False, help='probability of token being masked')
     parser.add_argument('--mixed_precision', action='store_true', required = False, default = False,  help='mixed precision training or not')
     parser.add_argument('--resume', action='store_true', required = False, default = False,  help='resume training or train from scratch')
 
