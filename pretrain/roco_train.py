@@ -1,5 +1,5 @@
 import os
-import wandb
+# import wandb
 import argparse
 import numpy as np
 
@@ -18,9 +18,9 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description="Pretrain on ROCO with MLM")
 
-    parser.add_argument('-r', '--run_name', type=str, help="name for wandb run", required=True)
-    parser.add_argument('--data_dir', type=str, default = '/home/yash19/Datasets/all_data', help='path to dataset', required = False)
-    parser.add_argument('--save_dir', type=str, default = '/home/viraj.bagal/viraj/medvqa/Weights/roco_mlm', help='save model weights in this dir', required = False)
+    # parser.add_argument('-r', '--run_name', type=str, help="name for wandb run", required=True)
+    parser.add_argument('--data_dir', type=str, default = '../data/', help='path to dataset', required = False)
+    parser.add_argument('--save_dir', type=str, default = '../roco_mlm', help='save model weights in this dir', required = False)
     parser.add_argument('--mlm_prob', type=float, required = True, help='probability of token being masked')
     parser.add_argument('--mixed_precision', action='store_true', required = False, default = False,  help='mixed precision training or not')
     parser.add_argument('--resume', action='store_true', required = False, default = False,  help='resume training or train from scratch')
@@ -47,8 +47,7 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
-    wandb.init(project='medvqa', name = args.run_name, config = args)
-
+    # wandb.init(project='medvqa', name = args.run_name, config = args)
 
     train_data, val_data  = load_mlm_data(args)
     # No Image: PMC4240561_MA-68-291-g002.jpg
@@ -60,7 +59,7 @@ if __name__ == '__main__':
 
     model.to(device)
 
-    wandb.watch(model, log='all')
+    # wandb.watch(model, log='all')
 
     optimizer = optim.Adam(model.parameters(),lr=args.lr)
     scheduler = lr_scheduler.ReduceLROnPlateau(optimizer, patience = args.patience, factor = args.factor, verbose = True)
@@ -128,12 +127,12 @@ if __name__ == '__main__':
             torch.save(recorder, os.path.join(args.save_dir, 'recorder_2.pt'))
             
 
-        wandb.log({'epoch_train_loss': train_loss,
-                'epoch_val_loss': val_loss,
-                'epoch_train_acc': train_acc,
-                'epoch_val_acc': acc,
-                'learning_rate': optimizer.param_groups[0]["lr"],
-                'epoch': epoch})
+        # wandb.log({'epoch_train_loss': train_loss,
+        #         'epoch_val_loss': val_loss,
+        #         'epoch_train_acc': train_acc,
+        #         'epoch_val_acc': acc,
+        #         'learning_rate': optimizer.param_groups[0]["lr"],
+        #         'epoch': epoch})
 
         content = f'Learning rate: {(optimizer.param_groups[0]["lr"]):.7f}, Train loss: {(train_loss):.4f}, Train acc: {(train_acc):.4f} ,Val loss: {(val_loss):.4f}, Val acc: {(acc):.4f}'
         print(content)

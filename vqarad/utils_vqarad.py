@@ -62,13 +62,13 @@ def seed_everything(seed):
 
 def load_data(args):
     
-    # train_file = open(os.path.join(args.data_dir,'trainset.json'),)
-    # test_file = open(os.path.join(args.data_dir,'testset.json'),)
-    # validation_file = open(os.path.join(args.data_dir,'validationset.json'),)
+    train_file = open(os.path.join(args.data_dir,'trainset.json'),)
+    test_file = open(os.path.join(args.data_dir,'testset.json'),)
+    validation_file = open(os.path.join(args.data_dir,'validationset.json'),)
         
-    train_file = open(os.path.join(args.data_dir,'littrainset.json'),)
-    test_file = open(os.path.join(args.data_dir,'littestset.json'),)
-    validation_file = open(os.path.join(args.data_dir,'litvalidationset.json'),)
+    # train_file = open(os.path.join(args.data_dir,'littrainset.json'),)
+    # test_file = open(os.path.join(args.data_dir,'littestset.json'),)
+    # validation_file = open(os.path.join(args.data_dir,'litvalidationset.json'),)
 
     train_data = json.load(train_file)
     test_data = json.load(test_file)
@@ -208,7 +208,7 @@ class VQAMed(Dataset): ### inheritance does not accure????
 
 def calculate_bleu_score(preds,targets, idx2ans):
        
-    bleu_per_answer = np.asarray([sentence_bleu([idx2ans[target].split()],idx2ans[pred].split(),weights=[1]) for pred,target in zip(preds,targets)])
+    bleu_per_answer = np.asarray([sentence_bleu([str(idx2ans[target]).split()],str(idx2ans[pred]).split(),weights=[1]) for pred,target in zip(preds,targets)])
 
     return np.mean(bleu_per_answer)
 

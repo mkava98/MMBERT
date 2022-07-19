@@ -4,7 +4,7 @@ import pandas as pd
 import math
 import torch
 import random
-import wandb
+# import wandb
 from nltk.translate.bleu_score import sentence_bleu
 from tqdm import tqdm
 import pickle
@@ -215,9 +215,9 @@ def train_one_epoch(loader, model, criterion, optimizer, scaler, device, args, e
         train_loss.append(loss_np)
         bar.set_description('train_loss: %.5f, train_acc: %.2f' % (loss_np, acc))
 
-        wandb.log({'step_train_loss': loss_np,
-            'step_train_acc': acc,
-            'train_batch': epoch*len(loader) + i})
+        # wandb.log({'step_train_loss': loss_np,
+        #     'step_train_acc': acc,
+        #     'train_batch': epoch*len(loader) + i})
         
 
     PREDS = torch.cat(PREDS).cpu().numpy()
@@ -276,9 +276,9 @@ def validate(loader, model, criterion, scaler, device, args, epoch):
 
             bar.set_description('val_loss: %.5f, val_acc: %.5f' % (loss_np, acc))
 
-            wandb.log({'step_val_loss': loss_np,
-                'step_val_acc': acc,
-                'val_batch': epoch*len(loader) + i})
+            # wandb.log({'step_val_loss': loss_np,
+            #     'step_val_acc': acc,
+            #     'val_batch': epoch*len(loader) + i})
 
         val_loss = np.mean(val_loss)
 
