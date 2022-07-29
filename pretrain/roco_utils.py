@@ -43,9 +43,26 @@ def get_permutation(n):
         perms.append(np.random.choice(lst))
     return perms
 
+    # with open(os.path.join(args.data_dir, 'train/radiology', 'med_vocab.pkl'), 'rb') as f:
 
 def get_keywords(args):
-    with open(os.path.join(args.data_dir, 'vocab', 'med_vocab.pkl'), 'rb') as f:
+    data = {}
+    with open(os.path.join(args.data_dir, 'train/radiology', 'keywords.txt'), 'rb') as f:
+        for line in f:
+            # print(line.split())
+            listt= line.split()
+            (key, val) = (listt[0],listt[1:])
+            for ele in listt:
+                ele=ele.decode("utf-8") 
+            data[key]= val
+
+    # Save as pickle
+    with open('data.pkl', 'wb') as f:
+        pickle.dump(data, f, protocol=pickle.HIGHEST_PROTOCOL)
+
+    # Load as pickle
+    with open('data.pkl', 'rb') as f:
+        # data_pickle = pickle.load(f)
         key = pickle.load(f)
 
     keywords = []
