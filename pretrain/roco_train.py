@@ -21,15 +21,15 @@ if __name__ == '__main__':
     # parser.add_argument('-r', '--run_name', type=str, help="name for wandb run", required=True)
     parser.add_argument('--data_dir', type=str, default = '../data/roco/all_data', help='path to dataset', required = False)
     parser.add_argument('--save_dir', type=str, default = '../roco_mlm', help='save model weights in this dir', required = False)
-    parser.add_argument('--mlm_prob', type=float, required = False, help='probability of token being masked')
+    parser.add_argument('--mlm_prob', type=float, default = 0.5 ,required = False, help='probability of token being masked')
     parser.add_argument('--mixed_precision', action='store_true', required = False, default = False,  help='mixed precision training or not')
     parser.add_argument('--resume', action='store_true', required = False, default = False,  help='resume training or train from scratch')
 
-    parser.add_argument('--batch_size', type=int, default=16, help='batch_size.')
+    parser.add_argument('--batch_size', type=int, default=10, help='batch_size.')
     parser.add_argument('--lr', type=float, default=2e-5, help='learning rate')
     parser.add_argument('--patience', type=int, default=5, help='rlp patience')
     parser.add_argument('--factor', type=float, default=0.1, help='rlp factor')
-    parser.add_argument('--num_workers', type=int, default=4, help='num works to generate data.')
+    parser.add_argument('--num_workers', type=int, default= 4, help='num works to generate data.')
     parser.add_argument('--epochs', type=int, default=10, help='epochs to train')
 
     parser.add_argument('--train_pct', type=float, default=1.0, help='fraction of train set')
@@ -84,10 +84,13 @@ if __name__ == '__main__':
     val_path = os.path.join(args.data_dir,'validation')
     test_path = os.path.join(args.data_dir,'test')
 
-    keywords = get_keywords(args)    
+    keywords = get_keywords(args)   
+    # print("helooooo:",train_data)
 
     traindataset = ROCO(args, train_data, train_tfm, keywords, mode='train')
     valdataset = ROCO(args, val_data, val_tfm, keywords, mode = 'validation')
+    print(traindataset.df)
+    print(valdataset.df)
 
     trainloader = DataLoader(traindataset, batch_size = args.batch_size, shuffle=True, num_workers = args.num_workers)
     valloader = DataLoader(valdataset, batch_size = args.batch_size, shuffle=False, num_workers = args.num_workers)
@@ -107,15 +110,17 @@ if __name__ == '__main__':
         best_loss = np.inf
 
     save_recorder = 5
-
+    # for l in trainloader :
+        # print(l)
     for epoch in range(args.epochs):
         
         print(f'Epoch {epoch+1}/{args.epochs}')
+        
 
         train_loss, train_acc = train_one_epoch(trainloader, model, criterion, optimizer, scaler, device, args, epoch)
-        val_loss, predictions, acc = validate(valloader, model, criterion, scaler, device, args, epoch)
+        # val_loss, predictions, acc = validate(valloader, model, criterion, scaler, device, args, epoch)
 
-        scheduler.step(val_loss)
+        scheduler.step(train_loss)
 
         if (epoch + 1) % save_recorder == 0:
             recorder = {'epoch': epoch,
@@ -134,10 +139,12 @@ if __name__ == '__main__':
         #         'learning_rate': optimizer.param_groups[0]["lr"],
         #         'epoch': epoch})
 
-        content = f'Learning rate: {(optimizer.param_groups[0]["lr"]):.7f}, Train loss: {(train_loss):.4f}, Train acc: {(train_acc):.4f} ,Val loss: {(val_loss):.4f}, Val acc: {(acc):.4f}'
+        # content = f'Learning rate: {(optimizer.param_groups[0]["lr"]):.7f}, Train loss: {(train_loss):.4f}, Train acc: {(train_acc):.4f} ,Val loss: {(val_loss):.4f}, Val acc: {(acc):.4f}'
+        content = f'Learning rate: {(optimizer.param_groups[0]["lr"]):.7f}, Train loss: {(train_loss):.4f}, Train acc: {(train_acc):.4f}'
+
         print(content)
         
-        if val_loss<best_loss:
-            torch.save(model.state_dict(), os.path.join(args.save_dir, 'val_loss_3.pt'))
-            best_loss=val_loss
+        # if val_loss<best_loss:
+        #     torch.save(model.state_dict(), os.path.join(args.save_dir, 'val_loss_3.pt'))
+        #     best_loss=val_loss
 

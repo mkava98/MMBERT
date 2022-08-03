@@ -48,12 +48,13 @@ def get_permutation(n):
 def get_keywords(args):
     data = {}
     with open(os.path.join(args.data_dir, 'train/radiology', 'keywords.txt'), 'rb') as f:
+        path =os.path.join(args.data_dir, 'train/radiology', 'keywords.txt')
+        print("!!!!!!!!! it is importan !!!!!!!!!:",path )
         for line in f:
-            # print(line.split())
             listt= line.split()
-            (key, val) = (listt[0],listt[1:])
             for ele in listt:
                 ele=ele.decode("utf-8") 
+            (key, val) = (listt[0],listt[1:])
             data[key]= val
 
     # Save as pickle
@@ -73,6 +74,7 @@ def get_keywords(args):
     keywords_ = list(set(keywords))
 
     for word in keywords_:
+        word=word.decode("utf-8")
         keywords.extend(word + '.')
     
     keywords = list(set(keywords))
@@ -86,23 +88,35 @@ def load_mlm_data(args):
     test_path = os.path.join(args.data_dir,'test','radiology')
 
     train_image_names = os.listdir(os.path.join(train_path,'images'))
+    # print("imageeeee ",train_image_names)
     val_image_names = os.listdir(os.path.join(val_path,'images'))
     # test_image_names = os.listdir(os.path.join(test_path,'images'))
 
-    train_data = pd.read_csv(os.path.join(train_path,'traindata.csv'))
+    train_data = pd.read_csv(os.path.join(train_path,'radiologytraindata.csv'))
+
+    # train_data = train_data[['id', 'name', 'caption']]
+    # train_data = train_data.reindex(['id', 'name', 'caption'], axis=1)
+
     train_data = train_data[train_data['name'].isin(train_image_names)]
 
-    val_data = pd.read_csv(os.path.join(val_path, 'valdata.csv'))
+    val_data = pd.read_csv(os.path.join(val_path, 'radiologyvaldata.csv'))
     val_data = val_data[val_data['name'].isin(val_image_names)]
 
     # test_data = pd.read_csv(os.path.join(test_path, 'testdata.csv'))
     # test_data = test_data[test_data['name'].isin(test_image_names)]
     
+    
 
     train_data = train_data.sample(frac = args.train_pct)
     val_data = val_data.sample(frac = args.valid_pct)
+    train_data=train_data.rename({"caption":"id","id":"name","name":"caption"},axis='columns')
+    val_data=val_data.rename({"caption":"id","id":"name","name":"caption"},axis='columns')
+
+
     # test_data = test_data.sample(frac = args.test_pct)
-        
+    print("daaaaaaaataaaa   train :!!!!!!!",train_data)
+    print("daaaaaaaataaaa   validation :!!!!!!!",val_data)
+
     return train_data, val_data
 
 def shuffle_list(some_list):
@@ -129,6 +143,9 @@ def mask_word(sentence, tokenizer, keywords, args):
             t = tokenizer.tokenize(char)
             for j in range(len(t)):
                 prob = random.random()
+                # print("prob", prob)
+                # print("args.mlm_prob", args.mlm_prob)
+
                 if prob < args.mlm_prob:
                     
                     output_label.extend([tokenizer.encode(t[j])[1]])
@@ -177,13 +194,13 @@ def calculate_bleu_score(preds,targets):
 
 
 def train_one_epoch(loader, model, criterion, optimizer, scaler, device, args, epoch):
-
     model.train()
     train_loss = []
     PREDS = []
     TARGETS = []
     bar = tqdm(loader, leave = False)
     for i, (img, caption_token,segment_ids,attention_mask,target) in enumerate(bar):
+        # print("(img, caption_token,segment_ids,attention_mask,target):",(img, caption_token,segment_ids,attention_mask,target))
 
         img, caption_token,segment_ids,attention_mask,target = img.to(device), caption_token.to(device), segment_ids.to(device), attention_mask.to(device), target.to(device)
 
@@ -200,7 +217,7 @@ def train_one_epoch(loader, model, criterion, optimizer, scaler, device, args, e
                 loss = loss_func(logits.permute(0,2,1), target)
         else:
             logits = model(img, caption_token, segment_ids, attention_mask)
-            logits = logits.log_softmax(-1)  # (bs x seq_len x vocab_size)
+            logits = logits.log_softmax(-1)  # (bs x seqtrain_one_epoch_len x vocab_size)
             loss = loss_func(logits.permute(0,2,1), target)       
 
 
@@ -383,7 +400,7 @@ class ROCOModule(pl.LightningDataModule):
 
     def setup(self, stage=None):
 
-        train, val, test = load_mlm_data(self.args)
+        train, val, _ = load_mlm_data(self.args)
 
         train = train[train['name']!='PMC4240561_MA-68-291-g002.jpg'].reset_index(drop=True)
 
