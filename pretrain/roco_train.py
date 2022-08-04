@@ -21,7 +21,7 @@ if __name__ == '__main__':
     # parser.add_argument('-r', '--run_name', type=str, help="name for wandb run", required=True)
     parser.add_argument('--data_dir', type=str, default = '../data/roco/all_data', help='path to dataset', required = False)
     parser.add_argument('--save_dir', type=str, default = '../roco_mlm', help='save model weights in this dir', required = False)
-    parser.add_argument('--mlm_prob', type=float, default = 0.5 ,required = False, help='probability of token being masked')
+    parser.add_argument('--mlm_prob', type=float, default = 1.0 ,required = False, help='probability of token being masked')
     parser.add_argument('--mixed_precision', action='store_true', required = False, default = False,  help='mixed precision training or not')
     parser.add_argument('--resume', action='store_true', required = False, default = False,  help='resume training or train from scratch')
 
@@ -30,7 +30,7 @@ if __name__ == '__main__':
     parser.add_argument('--patience', type=int, default=5, help='rlp patience')
     parser.add_argument('--factor', type=float, default=0.1, help='rlp factor')
     parser.add_argument('--num_workers', type=int, default= 4, help='num works to generate data.')
-    parser.add_argument('--epochs', type=int, default=10, help='epochs to train')
+    parser.add_argument('--epochs', type=int, default=20, help='epochs to train')
 
     parser.add_argument('--train_pct', type=float, default=1.0, help='fraction of train set')
     parser.add_argument('--valid_pct', type=float, default=1.0, help='fraction of validation set')
@@ -128,8 +128,8 @@ if __name__ == '__main__':
                     'scheduler': scheduler.state_dict(),
                     'scaler': scaler.state_dict(),
                     'model': model.state_dict()}
-
-            torch.save(recorder, os.path.join(args.save_dir, 'recorder_2.pt'))
+            name = str('recorder_2'+f'{(epoch+1)}'+'.pt')
+            torch.save(recorder, os.path.join(args.save_dir,name ))
             
 
         # wandb.log({'epoch_train_loss': train_loss,
@@ -140,9 +140,9 @@ if __name__ == '__main__':
         #         'epoch': epoch})
 
         # content = f'Learning rate: {(optimizer.param_groups[0]["lr"]):.7f}, Train loss: {(train_loss):.4f}, Train acc: {(train_acc):.4f} ,Val loss: {(val_loss):.4f}, Val acc: {(acc):.4f}'
-        content = f'Learning rate: {(optimizer.param_groups[0]["lr"]):.7f}, Train loss: {(train_loss):.4f}, Train acc: {(train_acc):.4f}'
+        # content = f'Learning rate: {(optimizer.param_groups[0]["lr"]):.7f}, Train loss: {(train_loss):.4f}, Train acc: {(train_acc):.4f}'
 
-        print(content)
+        # print(content)
         
         # if val_loss<best_loss:
         #     torch.save(model.state_dict(), os.path.join(args.save_dir, 'val_loss_3.pt'))

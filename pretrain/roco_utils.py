@@ -206,7 +206,14 @@ def train_one_epoch(loader, model, criterion, optimizer, scaler, device, args, e
 
         caption_token = caption_token.squeeze(1)
         attention_mask = attention_mask.squeeze(1)
-    
+        print("imggggggggggggg:", img)
+
+        print("captionnnnnnnnnnnnnnnnnn:", caption_token)
+        print("segment_idsssssss:", segment_ids)
+        print("attention_mask:", attention_mask)
+        print("targettttttttt:", target)
+
+
         loss_func = criterion
         optimizer.zero_grad()
 
@@ -215,10 +222,16 @@ def train_one_epoch(loader, model, criterion, optimizer, scaler, device, args, e
                 logits = model(img, caption_token, segment_ids, attention_mask)
                 logits = logits.log_softmax(-1)  # (bs x seq_len x vocab_size)
                 loss = loss_func(logits.permute(0,2,1), target)
+                
         else:
             logits = model(img, caption_token, segment_ids, attention_mask)
+            print("lllllllllllllllllllllllogits:",logits)
             logits = logits.log_softmax(-1)  # (bs x seqtrain_one_epoch_len x vocab_size)
-            loss = loss_func(logits.permute(0,2,1), target)       
+            print("lllllllllllllllllllllllogits:",logits)
+
+            loss = loss_func(logits.permute(0,2,1), target) 
+            print(loss) 
+            print(logits.permute(0,2,1))     
 
 
         if args.mixed_precision:
@@ -234,12 +247,31 @@ def train_one_epoch(loader, model, criterion, optimizer, scaler, device, args, e
         # loss = loss_func(logits.permute(0,2,1), target)
 
         # loss.backward()
-        # optimizer.step()       
+        # optimizer.step()  
+
+
+        # logits = logits.permute(0,2,1)   
+        # for i in range(logits.size()[])  
+        # print('logitssssssssssssssssssssssssssss',logits)
+        # print('targetttttttttttttttttttttttttttttt',target)
         
         bool_label = target > 0
+        print("bool_label",bool_label)
+        pred=logits[bool_label, :].argmax(1)
+####???????
+        # pred = logits[aya==0]
+        # pred = aya
+        print("pred",pred)
 
-        pred = logits[bool_label, :].argmax(1)
-        valid_labels = target[bool_label]   
+        valid_labels = target[bool_label]  ### i increment this 
+        print("valid_labels",valid_labels)
+        # print("valid_labels.size()",valid_labels.size())
+
+        # for i in range(list(valid_labels.size())[0]) :
+        #     valid_labels[i] = 0
+    
+        # print("valid_labels",valid_labels)
+
         
         PREDS.append(pred)
         TARGETS.append(valid_labels)
@@ -247,7 +279,11 @@ def train_one_epoch(loader, model, criterion, optimizer, scaler, device, args, e
         loss_np = loss.detach().cpu().numpy()
         acc = (pred == valid_labels).type(torch.float).mean() * 100.
         train_loss.append(loss_np)
-        bar.set_description('train_loss: %.5f, train_acc: %.2f' % (loss_np, acc))
+        # bar.set_description('train_loss: %.5f, train_acc: %.2f' % (loss_np,"it is not important"))
+        content = f' Train loss: {(loss_np):.4f}'
+
+        print(content)
+        
 
         # wandb.log({'step_train_loss': loss_np,
         #     'step_train_acc': acc,
@@ -390,7 +426,7 @@ class ROCO(Dataset):
         return img, tokens, segment_ids, input_mask, targets
 
 
-
+# img, caption_token,segment_ids,attention_mask,target
 
 class ROCOModule(pl.LightningDataModule):
     def __init__(self, args):
