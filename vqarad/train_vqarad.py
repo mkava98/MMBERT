@@ -79,12 +79,12 @@ warnings.simplefilter("ignore", UserWarning)
     
 
 if __name__ == '__main__':
-
+#### maximize accuracy, minimize loss
     parser = argparse.ArgumentParser(description = "Finetune on VQARAD")
 
     # parser.add_argument('--run_name', type = str, required = True, help = "run name for wandb")
     parser.add_argument('--data_dir', type = str, required = False, default = "../data/vqarad/", help = "path for data")
-    parser.add_argument('--model_dir', type = str, required = False, default = "/home/viraj.bagal/viraj/medvqa/Weights/roco_mlm/val_loss_3.pt", help = "path to load weights")
+    parser.add_argument('--model_dir', type = str, required = False, default = "../roco_mlm/recorder_520.pt", help = "path to load weights")
     
     # parser.add_argument('--model_dir', type = str, required = False, default = "/home/viraj.bagal/viraj/medvqa/Weights/roco_mlm/val_loss_3.pt", help = "path to load weights")
     parser.add_argument('--save_dir', type = str, required = False, default = "../output/", help = "path to save weights")
@@ -95,7 +95,7 @@ if __name__ == '__main__':
 
     parser.add_argument('--seed', type = int, required = False, default = 42, help = "set seed for reproducibility")
     parser.add_argument('--num_workers', type = int, required = False, default = 4, help = "number of workers")
-    parser.add_argument('--epochs', type = int, required = False, default =70, help = "num epochs to train")
+    parser.add_argument('--epochs', type = int, required = False, default =200, help = "num epochs to train")
     parser.add_argument('--train_pct', type = float, required = False, default = 1.0, help = "fraction of train samples to select")
     parser.add_argument('--valid_pct', type = float, required = False, default = 1.0, help = "fraction of validation samples to select")
     parser.add_argument('--test_pct', type = float, required = False, default = 1.0, help = "fraction of test samples to select")
@@ -105,7 +105,7 @@ if __name__ == '__main__':
     parser.add_argument('--lr', type = float, required = False, default = 1e-4, help = "learning rate'")
     # parser.add_argument('--weight_decay', type = float, required = False, default = 1e-2, help = " weight decay for gradients")
     parser.add_argument('--factor', type = float, required = False, default = 0.1, help = "factor for rlp")
-    parser.add_argument('--patience', type = int, required = False, default = 10, help = "patience for rlp")
+    parser.add_argument('--patience', type = int, required = False, default = 200, help = "patience for rlp")
     # parser.add_argument('--lr_min', type = float, required = False, default = 1e-6, help = "minimum lr for Cosine Annealing")
     parser.add_argument('--hidden_dropout_prob', type = float, required = False, default = 0.3, help = "hidden dropout probability")
     """
@@ -249,7 +249,7 @@ if __name__ == '__main__':
 
      # Early stopping
     last_loss = 100
-    patience = 5
+    patience = 200
     triggertimes = 0
 
 
@@ -262,6 +262,9 @@ if __name__ == '__main__':
     for epoch in range(args.epochs):
 
         print(f'Epoch {epoch+1}/{args.epochs}')
+        # if epoch == 80:
+        #     args.lr=3e-6
+
 
 
         train_loss, train_acc = train_one_epoch(trainloader, model, optimizer, criterion, device, scaler, args, train_df,idx2ans)

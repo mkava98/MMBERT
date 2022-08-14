@@ -18,6 +18,8 @@ import albumentations as A
 import pretrainedmodels
 from albumentations.core.composition import OneOf
 from albumentations.pytorch.transforms import ToTensorV2
+import timm
+from timm.data.constants import IMAGENET_DEFAULT_MEAN, IMAGENET_DEFAULT_STD
 
 warnings.simplefilter("ignore", UserWarning)
 
@@ -31,7 +33,7 @@ if __name__ == '__main__':
     parser.add_argument('--data_dir', type = str, required = False, default = "../data/vqamed", help = "path for data")
     parser.add_argument('--model_dir', type = str, required = False, default = "/home/viraj.bagal/viraj/medvqa/Weights/roco_mlm/val_loss_3.pt", help = "path to load weights")
     parser.add_argument('--save_dir', type = str, required = False, default = "/home/viraj.bagal/viraj/medvqa/Weights/ic19", help = "path to save weights")
-    parser.add_argument('--category', type = str, required = False, default = None,  help = "choose specific category if you want")
+    parser.add_argument('--category', type =boolean, required = False, default = False,  help = "choose specific category if you want")
     parser.add_argument('--use_pretrained', action = 'store_true', default = False, help = "use pretrained weights or not")
     parser.add_argument('--mixed_precision', action = 'store_true', default = True, help = "use mixed precision or not")
     parser.add_argument('--clip', action = 'store_true', default = False, help = "clip the gradients or not")
@@ -61,6 +63,8 @@ if __name__ == '__main__':
     parser.add_argument('--n_layers', type = int, required = False, default= 4, help = "num of layers")
     parser.add_argument('--num_vis', type = int, required = False,default=5, help = "num of visual embeddings")
     # parser.add_argument('--all_category', type =boolean, required= False, help = "yes or no category")
+    parser.add_argument('--image_embedding', type = str, required = False, default = "vision", help = "Name of image extractor")
+
 
     args = parser.parse_args()
 
@@ -123,26 +127,49 @@ if __name__ == '__main__':
         criterion = nn.CrossEntropyLoss()
 
     scaler = GradScaler()
+### transformation on images 
+    if args.image_embedding == "vision":
+        train_tfm = transforms.Compose([transforms.ToPILImage(),
+            transforms.Resize(256, interpolation=3),
+            transforms.CenterCrop(224),
+            transforms.ToTensor(),
+            transforms.Normalize(IMAGENET_DEFAULT_MEAN, IMAGENET_DEFAULT_STD),
+        ])
+        test_tfm = transforms.Compose([transforms.ToPILImage(),
+            transforms.Resize(256, interpolation=3),
+            transforms.CenterCrop(224),
+            transforms.ToTensor(),
+            transforms.Normalize(IMAGENET_DEFAULT_MEAN, IMAGENET_DEFAULT_STD),
+        ])
+        val_tfm = transforms.Compose([transforms.ToPILImage(),
+            transforms.Resize(256, interpolation=3),
+            transforms.CenterCrop(224),
+            transforms.ToTensor(),
+            transforms.Normalize(IMAGENET_DEFAULT_MEAN, IMAGENET_DEFAULT_STD),
+        ])
 
 
-    train_tfm = transforms.Compose([
-                                    
-                                    transforms.ToPILImage(),
-                                    transforms.RandomResizedCrop(224,scale=(0.75,1.25),ratio=(0.75,1.25)),
-                                    transforms.RandomRotation(10),
-                                    # Cutout(),
-                                    transforms.ColorJitter(brightness=0.4,contrast=0.4,saturation=0.4,hue=0.4),
+
+    else:
+
+        train_tfm = transforms.Compose([
+                                        
+                                        transforms.ToPILImage(),
+                                        transforms.RandomResizedCrop(224,scale=(0.75,1.25),ratio=(0.75,1.25)),
+                                        transforms.RandomRotation(10),
+                                        # Cutout(),
+                                        transforms.ColorJitter(brightness=0.4,contrast=0.4,saturation=0.4,hue=0.4),
+                                        transforms.ToTensor(), 
+                                        transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
+
+
+        val_tfm = transforms.Compose([transforms.ToPILImage(),
                                     transforms.ToTensor(), 
                                     transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
 
-
-    val_tfm = transforms.Compose([transforms.ToPILImage(),
-                                transforms.ToTensor(), 
-                                transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
-
-    test_tfm = transforms.Compose([transforms.ToPILImage(),
-                                transforms.ToTensor(), 
-                                 transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
+        test_tfm = transforms.Compose([transforms.ToPILImage(),
+                                    transforms.ToTensor(), 
+                                    transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
 
 
 

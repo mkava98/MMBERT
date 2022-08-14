@@ -4,6 +4,9 @@ import pandas as pd
 import random
 import math
 import cv2
+import timm 
+from timm.data.constants import IMAGENET_DEFAULT_MEAN, IMAGENET_DEFAULT_STD
+
 
 import torch
 from torchvision import transforms, models
@@ -366,17 +369,44 @@ class Transfer(nn.Module):
         #     p.requires_grad=False
 
         if self.num_vis == 5:
-            self.relu = nn.ReLU()
-            self.conv2 = nn.Conv2d(2048, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            self.gap2 = nn.AdaptiveAvgPool2d((1,1))
-            self.conv3 = nn.Conv2d(1024, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            self.gap3 = nn.AdaptiveAvgPool2d((1,1))
-            self.conv4 = nn.Conv2d(512, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            self.gap4 = nn.AdaptiveAvgPool2d((1,1))
-            self.conv5 = nn.Conv2d(256, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            self.gap5 = nn.AdaptiveAvgPool2d((1,1))
-            self.conv7 = nn.Conv2d(64, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            self.gap7 = nn.AdaptiveAvgPool2d((1,1))
+
+
+            if self.args.image_embedding == "vision":
+
+                # self.args = args
+                self.model1 = models.resnet152(pretrained=True)
+                # for p in self.parameters():
+                #     p.requires_grad=False
+                self.relu = nn.ReLU()
+                # self.conv2 = nn.Conv2d(2048, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                # self.gap2 = nn.AdaptiveAvgPool2d((1,1))
+                self.conv2 = nn.Conv2d(196, 768, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                self.gap2 = nn.AdaptiveAvgPool2d((1,1))
+
+                self.conv3 = nn.Conv2d(1024, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                self.gap3 = nn.AdaptiveAvgPool2d((1,1))
+                self.conv4 = nn.Conv2d(512, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                self.gap4 = nn.AdaptiveAvgPool2d((1,1))
+                self.conv5 = nn.Conv2d(256, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                self.gap5 = nn.AdaptiveAvgPool2d((1,1))
+                self.conv7 = nn.Conv2d(64, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                self.gap7 = nn.AdaptiveAvgPool2d((1,1))
+                self.model2 = \
+                torch.hub.load('facebookresearch/deit:main', 'deit_base_patch16_224', pretrained=True)
+            else :
+
+
+                self.relu = nn.ReLU()
+                self.conv2 = nn.Conv2d(2048, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                self.gap2 = nn.AdaptiveAvgPool2d((1,1))
+                self.conv3 = nn.Conv2d(1024, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                self.gap3 = nn.AdaptiveAvgPool2d((1,1))
+                self.conv4 = nn.Conv2d(512, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                self.gap4 = nn.AdaptiveAvgPool2d((1,1))
+                self.conv5 = nn.Conv2d(256, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                self.gap5 = nn.AdaptiveAvgPool2d((1,1))
+                self.conv7 = nn.Conv2d(64, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                self.gap7 = nn.AdaptiveAvgPool2d((1,1))
 
         elif self.num_vis == 3:
             self.relu = nn.ReLU()
@@ -395,28 +425,84 @@ class Transfer(nn.Module):
     def forward(self, img):
 
         if self.num_vis == 5: 
-            modules2 = list(self.model.children())[:-2]
-            fix2 = nn.Sequential(*modules2)
-            inter_2 = self.conv2(fix2(img))
-            v_2 = self.gap2(self.relu(inter_2)).view(-1,self.args.hidden_size)
-            modules3 = list(self.model.children())[:-3]
-            fix3 = nn.Sequential(*modules3)
-            inter_3 = self.conv3(fix3(img))
-            v_3 = self.gap3(self.relu(inter_3)).view(-1,self.args.hidden_size)
-            modules4 = list(self.model.children())[:-4]
-            fix4 = nn.Sequential(*modules4)
-            inter_4 = self.conv4(fix4(img))
-            v_4 = self.gap4(self.relu(inter_4)).view(-1,self.args.hidden_size)
-            modules5 = list(self.model.children())[:-5]
-            fix5 = nn.Sequential(*modules5)
-            inter_5 = self.conv5(fix5(img))
-            v_5 = self.gap5(self.relu(inter_5)).view(-1,self.args.hidden_size)
-            modules7 = list(self.model.children())[:-7]
-            fix7 = nn.Sequential(*modules7)
-            inter_7 = self.conv7(fix7(img))
-            v_7 = self.gap7(self.relu(inter_7)).view(-1,self.args.hidden_size)
 
-            return v_2, v_3, v_4, v_5, v_7, [inter_2.mean(1), inter_3.mean(1), inter_4.mean(1), inter_5.mean(1), inter_7.mean(1)]
+            if self.args.image_embedding == "vision":
+            
+                modules2 = list(self.model2.children())[:]
+                fix2 = nn.Sequential(*modules2)
+        
+                # print(len(fix2))
+                z=fix2(img)
+                # print("z.size()in vision ", z.size())
+                z=z.view(img.size()[0],196,10,100)
+                z=self.conv2(z)
+                # inter_2 = self.conv2(fix2(img))
+                inter_2=z
+
+                # print("z_size() after conv2",z.size())
+                z_relu=self.relu(z)
+                # print(z_relu)
+                z_gap = self.gap2(z_relu)
+                # print("z_gap.size()", z_gap.size())
+                v_2 = z_gap.view(img.size()[0],-1)
+                # v_2 =self.gap2(self.relu(self.conv2(z))).view(-1,768)
+                
+
+                # modules2 = list(self.model.children())[:-2] ## do ta mandeh be akhari !!
+                # fix2 = nn.Sequential(*modules2)  ## sequential
+                # print("fix2 structure alone:",fix2[-1:])
+
+                # print("fix2 structure:", fix2(img).size())
+                # v_2 = self.gap2(self.relu(self.conv2(fix2(img)))).view(-1,self.args.hidden_size)
+                # print("self.conv2(fix2)",self.conv2(fix2(img)).size())
+                # print("")
+                # print("v2size:", v_2.size())  ### (12, 768)
+                modules3 = list(self.model1.children())[:-3] ### 3 ta laye be akhari 
+                fix3 = nn.Sequential(*modules3)
+                inter_3 = self.conv3(fix3(img))
+                v_3 = self.gap3(self.relu(inter_3)).view(-1,self.args.hidden_size)
+                # print("v3size:", v_3.size())  ###
+                modules4 = list(self.model1.children())[:-4]
+                fix4 = nn.Sequential(*modules4)
+                inter_4 = self.conv4(fix4(img))
+                v_4 = self.gap4(self.relu(inter_4)).view(-1,self.args.hidden_size)
+                modules5 = list(self.model1.children())[:-5]
+                fix5 = nn.Sequential(*modules5)
+                inter_5 = self.conv5(fix5(img))
+                v_5 = self.gap5(self.relu(inter_5)).view(-1,self.args.hidden_size)
+                modules7 = list(self.model1.children())[:-7]
+                fix7 = nn.Sequential(*modules7)
+                inter_7 = self.conv7(fix7(img))
+
+                v_7 = self.gap7(self.relu(inter_7)).view(-1,self.args.hidden_size)
+
+                return v_2, v_3, v_4, v_5, v_7,[inter_2.mean(1), inter_3.mean(1), inter_4.mean(1), inter_5.mean(1), inter_7.mean(1)]
+
+
+            else:
+
+                modules2 = list(self.model.children())[:-2]
+                fix2 = nn.Sequential(*modules2)
+                inter_2 = self.conv2(fix2(img))
+                v_2 = self.gap2(self.relu(inter_2)).view(-1,self.args.hidden_size)
+                modules3 = list(self.model.children())[:-3]
+                fix3 = nn.Sequential(*modules3)
+                inter_3 = self.conv3(fix3(img))
+                v_3 = self.gap3(self.relu(inter_3)).view(-1,self.args.hidden_size)
+                modules4 = list(self.model.children())[:-4]
+                fix4 = nn.Sequential(*modules4)
+                inter_4 = self.conv4(fix4(img))
+                v_4 = self.gap4(self.relu(inter_4)).view(-1,self.args.hidden_size)
+                modules5 = list(self.model.children())[:-5]
+                fix5 = nn.Sequential(*modules5)
+                inter_5 = self.conv5(fix5(img))
+                v_5 = self.gap5(self.relu(inter_5)).view(-1,self.args.hidden_size)
+                modules7 = list(self.model.children())[:-7]
+                fix7 = nn.Sequential(*modules7)
+                inter_7 = self.conv7(fix7(img))
+                v_7 = self.gap7(self.relu(inter_7)).view(-1,self.args.hidden_size)
+
+                return v_2, v_3, v_4, v_5, v_7, [inter_2.mean(1), inter_3.mean(1), inter_4.mean(1), inter_5.mean(1), inter_7.mean(1)]
 
         if self.num_vis == 3: 
             modules2 = list(self.model.children())[:-2]
@@ -722,7 +808,7 @@ def validate(loader, model, criterion, device, scaler, args, val_df, idx2ans):
     TARGETS = torch.cat(TARGETS).cpu().numpy()
 
     # Calculate total and category wise accuracy
-    if args.category:
+    if  args.category:
         acc = (PREDS == TARGETS).mean() * 100.
         bleu = calculate_bleu_score(PREDS,TARGETS,idx2ans)
     else:

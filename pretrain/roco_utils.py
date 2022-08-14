@@ -47,34 +47,39 @@ def get_permutation(n):
 
 def get_keywords(args):
     data = {}
+    keywords = []
     with open(os.path.join(args.data_dir, 'train/radiology', 'keywords.txt'), 'rb') as f:
         path =os.path.join(args.data_dir, 'train/radiology', 'keywords.txt')
         print("!!!!!!!!! it is importan !!!!!!!!!:",path )
         for line in f:
             listt= line.split()
-            for ele in listt:
-                ele=ele.decode("utf-8") 
-            (key, val) = (listt[0],listt[1:])
-            data[key]= val
+            # print("listtttttt:",listt)
+            for ele in range(len(listt)):
+                listt[ele]= listt[ele].decode("utf-8") 
 
+            # print("listtttttt:",listt)
+            # (key, val) = (listt[0],listt[1:])
+            # data[key]= val
+            keywords.extend(listt[1:])
+    # print(data)
     # Save as pickle
-    with open('data.pkl', 'wb') as f:
-        pickle.dump(data, f, protocol=pickle.HIGHEST_PROTOCOL)
+    # with open('data.pkl', 'wb') as f:
+    #     pickle.dump(data, f, protocol=pickle.HIGHEST_PROTOCOL)
 
-    # Load as pickle
-    with open('data.pkl', 'rb') as f:
-        # data_pickle = pickle.load(f)
-        key = pickle.load(f)
+    # # Load as pickle
+    # with open('data.pkl', 'rb') as f:
+    #     # data_pickle = pickle.load(f)
+    #     key = pickle.load(f)
 
-    keywords = []
+    # keywords = []
 
-    for k,v in key.items():
-        keywords.extend(v)
+    # for k,v in key.items():
+    #     keywords.extend(v)
     
     keywords_ = list(set(keywords))
 
     for word in keywords_:
-        word=word.decode("utf-8")
+        # word=word.decode("utf-8")
         keywords.extend(word + '.')
     
     keywords = list(set(keywords))
@@ -83,13 +88,14 @@ def get_keywords(args):
 
 
 def load_mlm_data(args):
+    val_data=[]
     train_path = os.path.join(args.data_dir,'train','radiology')
     val_path = os.path.join(args.data_dir,'validation','radiology')
     test_path = os.path.join(args.data_dir,'test','radiology')
 
     train_image_names = os.listdir(os.path.join(train_path,'images'))
     # print("imageeeee ",train_image_names)
-    val_image_names = os.listdir(os.path.join(val_path,'images'))
+    # val_image_names = os.listdir(os.path.join(val_path,'images'))
     # test_image_names = os.listdir(os.path.join(test_path,'images'))
 
     train_data = pd.read_csv(os.path.join(train_path,'radiologytraindata.csv'))
@@ -99,23 +105,24 @@ def load_mlm_data(args):
 
     train_data = train_data[train_data['name'].isin(train_image_names)]
 
-    val_data = pd.read_csv(os.path.join(val_path, 'radiologyvaldata.csv'))
-    val_data = val_data[val_data['name'].isin(val_image_names)]
+    # val_data = pd.read_csv(os.path.join(val_path, 'radiologyvaldata.csv'))
+    # val_data = val_data[val_data['name'].isin(val_image_names)]
 
     # test_data = pd.read_csv(os.path.join(test_path, 'testdata.csv'))
     # test_data = test_data[test_data['name'].isin(test_image_names)]
     
+    print("load_mlm_data   train data :!!!!!!!",train_data)
     
-
-    train_data = train_data.sample(frac = args.train_pct)
-    val_data = val_data.sample(frac = args.valid_pct)
+    print(train_data.columns)
+    # train_data = train_data.sample(frac = args.train_pct)
+    # val_data = val_data.sample(frac = args.valid_pct)
     train_data=train_data.rename({"caption":"id","id":"name","name":"caption"},axis='columns')
-    val_data=val_data.rename({"caption":"id","id":"name","name":"caption"},axis='columns')
+    # val_data=val_data.rename({"caption":"id","id":"name","name":"caption"},axis='columns')
 
 
     # test_data = test_data.sample(frac = args.test_pct)
-    print("daaaaaaaataaaa   train :!!!!!!!",train_data)
-    print("daaaaaaaataaaa   validation :!!!!!!!",val_data)
+    print("load_mlm_data   train data :!!!!!!!",train_data)
+    # print("daaaaaaaataaaa   validation :!!!!!!!",val_data)
 
     return train_data, val_data
 
@@ -198,23 +205,24 @@ def train_one_epoch(loader, model, criterion, optimizer, scaler, device, args, e
     train_loss = []
     PREDS = []
     TARGETS = []
-    bar = tqdm(loader, leave = False)
-    for i, (img, caption_token,segment_ids,attention_mask,target) in enumerate(bar):
+    # bar = tqdm(loader, leave = False)
+    for i, (img, caption_token,segment_ids,attention_mask,target) in enumerate(loader):
         # print("(img, caption_token,segment_ids,attention_mask,target):",(img, caption_token,segment_ids,attention_mask,target))
 
         img, caption_token,segment_ids,attention_mask,target = img.to(device), caption_token.to(device), segment_ids.to(device), attention_mask.to(device), target.to(device)
 
         caption_token = caption_token.squeeze(1)
         attention_mask = attention_mask.squeeze(1)
-        print("imggggggggggggg:", img)
+        # print("imggggggggggggg:", img)
 
-        print("captionnnnnnnnnnnnnnnnnn:", caption_token)
-        print("segment_idsssssss:", segment_ids)
-        print("attention_mask:", attention_mask)
-        print("targettttttttt:", target)
+        # print("captionnnnnnnnnnnnnnnnnn:", caption_token)
+        # print("segment_idsssssss:", segment_ids)
+        # print("attention_mask:", attention_mask)
+        # print("targettttttttt:", target)  ## shape target is 2 dim 
 
 
         loss_func = criterion
+        print('loss_func',loss_func)
         optimizer.zero_grad()
 
         if args.mixed_precision:
@@ -225,22 +233,27 @@ def train_one_epoch(loader, model, criterion, optimizer, scaler, device, args, e
                 
         else:
             logits = model(img, caption_token, segment_ids, attention_mask)
-            print("lllllllllllllllllllllllogits:",logits)
-            logits = logits.log_softmax(-1)  # (bs x seqtrain_one_epoch_len x vocab_size)
-            print("lllllllllllllllllllllllogits:",logits)
+            # print("lllllllllllllllllllllllogits:",logits)
+            logits = logits.log_softmax(-1)
+            print("lllllllllllllllllllllllogits:",logits.size())
+            print('targetttttttttttttttttttttttttttttt',target.size())
+            
+
 
             loss = loss_func(logits.permute(0,2,1), target) 
-            print(loss) 
-            print(logits.permute(0,2,1))     
+            # print(loss) 
+            # print(logits.permute(0,2,1))     
 
+        loss.backward()
+        optimizer.step()    
 
-        if args.mixed_precision:
-            scaler.scale(loss).backward()
-            scaler.step(optimizer)
-            scaler.update()
-        else:
-            loss.backward()
-            optimizer.step()    
+        # if args.mixed_precision:
+        #     scaler.scale(loss).backward()
+        #     scaler.step(optimizer)
+        #     scaler.update()
+        # else:
+        #     loss.backward()
+        #     optimizer.step()    
 
         # logits = model(img, caption_token, segment_ids, attention_mask)
         # logits = logits.log_softmax(-1)  # (bs x seq_len x vocab_size)
@@ -255,16 +268,16 @@ def train_one_epoch(loader, model, criterion, optimizer, scaler, device, args, e
         # print('logitssssssssssssssssssssssssssss',logits)
         # print('targetttttttttttttttttttttttttttttt',target)
         
-        bool_label = target > 0
-        print("bool_label",bool_label)
-        pred=logits[bool_label, :].argmax(1)
+        # bool_label = target > 0
+        # # print("bool_label",bool_label)
+        # pred=logits[bool_label, :].argmax(1)
 ####???????
         # pred = logits[aya==0]
         # pred = aya
-        print("pred",pred)
+        # print("pred",pred)
 
-        valid_labels = target[bool_label]  ### i increment this 
-        print("valid_labels",valid_labels)
+        # valid_labels = target[bool_label]  ### i increment this 
+        # print("valid_labels",valid_labels)
         # print("valid_labels.size()",valid_labels.size())
 
         # for i in range(list(valid_labels.size())[0]) :
@@ -273,11 +286,11 @@ def train_one_epoch(loader, model, criterion, optimizer, scaler, device, args, e
         # print("valid_labels",valid_labels)
 
         
-        PREDS.append(pred)
-        TARGETS.append(valid_labels)
+        # PREDS.append(pred)
+        # TARGETS.append(valid_labels)
         
         loss_np = loss.detach().cpu().numpy()
-        acc = (pred == valid_labels).type(torch.float).mean() * 100.
+        # acc = (pred == valid_labels).type(torch.float).mean() * 100.
         train_loss.append(loss_np)
         # bar.set_description('train_loss: %.5f, train_acc: %.2f' % (loss_np,"it is not important"))
         content = f' Train loss: {(loss_np):.4f}'
@@ -290,13 +303,13 @@ def train_one_epoch(loader, model, criterion, optimizer, scaler, device, args, e
         #     'train_batch': epoch*len(loader) + i})
         
 
-    PREDS = torch.cat(PREDS).cpu().numpy()
-    TARGETS = torch.cat(TARGETS).cpu().numpy()
+    # PREDS = torch.cat(PREDS).cpu().numpy()
+    # TARGETS = torch.cat(TARGETS).cpu().numpy()
 
 #     # Calculate total accuracy
-    total_acc = (PREDS == TARGETS).mean() * 100.
+    # total_acc = (PREDS == TARGETS).mean() * 100.
 
-    return np.mean(train_loss), total_acc
+    return np.mean(train_loss), None
 
 def validate(loader, model, criterion, scaler, device, args, epoch):
 
@@ -556,42 +569,229 @@ class Embeddings(nn.Module):
         return embeddings
 
 
+# class Transfer(nn.Module):
+    # def __init__(self,args):
+    #     super(Transfer, self).__init__()
+
+    #     self.args = args
+    #     self.model = models.resnet152(pretrained=True)
+    #     # for p in self.parameters():
+    #     #     p.requires_grad=False
+    #     self.relu = nn.ReLU()
+    #     self.conv2 = nn.Conv2d(2048, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
+    #     self.gap2 = nn.AdaptiveAvgPool2d((1,1))
+    #     self.conv3 = nn.Conv2d(1024, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
+    #     self.gap3 = nn.AdaptiveAvgPool2d((1,1))
+    #     self.conv4 = nn.Conv2d(512, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
+    #     self.gap4 = nn.AdaptiveAvgPool2d((1,1))
+    #     self.conv5 = nn.Conv2d(256, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
+    #     self.gap5 = nn.AdaptiveAvgPool2d((1,1))
+    #     self.conv7 = nn.Conv2d(64, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
+    #     self.gap7 = nn.AdaptiveAvgPool2d((1,1))
+    # def forward(self, img):
+    #     modules2 = list(self.model.children())[:-2]
+    #     fix2 = nn.Sequential(*modules2)
+    #     v_2 = self.gap2(self.relu(self.conv2(fix2(img)))).view(-1,self.args.hidden_size)
+    #     modules3 = list(self.model.children())[:-3]
+    #     fix3 = nn.Sequential(*modules3)
+    #     v_3 = self.gap3(self.relu(self.conv3(fix3(img)))).view(-1,self.args.hidden_size)
+    #     modules4 = list(self.model.children())[:-4]
+    #     fix4 = nn.Sequential(*modules4)
+    #     v_4 = self.gap4(self.relu(self.conv4(fix4(img)))).view(-1,self.args.hidden_size)
+    #     modules5 = list(self.model.children())[:-5]
+    #     fix5 = nn.Sequential(*modules5)
+    #     v_5 = self.gap5(self.relu(self.conv5(fix5(img)))).view(-1,self.args.hidden_size)
+    #     modules7 = list(self.model.children())[:-7]
+    #     fix7 = nn.Sequential(*modules7)
+    #     v_7 = self.gap7(self.relu(self.conv7(fix7(img)))).view(-1,self.args.hidden_size)
+    #     return v_2, v_3, v_4, v_5, v_7
+
 class Transfer(nn.Module):
     def __init__(self,args):
         super(Transfer, self).__init__()
+        if args.image_embedding =="resnet":  ### it is a condition 
+            self.args = args
+            self.model = models.resnet152(pretrained=True)
+            # for p in self.parameters():
+            #     p.requires_grad=False
+            self.relu = nn.ReLU()
+            self.conv2 = nn.Conv2d(2048, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            self.gap2 = nn.AdaptiveAvgPool2d((1,1))
+            self.conv3 = nn.Conv2d(1024, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            self.gap3 = nn.AdaptiveAvgPool2d((1,1))
+            self.conv4 = nn.Conv2d(512, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            self.gap4 = nn.AdaptiveAvgPool2d((1,1))
+            self.conv5 = nn.Conv2d(256, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            self.gap5 = nn.AdaptiveAvgPool2d((1,1))
+            self.conv7 = nn.Conv2d(64, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            self.gap7 = nn.AdaptiveAvgPool2d((1,1))
+            # self.args = args
+            # self.model = models.resnet152(pretrained=True)
+            # # for p in self.parameters():
+            # #     p.requires_grad=False
+            # self.relu = nn.ReLU()
+            # self.conv2 = nn.Conv2d(2048, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            # self.gap2 = nn.AdaptiveAvgPool2d((1,1))
+            # self.conv3 = nn.Conv2d(1024, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            # self.gap3 = nn.AdaptiveAvgPool2d((1,1))
+            # self.conv4 = nn.Conv2d(512, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            # self.gap4 = nn.AdaptiveAvgPool2d((1,1))
+            # self.conv5 = nn.Conv2d(256, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            # self.gap5 = nn.AdaptiveAvgPool2d((1,1))
+            # self.conv7 = nn.Conv2d(64, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            # self.gap7 = nn.AdaptiveAvgPool2d((1,1))
+        elif args.image_embedding == "vision":
 
-        self.args = args
-        self.model = models.resnet152(pretrained=True)
-        # for p in self.parameters():
-        #     p.requires_grad=False
-        self.relu = nn.ReLU()
-        self.conv2 = nn.Conv2d(2048, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
-        self.gap2 = nn.AdaptiveAvgPool2d((1,1))
-        self.conv3 = nn.Conv2d(1024, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
-        self.gap3 = nn.AdaptiveAvgPool2d((1,1))
-        self.conv4 = nn.Conv2d(512, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
-        self.gap4 = nn.AdaptiveAvgPool2d((1,1))
-        self.conv5 = nn.Conv2d(256, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
-        self.gap5 = nn.AdaptiveAvgPool2d((1,1))
-        self.conv7 = nn.Conv2d(64, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
-        self.gap7 = nn.AdaptiveAvgPool2d((1,1))
-    def forward(self, img):
-        modules2 = list(self.model.children())[:-2]
-        fix2 = nn.Sequential(*modules2)
-        v_2 = self.gap2(self.relu(self.conv2(fix2(img)))).view(-1,self.args.hidden_size)
-        modules3 = list(self.model.children())[:-3]
-        fix3 = nn.Sequential(*modules3)
-        v_3 = self.gap3(self.relu(self.conv3(fix3(img)))).view(-1,self.args.hidden_size)
-        modules4 = list(self.model.children())[:-4]
-        fix4 = nn.Sequential(*modules4)
-        v_4 = self.gap4(self.relu(self.conv4(fix4(img)))).view(-1,self.args.hidden_size)
-        modules5 = list(self.model.children())[:-5]
-        fix5 = nn.Sequential(*modules5)
-        v_5 = self.gap5(self.relu(self.conv5(fix5(img)))).view(-1,self.args.hidden_size)
-        modules7 = list(self.model.children())[:-7]
-        fix7 = nn.Sequential(*modules7)
-        v_7 = self.gap7(self.relu(self.conv7(fix7(img)))).view(-1,self.args.hidden_size)
-        return v_2, v_3, v_4, v_5, v_7
+            self.args = args
+            self.model1 = models.resnet152(pretrained=True)
+            # for p in self.parameters():
+            #     p.requires_grad=False
+            self.relu = nn.ReLU()
+            # self.conv2 = nn.Conv2d(2048, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            # self.gap2 = nn.AdaptiveAvgPool2d((1,1))
+            self.conv2 = nn.Conv2d(196, 768, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            self.gap2 = nn.AdaptiveAvgPool2d((1,1))
+
+            self.conv3 = nn.Conv2d(1024, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            self.gap3 = nn.AdaptiveAvgPool2d((1,1))
+            self.conv4 = nn.Conv2d(512, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            self.gap4 = nn.AdaptiveAvgPool2d((1,1))
+            self.conv5 = nn.Conv2d(256, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            self.gap5 = nn.AdaptiveAvgPool2d((1,1))
+            self.conv7 = nn.Conv2d(64, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            self.gap7 = nn.AdaptiveAvgPool2d((1,1))
+            self.model2 = \
+            torch.hub.load('facebookresearch/deit:main', 'deit_base_patch16_224', pretrained=True)
+            # relu = nn.ReLU()
+            # conv2 = nn.Conv2d(196, 768, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            # gap2 = nn.AdaptiveAvgPool2d((1,1))
+            # conv3 = nn.Conv2d(1024, 768, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            # gap3 = nn.AdaptiveAvgPool2d((1,1))
+            # conv4 = nn.Conv2d(512, 768, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            # gap4 = nn.AdaptiveAvgPool2d((1,1))
+            # conv5 = nn.Conv2d(256, 768, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            # gap5 = nn.AdaptiveAvgPool2d((1,1))
+            # conv7 = nn.Conv2d(64, 768, kernel_size=(1, 1), stride=(1, 1), bias=False)
+            # gap7 = nn.AdaptiveAvgPool2d((1,1))
+            # self.relu = nn.ReLU()
+            
+
+
+
+            ### layer specification 
+
+
+    def forward(self, img):  ## is a singleimg or a batch of images???!!!
+        # print("imaaaaaaaaaaaaaaaaaaaaaaggggeeeeeee:",img.size())
+        if self.args.image_embedding =="resnet":
+            modules2 = list(self.model.children())[:-2]
+            fix2 = nn.Sequential(*modules2)
+            v_2 = self.gap2(self.relu(self.conv2(fix2(img)))).view(-1,self.args.hidden_size)
+            modules3 = list(self.model.children())[:-3]
+            fix3 = nn.Sequential(*modules3)
+            v_3 = self.gap3(self.relu(self.conv3(fix3(img)))).view(-1,self.args.hidden_size)
+            modules4 = list(self.model.children())[:-4]
+            fix4 = nn.Sequential(*modules4)
+            v_4 = self.gap4(self.relu(self.conv4(fix4(img)))).view(-1,self.args.hidden_size)
+            modules5 = list(self.model.children())[:-5]
+            fix5 = nn.Sequential(*modules5)
+            v_5 = self.gap5(self.relu(self.conv5(fix5(img)))).view(-1,self.args.hidden_size)
+            modules7 = list(self.model.children())[:-7]
+            fix7 = nn.Sequential(*modules7)
+            v_7 = self.gap7(self.relu(self.conv7(fix7(img)))).view(-1,self.args.hidden_size)
+            return v_2, v_3, v_4, v_5, 
+
+            # modules2 = list(self.model.children())[:-2] ## do ta mandeh be akhari !!
+            # fix2 = nn.Sequential(*modules2)  ## sequential
+            # # print("fix2 structure alone:",fix2[-1:])
+
+            # # print("fix2 structure:", fix2(img).size())
+            # v_2 = self.gap2(self.relu(self.conv2(fix2(img)))).view(-1,self.args.hidden_size)
+            # # print("self.conv2(fix2)",self.conv2(fix2(img)).size())
+            # # print("")
+            # # print("v2size:", v_2.size())  ### (12, 768)
+            # modules3 = list(self.model.children())[:-3] ### 3 ta laye be akhari 
+            # fix3 = nn.Sequential(*modules3)
+            # v_3 = self.gap3(self.relu(self.conv3(fix3(img)))).view(-1,self.args.hidden_size)
+            # # print("v3size:", v_3.size())  ###
+            # modules4 = list(self.model.children())[:-4]
+            # fix4 = nn.Sequential(*modules4)
+            # v_4 = self.gap4(self.relu(self.conv4(fix4(img)))).view(-1,self.args.hidden_size)
+            # modules5 = list(self.model.children())[:-5]
+            # fix5 = nn.Sequential(*modules5)
+            # v_5 = self.gap5(self.relu(self.conv5(fix5(img)))).view(-1,self.args.hidden_size)
+            # modules7 = list(self.model.children())[:-7]
+            # fix7 = nn.Sequential(*modules7)
+            # v_7 = self.gap7(self.relu(self.conv7(fix7(img)))).view(-1,self.args.hidden_size)
+            # return v_2, v_3, v_4, v_5, v_7  ## 5 feature vector extracted 
+
+        elif self.args.image_embedding == "vision":
+            
+            modules2 = list(self.model2.children())[:]
+            fix2 = nn.Sequential(*modules2)
+    
+            # print(len(fix2))
+            z=fix2(img)
+            # print("z.size()in vision ", z.size())
+            z=z.view(img.size()[0],196,10,100)
+            z=self.conv2(z)
+            # print("z_size() after conv2",z.size())
+            z_relu=self.relu(z)
+            # print(z_relu)
+            z_gap = self.gap2(z_relu)
+            # print("z_gap.size()", z_gap.size())
+            z_gap = z_gap.view(img.size()[0],-1)
+            # v_2 =self.gap2(self.relu(self.conv2(z))).view(-1,768)
+            v_2=z_gap
+
+            # modules2 = list(self.model.children())[:-2] ## do ta mandeh be akhari !!
+            # fix2 = nn.Sequential(*modules2)  ## sequential
+            # print("fix2 structure alone:",fix2[-1:])
+
+            # print("fix2 structure:", fix2(img).size())
+            # v_2 = self.gap2(self.relu(self.conv2(fix2(img)))).view(-1,self.args.hidden_size)
+            # print("self.conv2(fix2)",self.conv2(fix2(img)).size())
+            # print("")
+            # print("v2size:", v_2.size())  ### (12, 768)
+            modules3 = list(self.model1.children())[:-3] ### 3 ta laye be akhari 
+            fix3 = nn.Sequential(*modules3)
+            v_3 = self.gap3(self.relu(self.conv3(fix3(img)))).view(-1,self.args.hidden_size)
+            # print("v3size:", v_3.size())  ###
+            modules4 = list(self.model1.children())[:-4]
+            fix4 = nn.Sequential(*modules4)
+            v_4 = self.gap4(self.relu(self.conv4(fix4(img)))).view(-1,self.args.hidden_size)
+            modules5 = list(self.model1.children())[:-5]
+            fix5 = nn.Sequential(*modules5)
+            v_5 = self.gap5(self.relu(self.conv5(fix5(img)))).view(-1,self.args.hidden_size)
+            modules7 = list(self.model1.children())[:-7]
+            fix7 = nn.Sequential(*modules7)
+            v_7 = self.gap7(self.relu(self.conv7(fix7(img)))).view(-1,self.args.hidden_size)
+
+            return v_2, v_3, v_4, v_5, v_7  ## 5 feature vector extracted 
+
+           
+            # # print("v2size:", v_2.size())  ### (1, 768)
+            # modules3 = list(self.model.children())[:-3] ### 3 ta laye be akhari 
+            # fix3 = nn.Sequential(*modules3)
+            # v_3 = self.gap3(self.relu(self.conv3(fix3(img)))).view(-1,self.args.hidden_size)
+            # # print("v3size:", v_3.size())  ###
+            # modules4 = list(self.model.children())[:-4]
+            # fix4 = nn.Sequential(*modules4)
+            # v_4 = self.gap4(self.relu(self.conv4(fix4(img)))).view(-1,self.args.hidden_size)
+            # modules5 = list(self.model.children())[:-5]
+            # fix5 = nn.Sequential(*modules5)
+            # v_5 = self.gap5(self.relu(self.conv5(fix5(img)))).view(-1,self.args.hidden_size)
+            # modules7 = list(self.model.children())[:-7]
+            # fix7 = nn.Sequential(*modules7)
+            # v_7 = self.gap7(self.relu(self.conv7(fix7(img)))).view(-1,self.args.hidden_size)
+            # return v_2, v_3, v_4, v_5, v_7  ## 5 feature vector extracted 
+
+            ### ta in ghesmat kamel shavad 
+## end of Transfer class
+
+
+
+
 
 class MultiHeadedSelfAttention(nn.Module):
     def __init__(self,args):
