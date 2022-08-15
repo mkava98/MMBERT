@@ -12,7 +12,9 @@ from torchvision import transforms
 from torch import optim
 from torch.optim import lr_scheduler
 
-from roco_utils import load_mlm_data, train_one_epoch, validate, get_keywords, Model, ROCO
+from roco_utils_med import load_mlm_data, train_one_epoch, validate, get_keywords, Model, ROCO
+# from roco_utils import load_mlm_data, train_one_epoch, validate, get_keywords, Model, ROCO
+
 from timm.data.constants import IMAGENET_DEFAULT_MEAN, IMAGENET_DEFAULT_STD
 
 if __name__ == '__main__':
@@ -46,6 +48,8 @@ if __name__ == '__main__':
     parser.add_argument('--hidden_size', type=int, default=768, help='embedding size')
     parser.add_argument('--hidden_dropout_prob', type=float, default=0.3, help='dropout')
     parser.add_argument('--image_embedding', type = str, required = False, default = "vision", help = "Name of image extractor")
+    parser.add_argument('--bert_model', type = str, required = False, default = "bert-base-uncased", help = "Name of Bert Model")
+    parser.add_argument('--num_vis', type = int, required = False,default=5, help = "num of visual embeddings")
 
 
     args = parser.parse_args()
@@ -154,7 +158,7 @@ if __name__ == '__main__':
         #     name = str('recorder_2'+f'{(epoch+1)}'+'.pt')
         #     torch.save(recorder, os.path.join(args.save_dir,name ))
         if (epoch + 1) % save_recorder == 0:
-            name = str('recorder_5'+f'{(epoch+1)}'+'.pt')
+            name = str('recorder_med'+f'{(epoch+1)}'+'.pt')
             torch.save(model.state_dict(), os.path.join(args.save_dir,name ))    
 
         # wandb.log({'epoch_train_loss': train_loss,

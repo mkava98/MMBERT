@@ -554,7 +554,7 @@ class Transformer(nn.Module):
         super(Transformer,self).__init__()
         if args.bert_model=="distilbert-base-uncased": ### specify distile bert 
             base_model=DistilBertModel.from_pretrained(args.bert_model)
-        else:
+        elif args.bert_model=="bert-base-uncased":
             base_model = BertModel.from_pretrained(args.bert_model) ## other model 
 
         # base_model = BertModel.from_pretrained('bert-base-multilingual-cased')

@@ -31,10 +31,10 @@ if __name__ == '__main__':
 
     # parser.add_argument('--run_name', type = str, required = True, help = "run name for wandb")
     parser.add_argument('--data_dir', type = str, required = False, default = "../data/vqamed", help = "path for data")
-    parser.add_argument('--model_dir', type = str, required = False, default = "/home/viraj.bagal/viraj/medvqa/Weights/roco_mlm/val_loss_3.pt", help = "path to load weights")
+    parser.add_argument('--model_dir', type = str, required = False, default = "../roco_mlm/recorder_med15.pt", help = "path to load weights")
     parser.add_argument('--save_dir', type = str, required = False, default = "/home/viraj.bagal/viraj/medvqa/Weights/ic19", help = "path to save weights")
     parser.add_argument('--category', type =boolean, required = False, default = False,  help = "choose specific category if you want")
-    parser.add_argument('--use_pretrained', action = 'store_true', default = False, help = "use pretrained weights or not")
+    parser.add_argument('--use_pretrained', action = 'store_true', default = True, help = "use pretrained weights or not")
     parser.add_argument('--mixed_precision', action = 'store_true', default = True, help = "use mixed precision or not")
     parser.add_argument('--clip', action = 'store_true', default = False, help = "clip the gradients or not")
 
@@ -64,6 +64,7 @@ if __name__ == '__main__':
     parser.add_argument('--num_vis', type = int, required = False,default=5, help = "num of visual embeddings")
     # parser.add_argument('--all_category', type =boolean, required= False, help = "yes or no category")
     parser.add_argument('--image_embedding', type = str, required = False, default = "vision", help = "Name of image extractor")
+    parser.add_argument('--bert_model', type = str, required = False, default = "bert-base-uncased", help = "Name of Bert Model")
 
 
     args = parser.parse_args()
