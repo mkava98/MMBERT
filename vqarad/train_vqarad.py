@@ -107,7 +107,7 @@ if __name__ == '__main__':
     parser.add_argument('--factor', type = float, required = False, default = 0.1, help = "factor for rlp")
     parser.add_argument('--patience', type = int, required = False, default = 200, help = "patience for rlp")
     # parser.add_argument('--lr_min', type = float, required = False, default = 1e-6, help = "minimum lr for Cosine Annealing")
-    parser.add_argument('--hidden_dropout_prob', type = float, required = False, default = 0.3, help = "hidden dropout probability")
+    parser.add_argument('--hidden_dropout_prob', type = float, required = True, default = 0.3, help = "hidden dropout probability")
     """
     This conceptualization suggests that perhaps dropout breaks-up situations where network layers 
     -adapt to correct mistakes from prior layers, in turn making the model more robust.

@@ -53,26 +53,26 @@ transform = transforms.Compose([
 
 img = Image.open(requests.get("https://raw.githubusercontent.com/pytorch/ios-demo-app/master/HelloWorld/HelloWorld/HelloWorld/image.png", stream=True).raw)
 img = transform(img)[None,]
-out = model(img)
+# out = model(img)
 
 
 
-# print("children -2222",list(model.children())[:])
-print (len(list(model.children())[0:]))   #### length 6 i can 
-print (len(list(model.children())[1:]))   #### length 6 i can
-print (len(list(model.children())[2:]))   #### length 6 i can 
-print (len(list(model.children())[3:]))   #### length 6 i can 
-print (len(list(model.children())[4:]))   #### length 6 i can 
-print (len(list(model.children())[5:]))   #### length 6 i can 
-# print (len(list(model.children())[6:]))   #### length 6 i can
+# # print("children -2222",list(model.children())[:])
+# print (len(list(model.children())[0:]))   #### length 6 i can 
+# print (len(list(model.children())[1:]))   #### length 6 i can
+# print (len(list(model.children())[2:]))   #### length 6 i can 
+# print (len(list(model.children())[3:]))   #### length 6 i can 
+# print (len(list(model.children())[4:]))   #### length 6 i can 
+# print (len(list(model.children())[5:]))   #### length 6 i can 
+# # print (len(list(model.children())[6:]))   #### length 6 i can
 
-print ("list(model.children())[0:]",len(list(model.children())[0:])) #### length 6 
-print ("list(model.children())[0:]",list(list(model.children())[0:])) #### length 6 
-print ("list(model.children())[0:]",list(model.children())[0:]) #### length 6 
+# print ("list(model.children())[0:]",len(list(model.children())[0:])) #### length 6 
+# print ("list(model.children())[0:]",list(list(model.children())[0:])) #### length 6 
+# print ("list(model.children())[0:]",list(model.children())[0:]) #### length 6 
 
 
-print ("list(model.children())[0:]",type(list(model.children())[0:])) #### length 6 
-print ("list(model.children())[0:]",model.children()) #### length 6 
+# print ("list(model.children())[0:]",type(list(model.children())[0:])) #### length 6 
+# print ("list(model.children())[0:]",model.children()) #### length 6 
 
 
 # print ("list(model.children())[1:]" , list(model.children())[1:])   #### length 5
@@ -84,12 +84,12 @@ print ("list(model.children())[0:]",model.children()) #### length 6
 
 
 
-modules2 = list(model.children())[:]
+modules2 = list(model.children())[:-5]
 fix2 = nn.Sequential(*modules2)
 z=fix2(img)
-print(z.size())
-z=z.view(1,196,10,100)
-v_2 =gap2(relu(conv2(z))).view(-1,768)
+print("khoruji laye akhar",z.size())
+# z=z.view(1,196,10,100)
+# v_2 =gap2(relu(conv2(z))).view(-1,768)
 
 
 # print(z.size())

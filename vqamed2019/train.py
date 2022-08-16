@@ -2,7 +2,6 @@ import argparse
 import pwd
 from xmlrpc.client import boolean
 from utils import seed_everything, Model, VQAMed, train_one_epoch, validate, test, load_data, LabelSmoothing, train_img_only, val_img_only, test_img_only
-# import wandb
 import pandas as pd
 import numpy as np
 import torch
@@ -23,30 +22,28 @@ from timm.data.constants import IMAGENET_DEFAULT_MEAN, IMAGENET_DEFAULT_STD
 
 warnings.simplefilter("ignore", UserWarning)
 
-
-
 if __name__ == '__main__':
-    # print("addres)
+
     parser = argparse.ArgumentParser(description = "Finetune on ImageClef 2019")
 
-    # parser.add_argument('--run_name', type = str, required = True, help = "run name for wandb")
     parser.add_argument('--data_dir', type = str, required = False, default = "../data/vqamed", help = "path for data")
+    
     parser.add_argument('--model_dir', type = str, required = False, default = "../roco_mlm/recorder_med15.pt", help = "path to load weights")
-    parser.add_argument('--save_dir', type = str, required = False, default = "/home/viraj.bagal/viraj/medvqa/Weights/ic19", help = "path to save weights")
-    parser.add_argument('--category', type =boolean, required = False, default = False,  help = "choose specific category if you want")
-    parser.add_argument('--use_pretrained', action = 'store_true', default = True, help = "use pretrained weights or not")
+    parser.add_argument('--save_dir', type = str, required = False, default = "../VQAmedSave/", help = "path to save weights")
+    parser.add_argument('--category', type =str, required = False, default =None,  help = "choose specific category if you want")
+    parser.add_argument('--use_pretrained', action = 'store_true', default = False, help = "use pretrained weights or not")
     parser.add_argument('--mixed_precision', action = 'store_true', default = True, help = "use mixed precision or not")
     parser.add_argument('--clip', action = 'store_true', default = False, help = "clip the gradients or not")
 
     parser.add_argument('--seed', type = int, required = False, default = 42, help = "set seed for reproducibility")
     parser.add_argument('--num_workers', type = int, required = False, default = 0, help = "number of workers")
     parser.add_argument('--epochs', type = int, required = False, default = 2, help = "num epochs to train")
-    parser.add_argument('--train_pct', type = float, required = False, default = 1.0, help = "fraction of train samples to select")
-    parser.add_argument('--valid_pct', type = float, required = False, default = 1.0, help = "fraction of validation samples to select")
-    parser.add_argument('--test_pct', type = float, required = False, default = 1.0, help = "fraction of test samples to select")
+    parser.add_argument('--train_pct', type = float, required = False, default = 1, help = "fraction of train samples to select")
+    parser.add_argument('--valid_pct', type = float, required = False, default = 1, help = "fraction of validation samples to select")
+    parser.add_argument('--test_pct', type = float, required = False, default = 1, help = "fraction of test samples to select")
 
     parser.add_argument('--max_position_embeddings', type = int, required = False, default = 28, help = "max length of sequence")
-    parser.add_argument('--batch_size', type = int, required = False, default = 1, help = "batch size")
+    parser.add_argument('--batch_size', type = int, required = False, default = 8 , help = "batch size")
     parser.add_argument('--lr', type = float, required = False, default = 1e-4, help = "learning rate'")
     # parser.add_argument('--weight_decay', type = float, required = False, default = 1e-2, help = " weight decay for gradients")
     parser.add_argument('--factor', type = float, required = False, default = 0.1, help = "factor for rlp")
@@ -61,43 +58,64 @@ if __name__ == '__main__':
     parser.add_argument('--type_vocab_size', type = int, required = False, default = 2, help = "type vocab size")
     parser.add_argument('--heads', type = int, required = False, default = 12, help = "heads")
     parser.add_argument('--n_layers', type = int, required = False, default= 4, help = "num of layers")
-    parser.add_argument('--num_vis', type = int, required = False,default=5, help = "num of visual embeddings")
+    parser.add_argument('--num_vis', type = int, required = False, default=5, help = "num of visual embeddings")
     # parser.add_argument('--all_category', type =boolean, required= False, help = "yes or no category")
     parser.add_argument('--image_embedding', type = str, required = False, default = "vision", help = "Name of image extractor")
     parser.add_argument('--bert_model', type = str, required = False, default = "bert-base-uncased", help = "Name of Bert Model")
+    parser.add_argument('--allcategory', type =boolean, required =False , default =False ,  help = "choose specific category if you want")
 
 
     args = parser.parse_args()
 
-    # wandb.init(project='medvqa', name = args.run_name, config = args)
-
     seed_everything(args.seed)
 
-
+    # if  args.category==None:
     train_df, val_df, test_df = load_data(args)
 
-    if args.category:
-            
-        train_df = train_df[train_df['category']==args.category].reset_index(drop=True)
-        val_df = val_df[val_df['category']==args.category].reset_index(drop=True)
-        test_df = test_df[test_df['category']==args.category].reset_index(drop=True)
+    # else:
 
-        train_df = train_df[~train_df['answer'].isin(['yes', 'no'])].reset_index(drop = True)
-        val_df = val_df[~val_df['answer'].isin(['yes', 'no'])].reset_index(drop = True)
-        test_df = test_df[~test_df['answer'].isin(['yes', 'no'])].reset_index(drop = True)
+    #     train_df, val_df, test_df = load_data(args)
+        # print("oooooooooooooooooooooo")
+
+    # if  not args.allcategory : 
+    #     print("arg.categorykkkkkkkkkkkkkkkkkkkkkk ", args.allcategory)
+
+        ###  DataFrame has a MultiIndex, this method can remove one or more levels
+        ### added as a column, and a new sequential index is used
+        ### We can use the drop parameter to avoid the old index being added as a column
+
+        # train_df = train_df[train_df['category']==args.category].reset_index(drop=True)
+        # print("rssssssett ",train_df)
+        # val_df = val_df[val_df['category']==args.category].reset_index(drop=True)
+        # test_df = test_df[test_df['category']==args.category].reset_index(drop=True)
+
+        ### Whether each element in the DataFrame is contained in values
+
+        # temp = ~train_df['answer'].isin(['yes', 'no'])
+        # print("~train_df['answer'].isin(['yes', 'no'])",temp)
+        # train_df = train_df[~train_df['answer'].isin(['yes', 'no'])]
+        # print("gggggggggggggggggggggggggggggggg",train_df.columns)
+        # val_df = val_df[~val_df['answer'].isin(['yes', 'no'])]
+        # test_df = test_df[~test_df['answer'].isin(['yes', 'no'])]
+
 
     df = pd.concat([train_df, val_df, test_df]).reset_index(drop=True)
+
+    print("TTTTTTTTTTTTTTTRAinnnnnnn\n", train_df)
+    print("vvvvvvvvvvvvvvvvvvvvvvvv\n", val_df)
+    print("sssssssssssssssssss\n", test_df)
 
     ans2idx = {ans:idx for idx,ans in enumerate(df['answer'].unique())}
     idx2ans = {idx:ans for ans,idx in ans2idx.items()}
     df['answer'] = df['answer'].map(ans2idx).astype(int)
     train_df = df[df['mode']=='train'].reset_index(drop=True)
-    val_df = df[df['mode']=='val'].reset_index(drop=True)
+    val_df = df[df['mode']=='eval'].reset_index(drop=True)
     test_df = df[df['mode']=='test'].reset_index(drop=True) ## with lower 
 
     num_classes = len(ans2idx)
 
     args.num_classes = num_classes
+    print("number of class\n ",num_classes)
 
 
 
@@ -115,7 +133,6 @@ if __name__ == '__main__':
         
     model.to(device)
 
-    # wandb.watch(model, log='all')
 
 
     optimizer = optim.Adam(model.parameters(),lr=args.lr)
@@ -172,7 +189,9 @@ if __name__ == '__main__':
                                     transforms.ToTensor(), 
                                     transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
 
-
+    print("TTTTTTTTTTTTTTTRAinnnnnnn\n", train_df)
+    print("vvvvvvvvvvvvvvvvvvvvvvvv\n", val_df)
+    print("sssssssssssssssssss\n", test_df)
 
 
     traindataset = VQAMed(train_df, imgsize = args.image_size, tfm = train_tfm, args = args)
@@ -199,34 +218,22 @@ if __name__ == '__main__':
 
         scheduler.step(val_loss)
      
-        print(val_acc)
-        if not args.category:
-
-            log_dict = acc
+        print("val_acc" , val_acc)
+        if  args.category == None: ### false
+            pass
+            # log_dict = acc
             
-            for k,v in bleu.items():
-                log_dict[k] = v
+            # for k,v in bleu.items():
+            #     log_dict[k] = v
 
-            log_dict['train_loss'] = train_loss
-            log_dict['test_loss'] = test_loss
-            log_dict['learning_rate'] = optimizer.param_groups[0]["lr"]
-            print(log_dict)
-            # wandb.log(log_dict)
-
-        # else:
-
-        #     wandb.log({'train_loss': train_loss,
-        #                 'val_loss': val_loss,
-        #                 'test_loss': test_loss,
-        #                 'learning_rate': optimizer.param_groups[0]["lr"],
-        #                 f'val_{args.category}_acc': val_acc,
-        #                 f'val_{args.category}_bleu': val_bleu,
-        #                 f'{args.category}_acc': acc,
-        #                 f'{args.category}_bleu': bleu}) 
+            # log_dict['train_loss'] = train_loss
+            # log_dict['test_loss'] = test_loss
+            # log_dict['learning_rate'] = optimizer.param_groups[0]["lr"]
 
 
+            # print(log_dict)
 
-        if not args.category:
+        if  args.category== None:
 
             if val_acc['val_total_acc'] > best_acc1:
                 torch.save(model.state_dict(),os.path.join(args.save_dir, f'{args.run_name}_acc.pt'))
@@ -236,15 +243,16 @@ if __name__ == '__main__':
 
             if val_acc > best_acc1:
                 print('Saving model')
-                torch.save(model.state_dict(),os.path.join(args.save_dir, f'{args.run_name}_acc.pt'))
+                torch.save(model.state_dict(),os.path.join(args.save_dir, f'recorder{epoch}_acc.pt'))
                 best_acc1 = val_acc 
 
+        # if  args.allcategory:
 
 
-        if val_acc['val_total_acc']  > best_acc2:
-            counter = 0
-            best_acc2 = val_acc['val_total_acc'] 
-        else:
-            counter+=1
-            if counter > 20:
-                break      
+        #     if val_acc['val_total_acc']  > best_acc2:
+        #         counter = 0
+        #         best_acc2 = val_acc['val_total_acc'] 
+        #     else:
+        #         counter+=1
+        #         if counter > 20:
+        #             break      

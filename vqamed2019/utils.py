@@ -24,7 +24,21 @@ from random import choice
 import matplotlib.pyplot as plt
 
 import pretrainedmodels
+ 
+##  seed every thing 
 
+### Function that sets seed for pseudo-random number generators in
+
+###Second, you can configure PyTorch to avoid using nondeterministic algorithms for some operations, 
+###so that multiple calls to those operations, given the same inputs, will produce the same result.
+"""
+
+reproducible results are not guaranteed across PyTorch releases, individual commits, or 
+different platforms. Furthermore, 
+results may not be reproducible between CPU and GPU executions, 
+even when using identical seeds.
+
+"""
 def seed_everything(seed):
     random.seed(seed)
     os.environ['PYTHONHASHSEED'] = str(seed)
@@ -37,128 +51,94 @@ def seed_everything(seed):
 
 
 
-def make_df(file_path):
-    paths = os.listdir(file_path)
+# def make_df(file_path):
+#     paths = os.listdir(file_path)
     
-    df_list = []
+#     df_list = []
     
-    for p in paths:
-        df = pd.read_csv(os.path.join(file_path, p), sep='|', names = ['img_id', 'question', 'answer'])
-        df['category'] = p.split('_')[1]
-        df['mode'] = p.split('_')[2][:-4]
-        df_list.append(df)
+#     for p in paths:
+#         df = pd.read_csv(os.path.join(file_path, p), sep='|', names = ['img_id', 'question', 'answer'])
+#         df['category'] = p.split('_')[1]  ## column
+#         df['mode'] = p.split('_')[2][:-4]
+#         df_list.append(df)
     
-    return pd.concat(df_list)
+#     return pd.concat(df_list)
 
 def load_data(args, remove = None):
-    print(os.getcwd())
-    traindf = pd.read_csv(os.path.join(args.data_dir, 'traindf.csv'),nrows=100)
-    valdf = pd.read_csv(os.path.join(args.data_dir, 'valdf.csv'),nrows=100)
-    testdf = pd.read_csv(os.path.join(args.data_dir, 'testdf.csv'),nrows=100)
-
-    if remove is not None:
-        traindf = traindf[~traindf['img_id'].isin(remove)].reset_index(drop=True)
-
-    traindf['img_id'] = traindf['img_id'].apply(lambda x: os.path.join(args.data_dir, 'ImageClef-2019-VQA-Med-Training/Train_images', x + '.jpg'))
-    # traindf['img_id'] = traindf['img_id'].apply(lambda x: os.path.join(args.data_dir, 'ImageClef-2019-VQA-Med-Training/Train_images', x ))
-
-    valdf['img_id'] = valdf['img_id'].apply(lambda x: os.path.join(args.data_dir, 'ImageClef-2019-VQA-Med-Validation/Val_images', x + '.jpg'))
-    # valdf['img_id'] = valdf['img_id'].apply(lambda x: os.path.join(args.data_dir, 'ImageClef-2019-VQA-Med-Validation/Val_images', x ))
-
+    testdf = pd.read_csv(os.path.join(args.data_dir, 'testdf.csv'))
+    testdf = testdf.loc[:, ~testdf.columns.str.contains('^Unnamed')]
     testdf['img_id'] = testdf['img_id'].apply(lambda x: os.path.join(args.data_dir, 'ImageClef-2019-VQA-Med-Test/VQAMed2019_Test_Images', x + '.jpg'))
-    # testdf['img_id'] = testdf['img_id'].apply(lambda x: os.path.join(args.data_dir, 'ImageClef-2019-VQA-Med-Test/VQAMed2019_Test_Images', x ))
 
-    # testdf['img_id'] = testdf['img_id'].apply(lambda x: os.path.join(args.data_dir, x + '.jpg'))
+
+    if args.category == None :
+        print(os.getcwd())
+        traindf = pd.read_csv(os.path.join(args.data_dir, 'traindf.csv'),nrows=100)
+        valdf = pd.read_csv(os.path.join(args.data_dir, 'valdf.csv'),nrows=100)
+
+        traindf = traindf.loc[:, ~traindf.columns.str.contains('^Unnamed')]
+        valdf = valdf.loc[:, ~valdf.columns.str.contains('^Unnamed')]
+
+
+        if remove is not None:
+            traindf = traindf[~traindf['img_id'].isin(remove)].reset_index(drop=True)
+
+        traindf['img_id'] = traindf['img_id'].apply(lambda x: os.path.join(args.data_dir, 'ImageClef-2019-VQA-Med-Training/Train_images', x + '.jpg'))
+
+        valdf['img_id'] = valdf['img_id'].apply(lambda x: os.path.join(args.data_dir, 'ImageClef-2019-VQA-Med-Validation/Val_images', x + '.jpg'))
+
+    else:
+        print("goooooooooooooooooo")
+        l= (os.path.join(args.data_dir, 'ImageClef-2019-VQA-Med-Training/QAPairsByCategory/'))
+        paths= os.listdir(l)
+        for path in paths:
+            if path.split("_")[1]== args.category:
+                traindf = pd.read_csv(f"{l}/{path}", sep="|", header=None, names=["img_id", "question","answer"])
+                traindf["category"]=args.category.lower()
+                
+                traindf["mode"]="train"
+                break
+        traindf['img_id'] = traindf['img_id'].apply(lambda x: os.path.join(args.data_dir, 'ImageClef-2019-VQA-Med-Training/Train_images', x + '.jpg'))
+        
+        print("goooooooooooooooooo")
+        l= (os.path.join(args.data_dir, 'ImageClef-2019-VQA-Med-Validation/QAPairsByCategory/'))
+        paths= os.listdir(l)
+        for path in paths:
+            if path.split("_")[1]== args.category:
+                valdf= pd.read_csv(f"{l}/{path}", sep="|", header=None, names=["img_id", "question","answer"])
+                valdf["category"]=args.category.lower()
+                
+                valdf["mode"]="eval"
+                break
+        valdf['img_id'] = valdf['img_id'].apply(lambda x: os.path.join(args.data_dir, 'ImageClef-2019-VQA-Med-Validation/Val_images', x + '.jpg'))
+        when= testdf['category']== args.category.lower() 
+        testdf= testdf[when]
+        # testdf=testdf.drop(['category'], axis=1)
+
 
     traindf['category'] = traindf['category'].str.lower()
+    traindf['answer'] = traindf['answer'].str.lower()
+
     valdf['category'] = valdf['category'].str.lower()
+    valdf['answer'] = valdf['answer'].str.lower()
+
+    testdf['answer'] = testdf['answer'].str.lower()
     testdf['category'] = testdf['category'].str.lower()
 
 
-    traindf['answer'] = traindf['answer'].str.lower()
-    valdf['answer'] = valdf['answer'].str.lower()
-    testdf['answer'] = testdf['answer'].str.lower()
 
     traindf = traindf.sample(frac = args.train_pct)
     valdf = valdf.sample(frac = args.valid_pct)
     testdf = testdf.sample(frac = args.test_pct)
 
-
     return traindf, valdf, testdf
 
-# def load_2020_data(args):
-
-    remove_train2020 = ['synpic52595', 'synpic61281', 'synpic43628', 'synpic15348', 'synpic35145', 'synpic20101', 'synpic20412', 'synpic45126', 'synpic26398', 'synpic15349', \
-                       'synpic37214', 'synpic52598', 'synpic46660', 'synpic36320', 'synpic34054', 'synpic58686', 'synpic15888', 'synpic19909', 'synpic24243', 'synpic39311', \
-                       'synpic18484', 'synpic24871', 'synpic31586', 'synpic47242', 'synpic36969', 'synpic21626', 'synpic22983', 'synpic40377', 'synpic48870', 'synpic43583', \
-                       'synpic45128', 'synpic32198', 'synpic31080', 'synpic45115', 'synpic28125', 'synpic45123', 'synpic23844', 'synpic17714','synpic52608', 'synpic52601', \
-                       'synpic47246', 'synpic15351', 'synpic46658', 'synpic45039', 'synpic31101', 'synpic52611', 'synpic31083', 'synpic49269', 'synpic23197', 'synpic27940', \
-                       'synpic37880']
-    remove_val2020 = ['synpic48867', 'synpic22792', 'synpic20410', 'synpic52301', 'synpic52606', 'synpic41310', 'synpic21537', 'synpic28001', 'synpic21967', 'synpic45120', \
-                     'synpic45129', 'synpic30873', 'synpic20402']
-    remove_train2019 = ['synpic21456', 'synpic21845', 'synpic47995', 'synpic48869', 'synpic52613', 'synpic31716', 'synpic27917','synpic39365', 'synpic19434', 'synpic52600', \
-                       'synpic56649', 'synpic52603', 'synpic52610', 'synpic46659', 'synpic19533']
-
-
-    traindf = pd.read_csv(os.path.join(args.datapath2020, 'VQAMed2020-VQAnswering-TrainingSet', 'train.csv'))
-    traindf = traindf[~traindf['imgid'].isin(remove_train2020)].reset_index(drop=True)
-    traindf = traindf[~traindf['answer'].isin(['yes', 'no'])].reset_index(drop=True)
-    valdf = pd.read_csv(os.path.join(args.datapath2020, 'VQAMed2020-VQAnswering-TrainingSet', 'val.csv'))
-    valdf = valdf[~valdf['imgid'].isin(remove_val2020)].reset_index(drop=True)
-    valdf = valdf[~valdf['answer'].isin(['yes', 'no'])].reset_index(drop=True)
-
-    testdf = pd.read_csv(os.path.join(args.datapath2020, 'VQAMed2020-VQAnswering-TrainingSet', 'test.csv'))
-
-    traindf['imgid'] = traindf['imgid'].apply(lambda x: args.datapath2020 + '/VQAMed2020-VQAnswering-TrainingSet/VQAnswering_2020_Train_images/' + x + '_224.jpg')
-    valdf['imgid'] = valdf['imgid'].apply(lambda x: args.datapath2020 + '/VQAMed2020-VQAnswering-ValidationSet/VQAnswering_2020_Val_images/' + x + '_224.jpg')
-    testdf['imgid'] = testdf['imgid'].apply(lambda x: args.testpath + '/Task1-2020-VQAnswering-Test-Images/' + x + '_224.jpg')
-
-
-
-    classes2020 = list(set(list(traindf['answer'].unique()) + list(valdf['answer'].unique())))
-
-    train19, val19, test19 = load_data(args, remove = remove_train2019)
-
-    df2019 = pd.concat([train19, val19, test19])
-    df2019['category'] = df2019['category'].str.lower()
-
-    print('Shape of 2019 data: ', len(df2019))
-    df2019 = df2019.drop(['category', 'mode'], axis=1)
-    df2019['keyword'] = 'abnorm'
-
-    df2019 = df2019[df2019['answer'].isin(classes2020)].reset_index(drop=True)
-    df2019.columns = ['imgid', 'question', 'answer', 'keyword']
-    traindf = pd.concat([traindf, df2019]).reset_index(drop=True)
-
-    df = pd.concat([traindf, valdf], ignore_index=True)
-    ans2idx = {ans:idx for idx,ans in enumerate(sorted(df['answer'].unique()))}
-    idx2ans = {idx:ans for ans,idx in ans2idx.items()}
-
-    print(df['keyword'].unique())
-    key2idx = {ans:idx for idx,ans in enumerate(sorted(df['keyword'].unique()))}
-    idx2key = {idx:ans for ans,idx in key2idx.items()}
-
-    traindf['answer'] = traindf['answer'].map(ans2idx)
-    valdf['answer'] = valdf['answer'].map(ans2idx)
-
-    traindf['keyword'] = traindf['keyword'].map(key2idx)
-    valdf['keyword'] = valdf['keyword'].map(key2idx)
-    testdf['keyword'] = testdf['keyword'].map(key2idx)
-
-    num_classes = len(ans2idx)
-    print('Number of classes: ', num_classes)
-
-    print('Shape of training set: ', traindf.shape)
-    print('Shape of val set: ', valdf.shape)
-    print('Shape of test set: ', testdf.shape)
-
-    return traindf, valdf, testdf, idx2ans, num_classes
+     
 
 
 
 #Utils
-def gelu(x):
-    return x * 0.5 * (1.0 + torch.erf(x / math.sqrt(2.0)))
+def gelu(x):  ### Computes the error function of input
+    return x * 0.5 * (1.0 + torch.erf(x / math.sqrt(2.0)))  ## square root of a number 
 
 
 def encode_text(caption,tokenizer, args):
@@ -225,7 +205,7 @@ class VQAMed(Dataset):
         self.tfm = tfm
         self.size = imgsize
         self.args = args
-        self.tokenizer = BertTokenizer.from_pretrained('bert-base-uncased') ## it takes time??? 
+        self.tokenizer =BertTokenizer.from_pretrained(args.bert_model) ## it takes time??? 
         ##for two model
         self.mode = mode
 
@@ -233,6 +213,7 @@ class VQAMed(Dataset):
         return len(self.df)
 
     def __getitem__(self, idx):
+
         path = self.df.loc[idx,'img_id']
         question = self.df.loc[idx, 'question']
  
@@ -256,71 +237,71 @@ class VQAMed(Dataset):
         return img, torch.tensor(tokens, dtype = torch.long), torch.tensor(segment_ids, dtype = torch.long), torch.tensor(input_mask, dtype = torch.long), torch.tensor(answer, dtype = torch.long), path
 
 
-class VQAMed_Binary(Dataset):
-    def __init__(self, df, imgsize, tfm, args, mode = 'train'):
-        self.df = df.values
-        self.tfm = tfm
-        self.size = imgsize
-        self.args = args
-        self.tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
-        self.mode = mode
+# class VQAMed_Binary(Dataset):
+#     def __init__(self, df, imgsize, tfm, args, mode = 'train'):
+#         self.df = df.values
+#         self.tfm = tfm
+#         self.size = imgsize
+#         self.args = args
+#         self.tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
+#         self.mode = mode
 
-    def __len__(self):
-        return len(self.df)
+#     def __len__(self):
+#         return len(self.df)
 
-    def __getitem__(self, idx):
-        path = self.df[idx,0]
+#     def __getitem__(self, idx):
+#         path = self.df[idx,0]
 
-        question = self.df[idx, 1]
+#         question = self.df[idx, 1]
 
-        if self.mode != 'test':
-            answer = self.df[idx, 3]
+#         if self.mode != 'test':
+#             answer = self.df[idx, 2]
 
-        if self.mode == 'eval':
-            tok_ques = self.tokenizer.tokenize(question)
+#         if self.mode == 'eval':
+#             tok_ques = self.tokenizer.tokenize(question)
 
-        if self.args.smoothing:
-            answer = onehot(self.args.num_classes, answer)
+#         if self.args.smoothing:
+#             answer = onehot(self.args.num_classes, answer)
 
-        img = cv2.imread(path)
+#         img = cv2.imread(path)
 
 
-        if self.tfm:
-            img = self.tfm(image = img)['image']
+#         if self.tfm:
+#             img = self.tfm(image = img)['image']
             
-        tokens, segment_ids, input_mask= encode_text(question, self.tokenizer, self.args)
+#         tokens, segment_ids, input_mask= encode_text(question, self.tokenizer, self.args)
 
-        if self.args.smoothing:
-            return img, torch.tensor(tokens, dtype = torch.long), torch.tensor(segment_ids, dtype = torch.long) ,torch.tensor(input_mask, dtype = torch.long), answer
-        else:
-            if self.mode == 'train':
-                return img, torch.tensor(tokens, dtype = torch.long), torch.tensor(segment_ids, dtype = torch.long) ,torch.tensor(input_mask, dtype = torch.long), torch.tensor(answer, dtype = torch.long), path
-            elif self.mode == 'test':
-                return img, torch.tensor(tokens, dtype = torch.long), torch.tensor(segment_ids, dtype = torch.long) ,torch.tensor(input_mask, dtype = torch.long)
-            else:
-                return img, torch.tensor(tokens, dtype = torch.long), torch.tensor(segment_ids, dtype = torch.long) ,torch.tensor(input_mask, dtype = torch.long), torch.tensor(answer, dtype = torch.long), tok_ques
+#         if self.args.smoothing:
+#             return img, torch.tensor(tokens, dtype = torch.long), torch.tensor(segment_ids, dtype = torch.long) ,torch.tensor(input_mask, dtype = torch.long), answer
+#         else:
+#             if self.mode == 'train':
+#                 return img, torch.tensor(tokens, dtype = torch.long), torch.tensor(segment_ids, dtype = torch.long) ,torch.tensor(input_mask, dtype = torch.long), torch.tensor(answer, dtype = torch.long), path
+#             elif self.mode == 'test':
+#                 return img, torch.tensor(tokens, dtype = torch.long), torch.tensor(segment_ids, dtype = torch.long) ,torch.tensor(input_mask, dtype = torch.long)
+#             else:
+#                 return img, torch.tensor(tokens, dtype = torch.long), torch.tensor(segment_ids, dtype = torch.long) ,torch.tensor(input_mask, dtype = torch.long), torch.tensor(answer, dtype = torch.long), tok_ques
 
 
 
-class Model_Keyword(nn.Module):
-    def __init__(self, num_classes):
-        super(Model_Keyword, self).__init__()
-        self.model = pretrainedmodels.__dict__['se_resnext50_32x4d'](num_classes=1000, pretrained='imagenet')
-        last_in = self.model.last_linear.in_features
-        self.model.last_linear = nn.Identity()
-        self.embed = nn.Embedding(3, last_in)
-        self.last_layer = nn.Linear(2 * last_in, num_classes)
+# class Model_Keyword(nn.Module):
+#     def __init__(self, num_classes):
+#         super(Model_Keyword, self).__init__()
+#         self.model = pretrainedmodels.__dict__['se_resnext50_32x4d'](num_classes=1000, pretrained='imagenet')
+#         last_in = self.model.last_linear.in_features
+#         self.model.last_linear = nn.Identity()
+#         self.embed = nn.Embedding(3, last_in)
+#         self.last_layer = nn.Linear(2 * last_in, num_classes)
 
-    def forward(self, img, keyword):
+#     def forward(self, img, keyword):
 
-        img_feat = self.model(img)
-        key_feat = self.embed(keyword)
+#         img_feat = self.model(img)
+#         key_feat = self.embed(keyword)
 
-        feat = torch.cat([img_feat, key_feat], -1)
+#         feat = torch.cat([img_feat, key_feat], -1)
 
-        logits = self.last_layer(feat)
+#         logits = self.last_layer(feat)
 
-        return logits
+#         return logits
 
 
 
@@ -340,6 +321,7 @@ class Embeddings(nn.Module):
         self.LayerNorm = nn.LayerNorm(args.hidden_size, eps=1e-12)
         self.dropout = nn.Dropout(args.hidden_dropout_prob)
         self.len = args.max_position_embeddings
+
     def forward(self, input_ids, segment_ids, position_ids=None):
         if position_ids is None:
             if torch.cuda.is_available():
@@ -364,37 +346,51 @@ class Transfer(nn.Module):
 
         self.args = args
         self.num_vis = args.num_vis
-        self.model = models.resnet152(pretrained=True)
-        # for p in self.parameters():
-        #     p.requires_grad=False
-
+        
         if self.num_vis == 5:
 
 
             if self.args.image_embedding == "vision":
 
-                # self.args = args
                 self.model1 = models.resnet152(pretrained=True)
-                # for p in self.parameters():
-                #     p.requires_grad=False
                 self.relu = nn.ReLU()
-                # self.conv2 = nn.Conv2d(2048, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
-                # self.gap2 = nn.AdaptiveAvgPool2d((1,1))
-                self.conv2 = nn.Conv2d(196, 768, kernel_size=(1, 1), stride=(1, 1), bias=False)
+
+                self.conv21 = nn.Conv2d(196, 768, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                self.gap21 = nn.AdaptiveAvgPool2d((1,1))
+
+                self.conv2 = nn.Conv2d(2048, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
                 self.gap2 = nn.AdaptiveAvgPool2d((1,1))
 
                 self.conv3 = nn.Conv2d(1024, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
                 self.gap3 = nn.AdaptiveAvgPool2d((1,1))
+
+                self.conv31 = nn.Conv2d(196, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                self.gap31 = nn.AdaptiveAvgPool2d((1,1))
+
                 self.conv4 = nn.Conv2d(512, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
                 self.gap4 = nn.AdaptiveAvgPool2d((1,1))
+
+                
+                self.conv41 = nn.Conv2d(196, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                self.gap41 = nn.AdaptiveAvgPool2d((1,1))
+
                 self.conv5 = nn.Conv2d(256, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
                 self.gap5 = nn.AdaptiveAvgPool2d((1,1))
+
+
+                self.conv51 = nn.Conv2d(196, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                self.gap51 = nn.AdaptiveAvgPool2d((1,1))
+                
                 self.conv7 = nn.Conv2d(64, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
                 self.gap7 = nn.AdaptiveAvgPool2d((1,1))
+
+                self.conv71 = nn.Conv2d(196, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
+                self.gap71 = nn.AdaptiveAvgPool2d((1,1))
+
                 self.model2 = \
                 torch.hub.load('facebookresearch/deit:main', 'deit_base_patch16_224', pretrained=True)
             else :
-
+                self.model = models.resnet152(pretrained=True)
 
                 self.relu = nn.ReLU()
                 self.conv2 = nn.Conv2d(2048, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
@@ -409,6 +405,8 @@ class Transfer(nn.Module):
                 self.gap7 = nn.AdaptiveAvgPool2d((1,1))
 
         elif self.num_vis == 3:
+            self.model = models.resnet152(pretrained=True)
+
             self.relu = nn.ReLU()
             self.conv2 = nn.Conv2d(2048, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
             self.gap2 = nn.AdaptiveAvgPool2d((1,1))
@@ -418,6 +416,8 @@ class Transfer(nn.Module):
             self.gap4 = nn.AdaptiveAvgPool2d((1,1))
 
         else:
+            self.model = models.resnet152(pretrained=True)
+
             self.relu = nn.ReLU()
             self.conv2 = nn.Conv2d(2048, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
             self.gap2 = nn.AdaptiveAvgPool2d((1,1))            
@@ -427,56 +427,75 @@ class Transfer(nn.Module):
         if self.num_vis == 5: 
 
             if self.args.image_embedding == "vision":
-            
-                modules2 = list(self.model2.children())[:]
-                fix2 = nn.Sequential(*modules2)
-        
-                # print(len(fix2))
-                z=fix2(img)
-                # print("z.size()in vision ", z.size())
-                z=z.view(img.size()[0],196,10,100)
-                z=self.conv2(z)
-                # inter_2 = self.conv2(fix2(img))
-                inter_2=z
-
-                # print("z_size() after conv2",z.size())
-                z_relu=self.relu(z)
-                # print(z_relu)
-                z_gap = self.gap2(z_relu)
-                # print("z_gap.size()", z_gap.size())
-                v_2 = z_gap.view(img.size()[0],-1)
-                # v_2 =self.gap2(self.relu(self.conv2(z))).view(-1,768)
                 
+                modules2 = list(self.model1.children())[:-2]
+                fix2 = nn.Sequential(*modules2)
+                inter_2 = self.conv2(fix2(img))
+                v_2 = self.gap2(self.relu(inter_2)).view(-1,self.args.hidden_size)
 
-                # modules2 = list(self.model.children())[:-2] ## do ta mandeh be akhari !!
-                # fix2 = nn.Sequential(*modules2)  ## sequential
-                # print("fix2 structure alone:",fix2[-1:])
-
-                # print("fix2 structure:", fix2(img).size())
-                # v_2 = self.gap2(self.relu(self.conv2(fix2(img)))).view(-1,self.args.hidden_size)
-                # print("self.conv2(fix2)",self.conv2(fix2(img)).size())
-                # print("")
-                # print("v2size:", v_2.size())  ### (12, 768)
+                modules21 = list(self.model2.children())[:]
+                fix21 = nn.Sequential(*modules21)
+                z=fix21(img)
+                z=z.view(img.size()[0],196,10,100)
+                z=self.conv21(z)
+                inter_21=z
+                z_relu=self.relu(z)
+                z_gap = self.gap21(z_relu)
+                v_21 = z_gap.view(img.size()[0],-1)
+                v_2 = torch.add(v_2, v_21)
+                
                 modules3 = list(self.model1.children())[:-3] ### 3 ta laye be akhari 
                 fix3 = nn.Sequential(*modules3)
                 inter_3 = self.conv3(fix3(img))
                 v_3 = self.gap3(self.relu(inter_3)).view(-1,self.args.hidden_size)
-                # print("v3size:", v_3.size())  ###
+
+                modules31 = list(self.model2.children())[:-1]
+                fix31 = nn.Sequential(*modules31)
+                z=fix31(img)
+                z=z.view(img.size()[0],196,24,32)
+                z=self.conv31(z)
+                inter_31=z
+                z_relu=self.relu(z)
+                z_gap = self.gap31(z_relu)
+                v_31 = z_gap.view(img.size()[0],-1)
+                v_2 = torch.add(v_3, v_31)
+
                 modules4 = list(self.model1.children())[:-4]
                 fix4 = nn.Sequential(*modules4)
                 inter_4 = self.conv4(fix4(img))
                 v_4 = self.gap4(self.relu(inter_4)).view(-1,self.args.hidden_size)
+
+                modules41 = list(self.model2.children())[:-2]
+                fix41 = nn.Sequential(*modules41)
+                inter_41 = self.conv41(fix41(img).view(img.size()[0],196,24,32))
+                v_41 = self.gap41(self.relu(inter_41)).view(-1,self.args.hidden_size)
+                v_4 = torch.add(v_4, v_41)
+
                 modules5 = list(self.model1.children())[:-5]
                 fix5 = nn.Sequential(*modules5)
                 inter_5 = self.conv5(fix5(img))
                 v_5 = self.gap5(self.relu(inter_5)).view(-1,self.args.hidden_size)
+
+                modules51 = list(self.model2.children())[:-3]
+                fix51 = nn.Sequential(*modules5)
+                inter_51 = self.conv51(fix51(img).view(img.size()[0],196,-1,32))
+                v_51 = self.gap51(self.relu(inter_51)).view(-1,self.args.hidden_size)
+                v_5 = torch.add(v_5, v_51)
+
                 modules7 = list(self.model1.children())[:-7]
                 fix7 = nn.Sequential(*modules7)
                 inter_7 = self.conv7(fix7(img))
-
                 v_7 = self.gap7(self.relu(inter_7)).view(-1,self.args.hidden_size)
 
-                return v_2, v_3, v_4, v_5, v_7,[inter_2.mean(1), inter_3.mean(1), inter_4.mean(1), inter_5.mean(1), inter_7.mean(1)]
+                modules71 = list(self.model2.children())[:-4]
+                fix71 = nn.Sequential(*modules71)
+                inter_71 = self.conv71(fix71(img).view(img.size()[0],196,24,32))
+
+                v_71 = self.gap7(self.relu(inter_71)).view(-1,self.args.hidden_size)
+                v_7 = torch.add(v_7, v_71)
+                return v_2, v_3, v_4, v_5, v_7, [inter_2.mean(1), inter_3.mean(1), inter_4.mean(1), inter_5.mean(1), inter_7.mean(1)]
+
+                # return v_2, v_3, v_4, v_5, v_7,[inter_2.mean(1)+inter_21.mean(1), inter_3.mean(1)+inter_31.mean(1), inter_4.mean(1)+inter_41.mean(1), inter_5.mean(1)+inter_51.mean(1), inter_7.mean(1)+inter_71.mean(1)]
 
 
             else:
@@ -808,30 +827,31 @@ def validate(loader, model, criterion, device, scaler, args, val_df, idx2ans):
     TARGETS = torch.cat(TARGETS).cpu().numpy()
 
     # Calculate total and category wise accuracy
-    if  args.category:
-        acc = (PREDS == TARGETS).mean() * 100.
-        bleu = calculate_bleu_score(PREDS,TARGETS,idx2ans)
+    if not args.category == None:
+        if  not args.allcategory:
+            acc = (PREDS == TARGETS).mean() * 100.
+            bleu = calculate_bleu_score(PREDS,TARGETS,idx2ans)
     else:
         total_acc = (PREDS == TARGETS).mean() * 100.
-        binary_acc = (PREDS[val_df['category']=='binary'] == TARGETS[val_df['category']=='binary']).mean() * 100.
+        # binary_acc = (PREDS[val_df['category']=='binary'] == TARGETS[val_df['category']=='binary']).mean() * 100.
         plane_acc = (PREDS[val_df['category']=='plane'] == TARGETS[val_df['category']=='plane']).mean() * 100.
         organ_acc = (PREDS[val_df['category']=='organ'] == TARGETS[val_df['category']=='organ']).mean() * 100.
         modality_acc = (PREDS[val_df['category']=='modality'] == TARGETS[val_df['category']=='modality']).mean() * 100.
         abnorm_acc = (PREDS[val_df['category']=='abnormality'] == TARGETS[val_df['category']=='abnormality']).mean() * 100.
 
-        acc = {'val_total_acc': np.round(total_acc, 4), 'val_binary_acc': np.round(binary_acc, 4), 'val_plane_acc': np.round(plane_acc, 4), 'val_organ_acc': np.round(organ_acc, 4), 
+        acc = {'val_total_acc': np.round(total_acc, 4), 'val_plane_acc': np.round(plane_acc, 4), 'val_organ_acc': np.round(organ_acc, 4), 
                'val_modality_acc': np.round(modality_acc, 4), 'val_abnorm_acc': np.round(abnorm_acc, 4)}
 
         # add bleu score code
         total_bleu = calculate_bleu_score(PREDS,TARGETS,idx2ans)
         plane_bleu = calculate_bleu_score(PREDS[val_df['category']=='plane'],TARGETS[val_df['category']=='plane'],idx2ans)
-        binary_bleu = calculate_bleu_score(PREDS[val_df['category']=='binary'],TARGETS[val_df['category']=='binary'],idx2ans)
+        # binary_bleu = calculate_bleu_score(PREDS[val_df['category']=='binary'],TARGETS[val_df['category']=='binary'],idx2ans)
         organ_bleu = calculate_bleu_score(PREDS[val_df['category']=='organ'],TARGETS[val_df['category']=='organ'],idx2ans)
         modality_bleu = calculate_bleu_score(PREDS[val_df['category']=='modality'],TARGETS[val_df['category']=='modality'],idx2ans)
         abnorm_bleu = calculate_bleu_score(PREDS[val_df['category']=='abnormality'],TARGETS[val_df['category']=='abnormality'],idx2ans)
 
 
-        bleu = {'val_total_bleu': np.round(total_bleu, 4), 'val_binary_bleu': np.round(binary_bleu, 4), 'val_plane_bleu': np.round(plane_bleu, 4), 'val_organ_bleu': np.round(organ_bleu, 4), 
+        bleu = {'val_total_bleu': np.round(total_bleu, 4), 'val_plane_bleu': np.round(plane_bleu, 4), 'val_organ_bleu': np.round(organ_bleu, 4), 
             'val_modality_bleu': np.round(modality_bleu, 4), 'val_abnorm_bleu': np.round(abnorm_bleu, 4)}
 
     return val_loss, PREDS, acc, bleu  
@@ -879,7 +899,7 @@ def test(loader, model, criterion, device, scaler, args, val_df,idx2ans):
     PREDS = torch.cat(PREDS).cpu().numpy()
     TARGETS = torch.cat(TARGETS).cpu().numpy()
 
-    if args.category:
+    if  not args.allcategory:
         acc = (PREDS == TARGETS).mean() * 100.
         bleu = calculate_bleu_score(PREDS,TARGETS,idx2ans)
     else:
@@ -936,92 +956,6 @@ def final_test(loader, all_models, device, args, val_df, idx2ans):
     PREDS = np.concatenate(PREDS)
 
     return PREDS
-
-def test2020(loader, model, device, args):
-
-    model.eval()
-
-    PREDS = []
-
-    with torch.no_grad():
-        for (img, question_token, segment_ids, attention_mask) in tqdm(loader, leave=False):
-
-            img, question_token, segment_ids, attention_mask = img.to(device), question_token.to(device), segment_ids.to(device), attention_mask.to(device)
-            question_token = question_token.squeeze(1)
-            attention_mask = attention_mask.squeeze(1)
-            
-            if args.mixed_precision:
-                with torch.cuda.amp.autocast(): 
-                    logits, _, _ = model(img, question_token, segment_ids, attention_mask)
-                    # logits = model(img)
-            else:
-                logits, _, _ = model(img, question_token, segment_ids, attention_mask)
-                # logits = model(img)
-
-
-            pred = logits.softmax(1).argmax(1).detach()
-            
-            PREDS.append(pred)
-
-
-    PREDS = torch.cat(PREDS).cpu().numpy()
-
-
-    return PREDS
-
-
-def validate2020(loader, model, criterion, device, scaler, args, val_df, idx2ans):
-
-    model.eval()
-    val_loss = []
-
-    PREDS = []
-    TARGETS = []
-    bar = tqdm(loader, leave=False)
-
-    with torch.no_grad():
-        for (img, question_token,segment_ids,attention_mask,target, _) in bar:
-
-            img, question_token,segment_ids,attention_mask,target = img.to(device), question_token.to(device), segment_ids.to(device), attention_mask.to(device), target.to(device)
-            question_token = question_token.squeeze(1)
-            attention_mask = attention_mask.squeeze(1)
-
-
-            if args.mixed_precision:
-                with torch.cuda.amp.autocast(): 
-                    logits, _, _ = model(img, question_token, segment_ids, attention_mask)
-                    loss = criterion(logits, target)
-            else:
-                logits, _ , _= model(img, question_token, segment_ids, attention_mask)
-                loss = criterion(logits, target)
-
-
-            loss_np = loss.detach().cpu().numpy()
-
-            pred = logits.softmax(1).argmax(1).detach()
-
-            PREDS.append(pred)
-
-            if args.smoothing:
-                TARGETS.append(target.argmax(1))
-            else:
-                TARGETS.append(target)
-
-            val_loss.append(loss_np)
-
-            bar.set_description('val_loss: %.5f' % (loss_np))
-
-        val_loss = np.mean(val_loss)
-
-    PREDS = torch.cat(PREDS).cpu().numpy()
-    TARGETS = torch.cat(TARGETS).cpu().numpy()
-
-    acc = (PREDS == TARGETS).mean() * 100.
-    bleu = calculate_bleu_score(PREDS,TARGETS,idx2ans)
-
-
-
-    return val_loss, PREDS, acc, bleu
 
 def val_img_only(loader, model, criterion, device, scaler, args, val_df, idx2ans):
 
@@ -1115,8 +1049,6 @@ def test_img_only(loader, model, criterion, device, scaler, args, test_df, idx2a
     bleu = calculate_bleu_score(PREDS,TARGETS,idx2ans)
 
     return test_loss, PREDS, acc, bleu
-
-
 
 def train_img_only(loader, model, optimizer, criterion, device, scaler, args, idx2ans):
 

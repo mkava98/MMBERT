@@ -160,10 +160,10 @@ class VQAMed(Dataset): ### inheritance does not accure????
         self.df = df.values 
         self.tfm = tfm ### with special transformation
         self.args = args
-        if args.bert_model=="distilbert-base-uncased":
-            self.tokenizer=DistilBertTokenizer.from_pretrained(args.bert_model) ## get specific tokenizer 
-        else:
-            self.tokenizer =BertTokenizer.from_pretrained(args.bert_model)
+        # if args.bert_model=="distilbert-base-uncased":
+        #     self.tokenizer=DistilBertTokenizer.from_pretrained(args.bert_model) ## get specific tokenizer 
+        # else:
+        self.tokenizer =BertTokenizer.from_pretrained(args.bert_model)
         self.mode = mode
 
     def __len__(self):
