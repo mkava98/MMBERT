@@ -328,6 +328,7 @@ class Transfer(nn.Module):
 
             self.model2 = \
             torch.hub.load('facebookresearch/deit:main', 'deit_base_patch16_224', pretrained=True)
+            
             # relu = nn.ReLU()
             # conv2 = nn.Conv2d(196, 768, kernel_size=(1, 1), stride=(1, 1), bias=False)
             # gap2 = nn.AdaptiveAvgPool2d((1,1))

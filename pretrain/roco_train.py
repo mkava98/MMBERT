@@ -22,7 +22,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Pretrain on ROCO with MLM")
 
     parser.add_argument('--run_name', type=str, help="name for wandb run", required=True)
-    parser.add_argument('--category', type =str, required = False, default ="Modality",  help = "choose specific category if you want")
+    parser.add_argument('--category', type =str, required = False, default ="Abnormality",  help = "choose specific category if you want")
 
     parser.add_argument('--data_dir', type=str, default = '../data/roco/all_data', help='path to dataset', required = False)
     ### we do not use absolute address

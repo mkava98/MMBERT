@@ -39,9 +39,9 @@ def get_permutation(n):
     index_list = list(np.arange(n))
     perms = []
     for i in range(n):
-        lst = index_list[:i] + index_list[i+1:]
-        perms.append(np.random.choice(lst))
-    return perms
+        lst = index_list[:i] + index_list[i+1:]##np.random.choice(5, 3, p=[0.1, 0, 0.3, 0.6, 0])
+        perms.append(np.random.choice(lst))  ##Generate a non-uniform random sample from np.arange(5) of size 3 without replacement:
+    return perms ## reorder
 
     # with open(os.path.join(args.data_dir, 'train/radiology', 'med_vocab.pkl'), 'rb') as f:
 
@@ -50,7 +50,7 @@ def get_keywords(args):
     keywords = []
     with open(os.path.join(args.data_dir, 'train/radiology', 'keywords.txt'), 'rb') as f:
         path =os.path.join(args.data_dir, 'train/radiology', 'keywords.txt')
-        print("!!!!!!!!! it is importan !!!!!!!!!:",path )
+        # print("!!!!!!!!! it is importan !!!!!!!!!:",path )
         for line in f:
             listt= line.split()
             # print("listtttttt:",listt)
