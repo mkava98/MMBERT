@@ -23,21 +23,23 @@ from timm.data.constants import IMAGENET_DEFAULT_MEAN, IMAGENET_DEFAULT_STD
 warnings.simplefilter("ignore", UserWarning)
 
 if __name__ == '__main__':
-
     parser = argparse.ArgumentParser(description = "Finetune on ImageClef 2019")
+
+    parser.add_argument('--run_name', type = str, required = True, help = "run name for wandb")
+
 
     parser.add_argument('--data_dir', type = str, required = False, default = "../data/vqamed", help = "path for data")
     
-    parser.add_argument('--model_dir', type = str, required = False, default = "../roco_mlm/recorder_med15.pt", help = "path to load weights")
+    parser.add_argument('--model_dir', type = str, required = False, default = "../roco_mlm/recorder_premed20.pt", help = "path to load weights")
     parser.add_argument('--save_dir', type = str, required = False, default = "../VQAmedSave/", help = "path to save weights")
-    parser.add_argument('--category', type =str, required = False, default =None,  help = "choose specific category if you want")
-    parser.add_argument('--use_pretrained', action = 'store_true', default = False, help = "use pretrained weights or not")
+    parser.add_argument('--category', type =str, required = False, default ="Modality",  help = "choose specific category if you want")
+    parser.add_argument('--use_pretrained', action = 'store_true', default = True, help = "use pretrained weights or not")
     parser.add_argument('--mixed_precision', action = 'store_true', default = True, help = "use mixed precision or not")
     parser.add_argument('--clip', action = 'store_true', default = False, help = "clip the gradients or not")
 
     parser.add_argument('--seed', type = int, required = False, default = 42, help = "set seed for reproducibility")
     parser.add_argument('--num_workers', type = int, required = False, default = 0, help = "number of workers")
-    parser.add_argument('--epochs', type = int, required = False, default = 2, help = "num epochs to train")
+    parser.add_argument('--epochs', type = int, required = False, default = 200, help = "num epochs to train")
     parser.add_argument('--train_pct', type = float, required = False, default = 1, help = "fraction of train samples to select")
     parser.add_argument('--valid_pct', type = float, required = False, default = 1, help = "fraction of validation samples to select")
     parser.add_argument('--test_pct', type = float, required = False, default = 1, help = "fraction of test samples to select")
@@ -62,7 +64,8 @@ if __name__ == '__main__':
     # parser.add_argument('--all_category', type =boolean, required= False, help = "yes or no category")
     parser.add_argument('--image_embedding', type = str, required = False, default = "vision", help = "Name of image extractor")
     parser.add_argument('--bert_model', type = str, required = False, default = "bert-base-uncased", help = "Name of Bert Model")
-    parser.add_argument('--allcategory', type =boolean, required =False , default =False ,  help = "choose specific category if you want")
+    # parser.add_argument('--allcategory', type =boolean, required =False , default =False ,  help = "choose specific category if you want")
+    parser.add_argument('--allcategory', type = str, required =False , default ="Fslse" ,  help = "choose specific category if you want")
 
 
     args = parser.parse_args()
@@ -101,9 +104,9 @@ if __name__ == '__main__':
 
     df = pd.concat([train_df, val_df, test_df]).reset_index(drop=True)
 
-    print("TTTTTTTTTTTTTTTRAinnnnnnn\n", train_df)
-    print("vvvvvvvvvvvvvvvvvvvvvvvv\n", val_df)
-    print("sssssssssssssssssss\n", test_df)
+    # print("TTTTTTTTTTTTTTTRAinnnnnnn\n", train_df)
+    # print("vvvvvvvvvvvvvvvvvvvvvvvv\n", val_df)
+    # print("sssssssssssssssssss\n", test_df)
 
     ans2idx = {ans:idx for idx,ans in enumerate(df['answer'].unique())}
     idx2ans = {idx:ans for ans,idx in ans2idx.items()}
@@ -189,9 +192,9 @@ if __name__ == '__main__':
                                     transforms.ToTensor(), 
                                     transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))])
 
-    print("TTTTTTTTTTTTTTTRAinnnnnnn\n", train_df)
-    print("vvvvvvvvvvvvvvvvvvvvvvvv\n", val_df)
-    print("sssssssssssssssssss\n", test_df)
+    # print("TTTTTTTTTTTTTTTRAinnnnnnn\n", train_df)
+    # print("vvvvvvvvvvvvvvvvvvvvvvvv\n", val_df)
+    # print("sssssssssssssssssss\n", test_df)
 
 
     traindataset = VQAMed(train_df, imgsize = args.image_size, tfm = train_tfm, args = args)
@@ -207,22 +210,43 @@ if __name__ == '__main__':
     best_loss = np.inf
     counter = 0
 
+    last_loss = 100
+    patience = 20
+    triggertimes = 0
+
+    all_train_loss= []
+    all_train_acc=[]
+    all_test_acc = []
+    all_test_loss= []
+    all_val_loss = []
+    # all_val_bleu=[]
+    all_test_bleu=[]
+    logdict=[]
+    last_epoch= args.epochs
     for epoch in range(args.epochs):
 
         print(f'Epoch {epoch+1}/{args.epochs}')
 
 
-        train_loss, _, _, _, _ = train_one_epoch(trainloader, model, optimizer, criterion, device, scaler, args, idx2ans)
-        val_loss, predictions, val_acc, val_bleu = validate(valloader, model, criterion, device, scaler, args, val_df,idx2ans)
+        train_loss, _, train_acc, _, _ = train_one_epoch(trainloader, model, optimizer, criterion, device, scaler, args, idx2ans)
         test_loss, predictions, acc, bleu = test(testloader, model, criterion, device, scaler, args, test_df,idx2ans)
+        logdict.append({"testacc",acc})
+        logdict.append({"testbleu",bleu})
 
-        scheduler.step(val_loss)
-     
-        print("val_acc" , val_acc)
-        if  args.category == None: ### false
-            pass
-            # log_dict = acc
-            
+        all_train_loss.append(train_loss)
+        all_train_acc.append(train_acc)
+        all_test_loss.append(test_loss)
+        
+        
+        # print("train_loss" , train_loss)
+        
+
+        # scheduler.step(train_loss)
+
+
+        if  args.category == "all": ### false
+            all_test_acc.append(acc["total_acc"])
+            all_test_bleu.append(bleu["total_bleu"])
             # for k,v in bleu.items():
             #     log_dict[k] = v
 
@@ -230,22 +254,73 @@ if __name__ == '__main__':
             # log_dict['test_loss'] = test_loss
             # log_dict['learning_rate'] = optimizer.param_groups[0]["lr"]
 
+            # log_dict = acc
+        else :
+            all_test_acc.append(acc)
+            all_test_bleu.append(bleu)
+
+
+          
+
 
             # print(log_dict)
+        if epoch % 5 == 0 :
+            val_loss, predictions, val_acc, val_bleu = validate(valloader, model, criterion, device, scaler, args, val_df,idx2ans)
+            # if args.category == "all":
+            #     current_loss=val_loss
+            # else :
+            #     current_loss=val_loss
+            logdict.append({"valacc":val_acc})
+            logdict.append({"valbleu":val_bleu})
+            current_loss=val_loss
+            all_val_loss.append(val_loss)
+            # all_val_bleu.append(val_bleu)
+            if current_loss > last_loss:
+                trigger_times += 1
+                print('Trigger Times:', trigger_times)
 
-        if  args.category== None:
+                if trigger_times >= patience:
+                    print('Early stopping!\nStart to test process.')
+                    last_epoch = epoch
+                    break
 
-            if val_acc['val_total_acc'] > best_acc1:
-                torch.save(model.state_dict(),os.path.join(args.save_dir, f'{args.run_name}_acc.pt'))
-                best_acc1=val_acc['val_total_acc']
+            else:
+                print('trigger times: 0')
+                trigger_times = 0
 
-        else:
+            last_loss = current_loss
+            scheduler.step(val_loss)
+            if  args.category== "all":
 
-            if val_acc > best_acc1:
-                print('Saving model')
-                torch.save(model.state_dict(),os.path.join(args.save_dir, f'recorder{epoch}_acc.pt'))
-                best_acc1 = val_acc 
+                if val_acc['val_total_acc'] > best_acc1:
+                    torch.save(model.state_dict(),os.path.join(args.save_dir, f'{args.run_name}_acc.pt'))
+                    best_acc1=val_acc['val_total_acc']
 
+            else:
+
+                if val_acc > best_acc1:
+                    print('Saving model')
+                    torch.save(model.state_dict(),os.path.join(args.save_dir, f'recorder{args.run_name}{epoch}_acc.pt'))
+                    best_acc1 = val_acc 
+    # epoo = [epoch+1 for epoch in range(args.epochs)]
+   
+
+    df = pd.read_excel('output_train.xlsx')
+    df = df.loc[:, ~df.columns.str.contains('^Unnamed')]
+
+
+
+    df = df.append({'model_name' :args.run_name, 'bert_model' : args.bert_model, \
+        'image_embedding':args.image_embedding,\
+        'epoch' : last_epoch, "lr" : args.lr, "loss_train" : \
+        all_train_loss, "overall_accuracy_train" : all_train_acc,"loss_val":all_val_loss,"loss_test":all_test_loss, "overall_accuracy_test": all_test_acc,"all_test_bleu":all_test_bleu, "category":args.category}, ignore_index = True)
+    # ["model2",args.bert_model ,args.epochs, args.lr, train_loss,train_acc["total_acc"]]
+    df.to_excel("output_train.xlsx") 
+    with open(f'recorder{args.run_name}.txt', 'w') as fp:
+        for item in logdict:
+            # write each item on a new line
+            fp.write("%s\n" % item)
+    print('Done')
         # if  args.allcategory:
 
 

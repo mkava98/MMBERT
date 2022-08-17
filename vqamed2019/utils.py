@@ -70,10 +70,10 @@ def load_data(args, remove = None):
     testdf['img_id'] = testdf['img_id'].apply(lambda x: os.path.join(args.data_dir, 'ImageClef-2019-VQA-Med-Test/VQAMed2019_Test_Images', x + '.jpg'))
 
 
-    if args.category == None :
+    if args.category == "all" :
         print(os.getcwd())
-        traindf = pd.read_csv(os.path.join(args.data_dir, 'traindf.csv'),nrows=100)
-        valdf = pd.read_csv(os.path.join(args.data_dir, 'valdf.csv'),nrows=100)
+        traindf = pd.read_csv(os.path.join(args.data_dir, 'traindf.csv'))
+        valdf = pd.read_csv(os.path.join(args.data_dir, 'valdf.csv'))
 
         traindf = traindf.loc[:, ~traindf.columns.str.contains('^Unnamed')]
         valdf = valdf.loc[:, ~valdf.columns.str.contains('^Unnamed')]
@@ -87,7 +87,7 @@ def load_data(args, remove = None):
         valdf['img_id'] = valdf['img_id'].apply(lambda x: os.path.join(args.data_dir, 'ImageClef-2019-VQA-Med-Validation/Val_images', x + '.jpg'))
 
     else:
-        print("goooooooooooooooooo")
+        # print("goooooooooooooooooo")
         l= (os.path.join(args.data_dir, 'ImageClef-2019-VQA-Med-Training/QAPairsByCategory/'))
         paths= os.listdir(l)
         for path in paths:
@@ -99,7 +99,7 @@ def load_data(args, remove = None):
                 break
         traindf['img_id'] = traindf['img_id'].apply(lambda x: os.path.join(args.data_dir, 'ImageClef-2019-VQA-Med-Training/Train_images', x + '.jpg'))
         
-        print("goooooooooooooooooo")
+        # print("goooooooooooooooooo")
         l= (os.path.join(args.data_dir, 'ImageClef-2019-VQA-Med-Validation/QAPairsByCategory/'))
         paths= os.listdir(l)
         for path in paths:
@@ -213,6 +213,7 @@ class VQAMed(Dataset):
         return len(self.df)
 
     def __getitem__(self, idx):
+        # print(idx , "uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu")
 
         path = self.df.loc[idx,'img_id']
         question = self.df.loc[idx, 'question']
@@ -306,8 +307,12 @@ class VQAMed(Dataset):
 
 
 def calculate_bleu_score(preds,targets, idx2ans):
-  bleu_per_answer = np.asarray([sentence_bleu([idx2ans[target].split()],idx2ans[pred].split(), weights = [1]) for pred,target in zip(preds,targets)])
-  return np.mean(bleu_per_answer)
+    # print ("PRED FOR ",preds)
+    # print("TARGEt",targets)
+    bleu_per_answer = np.asarray([sentence_bleu([idx2ans[target].split()],idx2ans[pred].split(), weights = [1]) for pred,target in zip(preds,targets)])
+    # print("bbbbbbbbblue accuracy ", bleu_per_answer)
+    
+    return np.mean(bleu_per_answer) if len(bleu_per_answer)>0 else torch.tensor(0.)
 
 
 
@@ -827,21 +832,23 @@ def validate(loader, model, criterion, device, scaler, args, val_df, idx2ans):
     TARGETS = torch.cat(TARGETS).cpu().numpy()
 
     # Calculate total and category wise accuracy
-    if not args.category == None:
-        if  not args.allcategory:
-            acc = (PREDS == TARGETS).mean() * 100.
-            bleu = calculate_bleu_score(PREDS,TARGETS,idx2ans)
+    if not args.category == "all":
+        acc = (PREDS == TARGETS).mean() * 100.
+        bleu = calculate_bleu_score(PREDS,TARGETS,idx2ans)
     else:
         total_acc = (PREDS == TARGETS).mean() * 100.
         # binary_acc = (PREDS[val_df['category']=='binary'] == TARGETS[val_df['category']=='binary']).mean() * 100.
-        plane_acc = (PREDS[val_df['category']=='plane'] == TARGETS[val_df['category']=='plane']).mean() * 100.
-        organ_acc = (PREDS[val_df['category']=='organ'] == TARGETS[val_df['category']=='organ']).mean() * 100.
-        modality_acc = (PREDS[val_df['category']=='modality'] == TARGETS[val_df['category']=='modality']).mean() * 100.
-        abnorm_acc = (PREDS[val_df['category']=='abnormality'] == TARGETS[val_df['category']=='abnormality']).mean() * 100.
+        plane_acc = (PREDS[val_df['category']=='plane'] == TARGETS[val_df['category']=='plane']).mean() * 100 if len(PREDS[val_df['category']=='plane'] == TARGETS[val_df['category']=='plane']) > 0 else torch.tensor(0.)
+        # torch.mean(a_masked) if len(a_masked) > 0 else torch.tensor(0.)
+        # if len(PREDS[val_df['category']=='plane'] == TARGETS[val_df['category']=='plane']) > 0:
+        #     print("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
+        organ_acc = (PREDS[val_df['category']=='organ'] == TARGETS[val_df['category']=='organ']).mean() * 100 if len(PREDS[val_df['category']=='organ'] == TARGETS[val_df['category']=='organ'])>0   else torch.tensor(0.)  
+        modality_acc = (PREDS[val_df['category']=='modality'] == TARGETS[val_df['category']=='modality']).mean() * 100. if len(PREDS[val_df['category']=='modality'] == TARGETS[val_df['category']=='modality'])>0 else torch.tensor(0.) 
+        abnorm_acc = (PREDS[val_df['category']=='abnormality'] == TARGETS[val_df['category']=='abnormality']).mean() * 100. if len(PREDS[val_df['category']=='abnormality'] == TARGETS[val_df['category']=='abnormality'])>0 else torch.tensor(0.)
 
         acc = {'val_total_acc': np.round(total_acc, 4), 'val_plane_acc': np.round(plane_acc, 4), 'val_organ_acc': np.round(organ_acc, 4), 
                'val_modality_acc': np.round(modality_acc, 4), 'val_abnorm_acc': np.round(abnorm_acc, 4)}
-
+        # bleu={}
         # add bleu score code
         total_bleu = calculate_bleu_score(PREDS,TARGETS,idx2ans)
         plane_bleu = calculate_bleu_score(PREDS[val_df['category']=='plane'],TARGETS[val_df['category']=='plane'],idx2ans)
@@ -899,30 +906,33 @@ def test(loader, model, criterion, device, scaler, args, val_df,idx2ans):
     PREDS = torch.cat(PREDS).cpu().numpy()
     TARGETS = torch.cat(TARGETS).cpu().numpy()
 
-    if  not args.allcategory:
+    if  not args.category == "all":
         acc = (PREDS == TARGETS).mean() * 100.
         bleu = calculate_bleu_score(PREDS,TARGETS,idx2ans)
     else:
         total_acc = (PREDS == TARGETS).mean() * 100.
-        binary_acc = (PREDS[val_df['category']=='binary'] == TARGETS[val_df['category']=='binary']).mean() * 100.
-        plane_acc = (PREDS[val_df['category']=='plane'] == TARGETS[val_df['category']=='plane']).mean() * 100.
-        organ_acc = (PREDS[val_df['category']=='organ'] == TARGETS[val_df['category']=='organ']).mean() * 100.
-        modality_acc = (PREDS[val_df['category']=='modality'] == TARGETS[val_df['category']=='modality']).mean() * 100.
-        abnorm_acc = (PREDS[val_df['category']=='abnormality'] == TARGETS[val_df['category']=='abnormality']).mean() * 100.
+        # binary_acc = (PREDS[val_df['category']=='binary'] == TARGETS[val_df['category']=='binary']).mean() * 100.
+        plane_acc = (PREDS[val_df['category']=='plane'] == TARGETS[val_df['category']=='plane']).mean() * 100 if len(PREDS[val_df['category']=='plane'] == TARGETS[val_df['category']=='plane']) > 0 else torch.tensor(0.)
+        # torch.mean(a_masked) if len(a_masked) > 0 else torch.tensor(0.)
+        # if len(PREDS[val_df['category']=='plane'] == TARGETS[val_df['category']=='plane']) > 0:
+            # print("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
+        organ_acc = (PREDS[val_df['category']=='organ'] == TARGETS[val_df['category']=='organ']).mean() * 100 if len(PREDS[val_df['category']=='organ'] == TARGETS[val_df['category']=='organ'])>0   else torch.tensor(0.)  
+        modality_acc = (PREDS[val_df['category']=='modality'] == TARGETS[val_df['category']=='modality']).mean() * 100. if len(PREDS[val_df['category']=='modality'] == TARGETS[val_df['category']=='modality'])>0 else torch.tensor(0.) 
+        abnorm_acc = (PREDS[val_df['category']=='abnormality'] == TARGETS[val_df['category']=='abnormality']).mean() * 100. if len(PREDS[val_df['category']=='abnormality'] == TARGETS[val_df['category']=='abnormality'])>0 else torch.tensor(0.)
 
-        acc = {'total_acc': np.round(total_acc, 4), 'binary_acc': np.round(binary_acc, 4), 'plane_acc': np.round(plane_acc, 4), 'organ_acc': np.round(organ_acc, 4), 
+        acc = {'total_acc': np.round(total_acc, 4),  'plane_acc': np.round(plane_acc, 4), 'organ_acc': np.round(organ_acc, 4), 
                'modality_acc': np.round(modality_acc, 4), 'abnorm_acc': np.round(abnorm_acc, 4)}
 
         # add bleu score code
         total_bleu = calculate_bleu_score(PREDS,TARGETS,idx2ans)
-        binary_bleu = calculate_bleu_score(PREDS[val_df['category']=='binary'],TARGETS[val_df['category']=='binary'],idx2ans)
+        # binary_bleu = calculate_bleu_score(PREDS[val_df['category']=='binary'],TARGETS[val_df['category']=='binary'],idx2ans)
         plane_bleu = calculate_bleu_score(PREDS[val_df['category']=='plane'],TARGETS[val_df['category']=='plane'],idx2ans)
         organ_bleu = calculate_bleu_score(PREDS[val_df['category']=='organ'],TARGETS[val_df['category']=='organ'],idx2ans)
         modality_bleu = calculate_bleu_score(PREDS[val_df['category']=='modality'],TARGETS[val_df['category']=='modality'],idx2ans)
         abnorm_bleu = calculate_bleu_score(PREDS[val_df['category']=='abnormality'],TARGETS[val_df['category']=='abnormality'],idx2ans)
 
 
-        bleu = {'total_bleu': np.round(total_bleu, 4),  'binary_bleu': np.round(binary_bleu, 4), 'plane_bleu': np.round(plane_bleu, 4), 'organ_bleu': np.round(organ_bleu, 4), 
+        bleu = {'total_bleu': np.round(total_bleu, 4),   'plane_bleu': np.round(plane_bleu, 4), 'organ_bleu': np.round(organ_bleu, 4), 
             'modality_bleu': np.round(modality_bleu, 4), 'abnorm_bleu': np.round(abnorm_bleu, 4)}
 
 

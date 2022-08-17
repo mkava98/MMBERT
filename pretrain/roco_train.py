@@ -21,7 +21,9 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description="Pretrain on ROCO with MLM")
 
-    # parser.add_argument('-r', '--run_name', type=str, help="name for wandb run", required=True)
+    parser.add_argument('--run_name', type=str, help="name for wandb run", required=True)
+    parser.add_argument('--category', type =str, required = False, default ="Modality",  help = "choose specific category if you want")
+
     parser.add_argument('--data_dir', type=str, default = '../data/roco/all_data', help='path to dataset', required = False)
     ### we do not use absolute address
     parser.add_argument('--save_dir', type=str, default = '../roco_mlm', help='save model weights in this dir', required = False)
@@ -34,11 +36,11 @@ if __name__ == '__main__':
     parser.add_argument('--patience', type=int, default=5, help='rlp patience')
     parser.add_argument('--factor', type=float, default=0.1, help='rlp factor')
     parser.add_argument('--num_workers', type=int, default= 4, help='num works to generate data.')
-    parser.add_argument('--epochs', type=int, default=15, help='epochs to train')
+    parser.add_argument('--epochs', type=int, default=30, help='epochs to train')
 
     parser.add_argument('--train_pct', type=float, default=1, help='fraction of train set')
-    parser.add_argument('--valid_pct', type=float, default=0.1, help='fraction of validation set')
-    parser.add_argument('--test_pct', type=float, default=0.1, help='fraction of test set ')
+    parser.add_argument('--valid_pct', type=float, default=1, help='fraction of validation set')
+    parser.add_argument('--test_pct', type=float, default=1, help='fraction of test set ')
 
     parser.add_argument('--max_position_embeddings', type=int, default=75, help='embedding size')
     parser.add_argument('--n_layers', type=int, default=4, help='num of heads in multihead attenion')
@@ -50,6 +52,7 @@ if __name__ == '__main__':
     parser.add_argument('--image_embedding', type = str, required = False, default = "vision", help = "Name of image extractor")
     parser.add_argument('--bert_model', type = str, required = False, default = "bert-base-uncased", help = "Name of Bert Model")
     parser.add_argument('--num_vis', type = int, required = False,default=5, help = "num of visual embeddings")
+    parser.add_argument('--allcategory', type = str, required =False , default ="False" ,  help = "choose specific category if you want")
 
 
     args = parser.parse_args()
@@ -158,7 +161,7 @@ if __name__ == '__main__':
         #     name = str('recorder_2'+f'{(epoch+1)}'+'.pt')
         #     torch.save(recorder, os.path.join(args.save_dir,name ))
         if (epoch + 1) % save_recorder == 0:
-            name = str('recorder_med'+f'{(epoch+1)}'+'.pt')
+            name = f'recorder_{args.run_name}{(epoch+1)}.pt'
             torch.save(model.state_dict(), os.path.join(args.save_dir,name ))    
 
         # wandb.log({'epoch_train_loss': train_loss,
