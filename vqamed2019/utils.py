@@ -71,7 +71,7 @@ def load_data(args, remove = None):
 
 
     if args.category == "all" :
-        print(os.getcwd())
+        # print(os.getcwd())
         traindf = pd.read_csv(os.path.join(args.data_dir, 'traindf.csv'))
         valdf = pd.read_csv(os.path.join(args.data_dir, 'valdf.csv'))
 
@@ -94,16 +94,17 @@ def load_data(args, remove = None):
             if path.split("_")[1]== args.category:
                 traindf = pd.read_csv(f"{l}/{path}", sep="|", header=None, names=["img_id", "question","answer"])
                 traindf["category"]=args.category.lower()
-                
+                # print("read train ppppppppppppppppppppppppppppsucsee")
                 traindf["mode"]="train"
                 break
         traindf['img_id'] = traindf['img_id'].apply(lambda x: os.path.join(args.data_dir, 'ImageClef-2019-VQA-Med-Training/Train_images', x + '.jpg'))
-        
+        # print("llllllllllllllllllllllllllllllllllllllllllll",traindf.columns)
         # print("goooooooooooooooooo")
         l= (os.path.join(args.data_dir, 'ImageClef-2019-VQA-Med-Validation/QAPairsByCategory/'))
         paths= os.listdir(l)
         for path in paths:
             if path.split("_")[1]== args.category:
+                # print("sssssssssssssssssssssssssssssssssssssssssssssssssssusss")
                 valdf= pd.read_csv(f"{l}/{path}", sep="|", header=None, names=["img_id", "question","answer"])
                 valdf["category"]=args.category.lower()
                 
@@ -112,6 +113,7 @@ def load_data(args, remove = None):
         valdf['img_id'] = valdf['img_id'].apply(lambda x: os.path.join(args.data_dir, 'ImageClef-2019-VQA-Med-Validation/Val_images', x + '.jpg'))
         when= testdf['category']== args.category.lower() 
         testdf= testdf[when]
+        # print("length of test dfffffffffffff",len(testdf))
         # testdf=testdf.drop(['category'], axis=1)
 
 
@@ -129,7 +131,10 @@ def load_data(args, remove = None):
     traindf = traindf.sample(frac = args.train_pct)
     valdf = valdf.sample(frac = args.valid_pct)
     testdf = testdf.sample(frac = args.test_pct)
-
+    # print("tttttttttttttttt\n",traindf.head())
+    # print("tttttttttttttttt\n",valdf.head())
+    # print("tttttttttttttttt\n",testdf.head())
+    
     return traindf, valdf, testdf
 
      
@@ -782,6 +787,8 @@ def train_one_epoch(loader, model, optimizer, criterion, device, scaler, args, i
 
     acc = (PREDS == TARGETS).mean() * 100.
     bleu = calculate_bleu_score(PREDS,TARGETS,idx2ans)
+    print("innnnnnnnnnnnntrainlooooss ",np.mean(train_loss))
+    print("iinnnnnnnnnnnnnnnnnnnnntrainaccc ", acc)
 
     return np.mean(train_loss), PREDS, acc, bleu, IMGIDS
 
@@ -834,6 +841,7 @@ def validate(loader, model, criterion, device, scaler, args, val_df, idx2ans):
     # Calculate total and category wise accuracy
     if not args.category == "all":
         acc = (PREDS == TARGETS).mean() * 100.
+        print("vallllacc",acc)
         bleu = calculate_bleu_score(PREDS,TARGETS,idx2ans)
     else:
         total_acc = (PREDS == TARGETS).mean() * 100.
@@ -860,7 +868,7 @@ def validate(loader, model, criterion, device, scaler, args, val_df, idx2ans):
 
         bleu = {'val_total_bleu': np.round(total_bleu, 4), 'val_plane_bleu': np.round(plane_bleu, 4), 'val_organ_bleu': np.round(organ_bleu, 4), 
             'val_modality_bleu': np.round(modality_bleu, 4), 'val_abnorm_bleu': np.round(abnorm_bleu, 4)}
-
+    print("valllloss", val_loss)
     return val_loss, PREDS, acc, bleu  
     
 def test(loader, model, criterion, device, scaler, args, val_df,idx2ans):
@@ -908,6 +916,7 @@ def test(loader, model, criterion, device, scaler, args, val_df,idx2ans):
 
     if  not args.category == "all":
         acc = (PREDS == TARGETS).mean() * 100.
+        print("testtttaccc",acc)
         bleu = calculate_bleu_score(PREDS,TARGETS,idx2ans)
     else:
         total_acc = (PREDS == TARGETS).mean() * 100.
@@ -935,7 +944,7 @@ def test(loader, model, criterion, device, scaler, args, val_df,idx2ans):
         bleu = {'total_bleu': np.round(total_bleu, 4),   'plane_bleu': np.round(plane_bleu, 4), 'organ_bleu': np.round(organ_bleu, 4), 
             'modality_bleu': np.round(modality_bleu, 4), 'abnorm_bleu': np.round(abnorm_bleu, 4)}
 
-
+    print("tessstllllllllooss",test_loss)
     return test_loss, PREDS, acc, bleu
 
 def final_test(loader, all_models, device, args, val_df, idx2ans):

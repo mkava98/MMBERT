@@ -1,6 +1,0 @@
-{'testacc', 100.0}
-{1.0, 'testbleu'}
-{'valacc': 20.0}
-{'valbleu': 0.2}
-{'testacc', 0.0}
-{0.0, 'testbleu'}
