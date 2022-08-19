@@ -501,7 +501,7 @@ class Transfer(nn.Module):
                 fix71 = nn.Sequential(*modules71)
                 inter_71 = self.conv71(fix71(img).view(img.size()[0],196,24,32))
 
-                v_71 = self.gap7(self.relu(inter_71)).view(-1,self.args.hidden_size)
+                v_71 = self.gap71(self.relu(inter_71)).view(-1,self.args.hidden_size)
                 v_7 = torch.add(v_7, v_71)
                 return v_2, v_3, v_4, v_5, v_7, [inter_2.mean(1), inter_3.mean(1), inter_4.mean(1), inter_5.mean(1), inter_7.mean(1)]
 

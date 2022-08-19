@@ -62,9 +62,9 @@ def seed_everything(seed):
 
 def load_data(args):
     
-    train_file = open(os.path.join(args.data_dir,'trainset.json'),)
-    test_file = open(os.path.join(args.data_dir,'testset.json'),)
-    validation_file = open(os.path.join(args.data_dir,'validationset.json'),)
+    train_file = open(os.path.join(args.data_dir,'littestset.json'),)
+    test_file = open(os.path.join(args.data_dir,'data.json'),)
+    # validation_file = open(os.path.join(args.data_dir,'validationset.json'),)
         
     # train_file = open(os.path.join(args.data_dir,'littrainset.json'),)
     # test_file = open(os.path.join(args.data_dir,'littestset.json'),)
@@ -72,27 +72,27 @@ def load_data(args):
 
     train_data = json.load(train_file)
     test_data = json.load(test_file)
-    validation_data = json.load(validation_file)
+    # validation_data = json.load(validation_file)
 
     traindf = pd.DataFrame(train_data) 
     traindf['mode'] = 'train'
     testdf = pd.DataFrame(test_data)
     testdf['mode'] = 'test' 
-    validdf = pd.DataFrame(validation_data) 
-    validdf['mode'] = 'eval'
+    # validdf = pd.DataFrame(validation_data) 
+    # validdf['mode'] = 'eval'
 
     traindf['image_name'] = traindf['image_name'].apply(lambda x: os.path.join(args.data_dir, 'images', x))
     testdf['image_name'] = testdf['image_name'].apply(lambda x: os.path.join(args.data_dir, 'images', x))
-    validdf['image_name'] = validdf['image_name'].apply(lambda x: os.path.join(args.data_dir, 'images', x))
+    # validdf['image_name'] = validdf['image_name'].apply(lambda x: os.path.join(args.data_dir, 'images', x))
 
     traindf['question_type'] = traindf['question_type'].str.lower()
     testdf['question_type'] = testdf['question_type'].str.lower()
-    validdf['question_type'] = validdf['question_type'].str.lower()
+    # validdf['question_type'] = validdf['question_type'].str.lower()
 
 
 
 
-    return traindf, validdf, testdf
+    return traindf, None, testdf
 
 
 #Utils
@@ -160,10 +160,10 @@ class VQAMed(Dataset): ### inheritance does not accure????
         self.df = df.values 
         self.tfm = tfm ### with special transformation
         self.args = args
-        # if args.bert_model=="distilbert-base-uncased":
-        #     self.tokenizer=DistilBertTokenizer.from_pretrained(args.bert_model) ## get specific tokenizer 
-        # else:
-        self.tokenizer =BertTokenizer.from_pretrained(args.bert_model)
+        if args.bert_model=="distilbert-base-uncased":
+            self.tokenizer=DistilBertTokenizer.from_pretrained(args.bert_model) ## get specific tokenizer 
+        else:
+            self.tokenizer =BertTokenizer.from_pretrained(args.bert_model)
         self.mode = mode
 
     def __len__(self):
@@ -175,12 +175,22 @@ class VQAMed(Dataset): ### inheritance does not accure????
         # print("type of df::::", type(self.df))
         path = self.df[idx,4]
         # print("path of df::::", path)
+        if self.mode == "train":
+            print("We are in Train Mode\n")
+            question = self.df[idx, 7]
 
-        question = self.df[idx, 7]
+        elif self.mode == "test":
+            print("We are in Test Mode\n")
+            question = self.df[idx, 8]
+            # if question == "NA" or question == "NULL" or len(str(question))==0 or len(str(question))<=3:
+                # print("We have exception\n")
+                # question = self.df[idx, 7]
+
+
         answer = self.df[idx, 12]
         # print("answer::::", answer)
-        if self.mode == 'eval':
-            tok_ques = self.tokenizer.tokenize(question)
+        # if self.mode == 'test':
+            # tok_ques = self.tokenizer.tokenize(question)
 
         img = Image.open(path)
 
@@ -201,7 +211,7 @@ class VQAMed(Dataset): ### inheritance does not accure????
             return img, torch.tensor(tokens, dtype = torch.long), \
                 torch.tensor(segment_ids, dtype = torch.long) ,\
                     torch.tensor(input_mask, dtype = torch.long), \
-                        torch.tensor(answer, dtype = torch.long), tok_ques  ### what is applicaton of this?
+                        torch.tensor(answer, dtype = torch.long)  ### what is applicaton of this?
 
  
 ### the end of VQAMed class
@@ -272,6 +282,7 @@ class Embeddings(nn.Module):
 class Transfer(nn.Module):
     def __init__(self,args):
         super(Transfer, self).__init__()
+        self.args = args
         if args.image_embedding =="resnet":  ### it is a condition 
             self.args = args
             self.model = models.resnet152(pretrained=True)
@@ -288,9 +299,9 @@ class Transfer(nn.Module):
             self.gap5 = nn.AdaptiveAvgPool2d((1,1))
             self.conv7 = nn.Conv2d(64, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
             self.gap7 = nn.AdaptiveAvgPool2d((1,1))
-        elif args.image_embedding == "vision":
+        elif args.image_embedding == "hybrid":
 
-            self.args = args
+            
             self.model1 = models.resnet152(pretrained=True)
             self.relu = nn.ReLU()
 
@@ -303,44 +314,23 @@ class Transfer(nn.Module):
             self.conv3 = nn.Conv2d(1024, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
             self.gap3 = nn.AdaptiveAvgPool2d((1,1))
 
-            self.conv31 = nn.Conv2d(196, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            self.gap31 = nn.AdaptiveAvgPool2d((1,1))
-
+            
             self.conv4 = nn.Conv2d(512, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
             self.gap4 = nn.AdaptiveAvgPool2d((1,1))
 
             
-            self.conv41 = nn.Conv2d(196, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            self.gap41 = nn.AdaptiveAvgPool2d((1,1))
-
+            
             self.conv5 = nn.Conv2d(256, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
             self.gap5 = nn.AdaptiveAvgPool2d((1,1))
 
 
-            self.conv51 = nn.Conv2d(196, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            self.gap51 = nn.AdaptiveAvgPool2d((1,1))
+        
             
             self.conv7 = nn.Conv2d(64, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
             self.gap7 = nn.AdaptiveAvgPool2d((1,1))
 
-            self.conv71 = nn.Conv2d(196, args.hidden_size, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            self.gap71 = nn.AdaptiveAvgPool2d((1,1))
-
-            self.model2 = \
-            torch.hub.load('facebookresearch/deit:main', 'deit_base_patch16_224', pretrained=True)
-            
-            # relu = nn.ReLU()
-            # conv2 = nn.Conv2d(196, 768, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            # gap2 = nn.AdaptiveAvgPool2d((1,1))
-            # conv3 = nn.Conv2d(1024, 768, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            # gap3 = nn.AdaptiveAvgPool2d((1,1))
-            # conv4 = nn.Conv2d(512, 768, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            # gap4 = nn.AdaptiveAvgPool2d((1,1))
-            # conv5 = nn.Conv2d(256, 768, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            # gap5 = nn.AdaptiveAvgPool2d((1,1))
-            # conv7 = nn.Conv2d(64, 768, kernel_size=(1, 1), stride=(1, 1), bias=False)
-            # gap7 = nn.AdaptiveAvgPool2d((1,1))
-            # self.relu = nn.ReLU()
+        
+            self.model2 = torch.hub.load('facebookresearch/deit:main', 'deit_base_patch16_224', pretrained=True)
             
 
 
@@ -376,93 +366,64 @@ class Transfer(nn.Module):
             v_7 = self.gap7(self.relu(self.conv7(fix7(img)))).view(-1,self.args.hidden_size)
             return v_2, v_3, v_4, v_5, v_7  ## 5 feature vector extracted 
 
-        elif self.args.image_embedding == "vision":
+        elif self.args.image_embedding == "hybrid":
+
             
-        
             modules2 = list(self.model1.children())[:-2]
             fix2 = nn.Sequential(*modules2)
-            inter_2 = self.conv2(fix2(img))
-            v_2 = self.gap2(self.relu(inter_2)).view(-1,self.args.hidden_size)
+            v_2 = self.gap2(self.relu(self.conv2(fix2(img)))).view(-1,self.args.hidden_size)
 
             modules21 = list(self.model2.children())[:]
             fix21 = nn.Sequential(*modules21)
-            z=fix21(img)
-            z=z.view(img.size()[0],196,10,100)
-            z=self.conv21(z)
-            inter_21=z
-            z_relu=self.relu(z)
-            z_gap = self.gap21(z_relu)
-            v_21 = z_gap.view(img.size()[0],-1)
+           
+            v_21 = self.gap21(self.relu(self.conv21(fix21(img).view(img.size()[0],196,10,100)))).view(img.size()[0],-1)
+            # v_21 = z_gap
             v_2 = torch.add(v_2, v_21)
             
             modules3 = list(self.model1.children())[:-3] ### 3 ta laye be akhari 
             fix3 = nn.Sequential(*modules3)
-            inter_3 = self.conv3(fix3(img))
-            v_3 = self.gap3(self.relu(inter_3)).view(-1,self.args.hidden_size)
+            v_3 = self.gap3(self.relu(self.conv3(fix3(img)))).view(-1,self.args.hidden_size)
 
             modules31 = list(self.model2.children())[:-1]
             fix31 = nn.Sequential(*modules31)
-            z=fix31(img)
-            z=z.view(img.size()[0],196,24,32)
-            z=self.conv31(z)
-            inter_31=z
-            z_relu=self.relu(z)
-            z_gap = self.gap31(z_relu)
+           
+            z_gap = self.gap21(self.relu(self.conv21(fix31(img).view(img.size()[0],196,24,32))))
             v_31 = z_gap.view(img.size()[0],-1)
             v_2 = torch.add(v_3, v_31)
 
             modules4 = list(self.model1.children())[:-4]
             fix4 = nn.Sequential(*modules4)
-            inter_4 = self.conv4(fix4(img))
-            v_4 = self.gap4(self.relu(inter_4)).view(-1,self.args.hidden_size)
+            v_4 = self.gap4(self.relu(self.conv4(fix4(img)))).view(-1,self.args.hidden_size)
 
             modules41 = list(self.model2.children())[:-2]
             fix41 = nn.Sequential(*modules41)
-            inter_41 = self.conv41(fix41(img).view(img.size()[0],196,24,32))
-            v_41 = self.gap41(self.relu(inter_41)).view(-1,self.args.hidden_size)
+            inter_41 = self.conv21(fix41(img).view(img.size()[0],196,24,32))
+            v_41 = self.gap21(self.relu(inter_41)).view(-1,self.args.hidden_size)
             v_4 = torch.add(v_4, v_41)
 
             modules5 = list(self.model1.children())[:-5]
             fix5 = nn.Sequential(*modules5)
-            inter_5 = self.conv5(fix5(img))
-            v_5 = self.gap5(self.relu(inter_5)).view(-1,self.args.hidden_size)
+            v_5 = self.gap5(self.relu(self.conv5(fix5(img)))).view(-1,self.args.hidden_size)
 
             modules51 = list(self.model2.children())[:-3]
-            fix51 = nn.Sequential(*modules5)
-            inter_51 = self.conv51(fix51(img).view(img.size()[0],196,-1,32))
-            v_51 = self.gap51(self.relu(inter_51)).view(-1,self.args.hidden_size)
+            fix51 = nn.Sequential(*modules51)
+            inter_51 = self.conv21(fix51(img).view(img.size()[0],196,-1,32))
+            v_51 = self.gap21(self.relu(inter_51)).view(-1,self.args.hidden_size)
             v_5 = torch.add(v_5, v_51)
 
             modules7 = list(self.model1.children())[:-7]
             fix7 = nn.Sequential(*modules7)
-            inter_7 = self.conv7(fix7(img))
-            v_7 = self.gap7(self.relu(inter_7)).view(-1,self.args.hidden_size)
+            v_7 = self.gap7(self.relu(self.conv7(fix7(img)))).view(-1,self.args.hidden_size)
 
             modules71 = list(self.model2.children())[:-4]
             fix71 = nn.Sequential(*modules71)
-            inter_71 = self.conv71(fix71(img).view(img.size()[0],196,24,32))
+            inter_71 = self.conv21(fix71(img).view(img.size()[0],196,24,32))
+            v_71 = self.gap21(self.relu(inter_71)).view(-1,self.args.hidden_size)
 
-            v_71 = self.gap7(self.relu(inter_71)).view(-1,self.args.hidden_size)
             v_7 = torch.add(v_7, v_71)
 
-            return v_2, v_3, v_4, v_5, v_7  ## 5 feature vector extracted 
+            return v_2, v_3, v_4, v_5, v_7 
 
-           
-            # # print("v2size:", v_2.size())  ### (1, 768)
-            # modules3 = list(self.model.children())[:-3] ### 3 ta laye be akhari 
-            # fix3 = nn.Sequential(*modules3)
-            # v_3 = self.gap3(self.relu(self.conv3(fix3(img)))).view(-1,self.args.hidden_size)
-            # # print("v3size:", v_3.size())  ###
-            # modules4 = list(self.model.children())[:-4]
-            # fix4 = nn.Sequential(*modules4)
-            # v_4 = self.gap4(self.relu(self.conv4(fix4(img)))).view(-1,self.args.hidden_size)
-            # modules5 = list(self.model.children())[:-5]
-            # fix5 = nn.Sequential(*modules5)
-            # v_5 = self.gap5(self.relu(self.conv5(fix5(img)))).view(-1,self.args.hidden_size)
-            # modules7 = list(self.model.children())[:-7]
-            # fix7 = nn.Sequential(*modules7)
-            # v_7 = self.gap7(self.relu(self.conv7(fix7(img)))).view(-1,self.args.hidden_size)
-            # return v_2, v_3, v_4, v_5, v_7  ## 5 feature vector extracted 
 
             ### ta in ghesmat kamel shavad 
 ## end of Transfer class
@@ -600,7 +561,7 @@ class Transformer(nn.Module):
         super(Transformer,self).__init__()
         if args.bert_model=="distilbert-base-uncased": ### specify distile bert 
             base_model=DistilBertModel.from_pretrained(args.bert_model)
-        elif args.bert_model=="bert-base-uncased":
+        else:
             base_model = BertModel.from_pretrained(args.bert_model) ## other model 
 
         # base_model = BertModel.from_pretrained('bert-base-multilingual-cased')
@@ -827,49 +788,52 @@ def test(loader, model, criterion, device, scaler, args, val_df,idx2ans):
     test_loss = []
 
     with torch.no_grad():
-        for (img,question_token,segment_ids,attention_mask,target) in tqdm(loader, leave=False):
-
-            img, question_token, segment_ids, attention_mask, target = img.to(device), question_token.to(device), segment_ids.to(device), attention_mask.to(device), target.to(device)
-            question_token = question_token.squeeze(1)
-            attention_mask = attention_mask.squeeze(1)
-            
-            if args.mixed_precision:
-                with torch.cuda.amp.autocast(): 
+        try:
+            for (img,question_token,segment_ids,attention_mask,target) in tqdm(loader, leave=False):
+                img, question_token, segment_ids, attention_mask, target = img.to(device), question_token.to(device), segment_ids.to(device), attention_mask.to(device), target.to(device)
+                question_token = question_token.squeeze(1)
+                attention_mask = attention_mask.squeeze(1)
+                
+                if args.mixed_precision:
+                    with torch.cuda.amp.autocast(): 
+                        logits, _ = model(img, question_token, segment_ids, attention_mask)
+                        loss = criterion(logits, target)
+                else:
                     logits, _ = model(img, question_token, segment_ids, attention_mask)
                     loss = criterion(logits, target)
-            else:
-                logits, _ = model(img, question_token, segment_ids, attention_mask)
-                loss = criterion(logits, target)
 
 
-            loss_np = loss.detach().cpu().numpy()
+                loss_np = loss.detach().cpu().numpy()
 
-            test_loss.append(loss_np)
+                test_loss.append(loss_np)
 
-            pred = logits.softmax(1).argmax(1).detach()
-            
-            PREDS.append(pred)
+                pred = logits.softmax(1).argmax(1).detach()
+                
+                PREDS.append(pred)
 
-            if args.smoothing:
-                TARGETS.append(target.argmax(1))
-            else:
-                TARGETS.append(target)
+                if args.smoothing:
+                    TARGETS.append(target.argmax(1))
+                else:
+                    TARGETS.append(target)
+            test_loss = np.mean(test_loss)
+            PREDS = torch.cat(PREDS).cpu().numpy()
+            TARGETS = torch.cat(TARGETS).cpu().numpy()
 
-        test_loss = np.mean(test_loss)
+            total_acc = (PREDS == TARGETS).mean() * 100.
+            closed_acc = (PREDS[val_df['answer_type']=='CLOSED'] == TARGETS[val_df['answer_type']=='CLOSED']).mean() * 100.
+            open_acc = (PREDS[val_df['answer_type']=='OPEN'] == TARGETS[val_df['answer_type']=='OPEN']).mean() * 100.
 
-    PREDS = torch.cat(PREDS).cpu().numpy()
-    TARGETS = torch.cat(TARGETS).cpu().numpy()
-
-    total_acc = (PREDS == TARGETS).mean() * 100.
-    closed_acc = (PREDS[val_df['answer_type']=='CLOSED'] == TARGETS[val_df['answer_type']=='CLOSED']).mean() * 100.
-    open_acc = (PREDS[val_df['answer_type']=='OPEN'] == TARGETS[val_df['answer_type']=='OPEN']).mean() * 100.
-
-    acc = {'total_acc': np.round(total_acc, 4), 'closed_acc': np.round(closed_acc, 4), 'open_acc': np.round(open_acc, 4)}
+            acc = {'total_acc': np.round(total_acc, 4), 'closed_acc': np.round(closed_acc, 4), 'open_acc': np.round(open_acc, 4)}
 
 
 
 
-    return test_loss, PREDS, acc
+            return test_loss, PREDS, acc
+
+        except:
+            print("this is noiiiiiiiiiiiiiiisssyyyyyyyy\n")   
+            return  "Noisy","Noisy","Noisy"
+      
 
 ### final prediction 
 def final_test(loader, all_models, device, args, val_df, idx2ans):

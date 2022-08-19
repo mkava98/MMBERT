@@ -31,7 +31,7 @@ if __name__ == '__main__':
 
     parser.add_argument('--data_dir', type = str, required = False, default = "../data/vqamed", help = "path for data")
     
-    parser.add_argument('--model_dir', type = str, required = False, default = "../roco_mlm/recorder_premed20.pt", help = "path to load weights")
+    parser.add_argument('--model_dir', type = str, required = False, default = "../VQAmedSave/recorderpremedabnormalityresume30FINAL_acc.pt", help = "path to load weights")
     parser.add_argument('--save_dir', type = str, required = False, default = "../VQAmedSave/", help = "path to save weights")
     parser.add_argument('--category', type =str, required = False, default ="Abnormality",  help = "choose specific category if you want")
     parser.add_argument('--use_pretrained', action = 'store_true', default = True, help = "use pretrained weights or not")
@@ -40,7 +40,7 @@ if __name__ == '__main__':
 
     parser.add_argument('--seed', type = int, required = False, default = 42, help = "set seed for reproducibility")
     parser.add_argument('--num_workers', type = int, required = False, default = 4, help = "number of workers")
-    parser.add_argument('--epochs', type = int, required = False, default = 700, help = "num epochs to train")
+    parser.add_argument('--epochs', type = int, required = False, default = 100, help = "num epochs to train")
     parser.add_argument('--train_pct', type = float, required = False, default = 1, help = "fraction of train samples to select")
     parser.add_argument('--valid_pct', type = float, required = False, default = 1, help = "fraction of validation samples to select")
     parser.add_argument('--test_pct', type = float, required = False, default = 1, help = "fraction of test samples to select")
@@ -57,7 +57,7 @@ if __name__ == '__main__':
 
     parser.add_argument('--image_size', type = int, required = False, default = 224, help = "image size")
     parser.add_argument('--hidden_size', type = int, required = False, default = 768, help = "hidden size")
-    parser.add_argument('--vocab_size', type = int, required = False, default = 30522, help = "vocab size")
+    parser.add_argument('--vocab_size', type = int, required = False, default = 1671, help = "vocab size")
     parser.add_argument('--type_vocab_size', type = int, required = False, default = 2, help = "type vocab size")
     parser.add_argument('--heads', type = int, required = False, default = 12, help = "heads")
     parser.add_argument('--n_layers', type = int, required = False, default= 4, help = "num of layers")
@@ -105,9 +105,9 @@ if __name__ == '__main__':
 
     df = pd.concat([train_df, val_df, test_df]).reset_index(drop=True)
 
-    print("TTTTTTTTTTTTTTTRAinnnnnnn\n", train_df)
-    print("vvvvvvvvvvvvvvvvvvvvvvvv\n", val_df)
-    print("sssssssssssssssssss\n", test_df)
+    # print("TTTTTTTTTTTTTTTRAinnnnnnn\n", train_df)
+    # print("vvvvvvvvvvvvvvvvvvvvvvvv\n", val_df)
+    # print("sssssssssssssssssss\n", test_df)
 
     ans2idx = {ans:idx for idx,ans in enumerate(df['answer'].unique())}
     idx2ans = {idx:ans for ans,idx in ans2idx.items()}
@@ -128,10 +128,11 @@ if __name__ == '__main__':
     model = Model(args)
 
     if args.use_pretrained:
+        print("Resume Model")
         model.load_state_dict(torch.load(args.model_dir))
 
 
-    model.classifier[2] = nn.Linear(args.hidden_size, num_classes)
+    # model.classifier[2] = nn.Linear(args.hidden_size, num_classes)
 
 
         
