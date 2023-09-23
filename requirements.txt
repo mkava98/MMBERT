@@ -2,4 +2,8 @@ torch
 torchvision
 numpy
 pandas
-matplotlip
+timm
+transformers
+nltk
+matplotlib
+opencv-python
