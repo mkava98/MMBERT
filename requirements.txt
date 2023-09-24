@@ -10,3 +10,5 @@ opencv-python~=4.8.0.76
 requests~=2.31.0
 Pillow~=10.0.1
 tqdm~=4.66.1
+pytorch_lightning
+wandb
