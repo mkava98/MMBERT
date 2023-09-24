@@ -62,8 +62,15 @@ def seed_everything(seed):
 
 def load_data(args):
     
-    train_file = open(os.path.join(args.data_dir,'littestset.json'),)
-    test_file = open(os.path.join(args.data_dir,'data.json'),)
+    train_file = open(os.path.join(args.data_dir,'trainset.json'),)
+    test_file = open(os.path.join(args.data_dir,'testset.json'),)
+    """
+        I replace littestset.json,  data.json
+        
+    """
+    # train_file = open(os.path.join(args.data_dir, 'littestset.json'), )
+    # test_file = open(os.path.join(args.data_dir, 'data.json'), )
+
     # validation_file = open(os.path.join(args.data_dir,'validationset.json'),)
         
     # train_file = open(os.path.join(args.data_dir,'littrainset.json'),)
